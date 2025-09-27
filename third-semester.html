@@ -903,6 +903,7 @@
     }
 
     function updateButtonStates(purchasedNotes) {
+      console.log('Updating button states with purchased notes:', purchasedNotes);
       const downloadButtons = document.querySelectorAll('a.download-btn');
       
       downloadButtons.forEach(button => {
@@ -914,26 +915,65 @@
           return;
         }
 
-        // Only process "Download Notes" buttons
-        if (button.textContent.includes('Download Notes') || button.textContent.includes('📥 Download Notes')) {
-          const originalUrl = button.href;
+        // Only process "Download Notes" buttons (check for locked buttons too)
+        if (button.textContent.includes('Download Notes') || button.textContent.includes('📥 Download Notes') ||
+            button.textContent.includes('🔒 Unlock Notes')) {
+          
+          // Get the original URL (stored in data attribute or href)
+          let originalUrl = button.getAttribute('data-original-url') || button.href;
+          
+          // If href is '#', try to reconstruct the original URL from context
+          if (originalUrl === '#' || originalUrl.endsWith('#')) {
+            // This might be a locked button, try to find the original URL from the button context
+            const buttonText = button.textContent;
+            const parentUnit = button.closest('.unit-item');
+            if (parentUnit) {
+              // Try to find any other link in the same unit to infer the pattern
+              const otherLinks = parentUnit.querySelectorAll('a[href]:not([href="#"])');
+              if (otherLinks.length > 0) {
+                // Use the first valid link as reference - this is a fallback
+                originalUrl = otherLinks[0].href;
+              }
+            }
+          }
+          
+          // Store original URL for future reference
+          if (!button.getAttribute('data-original-url') && originalUrl !== '#') {
+            button.setAttribute('data-original-url', originalUrl);
+          }
+          
+          console.log(`Checking button for ${unitTitle}:`, {
+            originalUrl,
+            isPurchased: purchasedNotes.includes(originalUrl),
+            currentText: button.textContent
+          });
           
           if (purchasedNotes.includes(originalUrl)) {
             // Note is purchased - show as unlocked
+            button.href = originalUrl;
             button.textContent = '✅ View Notes';
             button.style.background = '#22c55e';
             button.style.color = 'white';
+            button.style.cursor = 'pointer';
+            
+            // Remove any existing payment click handlers
+            button.replaceWith(button.cloneNode(true));
+            
           } else {
             // Note is not purchased - lock it
             button.href = '#';
             button.textContent = '🔒 Unlock Notes';
             button.style.background = '#f59e0b';
             button.style.color = 'white';
+            button.style.cursor = 'pointer';
             
-            button.addEventListener('click', function(e) {
+            // Remove existing handlers and add payment popup handler
+            const newButton = button.cloneNode(true);
+            newButton.addEventListener('click', function(e) {
               e.preventDefault();
               showPaymentPopup(originalUrl, unitTitle);
             });
+            button.replaceWith(newButton);
           }
         }
       });
@@ -1046,6 +1086,10 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
           name: 'SayHeyShubh - BSc Zoology Notes',
           description: `Unlock: ${currentNoteTitle}`,
           handler: async function (response) {
+            // Show immediate success feedback
+            document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>✅ Payment Successful!</h3><p>Unlocking your notes...</p></div>';
+            document.getElementById('paymentLoading').classList.add('show');
+            
             try {
               // Get Firebase authentication token for verification
               const idToken = await auth.currentUser.getIdToken();
@@ -1080,31 +1124,50 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
               const verifyResult = await verifyResponse.json();
               
               if (verifyResult.success && verifyResult.verified) {
-                // Payment verified - immediately close popup and show success
-                hidePaymentPopup();
-                alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
+                // Payment verified - update success message
+                document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>🎉 Notes Unlocked!</h3><p>You can now access your purchased content!</p></div>';
                 
-                // Update UI immediately
-                const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
-                if (!purchasedNotes.includes(currentNoteUrl)) {
-                  purchasedNotes.push(currentNoteUrl);
-                  localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
-                }
+                // Wait a moment for user to see the success message
+                setTimeout(() => {
+                  hidePaymentPopup();
+                  
+                  // Update UI immediately with local state
+                  const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+                  if (!purchasedNotes.includes(currentNoteUrl)) {
+                    purchasedNotes.push(currentNoteUrl);
+                    localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+                  }
+                  
+                  // Update button states immediately
+                  updateButtonStates(purchasedNotes);
+                  
+                  // Show success alert after modal closes
+                  setTimeout(() => {
+                    alert(`🎉 Success! ₹${selectedPrice} paid for ${currentNoteTitle}. Notes are now unlocked!`);
+                  }, 300);
+                  
+                  // Sync with server in background to ensure consistency
+                  setTimeout(() => {
+                    loadPurchasedNotesAndUpdateButtons().catch(error => {
+                      console.warn('Background purchase sync failed:', error);
+                    });
+                  }, 1000);
+                }, 1500);
                 
-                // Update button states immediately
-                updateButtonStates(purchasedNotes);
-                
-                // Load fresh purchases from server in background (don't block UI)
-                loadPurchasedNotesAndUpdateButtons().catch(error => {
-                  console.warn('Background purchase sync failed:', error);
-                  // Don't show error to user since payment was successful
-                });
               } else {
-                alert('Payment verification failed. Please contact support.');
+                document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #ef4444;"><h3>❌ Verification Failed</h3><p>Please contact support.</p></div>';
+                setTimeout(() => {
+                  hidePaymentPopup();
+                  alert('Payment verification failed. Please contact support.');
+                }, 2000);
               }
             } catch (error) {
               console.error('Error verifying payment:', error);
-              alert('Payment was successful but verification failed. Please contact support.');
+              document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #f59e0b;"><h3>⚠️ Processing Issue</h3><p>Payment successful, but verification needs manual check.</p></div>';
+              setTimeout(() => {
+                hidePaymentPopup();
+                alert('Payment was successful but verification failed. Please contact support with your payment details.');
+              }, 2000);
             }
           },
           prefill: {
