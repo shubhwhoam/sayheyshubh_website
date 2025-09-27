@@ -171,9 +171,10 @@ app.post('/.netlify/functions/verify-payment', async (req, res) => {
       });
     }
 
-    // Save purchase record to Firestore
+    // Save purchase record to Firestore (consistent with netlify functions)
     try {
-      await db.collection('purchases').add({
+      // 1. Record the transaction (for history)
+      await db.collection('transactions').add({
         userId: authenticatedUserId,
         paymentId: paymentId,
         orderId: orderId,
@@ -182,8 +183,18 @@ app.post('/.netlify/functions/verify-payment', async (req, res) => {
         status: 'completed',
         verified: true
       });
+
+      // 2. Update user's unlocked notes
+      const userRef = db.collection('users').doc(authenticatedUserId);
+      const noteSlug = noteUrl.split('/').pop(); // Gets the unique identifier (slug) of the note
+
+      await userRef.set({
+        unlockedNotes: {
+          [noteSlug]: true // Sets a flag: e.g., { 'non-chordata-protists': true }
+        }
+      }, { merge: true });
       
-      console.log('Purchase recorded successfully for user:', authenticatedUserId);
+      console.log('Purchase recorded and note unlocked successfully for user:', authenticatedUserId);
     } catch (firestoreError) {
       console.error('Error saving purchase to Firestore:', firestoreError);
       // Continue with success response since payment was verified
@@ -213,19 +224,34 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    // Get purchased notes for the authenticated user
-    const purchasesSnapshot = await db.collection('purchases')
-      .where('userId', '==', authenticatedUserId)
-      .where('status', '==', 'completed')
-      .get();
-
+    // Get user's unlocked notes from their user document
+    const userDoc = await db.collection('users').doc(authenticatedUserId).get();
+    
     const purchasedNotes = [];
-    purchasesSnapshot.forEach(doc => {
-      const data = doc.data();
-      if (data.noteUrl) {
-        purchasedNotes.push(data.noteUrl);
-      }
-    });
+    
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+      const unlockedNotes = userData.unlockedNotes || {};
+      
+      // Convert unlocked notes object to URLs
+      // The verify-payment.js stores noteSlug as key, but we need full URLs
+      // So we also check the transactions collection for the noteUrls
+      const transactionsSnapshot = await db.collection('transactions')
+        .where('userId', '==', authenticatedUserId)
+        .where('status', '==', 'completed')
+        .get();
+
+      transactionsSnapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.noteUrl) {
+          const noteSlug = data.noteUrl.split('/').pop();
+          // Check if this note is unlocked in user's document
+          if (unlockedNotes[noteSlug] === true) {
+            purchasedNotes.push(data.noteUrl);
+          }
+        }
+      });
+    }
 
     res.json({
       success: true,

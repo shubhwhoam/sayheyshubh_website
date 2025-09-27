@@ -68,19 +68,34 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    // Get purchased notes for the authenticated user
-    const purchasesSnapshot = await db.collection('purchases')
-      .where('userId', '==', authenticatedUserId)
-      .where('status', '==', 'completed')
-      .get();
-
+    // Get user's unlocked notes from their user document
+    const userDoc = await db.collection('users').doc(authenticatedUserId).get();
+    
     const purchasedNotes = [];
-    purchasesSnapshot.forEach(doc => {
-      const data = doc.data();
-      if (data.noteUrl) {
-        purchasedNotes.push(data.noteUrl);
-      }
-    });
+    
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+      const unlockedNotes = userData.unlockedNotes || {};
+      
+      // Convert unlocked notes object to URLs
+      // The verify-payment.js stores noteSlug as key, but we need full URLs
+      // So we also check the transactions collection for the noteUrls
+      const transactionsSnapshot = await db.collection('transactions')
+        .where('userId', '==', authenticatedUserId)
+        .where('status', '==', 'completed')
+        .get();
+
+      transactionsSnapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.noteUrl) {
+          const noteSlug = data.noteUrl.split('/').pop();
+          // Check if this note is unlocked in user's document
+          if (unlockedNotes[noteSlug] === true) {
+            purchasedNotes.push(data.noteUrl);
+          }
+        }
+      });
+    }
 
     return {
       statusCode: 200,
