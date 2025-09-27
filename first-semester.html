@@ -801,7 +801,7 @@
 
     async function fetchRazorpayConfig() {
       try {
-        const response = await fetch('/api/public-config');
+        const response = await fetch('/.netlify/functions/public-config');
         if (response.ok) {
           const config = await response.json();
           RAZORPAY_KEY_ID = config.razorpayKeyId;
@@ -880,7 +880,7 @@
         const idToken = await auth.currentUser.getIdToken();
         
         // Check purchases via API
-        const response = await fetch('/api/check-purchases', {
+        const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${idToken}`
@@ -1012,7 +1012,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
         const idToken = await auth.currentUser.getIdToken();
         
         // Create order with backend
-        const orderResponse = await fetch('/api/create-order', {
+        const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -1055,7 +1055,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
               const idToken = await auth.currentUser.getIdToken();
               
               // Verify payment with backend
-              const verifyResponse = await fetch('/api/verify-payment', {
+              const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
                 headers: { 
                   'Content-Type': 'application/json',
@@ -1084,18 +1084,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
               const verifyResult = await verifyResponse.json();
               
               if (verifyResult.success && verifyResult.verified) {
-                // Payment verified - save to Firestore
-                await db.collection('purchases').add({
-                  userId: userId,
-                  noteUrl: currentNoteUrl,
-                  noteTitle: currentNoteTitle,
-                  amount: selectedPrice,
-                  paymentId: response.razorpay_payment_id,
-                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                  status: 'completed'
-                });
-
-                // Update local storage
+                // Payment verified - update local storage and refresh
                 const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
                 purchasedNotes.push(currentNoteUrl);
                 localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
@@ -1103,8 +1092,8 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
                 hidePaymentPopup();
                 alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
 
-                // Refresh page to update button states
-                location.reload();
+                // Reload purchased notes and update button states
+                await loadPurchasedNotesAndUpdateButtons();
               } else {
                 alert('Payment verification failed. Please contact support.');
               }

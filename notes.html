@@ -1338,7 +1338,7 @@
         // Get Firebase auth token
         const idToken = await user.getIdToken();
         
-        const response = await fetch('/api/check-purchases', {
+        const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${idToken}`,
@@ -1470,7 +1470,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!
         // Step 1: Create order on server
         const amountInPaise = selectedPrice * 100; // Convert to paise
         
-        const orderResponse = await fetch('/api/create-order', {
+        const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${idToken}`,
@@ -1503,7 +1503,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!
               const idToken = await user.getIdToken();
               
               // Step 3: Verify payment on server
-              const verifyResponse = await fetch('/api/verify-payment', {
+              const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${idToken}`,
