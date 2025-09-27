@@ -1,0 +1,1632 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <!-- Razorpay Checkout -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BSc Zoology Notes | Delhi University Free Study Material | SayHeyShubh</title>
+  <meta name="description" content="Access comprehensive BSc Zoology (Hons) notes organized by year and semester. Download handwritten notes and study materials." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .notes-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      min-height: 80vh;
+      will-change: transform;
+    }
+
+    .navigation-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .back-to-youtube-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, #ff0000, #cc0000);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+      width: fit-content;
+      border: none;
+    }
+
+    .back-to-youtube-btn:hover {
+      background: linear-gradient(135deg, #cc0000, #990000);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
+    }
+
+    .notes-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .notes-header h1 {
+      font-size: 2.5rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .notes-header p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+
+    .breadcrumb-item {
+      cursor: pointer;
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .breadcrumb-item:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb-separator {
+      color: #a0aec0;
+    }
+
+    .navigation-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .nav-button {
+      background: linear-gradient(135deg, #349b31, #18179f);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .nav-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+    }
+
+    .back-button {
+      background: linear-gradient(135deg, #64748b, #475569);
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+
+    .back-button:hover {
+      background: linear-gradient(135deg, #475569, #334155);
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .syllabus-section {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border-left: 4px solid #0ea5e9;
+      padding: 1.8rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+    }
+
+    .syllabus-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .syllabus-section h3 {
+      color: #0369a1;
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .syllabus-pdf-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(16, 185, 129, 0.2);
+    }
+
+    .syllabus-pdf-btn:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .subjects-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .subject-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .subject-card:hover {
+      border-color: #6366f1;
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1);
+    }
+
+    .subject-header {
+      background: #f8fafc;
+      padding: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      font-weight: 600;
+      color: #2d3748;
+      transition: background 0.3s ease;
+    }
+
+    .subject-header:hover {
+      background: #e2e8f0;
+    }
+
+    .subject-header.active {
+      background: #6366f1;
+      color: white;
+    }
+
+    .expand-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .expand-icon.rotated {
+      transform: rotate(180deg);
+    }
+
+    .units-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .units-content.expanded {
+      max-height: 500px;
+    }
+
+    .units-list {
+      padding: 1rem;
+      background: white;
+    }
+
+    .unit-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: #f8fafc;
+      transition: all 0.3s ease;
+    }
+
+    .unit-item:hover {
+      background: #e2e8f0;
+      transform: translateX(5px);
+    }
+
+    .unit-title {
+      font-weight: 500;
+      color: #2d3748;
+    }
+
+    .download-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #059669;
+    }
+
+    .coming-soon {
+      background: #fbbf24;
+      color: #92400e;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .notes-container {
+        padding: 1rem;
+      }
+
+      .notes-header {
+        padding: 1.5rem;
+      }
+
+      .notes-header h1 {
+        font-size: 2rem;
+      }
+
+      .navigation-buttons {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .nav-button {
+        padding: 1.2rem;
+        font-size: 1rem;
+      }
+
+      .breadcrumb {
+        flex-wrap: wrap;
+      }
+
+      .syllabus-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .syllabus-pdf-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .back-to-youtube-btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 300px;
+      }
+    }
+
+    /* User Profile Styles */
+    .user-profile {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+
+    .user-profile.show {
+      display: flex;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .user-contact {
+      font-size: 0.75rem;
+      color: #718096;
+    }
+
+    .logout-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .user-profile {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* Payment Popup Styles */
+    .payment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .payment-modal.show {
+      display: flex;
+    }
+
+    .payment-container {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .payment-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .payment-header h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+    }
+
+    .payment-header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    .close-payment {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .close-payment:hover {
+      opacity: 1;
+    }
+
+    .payment-body {
+      padding: 2rem;
+    }
+
+    .note-details {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .note-title {
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .price-selection {
+      margin-bottom: 2rem;
+    }
+
+    .price-selection h3 {
+      margin-bottom: 1rem;
+      color: #4a5568;
+      font-size: 1rem;
+    }
+
+    .price-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .price-option {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .price-option:hover {
+      background: #edf2f7;
+      border-color: #cbd5e0;
+    }
+
+    .price-option.selected {
+      background: #6366f1;
+      color: white;
+      border-color: #6366f1;
+    }
+
+    .price-option.recommended {
+      position: relative;
+      background: #22c55e;
+      color: white;
+      border-color: #22c55e;
+    }
+
+    .price-option.recommended::after {
+      content: "Recommended";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #16a34a;
+      color: white;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .payment-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .payment-btn {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .pay-btn {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+    }
+
+    .pay-btn:hover {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      transform: translateY(-1px);
+    }
+
+    .cancel-btn {
+      background: #ef4444;
+      color: white;
+    }
+
+    .cancel-btn:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+    }
+
+    .preview-btn {
+      background: #6366f1;
+      color: white;
+    }
+
+    .preview-btn:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .payment-loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .payment-loading.show {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .payment-actions {
+        flex-direction: column;
+      }
+
+      .price-options {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .price-option {
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="notes-container">
+    <!-- User Profile Section -->
+    <div id="userProfile" class="user-profile">
+      <div class="user-avatar" id="userAvatar">S</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">Loading...</div>
+        <div class="user-contact" id="userContact">***</div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+      <div class="payment-container">
+        <div class="payment-header">
+          <button class="close-payment" onclick="hidePaymentPopup()">&times;</button>
+          <h2>🔒 Unlock Study Notes</h2>
+          <p>Access premium BSc Zoology notes and study materials</p>
+        </div>
+
+        <div class="payment-body">
+          <div class="note-details">
+            <div class="note-title" id="paymentNoteTitle">Loading note...</div>
+            <p>Get instant access to comprehensive handwritten notes and study materials</p>
+          </div>
+
+          <div class="price-selection">
+            <h3>Choose your contribution amount:</h3>
+            <div class="price-options">
+              <div class="price-option" data-price="5">₹5</div>
+              <div class="price-option" data-price="10">₹10</div>
+              <div class="price-option" data-price="15">₹15</div>
+              <div class="price-option recommended selected" data-price="20">₹20</div>
+              <div class="price-option" data-price="30">₹30</div>
+              <div class="price-option" data-price="50">₹50</div>
+            </div>
+          </div>
+
+          <div class="payment-actions">
+            <button class="payment-btn cancel-btn" onclick="hidePaymentPopup()">Cancel</button>
+            <button class="payment-btn preview-btn" onclick="previewNote()">Preview Notes</button>
+            <button class="payment-btn pay-btn" onclick="proceedToPayment()">Pay Now</button>
+          </div>
+
+          <div class="payment-loading" id="paymentLoading">
+            <p>Processing payment...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes-header">
+      <h1>BSc Zoology (Hons) Notes 📖 & Study Material 📚 [Delhi University]</h1>
+      <p>Download free BSc Zoology notes PDF for Delhi University students. Comprehensive handwritten notes, organized by year and semester. Download high-quality PDFs of all major topics and units to ace your exams! Perfect for DU Zoology (Hons) students. 🎓</p>
+    </div>
+
+    <!-- Breadcrumb Navigation -->
+    <!-- Navigation Controls -->
+    <div class="navigation-controls">
+      <a href="youtube.html" class="back-to-youtube-btn">
+        ← Back to YouTube page
+      </a>
+
+      <div class="breadcrumb" id="breadcrumb" style="display: none;">
+        <a href="#" class="breadcrumb-item" onclick="showYears()">Notes</a>
+      </div>
+
+      <!-- Back Button -->
+      <button class="nav-button back-button" id="backButton" style="display: none;" onclick="goBack()">
+        ← Back
+      </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="mainContent">
+      <!-- Year Selection (Initial View) -->
+      <div id="yearSelection" class="content-section">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">BSc Zoology Notes 📚 | Select Academic Year ✍️ </h2>
+        <div class="navigation-buttons">
+          <a href="first-year.html" class="nav-button">
+            📖 First Year Notes
+          </a>
+          <a href="second-year.html" class="nav-button">
+            📖 Second Year Notes 
+          </a>
+          <a href="third-year.html" class="nav-button">
+            📖 Third Year Notes
+          </a>
+        </div>
+      </div>
+
+      <!-- Semester Selection -->
+      <div id="semesterSelection" class="content-section" style="display: none;">
+        <h2 id="semesterTitle" style="text-align: center; margin-bottom: 2rem; color: #2d3748;"></h2>
+        <div class="navigation-buttons">
+          <button class="nav-button" onclick="showSemester('sem1')">
+            📝 First Semester
+          </button>
+          <button class="nav-button" onclick="showSemester('sem2')">
+            📝 Second Semester
+          </button>
+        </div>
+      </div>
+
+      <!-- Notes Content -->
+      <div id="notesContent" class="content-section" style="display: none;">
+        <div class="syllabus-section">
+          <div class="syllabus-header">
+            <h3>📋 Syllabus Overview</h3>
+            <button class="syllabus-pdf-btn" onclick="downloadSyllabus()">
+              📄 Download Syllabus PDF
+            </button>
+          </div>
+          <p id="syllabusText">Complete syllabus and curriculum details for the selected semester.</p>
+        </div>
+
+        <h3 style="margin-bottom: 1.5rem; color: #2d3748;">📚 Subject Notes</h3>
+        <div class="subjects-grid" id="subjectsGrid">
+          <!-- Subjects will be populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Your Study Companion</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <!-- Razorpay key is now retrieved dynamically from server during payment flow -->
+  <script>
+    let currentYear = '';
+    let currentSemester = '';
+
+    // Sample data structure for notes
+    const notesData = {
+      first: {
+        name: "First Year",
+        sem1: {
+          name: "First Semester",
+          syllabus: "(DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, (DSC-3) Concepts of Ecology",
+          subjects: {
+            "Cell Biology": {
+              "Unit 1: Cell Structure": "coming-soon",
+              "Unit 2: Cell Division": "coming-soon", 
+              "Unit 3: Cell Metabolism": "coming-soon"
+            },
+            "Animal Diversity": {
+              "Unit 1: Invertebrates": "coming-soon",
+              "Unit 2: Vertebrates": "coming-soon",
+              "Unit 3: Classification": "coming-soon"
+            },
+            "General Chemistry": {
+              "Unit 1: Atomic Structure": "coming-soon",
+              "Unit 2: Chemical Bonding": "coming-soon",
+              "Unit 3: Organic Chemistry": "coming-soon"
+            }
+          }
+        },
+        sem2: {
+          name: "Second Semester", 
+          syllabus: "Advanced biological concepts, genetics basics, and environmental science fundamentals.",
+          subjects: {
+            "Genetics": {
+              "Unit 1: Mendelian Genetics": "coming-soon",
+              "Unit 2: Molecular Genetics": "coming-soon",
+              "Unit 3: Population Genetics": "coming-soon"
+            },
+            "Environmental Science": {
+              "Unit 1: Ecosystem": "coming-soon",
+              "Unit 2: Pollution": "coming-soon",
+              "Unit 3: Conservation": "coming-soon"
+            },
+            "Biostatistics": {
+              "Unit 1: Descriptive Statistics": "coming-soon",
+              "Unit 2: Probability": "coming-soon",
+              "Unit 3: Hypothesis Testing": "coming-soon"
+            }
+          }
+        }
+      },
+      second: {
+        name: "Second Year",
+        sem1: {
+          name: "Third Semester",
+          syllabus: "Specialized zoology subjects including physiology, anatomy, and biochemistry.",
+          subjects: {
+            "Animal Physiology": {
+              "Unit 1: Respiratory System": "coming-soon",
+              "Unit 2: Circulatory System": "coming-soon",
+              "Unit 3: Nervous System": "coming-soon"
+            },
+            "Comparative Anatomy": {
+              "Unit 1: Skeletal System": "coming-soon", 
+              "Unit 2: Muscular System": "coming-soon",
+              "Unit 3: Digestive System": "coming-soon"
+            },
+            "Biochemistry": {
+              "Unit 1: Proteins": "coming-soon",
+              "Unit 2: Carbohydrates": "coming-soon",
+              "Unit 3: Lipids": "coming-soon"
+            }
+          }
+        },
+        sem2: {
+          name: "Fourth Semester",
+          syllabus: "Advanced physiology, developmental biology, and research methodology.",
+          subjects: {
+            "Developmental Biology": {
+              "Unit 1: Embryogenesis": "coming-soon",
+              "Unit 2: Organogenesis": "coming-soon",
+              "Unit 3: Growth & Development": "coming-soon"
+            },
+            "Research Methodology": {
+              "Unit 1: Scientific Method": "coming-soon",
+              "Unit 2: Data Collection": "coming-soon", 
+              "Unit 3: Statistical Analysis": "coming-soon"
+            },
+            "Microbiology": {
+              "Unit 1: Bacterial Structure": "coming-soon",
+              "Unit 2: Viral Biology": "coming-soon",
+              "Unit 3: Microbial Ecology": "coming-soon"
+            }
+          }
+        }
+      },
+      third: {
+        name: "Third Year", 
+        sem1: {
+          name: "Fifth Semester",
+          syllabus: "Specialized areas including ecology, evolution, and applied zoology.",
+          subjects: {
+            "Ecology": {
+              "Unit 1: Population Ecology": "coming-soon",
+              "Unit 2: Community Ecology": "coming-soon",
+              "Unit 3: Ecosystem Ecology": "coming-soon"
+            },
+            "Evolution": {
+              "Unit 1: Darwin's Theory": "coming-soon",
+              "Unit 2: Modern Synthesis": "coming-soon",
+              "Unit 3: Speciation": "coming-soon"
+            },
+            "Applied Zoology": {
+              "Unit 1: Economic Zoology": "coming-soon",
+              "Unit 2: Medical Zoology": "coming-soon",
+              "Unit 3: Agricultural Zoology": "coming-soon"
+            }
+          }
+        },
+        sem2: {
+          name: "Sixth Semester",
+          syllabus: "Advanced topics, project work, and specialization subjects.",
+          subjects: {
+            "Molecular Biology": {
+              "Unit 1: DNA Structure & Function": "coming-soon",
+              "Unit 2: RNA & Protein Synthesis": "coming-soon",
+              "Unit 3: Gene Regulation": "coming-soon"
+            },
+            "Biotechnology": {
+              "Unit 1: Genetic Engineering": "coming-soon",
+              "Unit 2: Bioprocessing": "coming-soon",
+              "Unit 3: Applications": "coming-soon"
+            },
+            "Project Work": {
+              "Unit 1: Literature Review": "coming-soon",
+              "Unit 2: Methodology": "coming-soon", 
+              "Unit 3: Data Analysis": "coming-soon"
+            }
+          }
+        }
+      }
+    };
+
+    function updateURL(year = '', semester = '') {
+      let url = '/notes';
+      if (year) url += `/${year}-year`;
+      if (semester) url += `/${semester}`;
+      history.pushState({ year, semester }, '', url);
+    }
+
+    function updateBreadcrumb() {
+      const breadcrumb = document.getElementById('breadcrumb');
+      const backButton = document.getElementById('backButton');
+
+      if (currentYear || currentSemester) {
+        breadcrumb.style.display = 'flex';
+        backButton.style.display = 'block';
+
+        let breadcrumbHTML = '<a href="#" class="breadcrumb-item" onclick="showYears()">Notes</a>';
+
+        if (currentYear) {
+          breadcrumbHTML += '<span class="breadcrumb-separator"> / </span>';
+          breadcrumbHTML += `<a href="#" class="breadcrumb-item" onclick="showYear('${currentYear}')">${notesData[currentYear].name}</a>`;
+        }
+
+        if (currentSemester) {
+          breadcrumbHTML += '<span class="breadcrumb-separator"> / </span>';
+          breadcrumbHTML += `<span class="breadcrumb-item">${notesData[currentYear][currentSemester].name}</span>`;
+        }
+
+        breadcrumb.innerHTML = breadcrumbHTML;
+      } else {
+        breadcrumb.style.display = 'none';
+        backButton.style.display = 'none';
+      }
+    }
+
+    function showYears() {
+      currentYear = '';
+      currentSemester = '';
+      document.getElementById('yearSelection').style.display = 'block';
+      document.getElementById('semesterSelection').style.display = 'none';
+      document.getElementById('notesContent').style.display = 'none';
+      updateBreadcrumb();
+      updateURL();
+    }
+
+    function showYear(year) {
+      currentYear = year;
+      currentSemester = '';
+      document.getElementById('yearSelection').style.display = 'none';
+      document.getElementById('semesterSelection').style.display = 'block';
+      document.getElementById('notesContent').style.display = 'none';
+      document.getElementById('semesterTitle').textContent = notesData[year].name + ' - Select Semester';
+      updateBreadcrumb();
+      updateURL(year);
+    }
+
+    function showSemester(semester) {
+      currentSemester = semester;
+      document.getElementById('yearSelection').style.display = 'none';
+      document.getElementById('semesterSelection').style.display = 'none';
+      document.getElementById('notesContent').style.display = 'block';
+
+      const semesterData = notesData[currentYear][semester];
+      document.getElementById('syllabusText').textContent = semesterData.syllabus;
+
+      const subjectsGrid = document.getElementById('subjectsGrid');
+      subjectsGrid.innerHTML = '';
+
+      Object.keys(semesterData.subjects).forEach(subject => {
+        const subjectCard = createSubjectCard(subject, semesterData.subjects[subject]);
+        subjectsGrid.appendChild(subjectCard);
+      });
+
+      updateBreadcrumb();
+      updateURL(currentYear, semester);
+    }
+
+    function createSubjectCard(subjectName, units) {
+      const card = document.createElement('div');
+      card.className = 'subject-card';
+
+      const header = document.createElement('div');
+      header.className = 'subject-header';
+      header.innerHTML = `
+        ${subjectName}
+        <span class="expand-icon">▼</span>
+      `;
+
+      const content = document.createElement('div');
+      content.className = 'units-content';
+
+      const unitsList = document.createElement('div');
+      unitsList.className = 'units-list';
+
+      Object.keys(units).forEach(unit => {
+        const unitItem = document.createElement('div');
+        unitItem.className = 'unit-item';
+
+        const unitTitle = document.createElement('span');
+        unitTitle.className = 'unit-title';
+        unitTitle.textContent = unit;
+
+        const actionButton = document.createElement('span');
+        if (units[unit] === 'coming-soon') {
+          actionButton.className = 'coming-soon';
+          actionButton.textContent = 'Coming Soon';
+        } else {
+          // Only apply payment logic on semester pages (when currentSemester is defined)
+          if (currentSemester) {
+            // ALL semester notes require payment - no free semesters
+            const userId = localStorage.getItem('userId');
+            const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+            const isPurchased = purchasedNotes.includes(units[unit]);
+            
+            if (isPurchased) {
+              actionButton.className = 'download-btn unlocked';
+              actionButton.textContent = '✅ View Notes';
+              actionButton.onclick = () => downloadNote(units[unit], unit);
+              actionButton.style.background = '#22c55e';
+              actionButton.style.color = 'white';
+            } else {
+              actionButton.className = 'download-btn locked';
+              actionButton.textContent = '🔒 Unlock Notes';
+              actionButton.onclick = () => showPaymentPopup(units[unit], unit);
+              actionButton.style.background = '#f59e0b';
+              actionButton.style.color = 'white';
+            }
+          } else {
+            // For non-semester pages, default to download without payment logic
+            actionButton.className = 'download-btn';
+            actionButton.textContent = '📖 View Notes';
+            actionButton.onclick = () => downloadNote(units[unit], unit);
+            actionButton.style.background = '#10b981';
+            actionButton.style.color = 'white';
+          }
+        }
+
+        unitItem.appendChild(unitTitle);
+        unitItem.appendChild(actionButton);
+        unitsList.appendChild(unitItem);
+      });
+
+      content.appendChild(unitsList);
+      card.appendChild(header);
+      card.appendChild(content);
+
+      header.onclick = () => toggleSubject(header, content);
+
+      return card;
+    }
+
+    function toggleSubject(header, content) {
+      const icon = header.querySelector('.expand-icon');
+      const isExpanded = content.classList.contains('expanded');
+
+      if (isExpanded) {
+        content.classList.remove('expanded');
+        header.classList.remove('active');
+        icon.classList.remove('rotated');
+      } else {
+        content.classList.add('expanded');
+        header.classList.add('active');
+        icon.classList.add('rotated');
+      }
+    }
+
+    function downloadNote(noteUrl, noteTitle) {
+      // Check payment for all semester pages
+      if (currentSemester) {
+        // ALL semester notes require payment
+        const userId = localStorage.getItem('userId');
+        const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+
+        if (purchasedNotes.includes(noteUrl)) {
+          // User has purchased this note - allow download
+          console.log('Downloading:', noteUrl);
+          alert('Download functionality will be implemented soon! (Note is unlocked)');
+        } else {
+          // Show payment popup for unpaid notes
+          showPaymentPopup(noteUrl, noteTitle);
+        }
+      } else {
+        // Free access for non-semester pages
+        console.log('Downloading (free):', noteUrl);
+        alert('Download functionality will be implemented soon! (Free access)');
+      }
+    }
+
+    function downloadSyllabus() {
+      // Implement syllabus PDF download
+      console.log('Downloading syllabus for:', currentYear, currentSemester);
+      alert('Syllabus PDF download will be available soon!');
+    }
+
+    function goBack() {
+      if (currentSemester) {
+        showYear(currentYear);
+      } else if (currentYear) {
+        showYears();
+      }
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(event) {
+      if (event.state) {
+        const { year, semester } = event.state;
+        if (semester) {
+          currentYear = year;
+          showSemester(semester);
+        } else if (year) {
+          showYear(year);
+        } else {
+          showYears();
+        }
+      } else {
+        showYears();
+      }
+    });
+
+    // Navigation highlighting - highlight YouTube since this is accessed from YouTube
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === 'youtube.html') {
+        link.classList.add("active");
+      }
+    });
+
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      const path = window.location.pathname;
+      let currentPage = path.split("/").pop() || "index";
+      currentPage = currentPage.replace(".html", "");
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
+    💬
+  </a>
+
+  <div class="doubts-bubble" id="doubts-bubble">
+    Got a question?
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const bubble = document.getElementById("doubts-bubble");
+
+    // Show bubble 0.8s after button appears
+    setTimeout(() => {
+      bubble.classList.add("show");
+    }, 800);
+
+    // Hide bubble after 3 seconds
+    setTimeout(() => {
+      bubble.classList.remove("show");
+    }, 3800);
+  });
+  </script>
+
+  <!-- Firebase Configuration and Session Management -->
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
+      authDomain: "sayheyshubh-7051c.firebaseapp.com",
+      projectId: "sayheyshubh-7051c",
+      storageBucket: "sayheyshubh-7051c.firebasestorage.app",
+      messagingSenderId: "992127392588",
+      appId: "1:992127392588:web:62f89024de9d48c1144de9",
+      measurementId: "G-HMQJKKEKPE"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Check authentication status
+    function checkAuthStatus() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (!isLoggedIn || isLoggedIn !== 'true') {
+        // Redirect to YouTube page if not logged in
+        window.location.href = 'youtube.html';
+        return false;
+      }
+      return true;
+    }
+
+    // Load user profile
+    function loadUserProfile() {
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+      const userPhone = localStorage.getItem('userPhone');
+
+      if (userName) {
+        // Set user name
+        document.getElementById('userName').textContent = userName;
+
+        // Set user avatar (first letter of name)
+        document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+
+        // Set masked contact info
+        let contactInfo = '';
+        if (userEmail) {
+          const emailParts = userEmail.split('@');
+          const maskedEmail = emailParts[0].substring(0, 2) + '***@' + emailParts[1];
+          contactInfo = maskedEmail;
+        } else if (userPhone) {
+          const maskedPhone = userPhone.substring(0, 3) + '***' + userPhone.substring(userPhone.length - 2);
+          contactInfo = maskedPhone;
+        }
+
+        document.getElementById('userContact').textContent = contactInfo;
+
+        // Show user profile
+        document.getElementById('userProfile').classList.add('show');
+      }
+    }
+
+    // Logout function
+    async function logout() {
+      try {
+        await auth.signOut();
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPhone');
+
+        // Redirect to YouTube page
+        window.location.href = 'youtube.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+        alert('Error logging out. Please try again.');
+      }
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+      if (checkAuthStatus()) {
+        loadUserProfile();
+        loadPurchasedNotes();
+      }
+    });
+
+    // Load purchased notes from server for the current user
+    async function loadPurchasedNotes() {
+      try {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        // Get Firebase auth token
+        const idToken = await user.getIdToken();
+        
+        const response = await fetch('/api/check-purchases', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          // Store purchased notes locally for faster access
+          localStorage.setItem('purchasedNotes', JSON.stringify(data.purchases));
+        } else {
+          console.error('Failed to load purchases:', data.error);
+        }
+      } catch (error) {
+        console.error('Error loading purchased notes:', error);
+      }
+    }
+
+    // Firebase auth state listener
+    auth.onAuthStateChanged((user) => {
+      if (!user && localStorage.getItem('isLoggedIn') === 'true') {
+        // User was logged out externally
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPhone');
+        window.location.href = 'youtube.html';
+      }
+    });
+
+    // Payment popup functions
+    let currentNoteUrl = '';
+    let currentNoteTitle = '';
+    let selectedPrice = 20;
+
+    function showPaymentPopup(noteUrl, noteTitle) {
+      // Prevent multiple payment popups
+      if (document.getElementById('paymentModal').classList.contains('show')) {
+        return;
+      }
+      
+      currentNoteUrl = noteUrl;
+      currentNoteTitle = noteTitle || 'BSc Zoology Notes';
+
+      document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
+      document.getElementById('paymentModal').classList.add('show');
+
+      // Reset to default price selection and enable payment button
+      document.querySelectorAll('.price-option').forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.price === '20') {
+          option.classList.add('selected');
+        }
+      });
+      selectedPrice = 20;
+      
+      // Reset payment button state
+      const payBtn = document.querySelector('.pay-btn');
+      payBtn.disabled = false;
+      payBtn.textContent = 'Pay Now';
+      payBtn.style.opacity = '1';
+      payBtn.style.cursor = 'pointer';
+    }
+
+    function hidePaymentPopup() {
+      document.getElementById('paymentModal').classList.remove('show');
+      document.getElementById('paymentLoading').classList.remove('show');
+    }
+
+    function previewNote() {
+      // Show preview of notes content
+      const previewContent = `
+📖 Preview of ${currentNoteTitle}:
+
+✅ Comprehensive handwritten notes
+✅ Key topics and concepts covered  
+✅ Diagrams and illustrations
+✅ Important questions and answers
+✅ Exam-focused content
+✅ High-quality PDF format
+
+This is just a preview. The full notes contain:
+• Detailed explanations of all topics
+• Step-by-step problem solutions  
+• Memory techniques and tips
+• Previous year questions analysis
+• Complete coverage of syllabus
+
+Pay ₹${selectedPrice} to unlock the complete notes!
+      `;
+
+      alert(previewContent);
+    }
+
+    async function proceedToPayment() {
+      const userId = localStorage.getItem('userId');
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+
+      if (!userId) {
+        alert('Please log in to continue with payment');
+        return;
+      }
+
+      // Prevent duplicate payments
+      const payBtn = document.querySelector('.pay-btn');
+      if (payBtn.disabled) {
+        return;
+      }
+      
+      // Disable payment button and show loading
+      payBtn.disabled = true;
+      payBtn.textContent = 'Processing...';
+      payBtn.style.opacity = '0.6';
+      payBtn.style.cursor = 'not-allowed';
+      document.getElementById('paymentLoading').classList.add('show');
+
+      try {
+        // Get Firebase auth token
+        const user = auth.currentUser;
+        if (!user) {
+          throw new Error('User not authenticated');
+        }
+        const idToken = await user.getIdToken();
+        
+        // Step 1: Create order on server
+        const amountInPaise = selectedPrice * 100; // Convert to paise
+        
+        const orderResponse = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            amount: amountInPaise,
+            noteTitle: currentNoteTitle
+          })
+        });
+
+        const orderData = await orderResponse.json();
+        
+        if (!orderData.success) {
+          throw new Error(orderData.error || 'Failed to create payment order');
+        }
+
+        // Step 2: Initialize Razorpay with server response
+        const options = {
+          key: orderData.key,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: 'SayHeyShubh - BSc Zoology Notes',
+          description: `Unlock: ${currentNoteTitle}`,
+          order_id: orderData.orderId,
+          handler: async function (response) {
+            try {
+              // Get fresh Firebase auth token for verification
+              const user = auth.currentUser;
+              const idToken = await user.getIdToken();
+              
+              // Step 3: Verify payment on server
+              const verifyResponse = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${idToken}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  paymentId: response.razorpay_payment_id,
+                  orderId: response.razorpay_order_id,
+                  signature: response.razorpay_signature,
+                  noteUrl: currentNoteUrl
+                })
+              });
+
+              const verifyData = await verifyResponse.json();
+              
+              if (!verifyData.success || !verifyData.verified) {
+                throw new Error('Payment verification failed');
+              }
+
+              // Step 4: Payment verified on server - reload purchases
+              await loadPurchasedNotes();
+
+              // Optional: Save additional data to Firestore for analytics
+              try {
+                await db.collection('purchases').add({
+                  userId: userId,
+                  noteUrl: currentNoteUrl,
+                  noteTitle: currentNoteTitle,
+                  amount: selectedPrice,
+                  paymentId: response.razorpay_payment_id,
+                  orderId: response.razorpay_order_id,
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                  status: 'completed'
+                });
+              } catch (firestoreError) {
+                console.warn('Firestore logging failed:', firestoreError);
+                // Don't fail the payment flow if Firestore is down
+              }
+
+              hidePaymentPopup();
+              alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
+
+              // Refresh the page to update button states
+              location.reload();
+
+            } catch (error) {
+              console.error('Error verifying/saving payment:', error);
+              alert('Payment verification failed. Please contact support if money was deducted.');
+              
+              // Re-enable payment button on verification error
+              const payBtn = document.querySelector('.pay-btn');
+              payBtn.disabled = false;
+              payBtn.textContent = 'Pay Now';
+              payBtn.style.opacity = '1';
+              payBtn.style.cursor = 'pointer';
+              hidePaymentPopup();
+            }
+          },
+          prefill: {
+            name: userName || '',
+            email: userEmail || '',
+          },
+          notes: {
+            note_title: currentNoteTitle,
+            user_id: userId
+          },
+          theme: {
+            color: '#6366f1'
+          },
+          modal: {
+            ondismiss: function() {
+              // Re-enable payment button if user dismisses modal
+              const payBtn = document.querySelector('.pay-btn');
+              payBtn.disabled = false;
+              payBtn.textContent = 'Pay Now';
+              payBtn.style.opacity = '1';
+              payBtn.style.cursor = 'pointer';
+              document.getElementById('paymentLoading').classList.remove('show');
+            }
+          }
+        };
+
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+        
+        document.getElementById('paymentLoading').classList.remove('show');
+
+      } catch (error) {
+        console.error('Payment initialization error:', error);
+        alert('Failed to initialize payment: ' + error.message);
+        
+        // Re-enable payment button on error
+        const payBtn = document.querySelector('.pay-btn');
+        payBtn.disabled = false;
+        payBtn.textContent = 'Pay Now';
+        payBtn.style.opacity = '1';
+        payBtn.style.cursor = 'pointer';
+        document.getElementById('paymentLoading').classList.remove('show');
+      }
+    }
+
+    // Price selection handling
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add click handlers for price options
+      document.querySelectorAll('.price-option').forEach(option => {
+        option.addEventListener('click', () => {
+          // Remove selected from all options
+          document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
+
+          // Add selected to clicked option
+          option.classList.add('selected');
+          selectedPrice = parseInt(option.dataset.price);
+        });
+      });
+
+      // Close modal when clicking outside
+      document.getElementById('paymentModal').addEventListener('click', (e) => {
+        if (e.target.id === 'paymentModal') {
+          hidePaymentPopup();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

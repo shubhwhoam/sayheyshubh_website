@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <!-- Razorpay Checkout -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Third Semester | SayHeyShubh</title>
+  <meta name="description" content="BSc Zoology Third Semester detailed study notes" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+    /* Existing styles remain unchanged */
+    .subject-dropdown {
+      margin-bottom: 1.5rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .subject-dropdown:hover {
+      border-color: #6366f1;
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1);
+    }
+
+    .subject-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .subject-header:hover {
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+    }
+
+    .expand-icon {
+      font-size: 1.2rem;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+        transform: translateZ(0);
+      }
+
+      .expand-icon.rotated {
+        transform: rotate(180deg);
+      }
+
+      .units-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+        will-change: max-height;
+        transform: translateZ(0);
+      }
+
+      .units-content.expanded {
+        max-height: 9999px;
+      }
+
+      .unit-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      transition: all 0.3s ease;
+    }
+
+    .unit-item:last-child {
+      border-bottom: none;
+    }
+
+    .unit-item:hover {
+      background: #f8fafc;
+      transform: translateX(5px);
+    }
+
+    .unit-title {
+      font-weight: 500;
+      color: #2d3748;
+      flex: 1;
+    }
+
+    .unit-buttons {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .download-btn, .watch-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .download-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-1px);
+    }
+
+    .watch-btn {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+    }
+
+    .watch-btn:hover {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      transform: translateY(-1px);
+    }
+
+    .coming-soon {
+      background: #fbbf24;
+      color: #92400e;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+      /* Mobile optimizations for smooth transitions */
+      @media (max-width: 768px) {
+        .subject-dropdown {
+          margin-bottom: 1rem;
+        }
+
+        .subject-header {
+          padding: 1rem;
+          font-size: 1rem;
+        }
+
+        .units-content {
+          transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .units-content.expanded {
+          max-height: 1000px;
+        }
+
+        .unit-item {
+          padding: 0.8rem 1rem;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.8rem;
+        }
+
+        .unit-title {
+          width: 100%;
+          margin-bottom: 0.5rem;
+          font-size: 0.95rem;
+          line-height: 1.4;
+        }
+
+        .unit-buttons {
+          width: 100%;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .download-btn, .watch-btn, .coming-soon {
+          font-size: 0.8rem;
+          padding: 0.4rem 0.8rem;
+          white-space: nowrap;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .units-content.expanded {
+          max-height: 9999px;
+        }
+
+        .unit-item {
+          padding: 0.7rem 0.8rem;
+        }
+
+        .unit-title {
+          font-size: 0.9rem;
+          word-break: break-word;
+        }
+
+        .download-btn, .watch-btn, .coming-soon {
+          font-size: 0.75rem;
+          padding: 0.35rem 0.6rem;
+        }
+      }
+
+    </style>
+  </head>
+<body>
+  
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">📖 Third Semester Notes</h2>
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <a href="second-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Second Year</a>
+    </div>
+
+    <!-- Syllabus Section -->
+    <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview</h3>
+        <a href="https://drive.google.com/file/d/1bBCnst3niOoHUN298otEn4WjeDo6GDMe/view?usp=sharing" target="_blank" 
+           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+          📄 Download Syllabus PDF
+        </a>
+      </div>
+      <p>(DSC-7): Diversity of Chordates, (DSC-8): Biochemistry: Metabolic Processes, (DSC-9): Human Physiology- Life Sustaining Systems</p>
+    </div>
+
+    <!-- Subjects with Dropdown -->
+    <div style="display: grid; gap: 1.5rem;">
+
+      <!-- (DSC-7): Diversity of Chordates -->
+      <div class="subject-dropdown subject-color-1">
+        <div class="subject-header" onclick="toggleSubject(this)">
+          (DSC-7): Diversity of Chordates
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="units-content">
+          <div class="unit-item">
+            <span class="unit-title">Unit I: Introduction to Chordates</span>
+            <div class="unit-buttons">
+              <a href="https://www.youtube.com/shorts/Y1AiZj95MV0" target="_blank" class="watch-btn">
+                ▶️ Watch Video
+              </a>
+              <a href="https://drive.google.com/file/d/1msxMjMFkpSSOevOx2GqcM-pg0qtgYbSL/view?usp=sharing" target="_blank" class="download-btn">
+                📥 Download Notes
+              </a>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit II: Protochordata</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit III: Origin of Chordates</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IV: Agnatha</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit V: Pisces</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit VI: Amphibia</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit VII: Reptilia</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit VIII: Aves</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IX: Mammalia</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit X: Zoogeography</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          
+          <div class="unit-item">
+            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">📝 <b>Previous year questions</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- (DSC-8): Biochemistry: Metabolic Processes -->
+      <div class="subject-dropdown subject-color-2">
+        <div class="subject-header" onclick="toggleSubject(this)">
+          (DSC-8): Biochemistry: Metabolic Processes
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="units-content">
+          <div class="unit-item">
+            <span class="unit-title">Unit I: Carbohydrate Metabolism</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit II: Lipid Metabolism</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit III: Protein Metabolism</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IV: Oxidative Phosphorylation</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit V: Liver as a Major Metabolic Hub</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">📝 <b>Previous year questions</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- (DSC-9): Human Physiology- Life Sustaining Systems -->
+      <div class="subject-dropdown subject-color-3">
+        <div class="subject-header" onclick="toggleSubject(this)">
+          (DSC-9): Human Physiology- Life Sustaining Systems
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="units-content">
+          <div class="unit-item">
+            <span class="unit-title">Unit I: Physiology of Digestion</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit II: Blood</span>
+            <div class="unit-buttons">
+              <a href="https://www.youtube.com/shorts/FXSX5jme5nA" target="_blank" class="watch-btn">
+                ▶️ Watch Video
+              </a>
+              <a href="https://drive.google.com/file/d/1-hPJY9G6snZgvTHD4hvHSg9sYR8fd812/view?usp=sharing" target="_blank" class="download-btn">
+                📥 Download Notes
+              </a>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit III: Physiology of Heart</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IV: Physiology of Respiration</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit V: Renal Physiology</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          
+          <div class="unit-item">
+            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">📝 <b>Previous year questions</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Second Semester Study Materials</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="page-protection.js"></script>
+  <script>
+    function toggleSubject(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.expand-icon');
+      const isExpanded = content.classList.contains('expanded');
+
+      if (isExpanded) {
+        content.classList.remove('expanded');
+        icon.classList.remove('rotated');
+      } else {
+        content.classList.add('expanded');
+        icon.classList.add('rotated');
+      }
+    }
+
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === "youtube") {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
+    💬
+  </a>
+
+  <div class="doubts-bubble" id="doubts-bubble">
+    Got a question?
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const bubble = document.getElementById("doubts-bubble");
+
+    // Show bubble 0.8s after button appears
+    setTimeout(() => {
+      bubble.classList.add("show");
+    }, 800);
+
+    // Hide bubble after 3 seconds
+    setTimeout(() => {
+      bubble.classList.remove("show");
+    }, 3800);
+  });
+  </script>
+
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="payment-modal">
+    <div class="payment-container">
+      <div class="payment-header">
+        <button class="close-payment" onclick="hidePaymentPopup()">&times;</button>
+        <h2>🔒 Unlock Study Notes</h2>
+        <p>Access premium BSc Zoology notes and study materials</p>
+      </div>
+
+      <div class="payment-body">
+        <div class="note-details">
+          <div class="note-title" id="paymentNoteTitle">Loading note...</div>
+          <p>Get instant access to comprehensive handwritten notes and study materials</p>
+        </div>
+
+        <div class="price-selection">
+          <h3>Choose your contribution amount:</h3>
+          <div class="price-options">
+            <div class="price-option" data-price="5">₹5</div>
+            <div class="price-option" data-price="10">₹10</div>
+            <div class="price-option" data-price="15">₹15</div>
+            <div class="price-option recommended selected" data-price="20">₹20</div>
+            <div class="price-option" data-price="30">₹30</div>
+            <div class="price-option" data-price="50">₹50</div>
+          </div>
+        </div>
+
+        <div class="payment-actions">
+          <button class="payment-btn cancel-btn" onclick="hidePaymentPopup()">Cancel</button>
+          <button class="payment-btn preview-btn" onclick="previewNote()">Preview Notes</button>
+          <button class="payment-btn pay-btn" onclick="proceedToPayment()">Pay Now</button>
+        </div>
+
+        <div class="payment-loading" id="paymentLoading">
+          <p>Processing payment...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Razorpay key will be fetched from API
+    let RAZORPAY_KEY_ID = null;
+
+    // Payment system variables
+    let currentNoteUrl = '';
+    let currentNoteTitle = '';
+    let selectedPrice = 20;
+
+    // Expose callback immediately so page-protection.js can call it
+    window.initializePaymentForAuthenticatedUser = function(userId) {
+      localStorage.setItem('userId', userId);
+      // If DOM is ready, initialize immediately; otherwise wait for DOMContentLoaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          loadPurchasedNotesAndUpdateButtons();
+        });
+      } else {
+        loadPurchasedNotesAndUpdateButtons();
+      }
+    };
+
+    // Initialize payment system when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializePaymentSystem();
+      fetchRazorpayConfig();
+    });
+
+    async function fetchRazorpayConfig() {
+      try {
+        const response = await fetch('/api/public-config');
+        if (response.ok) {
+          const config = await response.json();
+          RAZORPAY_KEY_ID = config.razorpayKeyId;
+        }
+      } catch (error) {
+        console.error('Failed to fetch Razorpay config:', error);
+      }
+    }
+
+    function initializePaymentSystem() {
+      // SECURITY: Lock all notes immediately by default to prevent unauthorized access
+      lockAllNotesButtons();
+      
+      // Check for existing authentication (fallback for already-authenticated users)
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId && window.currentUserData && auth.currentUser) {
+        // User is already authenticated, load purchased notes
+        loadPurchasedNotesAndUpdateButtons();
+      }
+      // Otherwise, wait for initializePaymentForAuthenticatedUser callback from page-protection.js
+
+      // Add price selection handlers
+      document.querySelectorAll('.price-option').forEach(option => {
+        option.addEventListener('click', () => {
+          document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
+          option.classList.add('selected');
+          selectedPrice = parseInt(option.dataset.price);
+        });
+      });
+
+      // Close modal when clicking outside
+      document.getElementById('paymentModal').addEventListener('click', (e) => {
+        if (e.target.id === 'paymentModal') {
+          hidePaymentPopup();
+        }
+      });
+    }
+
+    function lockAllNotesButtons() {
+      const downloadButtons = document.querySelectorAll('a.download-btn');
+      
+      downloadButtons.forEach(button => {
+        // Skip if this is a reference book download or other free content
+        const unitTitle = button.closest('.unit-item').querySelector('.unit-title').textContent;
+        if (unitTitle.includes('📘') || unitTitle.includes('📕') || unitTitle.includes('📓') || 
+            unitTitle.includes('Previous year') || unitTitle.includes('Cheat sheet')) {
+          // Keep reference books free
+          return;
+        }
+
+        // Only lock "Download Notes" buttons (which are the view notes buttons)
+        if (button.textContent.includes('Download Notes') || button.textContent.includes('📥 Download Notes')) {
+          const originalUrl = button.href;
+          const noteTitle = unitTitle;
+
+          // Convert to locked button
+          button.href = '#';
+          button.textContent = '🔒 Unlock Notes';
+          button.style.background = '#f59e0b';
+          button.style.color = 'white';
+          
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPaymentPopup(originalUrl, noteTitle);
+          });
+        }
+      });
+    }
+
+    async function loadPurchasedNotesAndUpdateButtons() {
+      const userId = localStorage.getItem('userId');
+      if (!userId || !auth.currentUser) return;
+
+      try {
+        // Get Firebase authentication token
+        const idToken = await auth.currentUser.getIdToken();
+        
+        // Check purchases via API
+        const response = await fetch('/api/check-purchases', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${idToken}`
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const purchasedNotes = data.purchasedNotes || [];
+          
+          // Update localStorage
+          localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+          
+          // Update button states
+          updateButtonStates(purchasedNotes);
+        } else {
+          console.error('Failed to load purchases:', response.status);
+          lockAllNotesButtons();
+        }
+      } catch (error) {
+        console.error('Error loading purchased notes:', error);
+        lockAllNotesButtons();
+      }
+    }
+
+    function updateButtonStates(purchasedNotes) {
+      const downloadButtons = document.querySelectorAll('a.download-btn');
+      
+      downloadButtons.forEach(button => {
+        const unitTitle = button.closest('.unit-item').querySelector('.unit-title').textContent;
+        
+        // Skip reference books and free content
+        if (unitTitle.includes('📘') || unitTitle.includes('📕') || unitTitle.includes('📓') || 
+            unitTitle.includes('Previous year') || unitTitle.includes('Cheat sheet')) {
+          return;
+        }
+
+        // Only process "Download Notes" buttons
+        if (button.textContent.includes('Download Notes') || button.textContent.includes('📥 Download Notes')) {
+          const originalUrl = button.href;
+          
+          if (purchasedNotes.includes(originalUrl)) {
+            // Note is purchased - show as unlocked
+            button.textContent = '✅ View Notes';
+            button.style.background = '#22c55e';
+            button.style.color = 'white';
+          } else {
+            // Note is not purchased - lock it
+            button.href = '#';
+            button.textContent = '🔒 Unlock Notes';
+            button.style.background = '#f59e0b';
+            button.style.color = 'white';
+            
+            button.addEventListener('click', function(e) {
+              e.preventDefault();
+              showPaymentPopup(originalUrl, unitTitle);
+            });
+          }
+        }
+      });
+    }
+
+    function showPaymentPopup(noteUrl, noteTitle) {
+      currentNoteUrl = noteUrl;
+      currentNoteTitle = noteTitle || 'BSc Zoology Notes';
+
+      document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
+      document.getElementById('paymentModal').classList.add('show');
+
+      // Reset to default price selection
+      document.querySelectorAll('.price-option').forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.price === '20') {
+          option.classList.add('selected');
+        }
+      });
+      selectedPrice = 20;
+    }
+
+    function hidePaymentPopup() {
+      document.getElementById('paymentModal').classList.remove('show');
+      document.getElementById('paymentLoading').classList.remove('show');
+    }
+
+    function previewNote() {
+      const previewContent = `📖 Preview of ${currentNoteTitle}:
+
+✅ Comprehensive handwritten notes
+✅ Key topics and concepts covered  
+✅ Diagrams and illustrations
+✅ Important questions and answers
+✅ Exam-focused content
+✅ High-quality PDF format
+
+This is just a preview. The full notes contain:
+• Detailed explanations of all topics
+• Step-by-step problem solutions  
+• Memory techniques and tips
+• Previous year questions analysis
+• Complete coverage of syllabus
+
+Pay ₹${selectedPrice} to unlock the complete notes!`;
+
+      alert(previewContent);
+    }
+
+    async function proceedToPayment() {
+      const userId = localStorage.getItem('userId');
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+
+      if (!userId) {
+        alert('Please log in to continue with payment');
+        return;
+      }
+
+      // Check if user is authenticated
+      if (!auth.currentUser) {
+        alert('Please log in first');
+        return;
+      }
+
+      document.getElementById('paymentLoading').classList.add('show');
+
+      try {
+        const amountInPaise = selectedPrice * 100;
+        
+        // Get Firebase authentication token
+        const idToken = await auth.currentUser.getIdToken();
+        
+        // Create order with backend
+        const orderResponse = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${idToken}`
+          },
+          body: JSON.stringify({
+            amount: amountInPaise,
+            noteTitle: currentNoteTitle,
+            userId: userId
+          })
+        });
+
+        if (!orderResponse.ok) {
+          const errorText = await orderResponse.text();
+          let errorMessage;
+          try {
+            const errorData = JSON.parse(errorText);
+            errorMessage = errorData.error || 'Failed to create order';
+          } catch {
+            errorMessage = `Server error (${orderResponse.status}): ${errorText}`;
+          }
+          throw new Error(errorMessage);
+        }
+
+        const orderData = await orderResponse.json();
+        if (!orderData.success) {
+          throw new Error(orderData.error || 'Failed to create order');
+        }
+        
+        const options = {
+          key: RAZORPAY_KEY_ID || orderData.key,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          order_id: orderData.orderId,
+          name: 'SayHeyShubh - BSc Zoology Notes',
+          description: `Unlock: ${currentNoteTitle}`,
+          handler: async function (response) {
+            try {
+              // Get Firebase authentication token for verification
+              const idToken = await auth.currentUser.getIdToken();
+              
+              // Verify payment with backend
+              const verifyResponse = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${idToken}`
+                },
+                body: JSON.stringify({
+                  paymentId: response.razorpay_payment_id,
+                  orderId: response.razorpay_order_id,
+                  signature: response.razorpay_signature,
+                  noteUrl: currentNoteUrl
+                })
+              });
+
+              if (!verifyResponse.ok) {
+                const errorText = await verifyResponse.text();
+                let errorMessage;
+                try {
+                  const errorData = JSON.parse(errorText);
+                  errorMessage = errorData.error || 'Payment verification failed';
+                } catch {
+                  errorMessage = `Verification error (${verifyResponse.status}): ${errorText}`;
+                }
+                throw new Error(errorMessage);
+              }
+
+              const verifyResult = await verifyResponse.json();
+              
+              if (verifyResult.success && verifyResult.verified) {
+                // Payment verified - save to Firestore
+                await db.collection('purchases').add({
+                  userId: userId,
+                  noteUrl: currentNoteUrl,
+                  noteTitle: currentNoteTitle,
+                  amount: selectedPrice,
+                  paymentId: response.razorpay_payment_id,
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                  status: 'completed'
+                });
+
+                // Update local storage
+                const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+                purchasedNotes.push(currentNoteUrl);
+                localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+
+                hidePaymentPopup();
+                alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
+
+                // Refresh page to update button states
+                location.reload();
+              } else {
+                alert('Payment verification failed. Please contact support.');
+              }
+            } catch (error) {
+              console.error('Error verifying payment:', error);
+              alert('Payment was successful but verification failed. Please contact support.');
+            }
+          },
+          prefill: {
+            name: userName || '',
+            email: userEmail || '',
+          },
+          theme: { color: '#6366f1' },
+          modal: {
+            ondismiss: function() {
+              document.getElementById('paymentLoading').classList.remove('show');
+            }
+          }
+        };
+
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+        
+        document.getElementById('paymentLoading').classList.remove('show');
+
+      } catch (error) {
+        console.error('Payment initialization error:', error);
+        alert('Failed to initialize payment. Please try again.');
+        document.getElementById('paymentLoading').classList.remove('show');
+      }
+    }
+  </script>
+
+</body>
+</html>

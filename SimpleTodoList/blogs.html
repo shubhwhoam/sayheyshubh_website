@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blogs | SayHeyShubh</title>
+  <meta name="description" content="Read Shubham Kumar's blogs on mental health, digital creativity, content writing, and student life." />
+  <link rel="stylesheet" href="style.css" />
+   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+</head>
+<body>
+  <header>
+      <div class="container nav-flex">
+        <div class="logo-section">
+          <a href="index.html" class="logo-link">
+            <div class="logo">
+              <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+            </div>
+          </a>
+        </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container blogs">
+    <h2 class="section-title">📝 My Blogs & Writings</h2>
+    <p style="text-align: center; margin-bottom: 30px;">Thoughts, stories, captions, and writing pieces straight from my journey as a creator & student.</p>
+
+    <!-- Blog Post 1 -->
+    <article class="blog-post">
+      <div class="blog-card">
+        <h2>1. Beyond the Clinic Door: The Silent Struggles of Accessing Mental Health Services with a Disability 🧠</h2>
+        <p class="meta">Published: June 2025 | Topic: Mental Health & Disability</p>
+        <p>
+          Accessing mental health care when you live with a disability isn’t just about scheduling an appointment. It’s about navigating silence, stigma, and spaces that weren’t built for you...
+        </p>
+        <!-- Read full article button -->
+       <p> <a class="read-more-btn" href="beyond-the-clinic-door.html" target="_blank" rel="noopener noreferrer">
+          Read full article →
+        </a></p>
+        <!-- View certificate button -->
+        <p> <a class="view-button" href="https://drive.google.com/file/d/1pncZ4BHzgP1fH3paOya5imdvLpBPgRUn/view?usp=sharing" target="_blank" >View certificate</a></p>
+         
+      </div>
+    </article>
+
+    <!-- Blog Post 2 -->
+    <article class="blog-post">
+      <div class="blog-card">
+        <h2>2. I don't have to have it all figured out 🍂</h2>
+        <p class="meta">Published: August 2025 | Topic: Mental Health & Mindset</p>
+        <p>
+          Well...
+          I don't have to have it all figured out.
+          I don't have to worry about what my career will carry, who, when, or if I'll get married.
+          I don't have to feel like...
+        </p>
+        <!-- Read full article button -->
+       <p> <a class="read-more-btn" href="figuring-out.html" target="_blank" rel="noopener noreferrer">
+          Read full article →
+        </a></p>
+        </div>
+        </article>
+
+  </main>
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Thoughts & Stories</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const links = document.querySelectorAll('nav a');
+    const currentPage = location.pathname.split("/").pop() || 'index.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+  <script>
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        // Retry until nav is loaded
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      const path = window.location.pathname;
+      let currentPage = path.split("/").pop() || "index";
+      currentPage = currentPage.replace(".html", "");
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+</body>
+</html>

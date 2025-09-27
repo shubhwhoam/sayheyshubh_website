@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Third Year | SayHeyShubh</title>
+  <meta name="description" content="BSc Zoology Third Year study notes and materials" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+</head>
+<body>
+ 
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">📚 Third Year - BSc Zoology (Hons)</h2>
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <a href="notes.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to All Notes</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+      <div style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
+        <h3 style="color: white; margin-bottom: 1rem;">Fifth Semester</h3>
+        <p style="margin-bottom: 1.5rem; opacity: 0.9;">(Coming soon)</p>
+        <a href="fifth-semester.html" style="background: white; color: #ef4444; padding: 0.8rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600;">View Notes</a>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
+        <h3 style="color: white; margin-bottom: 1rem;">Sixth Semester</h3>
+        <p style="margin-bottom: 1.5rem; opacity: 0.9;">(Coming soon)</p>
+        <a href="sixth-semester.html" style="background: white; color: #06b6d4; padding: 0.8rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600;">View Notes</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Third Year Study Materials</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="page-protection.js"></script>
+  <script>
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === "youtube") {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
+    💬
+  </a>
+
+  <div class="doubts-bubble" id="doubts-bubble">
+    Got a question?
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const bubble = document.getElementById("doubts-bubble");
+
+    // Show bubble 0.8s after button appears
+    setTimeout(() => {
+      bubble.classList.add("show");
+    }, 800);
+
+    // Hide bubble after 3 seconds
+    setTimeout(() => {
+      bubble.classList.remove("show");
+    }, 3800);
+  });
+  </script>
+
+</body>
+</html>

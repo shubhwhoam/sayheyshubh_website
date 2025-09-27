@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio | SayHeyShubh</title>
+  <meta name="description" content="Explore the UGC, Digital Marketing, and Content Creation portfolio of Shubham Kumar." />
+  <link rel="stylesheet" href="style.css" />
+   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+</head>
+<body>
+  <header>
+      <div class="container nav-flex">
+        <div class="logo-section">
+          <a href="index.html" class="logo-link">
+            <div class="logo">
+              <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+            </div>
+          </a>
+        </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container portfolio">
+    <h2 class="section-title"> <span class="text">My Portfolio</span></h2>
+
+    <!-- Digital Marketing -->
+    <section class="portfolio-section">
+      <h3><span class="emoji">📊</span> <span class="text">Digital Marketing</span></h3>
+      <p>Social media strategy, paid campaigns, content writing & ad optimization. Take a look at my hands-on experience in digital marketing.</p>
+      <a href="Digital-marketing-projects.html" class="explore-btn">Explore My Work</a>
+      <style>
+        .explore-btn {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #6366f1; /* Primary color */
+          color: #fff;
+          font-size: 15px;
+          font-weight: 600;
+          border-radius: 8px;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .explore-btn:hover {
+          background-color: #4f46e5; /* Slightly darker on hover */
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+          transform: translateY(-2px);
+        }
+
+        .explore-btn:active {
+          transform: scale(0.96);
+        }
+      </style>
+    </section>
+
+    <!-- UGC -->
+    <section class="portfolio-section">
+      <h3><span class="emoji">🎯</span> <span class="text">Coming soon</span></h3>
+      <p>....</p>
+      <ul>
+        <li>(Coming soon)</li>
+
+    </section>
+
+    <!-- Content Creation -->
+    <section class="portfolio-section">
+      <h3><span class="emoji">🎬</span> <span class="text">Content Creation</span></h3>
+      <p>From smooth slow-mo edits to study vlogs, I love telling stories that connect.</p>
+      <ul>
+        <li>(Coming soon)</li>
+
+      </ul>
+    </section>
+
+    <div class="btn-wrap">
+      <a href="contact.html" class="btn">Work With Me</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Portfolio & Projects</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const links = document.querySelectorAll('nav a');
+    const currentPage = location.pathname.split("/").pop() || 'index.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+  <script>
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        // Retry until nav is loaded
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      const path = window.location.pathname;
+      let currentPage = path.split("/").pop() || "index";
+      currentPage = currentPage.replace(".html", "");
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+</body>
+</html>

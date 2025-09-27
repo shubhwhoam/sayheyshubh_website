@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Second Semester | SayHeyShubh</title>
+  <meta name="description" content="BSc Zoology Second Semester detailed study notes" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+    /* Existing styles remain unchanged */
+    .subject-dropdown {
+      margin-bottom: 1.5rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .subject-dropdown:hover {
+      border-color: #6366f1;
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1);
+    }
+
+    .subject-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .subject-header:hover {
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+    }
+
+    .expand-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .expand-icon.rotated {
+      transform: rotate(180deg);
+    }
+
+    .units-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: white;
+    }
+
+    .units-content.expanded {
+      max-height: 800px;
+    }
+
+    .unit-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+      transition: all 0.3s ease;
+    }
+
+    .unit-item:last-child {
+      border-bottom: none;
+    }
+
+    .unit-item:hover {
+      background: #f8fafc;
+      transform: translateX(5px);
+    }
+
+    .unit-title {
+      font-weight: 500;
+      color: #2d3748;
+      flex: 1;
+    }
+
+    .unit-buttons {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .download-btn, .watch-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .download-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-1px);
+    }
+
+    .watch-btn {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+    }
+
+    .watch-btn:hover {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      transform: translateY(-1px);
+    }
+
+    .coming-soon {
+      background: #fbbf24;
+      color: #92400e;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .subject-color-1 .subject-header { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .subject-color-2 .subject-header { background: linear-gradient(135deg, #10b981, #059669); }
+    .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+  
+  </style>
+</head>
+<body>
+  
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">📖 Second Semester Notes</h2>
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <a href="first-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to First Year</a>
+    </div>
+
+    <!-- Syllabus Section -->
+    <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview</h3>
+        <a href="https://drive.google.com/file/d/13qmXMQZXrJUE8nASIHorqLA6ieUyIx-l/view?usp=sharing" target="_blank" 
+           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+          📄 Download Syllabus PDF
+        </a>
+      </div>
+      <p>(DSC-4): Non-Chordata: Coelomates, (DSC-5): Fundamentals of Biomolecules, and (DSC-6): Human Physiology-Control and Coordination Systems</p>
+    </div>
+
+    <!-- Subjects with Dropdown -->
+    <div style="display: grid; gap: 1.5rem;">
+
+      <!-- (DSC-4): Non-Chordata: Coelomates -->
+      <div class="subject-dropdown subject-color-1">
+        <div class="subject-header" onclick="toggleSubject(this)">
+          (DSC-4): Non-Chordata: Coelomates
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="units-content">
+          <div class="unit-item">
+            <span class="unit-title">Unit I: Annelida</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit II: Arthropoda and Onychophora</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit III: Mollusca</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IV: Echinodermata</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">📝 <b>Previous year questions</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- (DSC-5): Fundamentals of Biomolecules -->
+      <div class="subject-dropdown subject-color-2">
+        <div class="subject-header" onclick="toggleSubject(this)">
+          (DSC-5): Fundamentals of Biomolecules
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="units-content">
+          <div class="unit-item">
+            <span class="unit-title">Unit I: Carbohydrates</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit II: Lipids</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit III: Proteins</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IV: Nucleic Acids</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit V: Enzymes</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">📝 <b>Previous year questions</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- (DSC-6): Human Physiology-Control and Coordination Systems -->
+      <div class="subject-dropdown subject-color-3">
+        <div class="subject-header" onclick="toggleSubject(this)">
+          (DSC-6): Human Physiology-Control and Coordination Systems
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="units-content">
+          <div class="unit-item">
+            <span class="unit-title">Unit I: Nervous System and Sense Organs</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit II: Muscle Physiology</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit III: Endocrine System</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">Unit IV: Reproductive System</span>
+            <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          
+          <div class="unit-item">
+            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+          <div class="unit-item">
+            <span class="unit-title">📝 <b>Previous year questions</b> </span>
+            <div class="unit-buttons"> 
+              <span class="coming-soon">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Second Semester Study Materials</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="page-protection.js"></script>
+  <script>
+    function toggleSubject(header) {
+      const content = header.nextElementSibling;
+      const icon = header.querySelector('.expand-icon');
+      const isExpanded = content.classList.contains('expanded');
+
+      if (isExpanded) {
+        content.classList.remove('expanded');
+        icon.classList.remove('rotated');
+      } else {
+        content.classList.add('expanded');
+        icon.classList.add('rotated');
+      }
+    }
+
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === "youtube") {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
+    💬
+  </a>
+
+  <div class="doubts-bubble" id="doubts-bubble">
+    Got a question?
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const bubble = document.getElementById("doubts-bubble");
+
+    // Show bubble 0.8s after button appears
+    setTimeout(() => {
+      bubble.classList.add("show");
+    }, 800);
+
+    // Hide bubble after 3 seconds
+    setTimeout(() => {
+      bubble.classList.remove("show");
+    }, 3800);
+  });
+  </script>
+
+</body>
+</html>

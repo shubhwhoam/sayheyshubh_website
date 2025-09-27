@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | SayHeyShubh</title>
+  <meta name="description" content="Learn more about Shubham Kumar – student of Zoology, UGC creator, and passionate mental health advocate." />
+  <link rel="stylesheet" href="style.css" />
+   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+</head>
+<body>
+  <header>
+      <div class="container nav-flex">
+        <div class="logo-section">
+          <a href="index.html" class="logo-link">
+            <div class="logo">
+              <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+            </div>
+          </a>
+        </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container about">
+    <h2 class="section-title"><span class="emoji"><img src="attached_assets/hi_1753419293614.png" alt="Wave" class="emoji-icon" /></span> <span class="text">About Me</span></h2>
+
+    <section class="about-intro">
+      <p>Hi! I'm <strong>Shubham Kumar</strong>, </p>
+
+      <p>A BSc Zoology (Hons.) student at Deen Dayal Upadhyaya College, University of Delhi with a deep curiosity about science, and the intricate workings of the natural world. My academic journey is driven by a passion for understanding living organisms from microscopic life forms to complex ecosystems, and how they relate to human behavior, psychology, and creativity.</p>
+
+      <p>Currently, I’m actively learning digital marketing to expand my skill set and understand how impactful content, storytelling, and strategy can come together to drive awareness and change.</p>
+
+       <p>Open to opportunities that blend scientific exploration, digital marketing, strategic communication, and creative problem-solving.</p>
+    </section>
+
+    <section class="about-points">
+      <h3><span class="emoji">💡</span> <span class="text">A Few Things About Me:</span></h3>
+      <ul>
+        <li>YouTube content around student life, emotional support, and study motivation</li>
+        <li>Skilled in video editing (CapCut, Premiere Pro) & design (Canva)</li>
+        <li>Completed a certificate in Emotional Intelligence (Grade: Outstanding)</li>
+        <li>Interested in Neuropsychology, mental health, and digital storytelling</li>
+      </ul>
+    </section>
+
+    <section class="about-goal">
+      <h3><span class="emoji">🎯</span> <span class="text">My Mission</span></h3>
+      <p>To tell stories that make people feel seen, heard, and inspired. Whether it’s through a short video, a caption, or a conversation. I believe in creating content that connects deeply and honestly.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Thanks for stopping by!</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const links = document.querySelectorAll('nav a');
+    const currentPage = location.pathname.split("/").pop() || 'index.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+  <script>
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        // Retry until nav is loaded
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      const path = window.location.pathname;
+      let currentPage = path.split("/").pop() || "index";
+      currentPage = currentPage.replace(".html", "");
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+</body>
+</html>

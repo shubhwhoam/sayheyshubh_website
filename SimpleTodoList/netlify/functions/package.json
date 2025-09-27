@@ -1,0 +1,10 @@
+{
+  "name": "netlify-functions",
+  "version": "1.0.0",
+  "description": "Netlify Functions for payment processing",
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.5.0",
+    "razorpay": "^2.9.6"
+  }
+}

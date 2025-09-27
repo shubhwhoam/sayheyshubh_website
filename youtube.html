@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube | ShubhiPhilia</title>
+  <meta name="description" content="Watch Shubham's educational content, handwritten notes, and study tips on YouTube. Access free Zoology notes and academic guidance." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="32x32">
+  <link rel="preload" href="attached_assets/boom.png_1753383095125.png" as="image">
+  <style>
+    .youtube-container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .channel-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .channel-avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #fff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    .channel-header .emoji-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 5px;
+    }
+
+    .channel-name {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #1c1c1c;
+      margin: 0;
+    }
+
+    .channel-description {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .youtube-btn, .notes-btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border: none;
+      cursor: pointer;
+    }
+
+    .youtube-btn {
+      background: linear-gradient(45deg, #ff0000, #cc0000);
+      color: white;
+    }
+
+    .youtube-btn:hover {
+      background: linear-gradient(45deg, #cc0000, #990000);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+    }
+
+    .notes-btn {
+      background: linear-gradient(45deg, #00897b, #00695c);
+      color: white;
+    }
+
+    .notes-btn:hover {
+      background: linear-gradient(45deg, #00695c, #004d40);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 137, 123, 0.3);
+    }
+
+    .content-section {
+      margin: 3rem 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2d3748;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(45deg, #6366f1, #4f46e5);
+      border-radius: 2px;
+    }
+
+    .video-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      margin-top: 2rem;
+    }
+
+    .video-item {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .video-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .video-item iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+    }
+
+    .video-info {
+      padding: 1.5rem;
+    }
+
+    .video-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-section {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      background: #fff;
+      padding: 1.5rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #6366f1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #718096;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .youtube-container {
+        padding: 1rem;
+      }
+
+      .channel-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .channel-avatar {
+        width: 120px;
+        height: 120px;
+      }
+
+      .channel-name {
+        font-size: 2rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .youtube-btn, .notes-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+  </style>
+</head>
+<body>
+ 
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="youtube-container">
+    <div class="channel-header">
+      <img src="attached_assets/shubhiphilia.jpg" alt="Shubham's Avatar" class="channel-avatar" />
+      <h1 class="channel-name">ShubhiPhilia 🎓</h1>
+       <h3>(Bsc Zoology Notes, Previous Year Questions, And Relevant Study Material)</h3>
+      
+      <div class="action-buttons">
+        <a href="https://www.youtube.com/@ShubhiPhilia" class="youtube-btn" target="_blank">
+          🎥 Visit My Channel
+        </a>
+        <button class="notes-btn" onclick="showAuthPopup()">
+          📚 Download Notes
+        </button>
+      </div>
+
+      <p class="channel-description">
+        Hey!! I'm Shubham 👋, a BSc (H) Zoology student sharing handwritten Zoology notes, study tips, and academic guidance on YouTube.</p> 
+
+      <p>"Well.. I'm just a regular human sharing random life stuff, cool lessons, and whatever else pops into my brain on YouTube. If you're into chill vibes, learning new things, and occasional chaos, you're in the right place. Hit that subscribe button and let's figure this life thing out together!"</p>
+
+        <p><strong>Bas mauj masti nahi rukni chahiye!!</strong>
+      </p>   
+    </div>
+
+    <div class="stats-section">
+      <h3 class="section-title">📊 Channel Highlights</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">📖</span>
+          <div class="stat-label">Study Content</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">✍️</span>
+          <div class="stat-label">Handwritten Notes</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">🎯</span>
+          <div class="stat-label">Academic Tips</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">🌟</span>
+          <div class="stat-label">Life Content</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3 class="section-title">🎬 Featured Videos</h3>
+      <div class="video-grid">
+
+        <div class="video-item">
+          <iframe 
+            src="https://www.youtube.com/embed/0QyVX0lVcMM" 
+            title="Carbohydrates" 
+            allowfullscreen>
+          </iframe>
+          <div class="video-info">
+            <div class="video-title">Introduction to Ecology | BSc Zoology Hons 📚 | Sem 1 | DU Notes</div>
+          </div>
+        </div>
+
+        <div class="video-item">
+          <iframe 
+            src="https://www.youtube.com/embed/wewhZlQ0IlI" 
+            title="BSc Zoology First Year Survival Guide 🎓" 
+            allowfullscreen>
+          </iframe>
+          <div class="video-info">
+            <div class="video-title">BSc Zoology First Year Survival Guide 🎓</div>
+          </div>
+        </div>
+
+
+        <div class="video-item">
+          <iframe 
+            src="https://www.youtube.com/embed/FMTwnbzEWAg" 
+            title="Introduction to Non-Chordates" 
+            allowfullscreen>
+          </iframe>
+          <div class="video-info">
+            <div class="video-title">Introduction to Non-Chordates | BSc Zoology Hons 📚 | Sem 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #6366f1, #4f46e5); border-radius: 15px; color: white;">
+        <h3 style="color: white; margin-bottom: 1rem;">Ready to Learn? 🚀</h3>
+        <p style="margin-bottom: 2rem; opacity: 0.9;">Join me on this amazing journey of learning and growth!</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="https://www.youtube.com/@ShubhiPhilia" class="youtube-btn" target="_blank">
+            Subscribe Now
+          </a>
+          <button class="notes-btn" onclick="showAuthPopup()">
+            Get Study Notes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authentication Modal -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-container">
+      <button class="close-auth" onclick="hideAuthPopup()">&times;</button>
+      
+      <div class="auth-header">
+        <h2>Access Study Notes</h2>
+        <p>Sign up or log in to access exclusive BSc Zoology notes</p>
+      </div>
+
+      <div class="auth-buttons">
+        <button class="auth-btn google-btn" onclick="signInWithGoogle()">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+      </div>
+
+
+
+      <div class="loading" id="loadingIndicator">
+        <p>Processing...</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Educational Content & Life Stories</p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
+  <script>
+    const links = document.querySelectorAll('nav a');
+    const currentPage = location.pathname.split("/").pop() || 'index.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+  <script>
+    function waitForNavAndHighlight() {
+      const navLinks = document.querySelectorAll("nav a");
+      if (navLinks.length === 0) {
+        // Retry until nav is loaded
+        setTimeout(waitForNavAndHighlight, 50);
+        return;
+      }
+
+      const path = window.location.pathname;
+      let currentPage = path.split("/").pop() || "index";
+      currentPage = currentPage.replace(".html", "");
+
+      navLinks.forEach(link => {
+        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
+        if (href === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+  </script>
+
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
+    💬
+  </a>
+
+  <div class="doubts-bubble" id="doubts-bubble">
+    Got a question?
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const bubble = document.getElementById("doubts-bubble");
+
+    // Show bubble 0.8s after button appears
+    setTimeout(() => {
+      bubble.classList.add("show");
+    }, 800);
+
+    // Hide bubble after 3 seconds
+    setTimeout(() => {
+      bubble.classList.remove("show");
+    }, 3800);
+  });
+  </script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" class="cookie-banner">
+    <p>
+      🍪 This website uses cookies to enhance your experience.  
+      <a href="/privacy-policy.html" target="_blank">Learn more</a>
+    </p>
+    <div class="cookie-buttons">
+      <button id="accept-cookies" class="accept-btn">Accept</button>
+      <span id="close-cookies" class="close-btn">&times;</span>
+    </div>
+  </div>
+
+  <style>
+    /* Cookie Banner Styling */
+    .cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      color: #333;
+      padding: 14px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      font-size: 14px;
+      max-width: 600px;
+      width: 90%;
+      z-index: 1000;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .cookie-banner a {
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .accept-btn {
+      background: #6366f1;
+      color: white;
+      padding: 6px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.3s ease;
+    }
+
+    .accept-btn:hover {
+      background: #4f46e5;
+    }
+
+    .close-btn {
+      font-size: 20px;
+      cursor: pointer;
+      color: #777;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+
+    .cookie-banner.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    /* Auth Modal Styles */
+    .auth-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .auth-modal.show {
+      display: flex;
+    }
+
+    .auth-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .auth-header h2 {
+      color: #2d3748;
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-header p {
+      color: #718096;
+      font-size: 0.9rem;
+    }
+
+    .auth-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .auth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      background: white;
+      color: #2d3748;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-btn:hover {
+      border-color: #6366f1;
+      background: #f8fafc;
+      transform: translateY(-2px);
+    }
+
+    .google-btn {
+      border-color: #4285f4;
+      color: #4285f4;
+    }
+
+    .google-btn:hover {
+      background: #4285f4;
+      color: white;
+    }
+
+
+
+    .verification-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: 0.2rem;
+    }
+
+    .close-auth {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #718096;
+      z-index: 10001;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .close-auth:hover {
+      background: rgba(113, 128, 150, 0.1);
+      color: #2d3748;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      color: #6366f1;
+    }
+
+
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const banner = document.getElementById("cookie-banner");
+      const acceptBtn = document.getElementById("accept-cookies");
+      const closeBtn = document.getElementById("close-cookies");
+
+      // Check if user already accepted or closed
+      if (localStorage.getItem("cookieConsent")) {
+        banner.classList.add("hidden");
+      }
+
+      // Accept cookies
+      acceptBtn.addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "accepted");
+        banner.classList.add("hidden");
+      });
+
+      // Close banner (decline)
+      closeBtn.addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "declined");
+        banner.classList.add("hidden");
+      });
+    });
+  </script>
+
+  <!-- Firebase Configuration and Authentication -->
+  <script>
+    // Firebase is initialized in firebase-config.js
+    let currentUser = null;
+
+    // Authentication functions
+    function showAuthPopup() {
+      document.getElementById('authModal').classList.add('show');
+    }
+
+    function hideAuthPopup() {
+      document.getElementById('authModal').classList.remove('show');
+      // Reset loading indicator if it exists
+      const loadingEl = document.getElementById('loadingIndicator');
+      if (loadingEl) loadingEl.style.display = 'none';
+    }
+
+    function showLoading(show = true) {
+      document.getElementById('loadingIndicator').style.display = show ? 'block' : 'none';
+    }
+
+    // Google Sign-in
+    async function signInWithGoogle() {
+      showLoading();
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+        
+        // Get device ID and register it
+        const deviceId = getDeviceId();
+        const userRef = db.collection('users').doc(user.uid);
+        const userDoc = await userRef.get();
+        
+        if (!userDoc.exists) {
+          // Save new user data with device registration
+          await userRef.set({
+            name: user.displayName,
+            email: user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            authMethod: 'google',
+            devices: {
+              [deviceId]: true
+            }
+          });
+        } else {
+          // Update existing user with new device
+          await userRef.update({
+            [`devices.${deviceId}`]: true
+          });
+        }
+        
+        currentUser = user;
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userId', user.uid);
+        localStorage.setItem('userName', user.displayName);
+        localStorage.setItem('userEmail', user.email);
+        
+        hideAuthPopup();
+        showLoading(false);
+        
+        // Redirect to notes page
+        window.location.href = 'notes.html';
+        
+      } catch (error) {
+        showLoading(false);
+        alert('Google sign-in failed: ' + error.message);
+      }
+    }
+
+
+
+
+
+    // Check if user is already logged in and update UI accordingly
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        currentUser = user;
+        
+        // Check if device is still valid
+        try {
+          const deviceId = getDeviceId();
+          const userRef = db.collection('users').doc(user.uid);
+          const doc = await userRef.get();
+          
+          if (doc.exists) {
+            const data = doc.data();
+            const devices = data.devices || {};
+            
+            if (devices[deviceId]) {
+              // User is authenticated - update buttons and UI
+              console.log('User is authenticated - updating UI');
+              updateUIForLoggedInUser(user, data);
+              return;
+            }
+          }
+        } catch (error) {
+          console.error('Authentication check failed:', error);
+          // Continue with normal flow if check fails
+        }
+      }
+      
+      // User is not authenticated - show normal login buttons
+      console.log('User not authenticated - showing login options');
+    });
+
+    // Function to update UI for logged-in users
+    function updateUIForLoggedInUser(user, userData) {
+      // Change the "Download Notes" buttons to "Access Notes" since user is already logged in
+      const notesButtons = document.querySelectorAll('.notes-btn');
+      notesButtons.forEach(btn => {
+        btn.textContent = '📚 Access My Notes';
+        btn.onclick = function() {
+          window.location.href = 'notes.html';
+        };
+      });
+      
+      // Add a welcome message or user indicator
+      const channelHeader = document.querySelector('.channel-header');
+      if (channelHeader && userData) {
+        const welcomeMsg = document.createElement('div');
+        welcomeMsg.style.cssText = `
+          background: linear-gradient(135deg, #22c55e, #16a34a);
+          color: white;
+          padding: 1rem;
+          border-radius: 10px;
+          margin-top: 1rem;
+          text-align: center;
+          font-weight: 600;
+        `;
+        welcomeMsg.innerHTML = `👋 Welcome back, ${userData.name || user.displayName || 'User'}! You're logged in and ready to access your notes.`;
+        channelHeader.appendChild(welcomeMsg);
+      }
+    }
+
+    // Check URL parameters and show login popup if needed
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('showLogin') === 'true') {
+        // Show login popup automatically when redirected from protected page
+        setTimeout(() => {
+          showAuthPopup();
+        }, 500); // Small delay to ensure page is fully loaded
+        
+        // Clean up URL by removing the parameter
+        const url = new URL(window.location);
+        url.searchParams.delete('showLogin');
+        window.history.replaceState({}, document.title, url.pathname);
+      }
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('authModal').addEventListener('click', (e) => {
+      if (e.target.id === 'authModal') {
+        hideAuthPopup();
+      }
+    });
+  </script>
+</body>
+</html>

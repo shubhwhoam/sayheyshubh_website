@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figuring Out</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    }
+    h1 {
+      color: #1a1a1a;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 2rem;
+      border-left: 4px solid #000080;
+      padding-left: 1rem;
+    }
+    h2 {
+      margin-top: 2rem;
+      color: #003366;
+    }
+    p {
+      margin: 1rem 0;
+    }
+    hr {
+      margin-top: 3rem;
+    }
+    .comment-section {
+      margin-top: 3rem;
+    }
+    .comment-section h3 {
+      margin-bottom: 1rem;
+      color: #222;
+    }
+    .comment {
+      padding: 1rem;
+      background: #f1f1f1;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .comment-form textarea,
+    .comment-form input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .comment-form button {
+      padding: 0.6rem 1.4rem;
+      background-color: #000080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .comment-form button:hover {
+      background-color: #0000cc;
+    }
+
+    .poem {
+      white-space: pre-line;
+      line-height: 1.7;
+    }
+  </style>
+  <!-- Favicon using emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍂</text></svg>">
+  </head>
+  <body>
+    <div class="container">
+      <h1>I don't have to have it all figured out 🍂</h1>
+      <p class="meta">Written by <strong>Shubham Kumar</strong><br>Published on <time datetime="2025-08-20">August 20, 2025</time><br>Topic: <em>Mental Health & Mindset</em></p>
+
+      <div class="poem">
+      Well...
+      I don't have to have it all figured out.
+      I don't have to worry about what my career will carry, who, when, or if I'll get married.
+      I don't have to feel like I'm running out of time,
+      Because real genuine life exists between the lines,
+      And I haven't even lived before.
+      This is the first time.
+
+      That's why I'm so twisted,
+      cuz everything I feel like I should've done by now I've listed.
+      But what's that even based off, other versions of myself that never existed?
+
+      Don't even get me started on comparing yourself to others.
+      Cuz everything online
+      Is designed 
+      To make you feel behind.
+      Everyone has setbacks, problems, and pain,
+      Even if you swap with them you'll feel the same.
+
+      So what's my purpose? Why I'm here? I don't know.
+      But I know we're not here to just try to figure out why we're here.
+      And I don't see much purpose in just trying to figure out what's my purpose.
+      You just gotta do.. go out and do things. 
+
+      So...
+      I'll say it again in case you doubt,
+      You don't have to have it all figured out.
+      </div>
+
+      <hr>
+
+          <div class="comment-section">
+            <h3>💬 Leave a Comment</h3>
+            <form class="comment-form">
+              <input type="text" placeholder="Your name" required />
+              <input type="email" placeholder="Your email" required />
+              <textarea rows="4" placeholder="Write your comment here..." required></textarea>
+              <button type="submit">Post Comment</button>
+            </form>
+
+            <div id="commentDisplay">
+              <div class="comment">
+                <strong>Ansh:</strong>
+                <p>This piece really opened my eyes. Thank you for writing this!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          const form = document.querySelector('.comment-form');
+          const commentDisplay = document.getElementById('commentDisplay');
+
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = form.querySelector('input[type=text]').value;
+            const text = form.querySelector('textarea').value;
+
+            const newComment = document.createElement('div');
+            newComment.classList.add('comment');
+            newComment.innerHTML = `<strong>${name}:</strong><p>${text}</p>`;
+            commentDisplay.appendChild(newComment);
+            form.reset();
+          });
+        </script>
+      </body>
+      </html>
