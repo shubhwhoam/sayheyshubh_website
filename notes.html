@@ -1350,7 +1350,7 @@
         
         if (data.success) {
           // Store purchased notes locally for faster access
-          localStorage.setItem('purchasedNotes', JSON.stringify(data.purchases));
+          localStorage.setItem('purchasedNotes', JSON.stringify(data.purchasedNotes));
         } else {
           console.error('Failed to load purchases:', data.error);
         }
@@ -1523,31 +1523,43 @@ Pay ₹${selectedPrice} to unlock the complete notes!
                 throw new Error('Payment verification failed');
               }
 
-              // Step 4: Payment verified on server - reload purchases
-              await loadPurchasedNotes();
-
-              // Optional: Save additional data to Firestore for analytics
-              try {
-                await db.collection('purchases').add({
-                  userId: userId,
-                  noteUrl: currentNoteUrl,
-                  noteTitle: currentNoteTitle,
-                  amount: selectedPrice,
-                  paymentId: response.razorpay_payment_id,
-                  orderId: response.razorpay_order_id,
-                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                  status: 'completed'
-                });
-              } catch (firestoreError) {
-                console.warn('Firestore logging failed:', firestoreError);
-                // Don't fail the payment flow if Firestore is down
-              }
-
+              // Step 4: Payment verified - immediately close popup and show success
               hidePaymentPopup();
               alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
-
-              // Refresh the page to update button states
-              location.reload();
+              
+              // Update UI immediately without page reload
+              const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+              if (!purchasedNotes.includes(currentNoteUrl)) {
+                purchasedNotes.push(currentNoteUrl);
+                localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+              }
+              
+              // Update button states immediately
+              updateUnlockedNoteButtons();
+              
+              // Load fresh purchases and save analytics in background (don't block UI)
+              Promise.all([
+                loadPurchasedNotes(),
+                (async () => {
+                  try {
+                    await db.collection('purchases').add({
+                      userId: userId,
+                      noteUrl: currentNoteUrl,
+                      noteTitle: currentNoteTitle,
+                      amount: selectedPrice,
+                      paymentId: response.razorpay_payment_id,
+                      orderId: response.razorpay_order_id,
+                      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                      status: 'completed'
+                    });
+                  } catch (firestoreError) {
+                    console.warn('Firestore logging failed:', firestoreError);
+                  }
+                })()
+              ]).catch(error => {
+                console.warn('Background operations failed:', error);
+                // Don't show error to user since payment was successful
+              });
 
             } catch (error) {
               console.error('Error verifying/saving payment:', error);
@@ -1602,6 +1614,38 @@ Pay ₹${selectedPrice} to unlock the complete notes!
         payBtn.style.opacity = '1';
         payBtn.style.cursor = 'pointer';
         document.getElementById('paymentLoading').classList.remove('show');
+      }
+    }
+
+    // Function to update button states after successful payment
+    function updateUnlockedNoteButtons() {
+      const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+      
+      // Update all note buttons on the current page
+      document.querySelectorAll('.download-btn.locked').forEach(button => {
+        const noteUrl = button.getAttribute('data-note-url') || '';
+        
+        // Find the corresponding note URL from the button's onclick handler
+        const onclickStr = button.onclick ? button.onclick.toString() : '';
+        const urlMatch = onclickStr.match(/showPaymentPopup\('([^']+)'/);
+        const matchedUrl = urlMatch ? urlMatch[1] : noteUrl;
+        
+        if (purchasedNotes.includes(matchedUrl)) {
+          button.className = 'download-btn unlocked';
+          button.textContent = '✅ View Notes';
+          button.style.background = '#22c55e';
+          button.style.color = 'white';
+          
+          // Update onclick to download instead of showing payment
+          const noteTitle = button.getAttribute('data-note-title') || 'Study Notes';
+          button.onclick = () => downloadNote(matchedUrl, noteTitle);
+        }
+      });
+      
+      // Also update buttons created dynamically in createSubjectCard
+      if (currentSemester) {
+        // Re-render the current semester view to update button states
+        showSemester(currentSemester);
       }
     }
 
