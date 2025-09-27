@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -9,10 +10,12 @@
 
     gtag('config', 'G-01VF0W2CD1');
   </script>
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   
+  <!-- Razorpay Checkout -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   
   <meta charset="UTF-8" />
@@ -22,7 +25,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
-    
+   
 
     .subject-dropdown {
       margin-bottom: 1.5rem;
@@ -337,7 +340,7 @@
   </style>
 </head>
 <body>
-  
+ 
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
@@ -371,19 +374,22 @@
       <a href="first-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to First Year</a>
     </div>
 
+    <!-- Syllabus Section -->
     <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
         <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview</h3>
         <a href="https://drive.google.com/file/d/13UDwf4l5ckH-3WG3jyx83Z_yZIMcZWgr/view?usp=sharing" target="_blank" 
-          style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
+           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
           📄 Download Syllabus PDF
         </a>
       </div>
       <p>(DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, (DSC-3) Concepts of Ecology</p>
     </div>
 
+    <!-- Subjects with Dropdown -->
     <div style="display: grid; gap: 1.5rem;">
 
+      <!-- (DSC-1) Non Chordata - Protists to Pseudocoelomates -->
       <div class="subject-dropdown subject-color-1">
         <div class="subject-header" onclick="toggleSubject(this)">
           (DSC-1) Non Chordata - Protists to Pseudocoelomates
@@ -396,7 +402,7 @@
               <a href="https://www.youtube.com/watch?v=FMTwnbzEWAg" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/1EotDR67uubwA4ZTGw_tBeCdWBkfwxP26/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/1EotDR67uubwA4ZTGw_tBeCdWBkfwxP26/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/1EotDR67uubwA4ZTGw_tBeCdWBkfwxP26/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
@@ -407,7 +413,7 @@
               <a href="https://www.youtube.com/shorts/WD--edvmkNs" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/1AwXjSVQXR-01CLcO93WlSvQ9e2Xj45bW/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/1AwXjSVQXR-01CLcO93WlSvQ9e2Xj45bW/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/1AwXjSVQXR-01CLcO93WlSvQ9e2Xj45bW/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
@@ -418,7 +424,7 @@
               <a href="https://www.youtube.com/shorts/oi0GWkKAvlk" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/1tdXqjf-cNwo6sDoRxOJtx-WLJb08EgLs/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/1tdXqjf-cNwo6sDoRxOJtx-WLJb08EgLs/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/1tdXqjf-cNwo6sDoRxOJtx-WLJb08EgLs/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
@@ -479,6 +485,7 @@
         </div>
       </div>
 
+      <!-- (DSC-2) Biology of Cell: Structure -->
       <div class="subject-dropdown subject-color-2">
         <div class="subject-header" onclick="toggleSubject(this)">
           (DSC-2) Biology of Cell: Structure
@@ -491,7 +498,7 @@
               <a href="https://www.youtube.com/shorts/gPlUwau5cwE" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/1XX2VV9nv27NJ2j7m8J0w-88zT6RCNQDj/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/1XX2VV9nv27NJ2j7m8J0w-88zT6RCNQDj/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/1XX2VV9nv27NJ2j7m8J0w-88zT6RCNQDj/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
@@ -508,13 +515,13 @@
               <a href="https://www.youtube.com/shorts/j8rt3Aenk04" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/12MWkc_F8-rwhJUqvg2AcSx4jgPi5cnb-/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/12MWkc_F8-rwhJUqvg2AcSx4jgPi5cnb-/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/12MWkc_F8-rwhJUqvg2AcSx4jgPi5cnb-/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
           </div>
           <div class="unit-item">
-            <span class="unit-title">Unit IV: Nucleus  </span>
+            <span class="unit-title">Unit IV: Nucleus  </span>
             <div class="unit-buttons">
               <span class="coming-soon">Coming Soon</span>
             </div>
@@ -560,6 +567,7 @@
         </div>
       </div>
 
+      <!-- (DSC-3) Concepts of Ecology -->
       <div class="subject-dropdown subject-color-3">
         <div class="subject-header" onclick="toggleSubject(this)">
           (DSC-3) Concepts of Ecology
@@ -572,7 +580,7 @@
               <a href="https://youtu.be/0QyVX0lVcMM" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/1_NnkX_hmzhLZJkaoTy6nHFx8plerIzft/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/1_NnkX_hmzhLZJkaoTy6nHFx8plerIzft/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/1_NnkX_hmzhLZJkaoTy6nHFx8plerIzft/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
@@ -583,7 +591,7 @@
               <a href="https://www.youtube.com/shorts/HO20RmosDmA" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="https://drive.google.com/file/d/1_TIJMy_u0J9m6l_PT_KkAFMuPWVmYaCP/view?usp=sharing" target="_blank" class="download-btn" data-note-url="https://drive.google.com/file/d/1_TIJMy_u0J9m6l_PT_KkAFMuPWVmYaCP/view?usp=sharing">
+              <a href="https://drive.google.com/file/d/1_TIJMy_u0J9m6l_PT_KkAFMuPWVmYaCP/view?usp=sharing" target="_blank" class="download-btn">
                 📥 View Notes
               </a>
             </div>
@@ -615,10 +623,10 @@
           <div class="unit-item">
             <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
             <div class="unit-buttons"> 
-           <a href="https://drive.google.com/file/d/19v2YFDTMkf07QxkPKfRv5KEdOw09vc9f/view?usp=sharing" target="_blank" class="download-btn">
-              📥 Download
-            </a>
-          </div>
+         <a href="https://drive.google.com/file/d/19v2YFDTMkf07QxkPKfRv5KEdOw09vc9f/view?usp=sharing" target="_blank" class="download-btn">
+                📥 Download
+              </a>
+            </div>
           </div>
           <div class="unit-item">
             <span class="unit-title">📝 <b>Previous year questions</b> </span>
@@ -652,7 +660,6 @@
               </a>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </main>
@@ -660,7 +667,7 @@
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • First Semester Study Materials</p>
-        <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
     </div>
   </footer>
 
@@ -724,6 +731,7 @@
   });
   </script>
 
+  <!-- Payment Modal -->
   <div id="paymentModal" class="payment-modal">
     <div class="payment-container">
       <div class="payment-header">
@@ -836,22 +844,17 @@
       const downloadButtons = document.querySelectorAll('a.download-btn');
       
       downloadButtons.forEach(button => {
-        const unitTitle = button.closest('.unit-item').querySelector('.unit-title').textContent;
         // Skip if this is a reference book download or other free content
+        const unitTitle = button.closest('.unit-item').querySelector('.unit-title').textContent;
         if (unitTitle.includes('📘') || unitTitle.includes('📕') || unitTitle.includes('📓') || 
             unitTitle.includes('Previous year') || unitTitle.includes('Cheat sheet')) {
           // Keep reference books free
           return;
         }
 
-        // Only lock "View Notes" buttons (check for locked buttons too)
-        if (button.textContent.includes('View Notes') || button.textContent.includes('📥 View Notes') || 
-            button.textContent.includes('🔒 Unlock Notes')) {
-          
-          // CRITICAL: Store the correct document link in a data attribute
-          const originalNoteUrl = button.href;
-          button.setAttribute('data-original-url', originalNoteUrl); 
-          
+        // Only lock "View Notes" buttons, not "Download" buttons for books
+        if (button.textContent.includes('View Notes') || button.textContent.includes('📥 View Notes')) {
+          const originalUrl = button.href;
           const noteTitle = unitTitle;
 
           // Convert to locked button
@@ -862,8 +865,7 @@
           
           button.addEventListener('click', function(e) {
             e.preventDefault();
-            // Pass the original URL and title to the popup
-            showPaymentPopup(originalNoteUrl, noteTitle); 
+            showPaymentPopup(originalUrl, noteTitle);
           });
         }
       });
@@ -887,11 +889,13 @@
 
         if (response.ok) {
           const data = await response.json();
-          // The API returns the list of unlocked note SLUGS (e.g., 'protista')
-          const purchasedNotesSlugs = data.purchasedNotes || []; 
+          const purchasedNotes = data.purchasedNotes || [];
+          
+          // Update localStorage
+          localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
           
           // Update button states
-          updateButtonStates(purchasedNotesSlugs);
+          updateButtonStates(purchasedNotes);
         } else {
           console.error('Failed to load purchases:', response.status);
           lockAllNotesButtons();
@@ -902,8 +906,8 @@
       }
     }
 
-    function updateButtonStates(purchasedNotesSlugs) {
-      console.log('Updating button states with purchased note SLUGS:', purchasedNotesSlugs);
+    function updateButtonStates(purchasedNotes) {
+      console.log('Updating button states with purchased notes:', purchasedNotes);
       const downloadButtons = document.querySelectorAll('a.download-btn');
       
       downloadButtons.forEach(button => {
@@ -915,47 +919,63 @@
           return;
         }
 
-        // Only process View Notes buttons
+        // Only process "View Notes" buttons (check for locked buttons too)
         if (button.textContent.includes('View Notes') || button.textContent.includes('📥 View Notes') || 
             button.textContent.includes('🔒 Unlock Notes')) {
           
-          // Get the original Drive URL from the data attribute set during lockAllNotesButtons()
-          const originalNoteUrl = button.getAttribute('data-original-url'); 
+          // Get the original URL (stored in data attribute or href)
+          let originalUrl = button.getAttribute('data-original-url') || button.href;
           
-          if (!originalNoteUrl) return; // Should not happen if lockAllNotesButtons ran
-
-          // Generate the SLUG to check against the purchased list
-          const noteSlug = originalNoteUrl.split('/').pop(); 
+          // If href is '#', try to reconstruct the original URL from context
+          if (originalUrl === '#' || originalUrl.endsWith('#')) {
+            // This might be a locked button, try to find the original URL from the button context
+            const buttonText = button.textContent;
+            const parentUnit = button.closest('.unit-item');
+            if (parentUnit) {
+              // Try to find any other link in the same unit to infer the pattern
+              const otherLinks = parentUnit.querySelectorAll('a[href]:not([href="#"])');
+              if (otherLinks.length > 0) {
+                // Use the first valid link as reference - this is a fallback
+                originalUrl = otherLinks[0].href;
+              }
+            }
+          }
           
-          // Check if the noteSlug is in the array of unlocked notes from the API
-          if (purchasedNotesSlugs.includes(noteSlug)) { 
+          // Store original URL for future reference
+          if (!button.getAttribute('data-original-url') && originalUrl !== '#') {
+            button.setAttribute('data-original-url', originalUrl);
+          }
+          
+          console.log(`Checking button for ${unitTitle}:`, {
+            originalUrl,
+            isPurchased: purchasedNotes.includes(originalUrl),
+            currentText: button.textContent
+          });
+          
+          if (purchasedNotes.includes(originalUrl)) {
             // Note is purchased - show as unlocked
-            
-            // --- FIX IS HERE: Ensure we are setting the final URL to the stored Drive link ---
-            button.href = originalNoteUrl; 
+            button.href = originalUrl;
             button.textContent = '✅ View Notes';
-            button.style.background = '#22c55e'; // Green background
+            button.style.background = '#22c55e';
             button.style.color = 'white';
             button.style.cursor = 'pointer';
             
-            // Re-attach the click handler to directly open the link
-            const newButton = button.cloneNode(true);
-            newButton.href = originalNoteUrl;
-            button.replaceWith(newButton); // Removes old click listener, applies new href
-
+            // Remove any existing payment click handlers
+            button.replaceWith(button.cloneNode(true));
+            
           } else {
-            // Note is not purchased - ensure it remains locked
+            // Note is not purchased - lock it
             button.href = '#';
             button.textContent = '🔒 Unlock Notes';
             button.style.background = '#f59e0b';
             button.style.color = 'white';
             button.style.cursor = 'pointer';
             
-            // Ensure the payment handler is active (re-adds payment handler if it was removed)
+            // Remove existing handlers and add payment popup handler
             const newButton = button.cloneNode(true);
             newButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                showPaymentPopup(originalNoteUrl, unitTitle);
+              e.preventDefault();
+              showPaymentPopup(originalUrl, unitTitle);
             });
             button.replaceWith(newButton);
           }
@@ -969,7 +989,6 @@
 
       document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
       document.getElementById('paymentModal').classList.add('show');
-      document.getElementById('paymentLoading').classList.remove('show'); // Hide loading on open
 
       // Reset to default price selection
       document.querySelectorAll('.price-option').forEach(option => {
@@ -1013,8 +1032,14 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
       const userName = localStorage.getItem('userName');
       const userEmail = localStorage.getItem('userEmail');
 
-      if (!userId || !auth.currentUser) {
+      if (!userId) {
         alert('Please log in to continue with payment');
+        return;
+      }
+
+      // Check if user is authenticated
+      if (!auth.currentUser) {
+        alert('Please log in first');
         return;
       }
 
@@ -1034,7 +1059,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
             'Authorization': `Bearer ${idToken}`
           },
           body: JSON.stringify({
-            amount: selectedPrice, // Sending amount in Rupees to the function for conversion
+            amount: amountInPaise,
             noteTitle: currentNoteTitle,
             userId: userId
           })
@@ -1076,7 +1101,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
               // Verify payment with backend
               const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
-                headers: {  
+                headers: { 
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${idToken}`
                 },
@@ -1084,7 +1109,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
                   signature: response.razorpay_signature,
-                  noteUrl: currentNoteUrl // Pass the original Drive URL for verification/fulfillment
+                  noteUrl: currentNoteUrl
                 })
               });
 
@@ -1110,22 +1135,27 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
                 setTimeout(() => {
                   hidePaymentPopup();
                   
-                  // Update UI immediately with local state (since verification was successful)
-                  const noteSlug = currentNoteUrl.split('/').pop();
-                  // Instead of checking localStorage, just call the full server sync for accuracy
-                  loadPurchasedNotesAndUpdateButtons().then(() => {
-                     // Check button one more time after sync
-                     const button = document.querySelector(`[data-original-url="${currentNoteUrl}"]`);
-                     if(button && button.href !== '#') {
-                        // Open the note immediately after unlocking and button update
-                         window.open(button.href, '_blank');
-                     } else {
-                        alert(`🎉 Success! ₹${selectedPrice} paid for ${currentNoteTitle}. Notes are now unlocked!`);
-                     }
-                  }).catch(error => {
-                    console.warn('Background purchase sync failed:', error);
-                  });
+                  // Update UI immediately with local state
+                  const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+                  if (!purchasedNotes.includes(currentNoteUrl)) {
+                    purchasedNotes.push(currentNoteUrl);
+                    localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+                  }
                   
+                  // Update button states immediately
+                  updateButtonStates(purchasedNotes);
+                  
+                  // Show success alert after modal closes
+                  setTimeout(() => {
+                    alert(`🎉 Success! ₹${selectedPrice} paid for ${currentNoteTitle}. Notes are now unlocked!`);
+                  }, 300);
+                  
+                  // Sync with server in background to ensure consistency
+                  setTimeout(() => {
+                    loadPurchasedNotesAndUpdateButtons().catch(error => {
+                      console.warn('Background purchase sync failed:', error);
+                    });
+                  }, 1000);
                 }, 1500);
                 
               } else {
