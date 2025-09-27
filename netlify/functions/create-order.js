@@ -98,7 +98,7 @@ exports.handler = async (event, context) => {
     const options = {
       amount: amount, // amount in smallest currency unit (paise)
       currency: 'INR',
-      receipt: `receipt_${authenticatedUserId}_${Date.now()}`,
+      receipt: `r_${Date.now().toString().slice(-8)}`,
       notes: {
         noteTitle: sanitizedNoteTitle,
         userId: authenticatedUserId,

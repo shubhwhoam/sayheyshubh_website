@@ -5,12 +5,15 @@
   "scripts": {
     "build": "echo 'Static site - no build needed'"
   },
-  "keywords": ["education", "zoology", "study-notes"],
+  "keywords": [
+    "education",
+    "zoology",
+    "study-notes"
+  ],
   "author": "Shubham Kumar",
   "license": "ISC",
-
   "dependencies": {
-    "firebase-admin": "^13.5.0",  
-    "razorpay": "^2.9.6"          
+    "firebase-admin": "^13.5.0",
+    "razorpay": "^2.9.6"
   }
 }
