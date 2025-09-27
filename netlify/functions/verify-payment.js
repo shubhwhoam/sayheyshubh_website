@@ -28,7 +28,7 @@ async function verifyFirebaseToken(authHeader) {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new Error('Missing or invalid authorization header');
   }
-  
+
   const idToken = authHeader.substring(7);
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
@@ -68,9 +68,9 @@ exports.handler = async (event, context) => {
     // Verify authentication
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
-    
+
     const { paymentId, orderId, signature, noteUrl } = JSON.parse(event.body);
-    
+
     // Check if Razorpay credentials are properly configured
     if (!process.env.RAZORPAY_KEY_SECRET || !process.env.RAZORPAY_KEY_ID) {
       console.error('Razorpay credentials not configured. Payment verification failed.');
@@ -84,7 +84,7 @@ exports.handler = async (event, context) => {
         })
       };
     }
-    
+
     if (!paymentId || !orderId || !signature || !noteUrl) {
       return {
         statusCode: 400,
@@ -118,24 +118,50 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Save purchase record to Firestore
+    // --- START FULFILLMENT LOGIC (The Fix) ---
     try {
-      await db.collection('purchases').add({
+      // 1. Record the transaction (for history, renamed to 'transactions' for clarity)
+      await db.collection('transactions').add({ 
         userId: authenticatedUserId,
         paymentId: paymentId,
         orderId: orderId,
-        noteUrl: noteUrl,
+        noteUrl: noteUrl, 
         timestamp: admin.firestore.FieldValue.serverTimestamp(),
         status: 'completed',
         verified: true
       });
-      
-      console.log('Purchase recorded successfully for user:', authenticatedUserId);
-    } catch (firestoreError) {
-      console.error('Error saving purchase to Firestore:', firestoreError);
-      // Continue with success response since payment was verified
-    }
 
+      // 2. CRITICAL STEP: Mark the note as UNLOCKED for the user's access control
+      const userRef = db.collection('users').doc(authenticatedUserId);
+      const noteSlug = noteUrl.split('/').pop(); // Gets the unique identifier (slug) of the note
+
+      // This merges the new unlocked note into the user's document without deleting other data
+      await userRef.set({
+        unlockedNotes: {
+          [noteSlug]: true // Sets a flag: e.g., { 'non-chordata-protists': true }
+        }
+      }, { merge: true });
+
+      console.log('Purchase recorded and note UNLOCKED successfully for user:', authenticatedUserId);
+
+    } catch (firestoreError) {
+      // Log the specific fulfillment error for debugging
+      console.error('Error in Firestore Fulfillment (Notes still locked):', firestoreError);
+
+      // Return a 500 status but clarify the verification succeeded
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          success: false,
+          verified: true,
+          error: 'Payment verified, but fulfillment failed. Please contact support.'
+        })
+      };
+    }
+    // --- END FULFILLMENT LOGIC ---
+
+    // Final Success Response
     return {
       statusCode: 200,
       headers,
@@ -147,6 +173,7 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
+    // General error handling for Firebase token verification, etc.
     console.error('Payment verification error:', error);
     return {
       statusCode: error.message && error.message.includes('authentication') ? 401 : 500,
