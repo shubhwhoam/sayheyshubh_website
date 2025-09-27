@@ -1,16 +1,19 @@
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
 
-// Initialize Firebase Admin
+// Initialize Firebase Admin with secure environment variables
 if (!admin.apps.length) {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON || '{}');
-  if (serviceAccount.project_id) {
+  if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      projectId: serviceAccount.project_id
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+      }),
+      projectId: process.env.FIREBASE_PROJECT_ID
     });
   } else {
-    // Fallback initialization
+    // Fallback initialization for development
     admin.initializeApp({
       projectId: 'sayheyshubh-7051c'
     });
