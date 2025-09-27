@@ -152,6 +152,191 @@
     .subject-color-1 .subject-header { background: linear-gradient(135deg, #6366f1, #4f46e5); }
     .subject-color-2 .subject-header { background: linear-gradient(135deg, #10b981, #059669); }
     .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+    /* Payment Popup Styles */
+    .payment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .payment-modal.show {
+      display: flex;
+    }
+
+    .payment-container {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .payment-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .payment-header h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+    }
+
+    .payment-header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    .close-payment {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .close-payment:hover {
+      opacity: 1;
+    }
+
+    .payment-body {
+      padding: 2rem;
+    }
+
+    .note-details {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .note-title {
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .price-selection {
+      margin-bottom: 2rem;
+    }
+
+    .price-selection h3 {
+      margin-bottom: 1rem;
+      color: #4a5568;
+      font-size: 1rem;
+    }
+
+    .price-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .price-option {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .price-option:hover {
+      background: #edf2f7;
+      border-color: #cbd5e0;
+    }
+
+    .price-option.selected {
+      background: #6366f1;
+      color: white;
+      border-color: #6366f1;
+    }
+
+    .price-option.recommended {
+      position: relative;
+      background: #22c55e;
+      color: white;
+      border-color: #22c55e;
+    }
+
+    .payment-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .payment-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .cancel-btn {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .cancel-btn:hover {
+      background: #cbd5e0;
+    }
+
+    .preview-btn {
+      background: #6366f1;
+      color: white;
+    }
+
+    .preview-btn:hover {
+      background: #4f46e5;
+    }
+
+    .pay-btn {
+      background: #22c55e;
+      color: white;
+    }
+
+    .pay-btn:hover {
+      background: #16a34a;
+    }
+
+    .payment-loading {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      background: #f0f9ff;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .payment-loading.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
