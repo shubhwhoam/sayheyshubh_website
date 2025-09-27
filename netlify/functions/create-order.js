@@ -122,7 +122,7 @@ exports.handler = async (event, context) => {
   } catch (error) {
     console.error('Order creation error:', error);
     return {
-      statusCode: error.message.includes('authentication') ? 401 : 400,
+      statusCode: error.message && error.message.includes('authentication') ? 401 : 400,
       headers,
       body: JSON.stringify({ 
         success: false, 

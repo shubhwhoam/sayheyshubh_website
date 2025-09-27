@@ -149,7 +149,7 @@ exports.handler = async (event, context) => {
   } catch (error) {
     console.error('Payment verification error:', error);
     return {
-      statusCode: error.message.includes('authentication') ? 401 : 500,
+      statusCode: error.message && error.message.includes('authentication') ? 401 : 500,
       headers,
       body: JSON.stringify({
         success: false,
