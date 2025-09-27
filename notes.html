@@ -20,6 +20,9 @@
   
   <!-- Razorpay Checkout -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+  <!-- PDF.js for secure PDF viewing without downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BSc Zoology Notes | Delhi University Free Study Material | SayHeyShubh</title>
@@ -649,6 +652,89 @@
       display: block;
     }
 
+    /* Notes Viewer Modal Styles */
+    .notes-viewer-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .notes-viewer-modal.show {
+      display: flex;
+    }
+
+    .notes-viewer-container {
+      background: white;
+      width: 95%;
+      height: 90%;
+      max-width: 1200px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notes-viewer-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notes-viewer-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .close-notes-viewer {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      padding: 0.5rem;
+    }
+
+    .close-notes-viewer:hover {
+      opacity: 1;
+    }
+
+    .notes-viewer-content {
+      flex: 1;
+      display: flex;
+      position: relative;
+    }
+
+    .notes-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #f8fafc;
+    }
+
+    .notes-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #666;
+    }
+
     @media (max-width: 768px) {
       .payment-actions {
         flex-direction: column;
@@ -663,6 +749,20 @@
         width: 100%;
         max-width: 200px;
         text-align: center;
+      }
+
+      .notes-viewer-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
+
+      .notes-viewer-header {
+        padding: 1rem;
+      }
+
+      .notes-viewer-title {
+        font-size: 1rem;
       }
     }
   </style>
@@ -703,6 +803,24 @@
         <div class="user-contact" id="userContact">***</div>
       </div>
       <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Notes Viewer Modal -->
+    <div id="notesViewerModal" class="notes-viewer-modal">
+      <div class="notes-viewer-container">
+        <div class="notes-viewer-header">
+          <h2 class="notes-viewer-title" id="notesViewerTitle">BSc Zoology Notes</h2>
+          <button class="close-notes-viewer" onclick="closeNotesViewer()">&times;</button>
+        </div>
+        <div class="notes-viewer-content">
+          <div class="notes-loading" id="notesLoading">
+            <p>Loading notes...</p>
+          </div>
+          <div id="pdfViewerContainer" style="display: none; width: 100%; height: 100%; overflow-y: auto; background: #f5f5f5;">
+            <div id="pdfViewer" style="padding: 20px;"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Payment Modal -->
@@ -1143,18 +1261,177 @@
         const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
 
         if (purchasedNotes.includes(noteUrl)) {
-          // User has purchased this note - allow download
-          console.log('Downloading:', noteUrl);
-          alert('Download functionality will be implemented soon! (Note is unlocked)');
+          // User has purchased this note - open in embedded viewer
+          console.log('Opening notes in viewer:', noteUrl);
+          openNotesViewer(noteUrl, noteTitle);
         } else {
           // Show payment popup for unpaid notes
           showPaymentPopup(noteUrl, noteTitle);
         }
       } else {
-        // Free access for non-semester pages
-        console.log('Downloading (free):', noteUrl);
-        alert('Download functionality will be implemented soon! (Free access)');
+        // Free access for non-semester pages - open in embedded viewer
+        console.log('Opening notes in viewer (free access):', noteUrl);
+        openNotesViewer(noteUrl, noteTitle);
       }
+    }
+
+    async function openNotesViewer(noteUrl, noteTitle) {
+      // Extract note ID from the URL for secure access
+      const noteId = extractNoteId(noteUrl);
+      if (!noteId) {
+        alert('Invalid note URL. Please contact support.');
+        return;
+      }
+      
+      // Set title and show modal
+      document.getElementById('notesViewerTitle').textContent = noteTitle || 'BSc Zoology Notes';
+      document.getElementById('notesViewerModal').classList.add('show');
+      
+      // Show loading state
+      document.getElementById('notesLoading').style.display = 'block';
+      document.getElementById('pdfViewerContainer').style.display = 'none';
+      
+      try {
+        // Get Firebase auth token for secure access
+        const user = auth.currentUser;
+        const idToken = await user.getIdToken();
+        
+        // Get secure preview URL and access info
+        const response = await fetch(`/secure-notes/${noteId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch notes: ${response.status}`);
+        }
+        
+        const noteData = await response.json();
+        if (!noteData.success) {
+          throw new Error(noteData.error || 'Failed to access notes');
+        }
+        
+        // Clear previous content
+        const pdfViewer = document.getElementById('pdfViewer');
+        pdfViewer.innerHTML = '';
+        
+        // Create secure iframe with Google Drive preview
+        await createSecureNotesIframe(noteData.previewUrl, pdfViewer, noteData.securityToken);
+        
+        // Show PDF viewer and hide loading
+        document.getElementById('notesLoading').style.display = 'none';
+        document.getElementById('pdfViewerContainer').style.display = 'block';
+        
+        // Apply security protections
+        applyViewerProtections();
+        
+      } catch (error) {
+        console.error('Error opening notes viewer:', error);
+        document.getElementById('notesLoading').style.display = 'none';
+        alert('Failed to load notes. Please try again or contact support.');
+        closeNotesViewer();
+      }
+    }
+
+    async function createSecureNotesIframe(previewUrl, container, securityToken) {
+      // Create iframe with enhanced security attributes
+      const iframe = document.createElement('iframe');
+      iframe.src = previewUrl;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      iframe.style.background = '#f5f5f5';
+      
+      // Enhanced security attributes
+      iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms');
+      iframe.setAttribute('referrerpolicy', 'no-referrer');
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('data-security-token', securityToken);
+      
+      // Disable right-click and other interactions
+      iframe.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Monitor iframe for security violations
+      iframe.onload = function() {
+        console.log('Notes loaded securely');
+        // Add additional monitoring if needed
+      };
+      
+      iframe.onerror = function() {
+        container.innerHTML = '<div style="text-align: center; padding: 50px; color: #f44336;">Failed to load notes. Please try again.</div>';
+      };
+      
+      container.appendChild(iframe);
+    }
+
+    function extractNoteId(driveUrl) {
+      // Extract file ID from Google Drive URL to use as note ID
+      if (driveUrl.includes('drive.google.com')) {
+        const fileIdMatch = driveUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+        if (fileIdMatch) {
+          return fileIdMatch[1];
+        }
+      }
+      return null;
+    }
+
+    function applyViewerProtections() {
+      // Disable right-click context menu on the viewer modal
+      const modal = document.getElementById('notesViewerModal');
+      
+      // Remove any existing event listeners to avoid duplicates
+      const newModal = modal.cloneNode(true);
+      modal.parentNode.replaceChild(newModal, modal);
+      
+      newModal.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+      
+      // Block common download/save keyboard shortcuts
+      newModal.addEventListener('keydown', function(e) {
+        // Block Ctrl+S (Save), Ctrl+P (Print), Ctrl+Shift+I (DevTools), F12 (DevTools)
+        if ((e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P')) || 
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
+            e.key === 'F12' ||
+            (e.ctrlKey && e.key === 'u') || // View source
+            (e.ctrlKey && e.shiftKey && e.key === 'C')) { // DevTools
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      });
+      
+      // Disable text selection on the modal
+      newModal.style.userSelect = 'none';
+      newModal.style.webkitUserSelect = 'none';
+      newModal.style.mozUserSelect = 'none';
+      newModal.style.msUserSelect = 'none';
+      
+      // Re-add close functionality
+      const closeBtn = newModal.querySelector('.close-notes-viewer');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeNotesViewer);
+      }
+      
+      // Re-add outside click functionality
+      newModal.addEventListener('click', (e) => {
+        if (e.target.id === 'notesViewerModal') {
+          closeNotesViewer();
+        }
+      });
+    }
+
+    function closeNotesViewer() {
+      document.getElementById('notesViewerModal').classList.remove('show');
+      // Clear PDF viewer content
+      document.getElementById('pdfViewer').innerHTML = '';
     }
 
     function downloadSyllabus() {
@@ -1330,10 +1607,26 @@
     });
 
     // Load purchased notes from server for the current user
-    async function loadPurchasedNotes() {
+    async function loadPurchasedNotes(forceRefresh = false) {
       try {
         const user = auth.currentUser;
         if (!user) return;
+
+        // Check if we have cached data that's less than 5 minutes old
+        const cacheKey = `purchasedNotes_${user.uid}`;
+        const cacheTimestampKey = `purchasedNotes_timestamp_${user.uid}`;
+        const cacheTimestamp = localStorage.getItem(cacheTimestampKey);
+        const fiveMinutesAgo = Date.now() - (5 * 60 * 1000);
+        
+        if (!forceRefresh && cacheTimestamp && parseInt(cacheTimestamp) > fiveMinutesAgo) {
+          // Use cached data if it's fresh
+          const cachedNotes = localStorage.getItem(cacheKey);
+          if (cachedNotes) {
+            localStorage.setItem('purchasedNotes', cachedNotes);
+            updateUnlockedNoteButtons();
+            return;
+          }
+        }
 
         // Get Firebase auth token
         const idToken = await user.getIdToken();
@@ -1350,7 +1643,13 @@
         
         if (data.success) {
           // Store purchased notes locally for faster access
-          localStorage.setItem('purchasedNotes', JSON.stringify(data.purchasedNotes));
+          const purchasedNotesJson = JSON.stringify(data.purchasedNotes);
+          localStorage.setItem('purchasedNotes', purchasedNotesJson);
+          localStorage.setItem(cacheKey, purchasedNotesJson);
+          localStorage.setItem(cacheTimestampKey, Date.now().toString());
+          
+          // Update button states immediately
+          updateUnlockedNoteButtons();
         } else {
           console.error('Failed to load purchases:', data.error);
         }
@@ -1528,6 +1827,9 @@ Pay ₹${selectedPrice} to unlock the complete notes!
               alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
               
               // Update UI immediately without page reload
+              // Refresh purchased notes from server to get the latest state
+              await loadPurchasedNotes(true); // Force refresh from server
+              
               const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
               if (!purchasedNotes.includes(currentNoteUrl)) {
                 purchasedNotes.push(currentNoteUrl);
@@ -1667,6 +1969,13 @@ Pay ₹${selectedPrice} to unlock the complete notes!
       document.getElementById('paymentModal').addEventListener('click', (e) => {
         if (e.target.id === 'paymentModal') {
           hidePaymentPopup();
+        }
+      });
+
+      // Close notes viewer when clicking outside
+      document.getElementById('notesViewerModal').addEventListener('click', (e) => {
+        if (e.target.id === 'notesViewerModal') {
+          closeNotesViewer();
         }
       });
     });

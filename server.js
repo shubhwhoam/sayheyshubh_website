@@ -268,6 +268,81 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
   }
 });
 
+// Secure PDF viewer endpoint with session-based access control
+app.get('/secure-notes/:noteId', async (req, res) => {
+  try {
+    // Verify authentication using header only
+    const decodedToken = await verifyFirebaseToken(req.headers.authorization);
+    const authenticatedUserId = decodedToken.uid;
+    
+    const { noteId } = req.params;
+    
+    // Get user's unlocked notes to verify access
+    const userDoc = await db.collection('users').doc(authenticatedUserId).get();
+    const userData = userDoc.data();
+    const unlockedNotes = userData?.unlockedNotes || {};
+    
+    // Check if user has access to this note
+    if (!unlockedNotes[noteId]) {
+      return res.status(403).json({ 
+        success: false, 
+        error: 'Access denied - note not unlocked' 
+      });
+    }
+    
+    // Get the actual Google Drive URL from transactions
+    const transactionsSnapshot = await db.collection('transactions')
+      .where('userId', '==', authenticatedUserId)
+      .where('status', '==', 'completed')
+      .get();
+    
+    let noteUrl = null;
+    transactionsSnapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.noteUrl && data.noteUrl.includes(noteId)) {
+        noteUrl = data.noteUrl;
+      }
+    });
+    
+    if (!noteUrl) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Note not found' 
+      });
+    }
+    
+    // Convert Google Drive URL to preview mode (more secure than direct download)
+    const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+    if (!fileIdMatch) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Invalid note URL format' 
+      });
+    }
+    
+    const fileId = fileIdMatch[1];
+    const previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+    
+    // Return preview URL for client-side rendering with additional security
+    res.json({
+      success: true,
+      previewUrl: previewUrl,
+      noteTitle: 'BSc Zoology Notes',
+      userId: authenticatedUserId,
+      noteId: noteId,
+      securityToken: crypto.createHash('sha256').update(`${authenticatedUserId}:${noteId}:${Date.now()}`).digest('hex').substring(0, 16)
+    });
+    
+  } catch (error) {
+    console.error('Error in secure notes endpoint:', error);
+    res.status(error.message && error.message.includes('authentication') ? 401 : 500)
+       .json({
+         success: false,
+         error: error.message || 'Failed to access notes'
+       });
+  }
+});
+
 // Serve static files
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, req.path));
