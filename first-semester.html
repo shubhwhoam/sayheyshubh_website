@@ -1084,16 +1084,25 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
               const verifyResult = await verifyResponse.json();
               
               if (verifyResult.success && verifyResult.verified) {
-                // Payment verified - update local storage and refresh
-                const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
-                purchasedNotes.push(currentNoteUrl);
-                localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
-
+                // Payment verified - immediately close popup and show success
                 hidePaymentPopup();
                 alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
-
-                // Reload purchased notes and update button states
-                await loadPurchasedNotesAndUpdateButtons();
+                
+                // Update UI immediately
+                const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+                if (!purchasedNotes.includes(currentNoteUrl)) {
+                  purchasedNotes.push(currentNoteUrl);
+                  localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+                }
+                
+                // Update button states immediately
+                updateButtonStates(purchasedNotes);
+                
+                // Load fresh purchases from server in background (don't block UI)
+                loadPurchasedNotesAndUpdateButtons().catch(error => {
+                  console.warn('Background purchase sync failed:', error);
+                  // Don't show error to user since payment was successful
+                });
               } else {
                 alert('Payment verification failed. Please contact support.');
               }
