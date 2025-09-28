@@ -812,6 +812,9 @@
     }
 
     function initializePaymentSystem() {
+      // Initialize button URLs to preserve original Google Drive links
+      initializeButtonUrls();
+      
       // SECURITY: Lock all notes immediately by default to prevent unauthorized access
       lockAllNotesButtons();
       
@@ -906,6 +909,19 @@
       }
     }
 
+    // Initialize button URLs when page loads
+    function initializeButtonUrls() {
+      const downloadButtons = document.querySelectorAll('a.download-btn');
+      downloadButtons.forEach(button => {
+        // Store the original URL in a data attribute for later reference
+        if (button.href && button.href !== '#' && !button.getAttribute('data-original-url')) {
+          // Ensure we have the full URL, not relative path
+          const fullUrl = button.href.startsWith('http') ? button.href : new URL(button.href, window.location.origin).href;
+          button.setAttribute('data-original-url', fullUrl);
+        }
+      });
+    }
+
     function updateButtonStates(purchasedNotes) {
       console.log('Updating button states with purchased notes:', purchasedNotes);
       const downloadButtons = document.querySelectorAll('a.download-btn');
@@ -923,74 +939,69 @@
         if (button.textContent.includes('View Notes') || button.textContent.includes('📥 View Notes') || 
             button.textContent.includes('🔒 Unlock Notes')) {
           
-          // Get the original URL (stored in data attribute or href)
-          let originalUrl = button.getAttribute('data-original-url') || button.href;
+          // Get the original URL from data attribute first, then try current href
+          let originalUrl = button.getAttribute('data-original-url');
           
-          // If href is '#', try to reconstruct the original URL from context
-          if (originalUrl === '#' || originalUrl.endsWith('#')) {
-            // This might be a locked button, try to find the original URL from the button context
-            const buttonText = button.textContent;
-            const parentUnit = button.closest('.unit-item');
-            if (parentUnit) {
-              // Specifically look for Google Drive links (notes) not YouTube links (videos)
-              const driveLinks = parentUnit.querySelectorAll('a[href*="drive.google.com"]:not([href="#"])');
-              if (driveLinks.length > 0) {
-                // Use the Google Drive link for notes
-                originalUrl = driveLinks[0].href;
-              } else {
-                // Fallback: look for any non-YouTube link
-                const otherLinks = parentUnit.querySelectorAll('a[href]:not([href="#"]):not([href*="youtube.com"]):not([href*="youtu.be"])');
-                if (otherLinks.length > 0) {
-                  originalUrl = otherLinks[0].href;
+          // If no data attribute, try to get it from current href or find it in the DOM
+          if (!originalUrl || originalUrl === '#') {
+            const currentHref = button.getAttribute('href');
+            if (currentHref && currentHref !== '#' && currentHref.includes('drive.google.com')) {
+              // Current href is a valid Google Drive link
+              originalUrl = currentHref.startsWith('http') ? currentHref : new URL(currentHref, window.location.origin).href;
+              button.setAttribute('data-original-url', originalUrl);
+            } else {
+              // Try to find the original URL from the unit structure
+              const parentUnit = button.closest('.unit-item');
+              if (parentUnit) {
+                // Look for Google Drive links in the same unit that aren't this button
+                const driveLinks = Array.from(parentUnit.querySelectorAll('a[href*="drive.google.com"]'))
+                  .filter(link => link !== button && !link.href.endsWith('#'));
+                if (driveLinks.length > 0) {
+                  originalUrl = driveLinks[0].href;
+                  button.setAttribute('data-original-url', originalUrl);
                 }
               }
             }
           }
           
-          // Store original URL for future reference
-          if (!button.getAttribute('data-original-url') && originalUrl !== '#') {
-            button.setAttribute('data-original-url', originalUrl);
-          }
-          
           console.log(`Checking button for ${unitTitle}:`, {
             originalUrl,
-            isPurchased: purchasedNotes.includes(originalUrl),
+            isPurchased: originalUrl ? purchasedNotes.includes(originalUrl) : false,
             currentText: button.textContent
           });
           
-          if (purchasedNotes.includes(originalUrl)) {
+          if (originalUrl && purchasedNotes.includes(originalUrl)) {
             // Note is purchased - show as unlocked
-            button.href = originalUrl;
-            button.textContent = '✅ View Notes';
-            button.style.background = '#22c55e';
-            button.style.color = 'white';
-            button.style.cursor = 'pointer';
-            button.target = '_blank'; // Ensure it opens in new tab
-            
-            // Remove any existing payment click handlers by cloning and replacing
-            const newButton = button.cloneNode(true);
+            const newButton = button.cloneNode(false); // Clone without children
             newButton.href = originalUrl;
-            newButton.target = '_blank';
             newButton.textContent = '✅ View Notes';
             newButton.style.background = '#22c55e';
             newButton.style.color = 'white';
             newButton.style.cursor = 'pointer';
+            newButton.target = '_blank';
+            newButton.className = button.className; // Preserve CSS classes
+            newButton.setAttribute('data-original-url', originalUrl);
+            
+            // Remove any existing event listeners by replacing the element
             button.replaceWith(newButton);
             
-          } else {
+          } else if (originalUrl) {
             // Note is not purchased - lock it
-            button.href = '#';
-            button.textContent = '🔒 Unlock Notes';
-            button.style.background = '#f59e0b';
-            button.style.color = 'white';
-            button.style.cursor = 'pointer';
+            const newButton = button.cloneNode(false); // Clone without children
+            newButton.href = '#';
+            newButton.textContent = '🔒 Unlock Notes';
+            newButton.style.background = '#f59e0b';
+            newButton.style.color = 'white';
+            newButton.style.cursor = 'pointer';
+            newButton.className = button.className; // Preserve CSS classes
+            newButton.setAttribute('data-original-url', originalUrl);
             
-            // Remove existing handlers and add payment popup handler
-            const newButton = button.cloneNode(true);
+            // Add payment popup handler
             newButton.addEventListener('click', function(e) {
               e.preventDefault();
               showPaymentPopup(originalUrl, unitTitle);
             });
+            
             button.replaceWith(newButton);
           }
         }
