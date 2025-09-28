@@ -932,11 +932,17 @@
             const buttonText = button.textContent;
             const parentUnit = button.closest('.unit-item');
             if (parentUnit) {
-              // Try to find any other link in the same unit to infer the pattern
-              const otherLinks = parentUnit.querySelectorAll('a[href]:not([href="#"])');
-              if (otherLinks.length > 0) {
-                // Use the first valid link as reference - this is a fallback
-                originalUrl = otherLinks[0].href;
+              // Specifically look for Google Drive links (notes) not YouTube links (videos)
+              const driveLinks = parentUnit.querySelectorAll('a[href*="drive.google.com"]:not([href="#"])');
+              if (driveLinks.length > 0) {
+                // Use the Google Drive link for notes
+                originalUrl = driveLinks[0].href;
+              } else {
+                // Fallback: look for any non-YouTube link
+                const otherLinks = parentUnit.querySelectorAll('a[href]:not([href="#"]):not([href*="youtube.com"]):not([href*="youtu.be"])');
+                if (otherLinks.length > 0) {
+                  originalUrl = otherLinks[0].href;
+                }
               }
             }
           }
