@@ -359,6 +359,108 @@ app.get('/secure-notes/:noteId', async (req, res) => {
   }
 });
 
+// Migration endpoint to fix existing purchases (one-time use)
+app.post('/migrate-purchases', async (req, res) => {
+  try {
+    console.log('🔄 Starting migration of existing purchases...');
+    
+    // Function to extract proper noteSlug from Google Drive URL
+    function extractNoteSlug(noteUrl) {
+      if (noteUrl.includes('drive.google.com/file/d/')) {
+        const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+        return fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
+      } else {
+        return noteUrl.split('/').pop();
+      }
+    }
+    
+    // Get all completed transactions
+    const transactionsSnapshot = await db.collection('transactions')
+      .where('status', '==', 'completed')
+      .get();
+    
+    console.log(`📊 Found ${transactionsSnapshot.size} completed transactions`);
+    
+    // Group transactions by user
+    const userTransactions = {};
+    transactionsSnapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.userId && data.noteUrl) {
+        if (!userTransactions[data.userId]) {
+          userTransactions[data.userId] = [];
+        }
+        userTransactions[data.userId].push(data);
+      }
+    });
+    
+    console.log(`👥 Found transactions for ${Object.keys(userTransactions).length} users`);
+    
+    // Process each user
+    let successCount = 0;
+    let errorCount = 0;
+    const migrationDetails = [];
+    
+    for (const [userId, transactions] of Object.entries(userTransactions)) {
+      try {
+        console.log(`🔧 Processing user: ${userId}`);
+        
+        // Build the correct unlockedNotes object
+        const unlockedNotes = {};
+        const userDetails = { userId, notes: [] };
+        
+        for (const transaction of transactions) {
+          const correctNoteSlug = extractNoteSlug(transaction.noteUrl);
+          unlockedNotes[correctNoteSlug] = true;
+          userDetails.notes.push({
+            noteSlug: correctNoteSlug,
+            originalUrl: transaction.noteUrl
+          });
+          console.log(`  ✅ Adding note: ${correctNoteSlug} from URL: ${transaction.noteUrl}`);
+        }
+        
+        // Update the user's document with correct unlockedNotes
+        const userRef = db.collection('users').doc(userId);
+        await userRef.set({
+          unlockedNotes: unlockedNotes
+        }, { merge: true });
+        
+        console.log(`  ✅ Updated ${Object.keys(unlockedNotes).length} notes for user ${userId}`);
+        migrationDetails.push(userDetails);
+        successCount++;
+        
+      } catch (error) {
+        console.error(`  ❌ Error processing user ${userId}:`, error);
+        migrationDetails.push({ userId, error: error.message });
+        errorCount++;
+      }
+    }
+    
+    console.log('🎉 Migration completed!');
+    console.log(`✅ Successfully processed: ${successCount} users`);
+    console.log(`❌ Errors: ${errorCount} users`);
+    
+    res.json({
+      success: true,
+      message: 'Migration completed successfully',
+      stats: {
+        totalTransactions: transactionsSnapshot.size,
+        usersProcessed: Object.keys(userTransactions).length,
+        successfulUsers: successCount,
+        errors: errorCount
+      },
+      details: migrationDetails
+    });
+    
+  } catch (error) {
+    console.error('💥 Migration failed:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Migration failed',
+      details: error.message
+    });
+  }
+});
+
 // Serve static files
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, req.path));
@@ -371,4 +473,5 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log('- POST /.netlify/functions/create-order');  
   console.log('- POST /.netlify/functions/verify-payment');
   console.log('- GET  /.netlify/functions/check-purchases');
+  console.log('- POST /migrate-purchases (one-time migration)');
 });
