@@ -88,7 +88,15 @@ exports.handler = async (event, context) => {
       transactionsSnapshot.forEach(doc => {
         const data = doc.data();
         if (data.noteUrl) {
-          const noteSlug = data.noteUrl.split('/').pop();
+          // Extract proper noteSlug for Google Drive URLs
+          let noteSlug;
+          if (data.noteUrl.includes('drive.google.com/file/d/')) {
+            // Extract the file ID from Google Drive URL
+            const fileIdMatch = data.noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+            noteSlug = fileIdMatch ? fileIdMatch[1] : data.noteUrl.split('/').pop();
+          } else {
+            noteSlug = data.noteUrl.split('/').pop();
+          }
           // Check if this note is unlocked in user's document
           if (unlockedNotes[noteSlug] === true) {
             purchasedNotes.push(data.noteUrl);

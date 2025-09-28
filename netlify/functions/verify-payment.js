@@ -133,7 +133,15 @@ exports.handler = async (event, context) => {
 
       // 2. CRITICAL STEP: Mark the note as UNLOCKED for the user's access control
       const userRef = db.collection('users').doc(authenticatedUserId);
-      const noteSlug = noteUrl.split('/').pop(); // Gets the unique identifier (slug) of the note
+      // Extract proper noteSlug for Google Drive URLs
+      let noteSlug;
+      if (noteUrl.includes('drive.google.com/file/d/')) {
+        // Extract the file ID from Google Drive URL
+        const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+        noteSlug = fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
+      } else {
+        noteSlug = noteUrl.split('/').pop();
+      }
 
       // This merges the new unlocked note into the user's document without deleting other data
       await userRef.set({

@@ -1,5 +1,5 @@
 entrypoint = "index.html"
-modules = ["web", "nodejs-20"]
+modules = ["web", "nodejs-20", "postgresql-16"]
 
 [nix]
 channel = "stable-25_05"
@@ -50,10 +50,6 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 42661
-externalPort = 3000
 
 [agent]
 expertMode = true
