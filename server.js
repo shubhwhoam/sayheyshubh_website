@@ -64,14 +64,7 @@ async function verifyFirebaseToken(authHeader) {
 // Public config endpoint
 app.get('/.netlify/functions/public-config', (req, res) => {
   res.json({
-    razorpayKeyId: process.env.RAZORPAY_KEY_ID || '',
-    firebaseApiKey: process.env.FIREBASE_API_KEY || "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
-    firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN || "sayheyshubh-7051c.firebaseapp.com",
-    firebaseProjectId: process.env.FIREBASE_PROJECT_ID || "sayheyshubh-7051c",
-    firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET || "sayheyshubh-7051c.firebasestorage.app",
-    firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "992127392588",
-    firebaseAppId: process.env.FIREBASE_APP_ID || "1:992127392588:web:62f89024de9d48c1144de9",
-    firebaseMeasurementId: process.env.FIREBASE_MEASUREMENT_ID || "G-HMQJKKEKPE"
+    razorpayKeyId: process.env.RAZORPAY_KEY_ID || ''
   });
 });
 
