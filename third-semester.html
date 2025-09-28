@@ -472,7 +472,7 @@
               <a href="https://www.youtube.com/shorts/Y1AiZj95MV0" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="#" data-note-id="note_biochem_proteins" class="download-btn">
+              <a href="https://drive.google.com/file/d/1msxMjMFkpSSOevOx2GqcM-pg0qtgYbSL/view?usp=sharing" target="_blank" class="download-btn">
                 📥 Download Notes
               </a>
             </div>
@@ -619,7 +619,7 @@
               <a href="https://www.youtube.com/shorts/FXSX5jme5nA" target="_blank" class="watch-btn">
                 ▶️ Watch Video
               </a>
-              <a href="#" data-note-id="note_biochem_carbs" class="download-btn">
+              <a href="https://drive.google.com/file/d/1-hPJY9G6snZgvTHD4hvHSg9sYR8fd812/view?usp=sharing" target="_blank" class="download-btn">
                 📥 Download Notes
               </a>
             </div>
@@ -811,63 +811,13 @@
     function initializeButtonUrls() {
       const downloadButtons = document.querySelectorAll('a.download-btn');
       downloadButtons.forEach(button => {
-        // For secure notes (with data-note-id), store the note ID
-        const noteId = button.getAttribute('data-note-id');
-        if (noteId) {
-          button.setAttribute('data-secure-note', noteId);
-          return;
-        }
-        
-        // For free content (direct links), store the original URL
+        // Store the original URL in a data attribute for later reference
         if (button.href && button.href !== '#' && !button.getAttribute('data-original-url')) {
+          // Ensure we have the full URL, not relative path
           const fullUrl = button.href.startsWith('http') ? button.href : new URL(button.href, window.location.origin).href;
           button.setAttribute('data-original-url', fullUrl);
         }
       });
-    }
-
-    // Secure note mapping (client-side for payment mapping only)
-    const secureNoteMapping = {
-      'note_biochem_proteins': 'https://drive.google.com/file/d/1msxMjMFkpSSOevOx2GqcM-pg0qtgYbSL/view?usp=sharing',
-      'note_biochem_carbs': 'https://drive.google.com/file/d/1-hPJY9G6snZgvTHD4hvHSg9sYR8fd812/view?usp=sharing'
-    };
-
-    // Function to check if user has access to a secure note
-    function checkNoteAccess(noteId, purchasedNotes) {
-      const noteUrl = secureNoteMapping[noteId];
-      return noteUrl && purchasedNotes.includes(noteUrl);
-    }
-
-    // Function to get the Google Drive URL for payment (mapping opaque ID to actual URL)
-    function getNoteUrlForPayment(noteId) {
-      return secureNoteMapping[noteId] || noteId;
-    }
-
-    // Function to get secure note URL through API
-    async function getSecureNoteUrl(noteId) {
-      try {
-        if (!auth.currentUser) {
-          throw new Error('User not authenticated');
-        }
-        
-        const idToken = await auth.currentUser.getIdToken();
-        const response = await fetch(`/secure-notes/${noteId}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${idToken}`
-          }
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          return data.previewUrl;
-        } else {
-          throw new Error('Access denied or note not found');
-        }
-      } catch (error) {
-        console.error('Error getting secure note URL:', error);
-        return null;
-      }
     }
 
     function initializePaymentSystem() {
@@ -935,18 +885,13 @@
 
     async function loadPurchasedNotesAndUpdateButtons() {
       const userId = localStorage.getItem('userId');
-      if (!userId || !auth.currentUser) {
-        // If not authenticated, lock all notes (don't show cached data without auth)
-        console.log('User not authenticated - locking all notes');
-        lockAllNotesButtons();
-        return;
-      }
+      if (!userId || !auth.currentUser) return;
 
       try {
         // Get Firebase authentication token
         const idToken = await auth.currentUser.getIdToken();
         
-        // Check purchases via API with retry logic
+        // Check purchases via API
         const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
           headers: {
@@ -958,45 +903,17 @@
           const data = await response.json();
           const purchasedNotes = data.purchasedNotes || [];
           
-          // Update localStorage for persistence (scoped per user)
-          const cacheKey = `purchasedNotes_${userId}`;
-          localStorage.setItem(cacheKey, JSON.stringify(purchasedNotes));
-          localStorage.setItem(`lastPurchaseCheck_${userId}`, Date.now().toString());
+          // Update localStorage
+          localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
           
           // Update button states
           updateButtonStates(purchasedNotes);
         } else {
           console.error('Failed to load purchases:', response.status);
-          // Use cached data as fallback instead of locking everything
-          const cacheKey = `purchasedNotes_${userId}`;
-          const cachedPurchases = localStorage.getItem(cacheKey);
-          if (cachedPurchases) {
-            try {
-              const purchasedNotes = JSON.parse(cachedPurchases);
-              console.log('Using cached purchases as fallback');
-              updateButtonStates(purchasedNotes);
-              return;
-            } catch (e) {
-              console.error('Error parsing cached purchases:', e);
-            }
-          }
           lockAllNotesButtons();
         }
       } catch (error) {
         console.error('Error loading purchased notes:', error);
-        // Use cached data as fallback instead of locking everything
-        const cacheKey = `purchasedNotes_${userId}`;
-        const cachedPurchases = localStorage.getItem(cacheKey);
-        if (cachedPurchases) {
-          try {
-            const purchasedNotes = JSON.parse(cachedPurchases);
-            console.log('Using cached purchases due to network error');
-            updateButtonStates(purchasedNotes);
-            return;
-          } catch (e) {
-            console.error('Error parsing cached purchases:', e);
-          }
-        }
         lockAllNotesButtons();
       }
     }
@@ -1019,80 +936,74 @@
             button.textContent.includes('View Notes') || button.textContent.includes('📥 View Notes') ||
             button.textContent.includes('🔒 Unlock Notes')) {
           
-          // Check if this is a secure note (has note ID)
-          const noteId = button.getAttribute('data-note-id') || button.getAttribute('data-secure-note');
+          // Get the original URL from data attribute first, then try current href
+          let originalUrl = button.getAttribute('data-original-url');
           
-          if (noteId) {
-            // This is secure content - check if user has access
-            // For opaque IDs, we need to check if the user has access through their purchase history
-            // The backend will validate the actual note access
-            const isPurchased = checkNoteAccess(noteId, purchasedNotes);
-            
-            console.log(`Checking secure note for ${unitTitle}:`, {
-              noteId,
-              isPurchased,
-              currentText: button.textContent
-            });
-            
-            if (isPurchased) {
-              // Note is purchased - show as unlocked with secure access
-              const newButton = button.cloneNode(false);
-              newButton.href = '#';
-              newButton.textContent = '✅ View Notes';
-              newButton.style.background = '#22c55e';
-              newButton.style.color = 'white';
-              newButton.style.cursor = 'pointer';
-              newButton.className = button.className;
-              newButton.setAttribute('data-secure-note', noteId);
-              
-              // Add secure click handler
-              newButton.addEventListener('click', async function(e) {
-                e.preventDefault();
-                const secureUrl = await getSecureNoteUrl(noteId);
-                if (secureUrl) {
-                  window.open(secureUrl, '_blank');
-                } else {
-                  alert('Unable to access note. Please try again or contact support.');
-                }
-              });
-              
-              button.replaceWith(newButton);
-              
+          // If no data attribute, try to get it from current href or find it in the DOM
+          if (!originalUrl || originalUrl === '#') {
+            const currentHref = button.getAttribute('href');
+            if (currentHref && currentHref !== '#' && currentHref.includes('drive.google.com')) {
+              // Current href is a valid Google Drive link
+              originalUrl = currentHref.startsWith('http') ? currentHref : new URL(currentHref, window.location.origin).href;
+              button.setAttribute('data-original-url', originalUrl);
             } else {
-              // Note is not purchased - lock it
-              const newButton = button.cloneNode(false);
-              newButton.href = '#';
-              newButton.textContent = '🔒 Unlock Notes';
-              newButton.style.background = '#f59e0b';
-              newButton.style.color = 'white';
-              newButton.style.cursor = 'pointer';
-              newButton.className = button.className;
-              newButton.setAttribute('data-secure-note', noteId);
-              
-              // Add payment popup handler - use a placeholder URL for payment, backend will handle mapping
-              newButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                showPaymentPopup(noteId, unitTitle);
-              });
-              
-              button.replaceWith(newButton);
+              // Try to find the original URL from the unit structure
+              const parentUnit = button.closest('.unit-item');
+              if (parentUnit) {
+                // Look for Google Drive links in the same unit that aren't this button
+                const driveLinks = Array.from(parentUnit.querySelectorAll('a[href*="drive.google.com"]'))
+                  .filter(link => link !== button && !link.href.endsWith('#'));
+                if (driveLinks.length > 0) {
+                  originalUrl = driveLinks[0].href;
+                  button.setAttribute('data-original-url', originalUrl);
+                }
+              }
             }
+          }
+          
+          console.log(`Checking button for ${unitTitle}:`, {
+            originalUrl,
+            isPurchased: originalUrl ? purchasedNotes.includes(originalUrl) : false,
+            currentText: button.textContent
+          });
+          
+          if (originalUrl && purchasedNotes.includes(originalUrl)) {
+            // Note is purchased - show as unlocked
+            const newButton = button.cloneNode(false); // Clone without children
+            newButton.href = originalUrl;
+            newButton.textContent = '✅ View Notes';
+            newButton.style.background = '#22c55e';
+            newButton.style.color = 'white';
+            newButton.style.cursor = 'pointer';
+            newButton.target = '_blank';
+            newButton.className = button.className; // Preserve CSS classes
+            newButton.setAttribute('data-original-url', originalUrl);
+            
+            // Remove any existing event listeners by replacing the element
+            button.replaceWith(newButton);
+            
           } else {
-            // This is free content - handle as before
-            const originalUrl = button.getAttribute('data-original-url') || button.href;
-            if (originalUrl && originalUrl !== '#') {
-              // Keep free content accessible
-              button.href = originalUrl;
-              button.target = '_blank';
-            }
+            // Note is not purchased - lock it
+            button.href = '#';
+            button.textContent = '🔒 Unlock Notes';
+            button.style.background = '#f59e0b';
+            button.style.color = 'white';
+            button.style.cursor = 'pointer';
+            
+            // Remove existing handlers and add payment popup handler
+            const newButton = button.cloneNode(true);
+            newButton.addEventListener('click', function(e) {
+              e.preventDefault();
+              showPaymentPopup(originalUrl, unitTitle);
+            });
+            button.replaceWith(newButton);
           }
         }
       });
     }
 
-    function showPaymentPopup(noteId, noteTitle) {
-      // Convert noteId to actual URL for payment processing
-      currentNoteUrl = getNoteUrlForPayment(noteId);
+    function showPaymentPopup(noteUrl, noteTitle) {
+      currentNoteUrl = noteUrl;
       currentNoteTitle = noteTitle || 'BSc Zoology Notes';
 
       document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
