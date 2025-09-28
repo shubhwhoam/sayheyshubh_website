@@ -957,20 +957,20 @@
           name: "First Semester",
           syllabus: "(DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, (DSC-3) Concepts of Ecology",
           subjects: {
-            "Animal Diversity (Non Chordata)": {
-              "Unit 1: Introduction to Non-chordates": "note_bio_intro_nonchordates",
-              "Unit 2: Protista": "note_bio_protista", 
-              "Unit 3: Porifera": "note_bio_porifera"
-            },
             "Cell Biology": {
-              "Unit 1: Cell Structure & Plasma Membrane": "note_cell_plasma_membrane",
-              "Unit 2: Cytoskeleton": "note_cell_cytoskeleton", 
-              "Unit 3: Cell Overview & Cell": "coming-soon"
+              "Unit 1: Cell Structure": "coming-soon",
+              "Unit 2: Cell Division": "coming-soon", 
+              "Unit 3: Cell Metabolism": "coming-soon"
             },
-            "Ecology": {
-              "Unit 1: Introduction to Ecology": "note_ecology_intro",
-              "Unit 2: Population": "note_ecology_population",
-              "Unit 3: Community Ecology": "coming-soon"
+            "Animal Diversity": {
+              "Unit 1: Invertebrates": "coming-soon",
+              "Unit 2: Vertebrates": "coming-soon",
+              "Unit 3: Classification": "coming-soon"
+            },
+            "General Chemistry": {
+              "Unit 1: Atomic Structure": "coming-soon",
+              "Unit 2: Chemical Bonding": "coming-soon",
+              "Unit 3: Organic Chemistry": "coming-soon"
             }
           }
         },
@@ -1013,8 +1013,8 @@
               "Unit 3: Digestive System": "coming-soon"
             },
             "Biochemistry": {
-              "Unit 1: Proteins": "note_biochem_proteins",
-              "Unit 2: Carbohydrates": "note_biochem_carbs",
+              "Unit 1: Proteins": "coming-soon",
+              "Unit 2: Carbohydrates": "coming-soon",
               "Unit 3: Lipids": "coming-soon"
             }
           }
@@ -1370,20 +1370,14 @@
       container.appendChild(iframe);
     }
 
-    function extractNoteId(noteIdOrUrl) {
-      // If it's already a secure note ID, return it directly
-      if (noteIdOrUrl && noteIdOrUrl.startsWith('note_')) {
-        return noteIdOrUrl;
-      }
-      
-      // Legacy support: Extract file ID from Google Drive URL if needed
-      if (noteIdOrUrl && noteIdOrUrl.includes('drive.google.com')) {
-        const fileIdMatch = noteIdOrUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+    function extractNoteId(driveUrl) {
+      // Extract file ID from Google Drive URL to use as note ID
+      if (driveUrl.includes('drive.google.com')) {
+        const fileIdMatch = driveUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
         if (fileIdMatch) {
           return fileIdMatch[1];
         }
       }
-      
       return null;
     }
 
@@ -1527,27 +1521,22 @@
   </script>
 
   <!-- Firebase Configuration and Session Management -->
-  <script src="firebase-config.js"></script>
-  <script src="page-protection.js"></script>
   <script>
-    // Wait for Firebase to initialize before proceeding
-    function waitForFirebase(callback) {
-      if (typeof auth !== 'undefined' && typeof db !== 'undefined') {
-        callback();
-      } else {
-        setTimeout(() => waitForFirebase(callback), 100);
-      }
-    }
-    
-    // Initialize payment system for authenticated users (called from page-protection.js)
-    function initializePaymentForAuthenticatedUser(userId) {
-      console.log('🔐 Initializing payment system for user:', userId);
-      
-      // Load purchased notes immediately when user authenticates
-      waitForFirebase(() => {
-        loadPurchasedNotes(true); // Force refresh from server
-      });
-    }
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
+      authDomain: "sayheyshubh-7051c.firebaseapp.com",
+      projectId: "sayheyshubh-7051c",
+      storageBucket: "sayheyshubh-7051c.firebasestorage.app",
+      messagingSenderId: "992127392588",
+      appId: "1:992127392588:web:62f89024de9d48c1144de9",
+      measurementId: "G-HMQJKKEKPE"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
     // Check authentication status
     function checkAuthStatus() {
