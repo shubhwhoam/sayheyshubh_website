@@ -965,9 +965,17 @@
             button.style.background = '#22c55e';
             button.style.color = 'white';
             button.style.cursor = 'pointer';
+            button.target = '_blank'; // Ensure it opens in new tab
             
-            // Remove any existing payment click handlers
-            button.replaceWith(button.cloneNode(true));
+            // Remove any existing payment click handlers by cloning and replacing
+            const newButton = button.cloneNode(true);
+            newButton.href = originalUrl;
+            newButton.target = '_blank';
+            newButton.textContent = '✅ View Notes';
+            newButton.style.background = '#22c55e';
+            newButton.style.color = 'white';
+            newButton.style.cursor = 'pointer';
+            button.replaceWith(newButton);
             
           } else {
             // Note is not purchased - lock it
