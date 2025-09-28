@@ -291,8 +291,92 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
   }
 });
 
+// Secure note mapping - opaque IDs to Google Drive URLs (server-side only)
+const secureNoteMapping = {
+  // First Semester Notes
+  'note_bio_intro_nonchordates': 'https://drive.google.com/file/d/1EotDR67uubwA4ZTGw_tBeCdWBkfwxP26/view?usp=sharing',
+  'note_bio_protista': 'https://drive.google.com/file/d/1AwXjSVQXR-01CLcO93WlSvQ9e2Xj45bW/view?usp=sharing',
+  'note_bio_porifera': 'https://drive.google.com/file/d/1tdXqjf-cNwo6sDoRxOJtx-WLJb08EgLs/view?usp=sharing',
+  'note_cell_plasma_membrane': 'https://drive.google.com/file/d/1XX2VV9nv27NJ2j7m8J0w-88zT6RCNQDj/view?usp=sharing',
+  'note_cell_cytoskeleton': 'https://drive.google.com/file/d/12MWkc_F8-rwhJUqvg2AcSx4jgPi5cnb-/view?usp=sharing',
+  'note_ecology_intro': 'https://drive.google.com/file/d/1_NnkX_hmzhLZJkaoTy6nHFx8plerIzft/view?usp=sharing',
+  'note_ecology_population': 'https://drive.google.com/file/d/1_TIJMy_u0J9m6l_PT_KkAFMuPWVmYaCP/view?usp=sharing',
+  
+  // Third Semester Notes
+  'note_biochem_proteins': 'https://drive.google.com/file/d/1msxMjMFkpSSOevOx2GqcM-pg0qtgYbSL/view?usp=sharing',
+  'note_biochem_carbs': 'https://drive.google.com/file/d/1-hPJY9G6snZgvTHD4hvHSg9sYR8fd812/view?usp=sharing'
+};
 
+// Helper function to get Google Drive file ID from secure note mapping
+function getGoogleDriveFileId(secureNoteId) {
+  const noteUrl = secureNoteMapping[secureNoteId];
+  if (!noteUrl) return null;
+  
+  const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+  return fileIdMatch ? fileIdMatch[1] : null;
+}
 
+// Secure PDF viewer endpoint with session-based access control
+app.get('/secure-notes/:noteId', async (req, res) => {
+  try {
+    // Verify authentication using header only
+    const decodedToken = await verifyFirebaseToken(req.headers.authorization);
+    const authenticatedUserId = decodedToken.uid;
+    
+    const { noteId } = req.params;
+    
+    // Validate that the note ID exists in our secure mapping
+    if (!secureNoteMapping[noteId]) {
+      return res.status(404).json({ 
+        success: false, 
+        error: 'Note not found' 
+      });
+    }
+    
+    // Get the Google Drive file ID from the secure mapping
+    const fileId = getGoogleDriveFileId(noteId);
+    if (!fileId) {
+      return res.status(500).json({ 
+        success: false, 
+        error: 'Invalid note configuration' 
+      });
+    }
+    
+    // Get user's unlocked notes to verify access
+    const userDoc = await db.collection('users').doc(authenticatedUserId).get();
+    const userData = userDoc.data();
+    const unlockedNotes = userData?.unlockedNotes || {};
+    
+    // Check if user has access to this note (using the file ID for compatibility)
+    if (!unlockedNotes[fileId]) {
+      return res.status(403).json({ 
+        success: false, 
+        error: 'Access denied - note not unlocked' 
+      });
+    }
+    
+    // Generate secure preview URL
+    const previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+    
+    // Return preview URL for client-side rendering with additional security
+    res.json({
+      success: true,
+      previewUrl: previewUrl,
+      noteTitle: 'BSc Zoology Notes',
+      userId: authenticatedUserId,
+      noteId: noteId,
+      securityToken: crypto.createHash('sha256').update(`${authenticatedUserId}:${noteId}:${Date.now()}`).digest('hex').substring(0, 16)
+    });
+    
+  } catch (error) {
+    console.error('Error in secure notes endpoint:', error);
+    res.status(error.message && error.message.includes('authentication') ? 401 : 500)
+       .json({
+         success: false,
+         error: error.message || 'Failed to access notes'
+       });
+  }
+});
 
 // Migration endpoint to fix existing purchases (one-time use)
 app.post('/migrate-purchases', async (req, res) => {
