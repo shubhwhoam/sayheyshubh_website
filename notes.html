@@ -958,18 +958,18 @@
           syllabus: "(DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, (DSC-3) Concepts of Ecology",
           subjects: {
             "Animal Diversity (Non Chordata)": {
-              "Unit 1: Introduction to Non-chordates": "https://drive.google.com/file/d/1EotDR67uubwA4ZTGw_tBeCdWBkfwxP26/view?usp=sharing",
-              "Unit 2: Protista": "https://drive.google.com/file/d/1AwXjSVQXR-01CLcO93WlSvQ9e2Xj45bW/view?usp=sharing", 
-              "Unit 3: Porifera": "https://drive.google.com/file/d/1tdXqjf-cNwo6sDoRxOJtx-WLJb08EgLs/view?usp=sharing"
+              "Unit 1: Introduction to Non-chordates": "note_bio_intro_nonchordates",
+              "Unit 2: Protista": "note_bio_protista", 
+              "Unit 3: Porifera": "note_bio_porifera"
             },
             "Cell Biology": {
-              "Unit 1: Cell Structure & Plasma Membrane": "https://drive.google.com/file/d/1XX2VV9nv27NJ2j7m8J0w-88zT6RCNQDj/view?usp=sharing",
-              "Unit 2: Cytoskeleton": "https://drive.google.com/file/d/12MWkc_F8-rwhJUqvg2AcSx4jgPi5cnb-/view?usp=sharing", 
+              "Unit 1: Cell Structure & Plasma Membrane": "note_cell_plasma_membrane",
+              "Unit 2: Cytoskeleton": "note_cell_cytoskeleton", 
               "Unit 3: Cell Overview & Cell": "coming-soon"
             },
             "Ecology": {
-              "Unit 1: Introduction to Ecology": "https://drive.google.com/file/d/1_NnkX_hmzhLZJkaoTy6nHFx8plerIzft/view?usp=sharing",
-              "Unit 2: Population": "https://drive.google.com/file/d/1_TIJMy_u0J9m6l_PT_KkAFMuPWVmYaCP/view?usp=sharing",
+              "Unit 1: Introduction to Ecology": "note_ecology_intro",
+              "Unit 2: Population": "note_ecology_population",
               "Unit 3: Community Ecology": "coming-soon"
             }
           }
@@ -1013,8 +1013,8 @@
               "Unit 3: Digestive System": "coming-soon"
             },
             "Biochemistry": {
-              "Unit 1: Proteins": "https://drive.google.com/file/d/1msxMjMFkpSSOevOx2GqcM-pg0qtgYbSL/view?usp=sharing",
-              "Unit 2: Carbohydrates": "https://drive.google.com/file/d/1-hPJY9G6snZgvTHD4hvHSg9sYR8fd812/view?usp=sharing",
+              "Unit 1: Proteins": "note_biochem_proteins",
+              "Unit 2: Carbohydrates": "note_biochem_carbs",
               "Unit 3: Lipids": "coming-soon"
             }
           }
@@ -1253,43 +1253,87 @@
       }
     }
 
-    async function downloadNote(noteUrl, noteTitle) {
-      // Check if user is authenticated
-      const user = auth.currentUser;
-      if (!user) {
-        showLoginPrompt();
-        return;
-      }
-      
+    function downloadNote(noteUrl, noteTitle) {
       // Check payment for all semester pages
       if (currentSemester) {
-        // Check if note is purchased using server API
-        const isPurchased = await checkIfNotePurchased(extractNoteId(noteUrl));
-        
-        if (isPurchased) {
-          // User has purchased this note - open Google Drive link directly
-          console.log('Opening note directly:', noteUrl);
-          window.open(noteUrl, '_blank');
+        // ALL semester notes require payment
+        const userId = localStorage.getItem('userId');
+        const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+
+        if (purchasedNotes.includes(noteUrl)) {
+          // User has purchased this note - open in embedded viewer
+          console.log('Opening notes in viewer:', noteUrl);
+          openNotesViewer(noteUrl, noteTitle);
         } else {
           // Show payment popup for unpaid notes
           showPaymentPopup(noteUrl, noteTitle);
         }
       } else {
-        // Free access for non-semester pages - open Google Drive link directly
-        console.log('Opening note directly (free access):', noteUrl);
-        window.open(noteUrl, '_blank');
+        // Free access for non-semester pages - open in embedded viewer
+        console.log('Opening notes in viewer (free access):', noteUrl);
+        openNotesViewer(noteUrl, noteTitle);
       }
     }
 
     async function openNotesViewer(noteUrl, noteTitle) {
-      // Directly open Google Drive link in new tab (simplified approach)
-      if (!noteUrl) {
+      // Extract note ID from the URL for secure access
+      const noteId = extractNoteId(noteUrl);
+      if (!noteId) {
         alert('Invalid note URL. Please contact support.');
         return;
       }
       
-      console.log('Opening Google Drive link:', noteUrl);
-      window.open(noteUrl, '_blank');
+      // Set title and show modal
+      document.getElementById('notesViewerTitle').textContent = noteTitle || 'BSc Zoology Notes';
+      document.getElementById('notesViewerModal').classList.add('show');
+      
+      // Show loading state
+      document.getElementById('notesLoading').style.display = 'block';
+      document.getElementById('pdfViewerContainer').style.display = 'none';
+      
+      try {
+        // Get Firebase auth token for secure access
+        const user = auth.currentUser;
+        const idToken = await user.getIdToken();
+        
+        // Get secure preview URL and access info
+        const response = await fetch(`/secure-notes/${noteId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch notes: ${response.status}`);
+        }
+        
+        const noteData = await response.json();
+        if (!noteData.success) {
+          throw new Error(noteData.error || 'Failed to access notes');
+        }
+        
+        // Clear previous content
+        const pdfViewer = document.getElementById('pdfViewer');
+        pdfViewer.innerHTML = '';
+        
+        // Create secure iframe with Google Drive preview
+        await createSecureNotesIframe(noteData.previewUrl, pdfViewer, noteData.securityToken);
+        
+        // Show PDF viewer and hide loading
+        document.getElementById('notesLoading').style.display = 'none';
+        document.getElementById('pdfViewerContainer').style.display = 'block';
+        
+        // Apply security protections
+        applyViewerProtections();
+        
+      } catch (error) {
+        console.error('Error opening notes viewer:', error);
+        document.getElementById('notesLoading').style.display = 'none';
+        alert('Failed to load notes. Please try again or contact support.');
+        closeNotesViewer();
+      }
     }
 
     async function createSecureNotesIframe(previewUrl, container, securityToken) {
@@ -1326,53 +1370,21 @@
       container.appendChild(iframe);
     }
 
-    function extractNoteId(noteUrl) {
-      // Extract file ID from Google Drive URL for payment tracking
-      if (noteUrl && noteUrl.includes('drive.google.com')) {
-        const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+    function extractNoteId(noteIdOrUrl) {
+      // If it's already a secure note ID, return it directly
+      if (noteIdOrUrl && noteIdOrUrl.startsWith('note_')) {
+        return noteIdOrUrl;
+      }
+      
+      // Legacy support: Extract file ID from Google Drive URL if needed
+      if (noteIdOrUrl && noteIdOrUrl.includes('drive.google.com')) {
+        const fileIdMatch = noteIdOrUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
         if (fileIdMatch) {
           return fileIdMatch[1];
         }
       }
       
       return null;
-    }
-
-    async function checkIfNotePurchased(noteId) {
-      try {
-        const user = auth.currentUser;
-        if (!user) {
-          return false;
-        }
-
-        const idToken = await user.getIdToken();
-        const response = await fetch('/.netlify/functions/check-purchases', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${idToken}`,
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          console.error('Failed to check purchases:', response.status);
-          return false;
-        }
-
-        const data = await response.json();
-        if (data.success && data.purchasedNotes) {
-          // Check if any purchased note URL contains this noteId
-          return data.purchasedNotes.some(url => {
-            const urlNoteId = extractNoteId(url);
-            return urlNoteId === noteId;
-          });
-        }
-
-        return false;
-      } catch (error) {
-        console.error('Error checking if note is purchased:', error);
-        return false;
-      }
     }
 
     function applyViewerProtections() {
@@ -1823,10 +1835,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!
 
               // Step 4: Payment verified - immediately close popup and show success
               hidePaymentPopup();
-              alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. Opening notes now!`);
-              
-              // Open the Google Drive link directly
-              window.open(currentNoteUrl, '_blank');
+              alert(`🎉 Payment successful! ₹${selectedPrice} paid for ${currentNoteTitle}. You can now access the notes anytime!`);
               
               // Update UI immediately without page reload
               // Refresh purchased notes from server to get the latest state
