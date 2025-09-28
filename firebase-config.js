@@ -2,21 +2,45 @@
 // FIREBASE CONFIGURATION AND UTILITY FUNCTIONS
 // =================================================================
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
-  authDomain: "sayheyshubh-7051c.firebaseapp.com",
-  projectId: "sayheyshubh-7051c",
-  storageBucket: "sayheyshubh-7051c.firebasestorage.app",
-  messagingSenderId: "992127392588",
-  appId: "1:992127392588:web:62f89024de9d48c1144de9",
-  measurementId: "G-HMQJKKEKPE"
-};
+// Firebase configuration - loaded from server for security
+let firebaseConfig = null;
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Function to load Firebase config from server
+async function loadFirebaseConfig() {
+  try {
+    const response = await fetch('/.netlify/functions/public-config');
+    const config = await response.json();
+    return {
+      apiKey: config.firebaseApiKey || "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
+      authDomain: config.firebaseAuthDomain || "sayheyshubh-7051c.firebaseapp.com",
+      projectId: config.firebaseProjectId || "sayheyshubh-7051c",
+      storageBucket: config.firebaseStorageBucket || "sayheyshubh-7051c.firebasestorage.app",
+      messagingSenderId: config.firebaseMessagingSenderId || "992127392588",
+      appId: config.firebaseAppId || "1:992127392588:web:62f89024de9d48c1144de9",
+      measurementId: config.firebaseMeasurementId || "G-HMQJKKEKPE"
+    };
+  } catch (error) {
+    console.warn('Failed to load config from server, using fallback values');
+    return {
+      apiKey: "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
+      authDomain: "sayheyshubh-7051c.firebaseapp.com",
+      projectId: "sayheyshubh-7051c",
+      storageBucket: "sayheyshubh-7051c.firebasestorage.app",
+      messagingSenderId: "992127392588",
+      appId: "1:992127392588:web:62f89024de9d48c1144de9",
+      measurementId: "G-HMQJKKEKPE"
+    };
+  }
+}
+
+// Initialize Firebase asynchronously
+let auth, db;
+(async function initializeFirebase() {
+  firebaseConfig = await loadFirebaseConfig();
+  firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth();
+  db = firebase.firestore();
+})();
 
 // Utility functions
 function getDeviceId() {
