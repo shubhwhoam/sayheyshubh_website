@@ -75,10 +75,10 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    const { amount, noteTitle } = req.body;
+    const { amount, noteTitle, noteUrl } = req.body;
     
     // Basic validation
-    if (!amount || !noteTitle) {
+    if (!amount || !noteTitle || !noteUrl) {
       return res.status(400).json({ success: false, error: 'Missing required parameters' });
     }
     
@@ -107,6 +107,18 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
 
     const order = await razorpay.orders.create(options);
     
+    // Store order details in Firebase for webhook processing (use orderId as doc ID for uniqueness)
+    await db.collection('orders').doc(order.id).set({
+      orderId: order.id,
+      userId: authenticatedUserId,
+      noteUrl: noteUrl,
+      noteTitle: sanitizedNoteTitle,
+      amount: amount,
+      currency: 'INR',
+      status: 'created',
+      createdAt: admin.firestore.FieldValue.serverTimestamp()
+    });
+    
     console.log('Order created successfully:', order.id);
     
     res.json({
@@ -127,6 +139,48 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
   }
 });
 
+// Helper function for idempotent note unlocking (shared with webhook)
+async function unlockNoteForUser(userId, paymentId, orderId, noteUrl) {
+  const transactionRef = db.collection('transactions').doc(paymentId);
+  
+  try {
+    // Use create() for atomic idempotency - fails if doc already exists
+    await transactionRef.create({
+      userId: userId,
+      paymentId: paymentId,
+      orderId: orderId,
+      noteUrl: noteUrl,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      status: 'completed',
+      verified: true
+    });
+
+    // Update user's unlocked notes
+    const userRef = db.collection('users').doc(userId);
+    let noteSlug;
+    if (noteUrl.includes('drive.google.com/file/d/')) {
+      const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+      noteSlug = fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
+    } else {
+      noteSlug = noteUrl.split('/').pop();
+    }
+
+    await userRef.set({
+      unlockedNotes: {
+        [noteSlug]: true
+      }
+    }, { merge: true });
+    
+    console.log('Note unlocked successfully for user:', userId, 'note:', noteSlug);
+  } catch (error) {
+    if (error.code === 6) { // ALREADY_EXISTS
+      console.log('Transaction already processed (idempotent):', paymentId);
+      return; // Already processed, skip silently
+    }
+    throw error; // Rethrow unexpected errors
+  }
+}
+
 // Verify payment endpoint
 app.post('/.netlify/functions/verify-payment', async (req, res) => {
   try {
@@ -134,7 +188,7 @@ app.post('/.netlify/functions/verify-payment', async (req, res) => {
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    const { paymentId, orderId, signature, noteUrl } = req.body;
+    const { paymentId, orderId, signature } = req.body;
     
     // Check if Razorpay credentials are properly configured
     if (!process.env.RAZORPAY_KEY_SECRET || !process.env.RAZORPAY_KEY_ID) {
@@ -146,7 +200,7 @@ app.post('/.netlify/functions/verify-payment', async (req, res) => {
       });
     }
     
-    if (!paymentId || !orderId || !signature || !noteUrl) {
+    if (!paymentId || !orderId || !signature) {
       return res.status(400).json({ 
         success: false, 
         verified: false,
@@ -171,41 +225,42 @@ app.post('/.netlify/functions/verify-payment', async (req, res) => {
       });
     }
 
-    // Save purchase record to Firestore (consistent with netlify functions)
-    try {
-      // 1. Record the transaction (for history)
-      await db.collection('transactions').add({
-        userId: authenticatedUserId,
-        paymentId: paymentId,
-        orderId: orderId,
-        noteUrl: noteUrl,
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
-        status: 'completed',
-        verified: true
+    // SECURITY: Fetch order details from database instead of trusting client
+    const orderDoc = await db.collection('orders').doc(orderId).get();
+
+    if (!orderDoc.exists) {
+      console.error('Order not found:', orderId);
+      return res.status(404).json({ 
+        success: false, 
+        verified: true,
+        error: 'Order not found' 
       });
+    }
 
-      // 2. Update user's unlocked notes
-      const userRef = db.collection('users').doc(authenticatedUserId);
-      // Extract proper noteSlug for Google Drive URLs
-      let noteSlug;
-      if (noteUrl.includes('drive.google.com/file/d/')) {
-        // Extract the file ID from Google Drive URL
-        const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-        noteSlug = fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
-      } else {
-        noteSlug = noteUrl.split('/').pop();
-      }
+    const orderData = orderDoc.data();
+    
+    // Verify the authenticated user matches the order's user
+    if (orderData.userId !== authenticatedUserId) {
+      console.error('User mismatch for order:', orderId);
+      return res.status(403).json({ 
+        success: false, 
+        verified: true,
+        error: 'Unauthorized: Order does not belong to this user' 
+      });
+    }
 
-      await userRef.set({
-        unlockedNotes: {
-          [noteSlug]: true // Sets a flag: e.g., { 'non-chordata-protists': true }
-        }
-      }, { merge: true });
-      
-      console.log('Purchase recorded and note unlocked successfully for user:', authenticatedUserId);
+    const noteUrl = orderData.noteUrl;
+
+    // Unlock the note for the user (using server-validated noteUrl)
+    try {
+      await unlockNoteForUser(authenticatedUserId, paymentId, orderId, noteUrl);
     } catch (firestoreError) {
-      console.error('Error saving purchase to Firestore:', firestoreError);
-      // Continue with success response since payment was verified
+      console.error('Error unlocking note:', firestoreError);
+      return res.status(500).json({
+        success: false,
+        verified: true,
+        error: 'Failed to unlock note'
+      });
     }
 
     res.json({
@@ -232,42 +287,20 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    // Get user's unlocked notes from their user document
-    const userDoc = await db.collection('users').doc(authenticatedUserId).get();
-    
-    const purchasedNotes = [];
-    
-    if (userDoc.exists) {
-      const userData = userDoc.data();
-      const unlockedNotes = userData.unlockedNotes || {};
-      
-      // Convert unlocked notes object to URLs
-      // The verify-payment.js stores noteSlug as key, but we need full URLs
-      // So we also check the transactions collection for the noteUrls
-      const transactionsSnapshot = await db.collection('transactions')
-        .where('userId', '==', authenticatedUserId)
-        .where('status', '==', 'completed')
-        .get();
+    // Get user's unlocked notes from transactions (single source of truth)
+    const transactionsSnapshot = await db.collection('transactions')
+      .where('userId', '==', authenticatedUserId)
+      .where('status', '==', 'completed')
+      .where('verified', '==', true)
+      .get();
 
-      transactionsSnapshot.forEach(doc => {
-        const data = doc.data();
-        if (data.noteUrl) {
-          // Extract proper noteSlug for Google Drive URLs
-          let noteSlug;
-          if (data.noteUrl.includes('drive.google.com/file/d/')) {
-            // Extract the file ID from Google Drive URL
-            const fileIdMatch = data.noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-            noteSlug = fileIdMatch ? fileIdMatch[1] : data.noteUrl.split('/').pop();
-          } else {
-            noteSlug = data.noteUrl.split('/').pop();
-          }
-          // Check if this note is unlocked in user's document
-          if (unlockedNotes[noteSlug] === true) {
-            purchasedNotes.push(data.noteUrl);
-          }
-        }
-      });
-    }
+    const purchasedNotes = [];
+    transactionsSnapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.noteUrl) {
+        purchasedNotes.push(data.noteUrl);
+      }
+    });
 
     res.json({
       success: true,

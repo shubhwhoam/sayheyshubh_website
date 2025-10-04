@@ -72,10 +72,10 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    const { amount, noteTitle } = JSON.parse(event.body);
+    const { amount, noteTitle, noteUrl } = JSON.parse(event.body);
     
     // Basic validation
-    if (!amount || !noteTitle) {
+    if (!amount || !noteTitle || !noteUrl) {
       return {
         statusCode: 400,
         headers,
@@ -107,6 +107,19 @@ exports.handler = async (event, context) => {
     };
 
     const order = await razorpay.orders.create(options);
+    
+    // Store order details in Firebase for webhook processing (use orderId as doc ID for uniqueness)
+    const db = admin.firestore();
+    await db.collection('orders').doc(order.id).set({
+      orderId: order.id,
+      userId: authenticatedUserId,
+      noteUrl: noteUrl,
+      noteTitle: sanitizedNoteTitle,
+      amount: amount,
+      currency: 'INR',
+      status: 'created',
+      createdAt: admin.firestore.FieldValue.serverTimestamp()
+    });
     
     return {
       statusCode: 200,

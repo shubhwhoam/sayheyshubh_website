@@ -15,7 +15,34 @@ The application follows a traditional multi-page architecture using vanilla HTML
 The authentication system is built around Firebase Authentication with custom device management. Users authenticate through a YouTube page entry point, with sessions tied to specific device IDs stored in localStorage. The system implements a device limit mechanism where user sessions are validated against registered devices in Firestore, preventing unauthorized access and session sharing.
 
 ## Content Protection Strategy
-Protected educational content (study notes) is gated behind authentication using Firebase. The `page-protection.js` handles session validation and redirects unauthorized users. The system checks both user authentication status and device registration before allowing access to premium content.
+Protected educational content (study notes) is gated behind authentication and payment using Firebase and Razorpay. The `page-protection.js` handles session validation and redirects unauthorized users. The system checks authentication status, device registration, and purchase verification before allowing access to premium content.
+
+## Payment System Architecture (Razorpay Integration)
+The payment system implements a secure, idempotent architecture to prevent duplicate unlocks and ensure notes remain unlocked forever once purchased.
+
+### Key Security Features:
+- **Server-Side Validation**: All noteUrl values are fetched from the database, never trusted from client input
+- **Idempotent Transactions**: Uses deterministic document IDs (paymentId) with atomic create() operations to prevent duplicates
+- **User Authorization**: Validates that the authenticated user matches the order's userId before unlocking
+- **Webhook Support**: Razorpay webhook with HMAC signature verification handles async payment notifications
+- **Deterministic Order Storage**: Orders stored with orderId as document ID to prevent duplicate order records
+
+### Payment Flow:
+1. **Order Creation**: User requests note purchase, server creates Razorpay order and stores order metadata (userId, noteUrl) in Firestore using orderId as document ID
+2. **Payment Processing**: Razorpay handles payment UI and processes transaction
+3. **Dual Verification Path**: 
+   - Frontend path: Client sends payment details, server fetches order from database, validates user, unlocks note
+   - Webhook path: Razorpay sends webhook, server verifies HMAC signature, fetches order, unlocks note
+4. **Idempotent Unlock**: Both paths call shared `unlockNoteForUser` helper that uses `transactionRef.create()` with paymentId as doc ID for atomic deduplication
+5. **Purchase Verification**: `check-purchases` endpoint uses transactions collection (with verified=true) as single source of truth
+
+### Database Collections:
+- **orders**: Stores order metadata (orderId as doc ID, userId, noteUrl, amount, status)
+- **transactions**: Records completed payments (paymentId as doc ID, userId, noteUrl, verified flag)
+- **users/{userId}/unlockedNotes**: Maps noteSlug to boolean for quick access checks
+
+### Migration Support:
+The `fix-unlocked-notes.js` function restores notes for users affected by the previous race condition bug, adding verified=true flags to existing transactions with proper batch handling for large datasets.
 
 ## Static File Architecture
 The website uses a Node.js development server (`server.js`) for local development, serving static files with appropriate MIME types and CORS headers. This approach allows for easy deployment to static hosting platforms while providing a development environment with proper file serving capabilities.
@@ -42,5 +69,10 @@ The site implements a consistent navigation structure across all pages with a re
 - **Node.js HTTP Server**: Local development server for static file serving
 - Custom MIME type handling for various file formats including images and documents
 
+## Payment Gateway
+- **Razorpay**: Payment processing for note purchases with webhook support for reliable payment verification
+- Requires RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables
+- Webhook endpoint must be configured in Razorpay dashboard to point to verify-payment function
+
 ## Third-party Integrations
-The site is designed to accommodate future integrations with educational platforms and content delivery networks for the study materials section. The Firebase backend provides scalability for user management and content protection features.
+The site uses Firebase for authentication and data storage, Razorpay for secure payment processing, Google Analytics for tracking, and is designed to accommodate future integrations with educational platforms and content delivery networks.

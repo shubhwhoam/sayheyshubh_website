@@ -1777,7 +1777,8 @@ Pay ₹${selectedPrice} to unlock the complete notes!
           },
           body: JSON.stringify({
             amount: amountInPaise,
-            noteTitle: currentNoteTitle
+            noteTitle: currentNoteTitle,
+            noteUrl: currentNoteUrl
           })
         });
 
@@ -1811,8 +1812,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!
                 body: JSON.stringify({
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
-                  signature: response.razorpay_signature,
-                  noteUrl: currentNoteUrl
+                  signature: response.razorpay_signature
                 })
               });
 
