@@ -1759,6 +1759,11 @@ Pay ₹${selectedPrice} to unlock the complete notes!
       document.getElementById('paymentLoading').classList.add('show');
 
       try {
+        // Check if Razorpay SDK is loaded
+        if (typeof Razorpay === 'undefined') {
+          throw new Error('Payment system not loaded. Please refresh the page and try again.');
+        }
+
         // Get Firebase auth token
         const user = auth.currentUser;
         if (!user) {
@@ -1782,10 +1787,23 @@ Pay ₹${selectedPrice} to unlock the complete notes!
           })
         });
 
+        if (!orderResponse.ok) {
+          const errorText = await orderResponse.text();
+          console.error('Order creation failed:', orderResponse.status, errorText);
+          throw new Error(`Server error: ${orderResponse.status}`);
+        }
+
         const orderData = await orderResponse.json();
+        console.log('Order response:', orderData);
         
         if (!orderData.success) {
           throw new Error(orderData.error || 'Failed to create payment order');
+        }
+
+        // Validate required fields
+        if (!orderData.key || !orderData.orderId) {
+          console.error('Invalid order data:', orderData);
+          throw new Error('Invalid payment configuration received from server');
         }
 
         // Step 2: Initialize Razorpay with server response

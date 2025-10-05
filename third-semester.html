@@ -1062,6 +1062,12 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
         return;
       }
 
+      // Check if Razorpay SDK is loaded
+      if (typeof Razorpay === 'undefined') {
+        alert('Payment system not loaded. Please refresh the page and try again.');
+        return;
+      }
+
       document.getElementById('paymentLoading').classList.add('show');
 
       try {
@@ -1080,7 +1086,7 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
           body: JSON.stringify({
             amount: amountInPaise,
             noteTitle: currentNoteTitle,
-            userId: userId
+            noteUrl: currentNoteUrl
           })
         });
 
