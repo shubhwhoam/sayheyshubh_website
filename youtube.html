@@ -18,12 +18,45 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ShubhiPhilia YouTube | BSc Zoology Study Notes & Educational Content</title>
-  <meta name="description" content="Watch Shubham's educational content featuring BSc Zoology study notes, handwritten materials, and academic tips on YouTube. Access comprehensive study resources for Delhi University Zoology students." />
-  <meta name="keywords" content="BSc Zoology YouTube channel, study notes videos, educational content, handwritten notes, academic guidance, Delhi University, Zoology study tips, semester notes, previous year papers">
+  <title>Best BSc Zoology Hons Notes PDF | DU Zoology Study Material & Previous Year Questions</title>
+  <meta name="description" content="Get the best BSc Zoology Hons notes for Delhi University students. Download semester-wise PDF notes, handwritten study material, previous year question papers, and exam preparation resources for DU Zoology Hons." />
+  <meta name="keywords" content="best bsc zoology notes, zoology hons du notes, BSc Zoology Hons semester wise notes, DU Zoology Hons notes pdf, Zoology Hons syllabus Delhi University, Zoology Hons exam preparation notes, Zoology Hons question bank, Zoology Hons previous year questions DU, Human physiology notes for BSc Zoology, Biochemistry notes BSc Zoology, Cell biology notes for BSc Zoology, Ecology notes BSc Zoology, Genetics notes for BSc Zoology students, Best notes for BSc Zoology Hons Delhi University, Zoology Hons notes for DU students pdf download, Easy revision notes for BSc Zoology Hons, BSc Zoology Hons unit wise notes, DU BSc Zoology Hons solved question papers, How to prepare for BSc Zoology Hons exams, Zoology Hons practical notes pdf, BSc Zoology Hons handwritten notes, Free Zoology Hons notes pdf, Zoology Hons semester syllabus DU, Zoology notes for competitive exams, BSc Zoology Hons study guide">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="32x32">
   <link rel="preload" href="attached_assets/boom.png_1753383095125.png" as="image">
+  
+  <!-- JSON-LD Schema Markup for FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What kind of content do you post on your YouTube channel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I post B.Sc. Zoology (Hons.) notes, study material, and helpful resources for Delhi University students. The videos are exam-oriented, concise, and easy to understand."
+      }
+    }]
+  }
+  </script>
+
+  <!-- JSON-LD Schema for Educational Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "ShubhiPhilia",
+    "description": "Best BSc Zoology Hons notes and study materials for Delhi University students. Free semester-wise PDF notes, handwritten study material, and exam preparation resources.",
+    "url": "https://www.youtube.com/@ShubhiPhilia",
+    "sameAs": [
+      "https://www.youtube.com/@ShubhiPhilia",
+      "https://t.me/shubhiphilia"
+    ],
+    "keywords": "BSc Zoology notes, DU Zoology Hons, Delhi University Zoology study material, Zoology exam preparation, semester-wise notes"
+  }
+  </script>
+
   <style>
     .youtube-container {
       padding: 2rem;
@@ -222,6 +255,82 @@
       margin-top: 0.5rem;
     }
 
+    /* FAQ Section Styles */
+    .faq-section {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: white;
+      border: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2d3748;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: #6366f1;
+    }
+
+    .faq-icon {
+      font-size: 1.5rem;
+      color: #6366f1;
+      font-weight: 300;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: #f8fafc;
+    }
+
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 1.5rem;
+    }
+
+    .faq-answer p {
+      margin: 0;
+      color: #4a5568;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
     @media (max-width: 768px) {
       .youtube-container {
         padding: 1rem;
@@ -259,6 +368,15 @@
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .faq-section {
+        padding: 1rem;
+      }
+
+      .faq-question {
+        font-size: 1rem;
+        padding: 1.2rem;
+      }
     }
 
   </style>
@@ -293,9 +411,9 @@
 
   <div class="youtube-container">
     <div class="channel-header">
-      <img src="attached_assets/shubhiphilia.jpg" alt="Shubham's Avatar" class="channel-avatar" />
-      <h1 class="channel-name">ShubhiPhilia 🎓</h1>
-       <h3>BSc Zoology Notes, Study Materials & Academic Resources</h3>
+      <img src="attached_assets/shubhiphilia.jpg" alt="Best BSc Zoology Hons Notes Delhi University - ShubhiPhilia Educational Content" class="channel-avatar" />
+      <h1 class="channel-name">Best BSc Zoology Hons Notes for Delhi University Students 🎓</h1>
+       <h2>Free Semester-Wise PDF Notes, Study Materials & Exam Preparation Resources</h2>
       
       <div class="action-buttons">
         <a href="https://www.youtube.com/@ShubhiPhilia" class="youtube-btn" target="_blank">
@@ -316,7 +434,7 @@
     </div>
 
     <div class="stats-section">
-      <h3 class="section-title">📊 Channel Highlights</h3>
+      <h2 class="section-title">📊 BSc Zoology Hons Study Resources & Content</h2>
       <div class="stats-grid">
         <div class="stat-item">
           <span class="stat-number">📖</span>
@@ -338,7 +456,7 @@
     </div>
 
     <div class="content-section">
-      <h3 class="section-title">🎬 Featured Videos</h3>
+      <h2 class="section-title">🎬 Featured Zoology Hons Study Videos - DU Notes & Exam Preparation</h2>
       <div class="video-grid">
 
         <div class="video-item">
@@ -372,6 +490,22 @@
           </iframe>
           <div class="video-info">
             <div class="video-title">Introduction to Non-Chordates | BSc Zoology Honours Semester 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="content-section faq-section">
+      <h2 class="section-title">❓ Frequently Asked Questions - BSc Zoology Hons Notes & Study Material</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What kind of content do you post on your YouTube channel?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>I post B.Sc. Zoology (Hons.) notes, study material, and helpful resources for Delhi University students. The videos are exam-oriented, concise, and easy to understand.</p>
           </div>
         </div>
       </div>
@@ -478,6 +612,24 @@
   </div>
 
   <script>
+  // FAQ Toggle Function
+  function toggleFAQ(button) {
+    const answer = button.nextElementSibling;
+    const isActive = button.classList.contains('active');
+    
+    // Close all FAQs
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.classList.remove('active');
+      q.nextElementSibling.classList.remove('active');
+    });
+    
+    // Open clicked FAQ if it wasn't active
+    if (!isActive) {
+      button.classList.add('active');
+      answer.classList.add('active');
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function() {
     const bubble = document.getElementById("doubts-bubble");
 
