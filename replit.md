@@ -50,6 +50,16 @@ The website uses a Node.js development server (`server.js`) for local developmen
 ## Navigation and User Experience
 The site implements a consistent navigation structure across all pages with a responsive header that adapts to scroll position. Mobile navigation uses a hamburger menu with smooth animations. The design prioritizes accessibility and performance with optimized loading strategies.
 
+## Comment System Architecture
+The YouTube page features a user feedback and comment system with the following characteristics:
+- **Authentication Required**: Users must be logged in via Firebase to post comments or replies
+- **PostgreSQL Database**: Comments stored in `youtube_comments` table with support for threaded replies via `parent_id` foreign key
+- **Environment-Aware API**: JavaScript automatically detects environment (local vs deployed) and uses appropriate endpoints:
+  - Local development: `/api/comments` (Node.js server)
+  - Netlify deployment: `/.netlify/functions/post-comment` and `/.netlify/functions/get-comments`
+- **User Profile Display**: Shows authenticated user info in header with avatar, masked contact details, and logout functionality
+- **Comment Features**: Pagination support, nested replies, character limits (1000 chars), and input validation
+
 # External Dependencies
 
 ## Firebase Services
@@ -68,6 +78,11 @@ The site implements a consistent navigation structure across all pages with a re
 ## Development Tools
 - **Node.js HTTP Server**: Local development server for static file serving
 - Custom MIME type handling for various file formats including images and documents
+
+## Database
+- **PostgreSQL**: Relational database for storing user comments and feedback
+- **Database Tables**:
+  - `youtube_comments`: Stores comments with fields for user_id, name, email, comment text, timestamps, parent_id for replies, and page identifier
 
 ## Payment Gateway
 - **Razorpay**: Payment processing for note purchases with webhook support for reliable payment verification
