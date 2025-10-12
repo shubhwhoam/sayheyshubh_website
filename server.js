@@ -4,9 +4,16 @@ const path = require('path');
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
+const { Pool } = require('pg');
 
 const app = express();
 const PORT = 5000;
+
+// PostgreSQL connection for comments
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
 
 // Middleware
 app.use(cors());
@@ -491,6 +498,82 @@ app.post('/migrate-purchases', async (req, res) => {
       error: 'Migration failed',
       details: error.message
     });
+  }
+});
+
+// Comment endpoints
+// Get comments for a page
+app.get('/api/comments/:page', async (req, res) => {
+  try {
+    const { page } = req.params;
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = parseInt(req.query.offset) || 0;
+    
+    const result = await pool.query(
+      'SELECT id, name, comment, created_at FROM youtube_comments WHERE page = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3',
+      [page, limit, offset]
+    );
+    
+    const countResult = await pool.query(
+      'SELECT COUNT(*) FROM youtube_comments WHERE page = $1',
+      [page]
+    );
+    
+    res.json({
+      success: true,
+      comments: result.rows,
+      total: parseInt(countResult.rows[0].count)
+    });
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    res.status(500).json({ success: false, error: 'Failed to fetch comments' });
+  }
+});
+
+// Post a new comment
+app.post('/api/comments', async (req, res) => {
+  try {
+    const { name, comment, page } = req.body;
+    
+    // Validation
+    if (!name || !comment || !page) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Name, comment, and page are required' 
+      });
+    }
+    
+    // Sanitize inputs
+    const sanitizedName = name.trim().substring(0, 100);
+    const sanitizedComment = comment.trim().substring(0, 1000);
+    const sanitizedPage = page.substring(0, 50);
+    
+    if (sanitizedName.length < 2) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Name must be at least 2 characters' 
+      });
+    }
+    
+    if (sanitizedComment.length < 3) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Comment must be at least 3 characters' 
+      });
+    }
+    
+    const result = await pool.query(
+      'INSERT INTO youtube_comments (name, comment, page) VALUES ($1, $2, $3) RETURNING id, name, comment, created_at',
+      [sanitizedName, sanitizedComment, sanitizedPage]
+    );
+    
+    res.json({
+      success: true,
+      comment: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Error posting comment:', error);
+    res.status(500).json({ success: false, error: 'Failed to post comment' });
   }
 });
 
