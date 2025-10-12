@@ -1203,6 +1203,22 @@
   let currentUserAuth = null;
   let activeReplyForm = null;
 
+  // Detect API endpoints based on environment
+  function getApiEndpoints() {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname.includes('repl');
+    if (isLocal) {
+      return {
+        postComment: '/api/comments',
+        getComments: '/api/comments/youtube'
+      };
+    } else {
+      return {
+        postComment: '/.netlify/functions/post-comment',
+        getComments: '/.netlify/functions/get-comments'
+      };
+    }
+  }
+
   // Mask email function
   function maskEmail(email) {
     if (!email || !email.includes('@')) return '***@***.com';
@@ -1322,8 +1338,9 @@
     
     try {
       const idToken = await currentUserAuth.getIdToken();
+      const endpoints = getApiEndpoints();
       
-      const response = await fetch('/api/comments', {
+      const response = await fetch(endpoints.postComment, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1383,8 +1400,9 @@
 
     try {
       const idToken = await currentUserAuth.getIdToken();
+      const endpoints = getApiEndpoints();
       
-      const response = await fetch('/api/comments', {
+      const response = await fetch(endpoints.postComment, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1475,7 +1493,8 @@
   // Load comments
   async function loadComments() {
     try {
-      const response = await fetch(`/api/comments/youtube?limit=${commentsPerPage}&offset=0`);
+      const endpoints = getApiEndpoints();
+      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=0`);
       const data = await response.json();
       
       if (data.success) {
@@ -1501,7 +1520,8 @@
     viewMoreBtn.textContent = 'Loading...';
     
     try {
-      const response = await fetch(`/api/comments/youtube?limit=${commentsPerPage}&offset=${currentOffset}`);
+      const endpoints = getApiEndpoints();
+      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
       const data = await response.json();
       
       if (data.success && data.comments.length > 0) {
