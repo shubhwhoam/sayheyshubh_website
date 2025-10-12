@@ -2058,6 +2058,9 @@
         url.searchParams.delete('showLogin');
         window.history.replaceState({}, document.title, url.pathname);
       }
+      
+      // Load user profile from localStorage on page load
+      loadUserProfile();
     });
 
     // Close modal when clicking outside
