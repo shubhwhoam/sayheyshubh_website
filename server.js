@@ -557,7 +557,7 @@ app.get('/api/comments/:page', async (req, res) => {
 });
 
 // Post a new comment (requires authentication)
-app.post('/api/comments', async (req, res) => {
+app.post('/api/comments/?', async (req, res) => {
   console.log('[POST] /api/comments - Posting new comment');
   try {
     // Verify authentication
