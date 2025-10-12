@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-01VF0W2CD1');
   </script>
   <meta charset="UTF-8" />
@@ -15,18 +13,173 @@
   <title>Portfolio | SayHeyShubh</title>
   <meta name="description" content="Explore the UGC, Digital Marketing, and Content Creation portfolio of Shubham Kumar." />
   <link rel="stylesheet" href="style.css" />
-   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+    .portfolio-hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin-bottom: 50px;
+    }
+
+    .portfolio-hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .portfolio-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    .portfolio-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+      padding: 0 20px;
+    }
+
+    .portfolio-card {
+      background: white;
+      border-radius: 16px;
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .portfolio-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      font-size: 50px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #1a202c;
+    }
+
+    .card-description {
+      color: #4a5568;
+      line-height: 1.7;
+      margin-bottom: 25px;
+      font-size: 1rem;
+    }
+
+    .card-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .coming-soon-badge {
+      display: inline-block;
+      background: #f7fafc;
+      color: #718096;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid #e2e8f0;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 50px 20px;
+      background: #f8f9ff;
+      border-radius: 16px;
+      margin: 20px;
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1a202c;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: #667eea;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: #5568d3;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-hero h1 {
+        font-size: 2rem;
+      }
+
+      .portfolio-hero p {
+        font-size: 1rem;
+      }
+
+      .portfolio-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-      <div class="container nav-flex">
-        <div class="logo-section">
-          <a href="index.html" class="logo-link">
-            <div class="logo">
-              <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
-            </div>
-          </a>
-        </div>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
       <div class="nav-toggle">
         <span></span>
         <span></span>
@@ -44,68 +197,45 @@
     </div>
   </header>
 
-  <main class="container portfolio">
-    <h2 class="section-title"> <span class="text">My Portfolio</span></h2>
+  <div class="portfolio-hero">
+    <h1>My Portfolio</h1>
+    <p>Showcasing my expertise in digital marketing, content creation, and UGC. Explore my projects and see how I bring ideas to life.</p>
+  </div>
 
-    <!-- Digital Marketing -->
-    <section class="portfolio-section">
-      <h3><span class="emoji">📊</span> <span class="text">Digital Marketing</span></h3>
-      <p>Social media strategy, paid campaigns, content writing & ad optimization. Take a look at my hands-on experience in digital marketing.</p>
-      <a href="Digital-marketing-projects.html" class="explore-btn">Explore My Work</a>
-      <style>
-        .explore-btn {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #6366f1; /* Primary color */
-          color: #fff;
-          font-size: 15px;
-          font-weight: 600;
-          border-radius: 8px;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
+  <main class="container">
+    <div class="portfolio-cards">
+      <div class="portfolio-card">
+        <div class="card-icon">📊</div>
+        <h3 class="card-title">Digital Marketing</h3>
+        <p class="card-description">Strategic social media campaigns, paid ads optimization, SEO, and content marketing that drive real results and engagement.</p>
+        <a href="Digital-marketing-projects.html" class="card-btn">View Projects</a>
+      </div>
 
-        .explore-btn:hover {
-          background-color: #4f46e5; /* Slightly darker on hover */
-          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-          transform: translateY(-2px);
-        }
+      <div class="portfolio-card">
+        <div class="card-icon">🎯</div>
+        <h3 class="card-title">UGC Creator</h3>
+        <p class="card-description">User-generated content creation for brands, authentic storytelling, and engaging visual content that resonates with audiences.</p>
+        <span class="coming-soon-badge">Coming Soon</span>
+      </div>
 
-        .explore-btn:active {
-          transform: scale(0.96);
-        }
-      </style>
-    </section>
+      <div class="portfolio-card">
+        <div class="card-icon">🎬</div>
+        <h3 class="card-title">Content Creation</h3>
+        <p class="card-description">From smooth slow-mo edits to engaging study vlogs, I create compelling stories that connect and inspire viewers.</p>
+        <span class="coming-soon-badge">Coming Soon</span>
+      </div>
+    </div>
 
-    <!-- UGC -->
-    <section class="portfolio-section">
-      <h3><span class="emoji">🎯</span> <span class="text">Coming soon</span></h3>
-      <p>....</p>
-      <ul>
-        <li>(Coming soon)</li>
-
-    </section>
-
-    <!-- Content Creation -->
-    <section class="portfolio-section">
-      <h3><span class="emoji">🎬</span> <span class="text">Content Creation</span></h3>
-      <p>From smooth slow-mo edits to study vlogs, I love telling stories that connect.</p>
-      <ul>
-        <li>(Coming soon)</li>
-
-      </ul>
-    </section>
-
-    <div class="btn-wrap">
-      <a href="contact.html" class="btn">Work With Me</a>
+    <div class="cta-section">
+      <h2>Ready to Work Together?</h2>
+      <a href="contact.html" class="cta-btn">Let's Collaborate</a>
     </div>
   </main>
 
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • Portfolio & Projects</p>
-       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
     </div>
   </footer>
 
@@ -116,33 +246,10 @@
 
     links.forEach(link => {
       const href = link.getAttribute("href");
-      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
+      if (href === currentPage) {
         link.classList.add("active");
       }
     });
-  </script>
-  <script>
-    function waitForNavAndHighlight() {
-      const navLinks = document.querySelectorAll("nav a");
-      if (navLinks.length === 0) {
-        // Retry until nav is loaded
-        setTimeout(waitForNavAndHighlight, 50);
-        return;
-      }
-
-      const path = window.location.pathname;
-      let currentPage = path.split("/").pop() || "index";
-      currentPage = currentPage.replace(".html", "");
-
-      navLinks.forEach(link => {
-        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
-        if (href === currentPage) {
-          link.classList.add("active");
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
   </script>
 </body>
 </html>

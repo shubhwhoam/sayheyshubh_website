@@ -1,159 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Explore my Digital Marketing projects including social media campaigns, ad optimization, content strategies, and SEO case studies." />
   <title>Digital Marketing Projects | SayHeyShubh</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
-    /* Page Background */
     body {
-      font-family: "Poppins", sans-serif;
+      font-family: "Inter", "Poppins", sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f8f9ff;
       color: #333;
     }
 
-    /* Container */
-    .projects-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 20px;
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: white;
+      border: 2px solid #667eea;
+      color: #667eea;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin: 20px;
     }
 
-    /* Heading */
+    .back-button:hover {
+      background: #667eea;
+      color: white;
+      transform: translateX(-5px);
+    }
+
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 20px 60px;
+    }
+
     .projects-header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
+      padding-top: 20px;
     }
 
     .projects-header h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 700;
-      color: #222;
-      margin-bottom: 10px;
+      color: #1a202c;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .projects-header p {
-      font-size: 1rem;
-      color: #555;
-      max-width: 700px;
+      font-size: 1.1rem;
+      color: #4a5568;
+      max-width: 750px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    /* Grid Layout */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
     }
 
-    /* Project Cards */
     .project-card {
-      background-color: #fff;
-      padding: 22px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
     }
 
     .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      border-color: #667eea;
     }
 
-    /* Project Icon */
     .project-icon {
-      font-size: 38px;
-      color: #4f46e5;
-      margin-bottom: 14px;
-    }
-
-    /* Project Title */
-    .project-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #111;
-      margin-bottom: 10px;
-    }
-
-    /* Project Description */
-    .project-description {
-      font-size: 0.95rem;
-      color: #555;
+      font-size: 45px;
       margin-bottom: 18px;
-      line-height: 1.5;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* Button Styling */
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 12px;
+    }
+
+    .project-description {
+      font-size: 1rem;
+      color: #4a5568;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
     .view-project-btn {
       display: inline-block;
-      padding: 10px 18px;
-      background-color: #6366f1;
-      color: #fff;
-      font-size: 0.95rem;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
       border-radius: 8px;
       text-align: center;
-      transition: background 0.3s ease-in-out;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
 
     .view-project-btn:hover {
-      background-color: #4f46e5;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .projects-header h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
+
       .projects-header p {
-        font-size: 0.9rem;
+        font-size: 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <a href="portfolio.html" class="back-button">
+    <span>←</span>
+    <span>Back to Portfolio</span>
+  </a>
+
   <div class="projects-container">
     <div class="projects-header">
       <h1>Digital Marketing Projects</h1>
-      <p>Explore my practical work in social media campaigns, paid ads, SEO, and content marketing strategies. These projects showcase my ability to create impactful, data-driven solutions.</p>
+      <p>Explore my practical work in social media campaigns, paid advertising, SEO optimization, and content marketing strategies. These projects showcase my ability to create impactful, data-driven marketing solutions.</p>
     </div>
 
     <div class="projects-grid">
-      <!-- Project 1 -->
       <div class="project-card">
-        <i class="fas fa-share-alt project-icon"></i>
+        <div class="project-icon">📱</div>
         <h3 class="project-title">Social Media Campaign Strategy</h3>
-        <p class="project-description">Designed an effective Instagram & Facebook marketing strategy for a skincare brand. Focused on ad targeting, engagement growth, and content optimization.</p>
+        <p class="project-description">Designed an effective Instagram & Facebook marketing strategy for a skincare brand. Focused on precise ad targeting, engagement growth, and content optimization to maximize ROI.</p>
         <a href="#" class="view-project-btn">View Project</a>
       </div>
 
-      <!-- Project 2 -->
       <div class="project-card">
-        <i class="fas fa-search project-icon"></i>
+        <div class="project-icon">🔍</div>
         <h3 class="project-title">SEO Optimization Case Study</h3>
-        <p class="project-description">Performed a detailed SEO audit and implemented ranking improvements. Worked on keyword targeting, meta optimization, and content structure enhancement.</p>
+        <p class="project-description">Performed comprehensive SEO audit and implemented strategic improvements. Worked on keyword targeting, meta optimization, and content structure enhancement for better rankings.</p>
         <a href="#" class="view-project-btn">View Project</a>
       </div>
 
-      <!-- Project 3 -->
-            <div class="project-card">
-              <i class="fas fa-bullseye project-icon"></i>
-              <h3 class="project-title">Google Ads Optimization</h3>
-              <p class="project-description">Created and optimized Google Ads campaigns, improved CTR, and boosted conversions through A/B testing and strategic bid adjustments.</p>
-              <a href="#" class="view-project-btn">View Project</a>
-            </div>
-          </div>
-        </div>
-      </body>
-      </html>
+      <div class="project-card">
+        <div class="project-icon">🎯</div>
+        <h3 class="project-title">Google Ads Optimization</h3>
+        <p class="project-description">Created and optimized Google Ads campaigns with focus on improving CTR and boosting conversions through A/B testing, strategic bid adjustments, and audience targeting.</p>
+        <a href="#" class="view-project-btn">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">✉️</div>
+        <h3 class="project-title">Email Marketing Campaign</h3>
+        <p class="project-description">Developed automated email sequences with personalized content that increased open rates by 45% and conversion rates by 30% for an e-commerce client.</p>
+        <a href="#" class="view-project-btn">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3 class="project-title">Content Marketing Strategy</h3>
+        <p class="project-description">Built comprehensive content marketing funnel including blog posts, infographics, and video content that drove 200% increase in organic traffic over 6 months.</p>
+        <a href="#" class="view-project-btn">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">💰</div>
+        <h3 class="project-title">Conversion Rate Optimization</h3>
+        <p class="project-description">Implemented CRO strategies including landing page redesign, A/B testing, and user journey optimization that improved conversion rates by 65%.</p>
+        <a href="#" class="view-project-btn">View Project</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Portfolio & Projects</p>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const links = document.querySelectorAll('nav a');
+    const currentPage = 'portfolio.html';
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+</body>
+</html>
