@@ -331,55 +331,55 @@
       font-size: 1rem;
     }
 
-    /* Comments Section Styles */
+    /* Comments Section Styles - Compact & Modern */
     .comments-section {
       background: #ffffff;
-      padding: 3rem 2rem;
-      margin: 3rem 0;
+      padding: 2rem 1.5rem;
+      margin: 2rem 0;
     }
 
     .comment-form-container {
       max-width: 700px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 2rem;
       background: #f8fafc;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .comment-form-title {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #2d3748;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       text-align: center;
     }
 
     .comment-form {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 0.8rem;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.3rem;
       position: relative;
     }
 
     .form-group label {
       font-weight: 600;
       color: #4a5568;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
     }
 
     .form-group input,
     .form-group textarea {
-      padding: 0.9rem;
+      padding: 0.7rem;
       border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      font-size: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
       font-family: inherit;
       transition: all 0.3s ease;
       background: white;
@@ -392,32 +392,37 @@
       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
 
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
     .char-count {
       position: absolute;
-      bottom: -1.5rem;
+      bottom: -1.3rem;
       right: 0;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: #94a3b8;
     }
 
     .submit-comment-btn {
-      padding: 1rem 2rem;
+      padding: 0.7rem 1.5rem;
       background: linear-gradient(45deg, #6366f1, #4f46e5);
       color: white;
       border: none;
-      border-radius: 10px;
-      font-size: 1.1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-      margin-top: 1rem;
+      box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+      margin-top: 0.5rem;
     }
 
     .submit-comment-btn:hover {
       background: linear-gradient(45deg, #4f46e5, #4338ca);
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 5px 14px rgba(99, 102, 241, 0.4);
     }
 
     .submit-comment-btn:disabled {
@@ -427,62 +432,194 @@
       box-shadow: none;
     }
 
+    .auth-required-message {
+      text-align: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .auth-required-message button {
+      margin-top: 0.8rem;
+      padding: 0.6rem 1.5rem;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-required-message button:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+    }
+
     .comments-display {
       max-width: 900px;
       margin: 0 auto;
     }
 
     .comments-title {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: #2d3748;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       text-align: center;
     }
 
     .comments-list {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .comment-item {
       background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      border-left: 4px solid #6366f1;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 1rem;
+      border-radius: 10px;
+      border-left: 3px solid #6366f1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
       transition: all 0.3s ease;
     }
 
     .comment-item:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      transform: translateX(5px);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transform: translateX(3px);
     }
 
     .comment-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
+      align-items: flex-start;
+      margin-bottom: 0.6rem;
+      gap: 0.5rem;
+    }
+
+    .comment-author-info {
+      flex: 1;
     }
 
     .comment-author {
       font-weight: 700;
       color: #2d3748;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      display: block;
+    }
+
+    .comment-email {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: block;
+      margin-top: 0.1rem;
     }
 
     .comment-date {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: #94a3b8;
+      white-space: nowrap;
     }
 
     .comment-text {
       color: #4a5568;
-      line-height: 1.7;
-      font-size: 1rem;
-      margin: 0;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin: 0 0 0.6rem 0;
+    }
+
+    .comment-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .reply-btn {
+      background: none;
+      border: none;
+      color: #6366f1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .reply-btn:hover {
+      background: #ede9fe;
+    }
+
+    .replies-container {
+      margin-top: 0.8rem;
+      padding-left: 1.5rem;
+      border-left: 2px solid #e2e8f0;
+    }
+
+    .reply-item {
+      background: #f8fafc;
+      padding: 0.8rem;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+      border-left: 2px solid #a5b4fc;
+    }
+
+    .reply-form {
+      margin-top: 0.8rem;
+      padding: 0.8rem;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .reply-form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .reply-form textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+    }
+
+    .reply-form-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .reply-submit-btn, .reply-cancel-btn {
+      padding: 0.4rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .reply-submit-btn {
+      background: #6366f1;
+      color: white;
+    }
+
+    .reply-submit-btn:hover {
+      background: #4f46e5;
+    }
+
+    .reply-cancel-btn {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .reply-cancel-btn:hover {
+      background: #cbd5e1;
     }
 
     .view-more-btn {
@@ -827,39 +964,8 @@
       </p>
       
       <!-- Comment Form -->
-      <div class="comment-form-container">
-        <h3 class="comment-form-title">Leave Your Feedback</h3>
-        <form id="commentForm" class="comment-form">
-          <div class="form-group">
-            <label for="commentName">Your Name *</label>
-            <input 
-              type="text" 
-              id="commentName" 
-              name="name" 
-              placeholder="Enter your name" 
-              required 
-              minlength="2"
-              maxlength="100"
-              autocomplete="name"
-            />
-          </div>
-          <div class="form-group">
-            <label for="commentText">Your Feedback *</label>
-            <textarea 
-              id="commentText" 
-              name="comment" 
-              placeholder="Share your experience with our study materials..." 
-              required
-              minlength="3"
-              maxlength="1000"
-              rows="5"
-            ></textarea>
-            <span class="char-count" id="charCount">0/1000</span>
-          </div>
-          <button type="submit" class="submit-comment-btn" id="submitCommentBtn">
-            Submit Feedback
-          </button>
-        </form>
+      <div class="comment-form-container" id="commentFormContainer">
+        <!-- Will be populated dynamically based on auth state -->
       </div>
 
       <!-- Comments Display -->
@@ -978,13 +1084,23 @@
     }
   }
 
-  // Comments System
+  // Comments System with Authentication
   let currentOffset = 0;
   const commentsPerPage = 10;
   let totalComments = 0;
   let allLoadedComments = [];
+  let currentUserAuth = null;
+  let activeReplyForm = null;
 
-  // Character counter for comment textarea
+  // Mask email function
+  function maskEmail(email) {
+    if (!email || !email.includes('@')) return '***@***.com';
+    const [user, domain] = email.split('@');
+    if (user.length <= 2) return email;
+    return user.slice(0, 2) + '***@' + domain;
+  }
+
+  // Initialize comments system
   document.addEventListener("DOMContentLoaded", function() {
     const bubble = document.getElementById("doubts-bubble");
 
@@ -998,62 +1114,111 @@
       bubble.classList.remove("show");
     }, 3800);
 
-    // Setup character counter
-    const commentTextarea = document.getElementById('commentText');
-    const charCount = document.getElementById('charCount');
-    
-    if (commentTextarea && charCount) {
-      commentTextarea.addEventListener('input', function() {
-        const count = this.value.length;
-        charCount.textContent = `${count}/1000`;
-        if (count > 900) {
-          charCount.style.color = '#dc2626';
-        } else {
-          charCount.style.color = '#94a3b8';
-        }
-      });
-    }
-
-    // Setup comment form submission
-    const commentForm = document.getElementById('commentForm');
-    if (commentForm) {
-      commentForm.addEventListener('submit', handleCommentSubmit);
-    }
-
-    // Load initial comments
-    loadComments();
-
     // Setup view more button
     const viewMoreBtn = document.getElementById('viewMoreBtn');
     if (viewMoreBtn) {
       viewMoreBtn.addEventListener('click', loadMoreComments);
     }
+
+    // Check auth state and setup comment form
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        currentUserAuth = user;
+        await renderCommentForm(true);
+      } else {
+        currentUserAuth = null;
+        await renderCommentForm(false);
+      }
+      
+      // Load comments after auth check
+      loadComments();
+    });
   });
+
+  // Render comment form based on auth state
+  async function renderCommentForm(isAuthenticated) {
+    const container = document.getElementById('commentFormContainer');
+    
+    if (isAuthenticated) {
+      container.innerHTML = `
+        <h3 class="comment-form-title">Share Your Feedback</h3>
+        <form id="commentForm" class="comment-form">
+          <div class="form-group">
+            <label for="commentText">Your Feedback *</label>
+            <textarea 
+              id="commentText" 
+              name="comment" 
+              placeholder="Share your experience with our study materials..." 
+              required
+              minlength="3"
+              maxlength="1000"
+            ></textarea>
+            <span class="char-count" id="charCount">0/1000</span>
+          </div>
+          <button type="submit" class="submit-comment-btn" id="submitCommentBtn">
+            Post Comment
+          </button>
+        </form>
+      `;
+      
+      // Setup character counter
+      const commentTextarea = document.getElementById('commentText');
+      const charCount = document.getElementById('charCount');
+      
+      if (commentTextarea && charCount) {
+        commentTextarea.addEventListener('input', function() {
+          const count = this.value.length;
+          charCount.textContent = `${count}/1000`;
+          charCount.style.color = count > 900 ? '#dc2626' : '#94a3b8';
+        });
+      }
+
+      // Setup form submission
+      const commentForm = document.getElementById('commentForm');
+      if (commentForm) {
+        commentForm.addEventListener('submit', handleCommentSubmit);
+      }
+    } else {
+      container.innerHTML = `
+        <div class="auth-required-message">
+          <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: #92400e;">🔒 Please log in to share your feedback</p>
+          <p style="margin: 0 0 0.8rem 0; color: #78350f; font-size: 0.9rem;">Join our community and help other students!</p>
+          <button onclick="showAuthPopup()">Log In to Comment</button>
+        </div>
+      `;
+    }
+  }
 
   // Handle comment submission
   async function handleCommentSubmit(e) {
     e.preventDefault();
     
+    if (!currentUserAuth) {
+      showAuthPopup();
+      return;
+    }
+
     const submitBtn = document.getElementById('submitCommentBtn');
-    const nameInput = document.getElementById('commentName');
     const commentInput = document.getElementById('commentText');
-    const formContainer = document.querySelector('.comment-form-container');
+    const formContainer = document.getElementById('commentFormContainer');
     
     // Remove any existing messages
     const existingMsg = formContainer.querySelector('.success-message, .error-message');
     if (existingMsg) existingMsg.remove();
     
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
+    submitBtn.textContent = 'Posting...';
     
     try {
+      const idToken = await currentUserAuth.getIdToken();
+      
       const response = await fetch('/api/comments', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`
         },
         body: JSON.stringify({
-          name: nameInput.value,
           comment: commentInput.value,
           page: 'youtube'
         })
@@ -1065,15 +1230,14 @@
         // Show success message
         const successMsg = document.createElement('div');
         successMsg.className = 'success-message';
-        successMsg.textContent = 'Thank you for your feedback! Your comment has been posted successfully.';
+        successMsg.textContent = '✅ Thank you! Your feedback has been posted successfully.';
         formContainer.insertBefore(successMsg, formContainer.firstChild);
         
         // Reset form
-        nameInput.value = '';
         commentInput.value = '';
         document.getElementById('charCount').textContent = '0/1000';
         
-        // Reload comments to show the new one
+        // Reload comments
         currentOffset = 0;
         allLoadedComments = [];
         await loadComments();
@@ -1081,7 +1245,6 @@
         // Scroll to comments
         document.getElementById('commentsList').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         
-        // Remove success message after 5 seconds
         setTimeout(() => successMsg.remove(), 5000);
       } else {
         throw new Error(data.error || 'Failed to post comment');
@@ -1090,13 +1253,112 @@
       console.error('Error submitting comment:', error);
       const errorMsg = document.createElement('div');
       errorMsg.className = 'error-message';
-      errorMsg.textContent = 'Failed to post comment. Please try again.';
+      errorMsg.textContent = error.message.includes('authentication') ? 
+        'Please log in to post a comment.' : 'Failed to post comment. Please try again.';
       formContainer.insertBefore(errorMsg, formContainer.firstChild);
       setTimeout(() => errorMsg.remove(), 5000);
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Feedback';
+      submitBtn.textContent = 'Post Comment';
     }
+  }
+
+  // Handle reply submission
+  async function handleReplySubmit(parentId, replyText) {
+    if (!currentUserAuth) {
+      showAuthPopup();
+      return;
+    }
+
+    try {
+      const idToken = await currentUserAuth.getIdToken();
+      
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`
+        },
+        body: JSON.stringify({
+          comment: replyText,
+          page: 'youtube',
+          parentId: parentId
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Reload comments to show the new reply
+        currentOffset = 0;
+        allLoadedComments = [];
+        await loadComments();
+      } else {
+        alert(data.error || 'Failed to post reply');
+      }
+    } catch (error) {
+      console.error('Error posting reply:', error);
+      alert('Failed to post reply. Please try again.');
+    }
+  }
+
+  // Show reply form
+  function showReplyForm(commentId) {
+    if (!currentUserAuth) {
+      showAuthPopup();
+      return;
+    }
+
+    // Remove any existing reply form
+    if (activeReplyForm) {
+      activeReplyForm.remove();
+      activeReplyForm = null;
+    }
+
+    const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`);
+    if (!commentElement) return;
+
+    const replyForm = document.createElement('div');
+    replyForm.className = 'reply-form';
+    replyForm.innerHTML = `
+      <textarea placeholder="Write your reply..." maxlength="1000"></textarea>
+      <div class="reply-form-actions">
+        <button class="reply-submit-btn">Reply</button>
+        <button class="reply-cancel-btn">Cancel</button>
+      </div>
+    `;
+
+    commentElement.appendChild(replyForm);
+    activeReplyForm = replyForm;
+
+    const textarea = replyForm.querySelector('textarea');
+    const submitBtn = replyForm.querySelector('.reply-submit-btn');
+    const cancelBtn = replyForm.querySelector('.reply-cancel-btn');
+
+    submitBtn.addEventListener('click', async () => {
+      const replyText = textarea.value.trim();
+      if (replyText.length < 3) {
+        alert('Reply must be at least 3 characters');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Posting...';
+
+      await handleReplySubmit(commentId, replyText);
+
+      if (activeReplyForm) {
+        activeReplyForm.remove();
+        activeReplyForm = null;
+      }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      replyForm.remove();
+      activeReplyForm = null;
+    });
+
+    textarea.focus();
   }
 
   // Load comments
@@ -1146,12 +1408,12 @@
     }
   }
 
-  // Display comments
+  // Display comments with replies
   function displayComments() {
     const commentsList = document.getElementById('commentsList');
     
     if (allLoadedComments.length === 0) {
-      commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 2rem;">No comments yet. Be the first to share your feedback!</p>';
+      commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 1.5rem;">No comments yet. Be the first to share your feedback!</p>';
       return;
     }
     
@@ -1165,24 +1427,58 @@
         minute: '2-digit'
       });
       
+      const repliesHTML = comment.replies && comment.replies.length > 0 ? `
+        <div class="replies-container">
+          ${comment.replies.map(reply => {
+            const replyDate = new Date(reply.created_at);
+            const formattedReplyDate = replyDate.toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'short', 
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            return `
+              <div class="reply-item">
+                <div class="comment-header">
+                  <div class="comment-author-info">
+                    <span class="comment-author">${escapeHtml(reply.name)}</span>
+                    <span class="comment-email">${maskEmail(reply.email)}</span>
+                  </div>
+                  <time class="comment-date" datetime="${reply.created_at}">${formattedReplyDate}</time>
+                </div>
+                <p class="comment-text">${escapeHtml(reply.comment)}</p>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      ` : '';
+      
       return `
-        <article class="comment-item" itemscope itemtype="https://schema.org/Comment">
+        <article class="comment-item" data-comment-id="${comment.id}" itemscope itemtype="https://schema.org/Comment">
           <div class="comment-header">
-            <span class="comment-author" itemprop="author">${escapeHtml(comment.name)}</span>
+            <div class="comment-author-info">
+              <span class="comment-author" itemprop="author">${escapeHtml(comment.name)}</span>
+              <span class="comment-email">${maskEmail(comment.email)}</span>
+            </div>
             <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
           </div>
           <p class="comment-text" itemprop="text">${escapeHtml(comment.comment)}</p>
+          <div class="comment-actions">
+            <button class="reply-btn" onclick="showReplyForm(${comment.id})">💬 Reply</button>
+          </div>
+          ${repliesHTML}
         </article>
       `;
     }).join('');
   }
 
-  // Update view more button visibility
+  // Update view more button
   function updateViewMoreButton() {
     const viewMoreBtn = document.getElementById('viewMoreBtn');
     if (currentOffset < totalComments) {
       viewMoreBtn.style.display = 'block';
-      viewMoreBtn.textContent = `View More Comments (${totalComments - currentOffset} remaining)`;
+      viewMoreBtn.textContent = `View More (${totalComments - currentOffset} remaining)`;
     } else {
       viewMoreBtn.style.display = 'none';
     }
@@ -1200,7 +1496,7 @@
     }
   }
 
-  // HTML escape function for security
+  // HTML escape function
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -1504,8 +1800,8 @@
         hideAuthPopup();
         showLoading(false);
         
-        // Redirect to notes page
-        window.location.href = 'notes.html';
+        // Reload the page to show logged-in state
+        window.location.reload();
         
       } catch (error) {
         showLoading(false);
@@ -1560,21 +1856,24 @@
         };
       });
       
-      // Add a welcome message or user indicator
-      const channelHeader = document.querySelector('.channel-header');
-      if (channelHeader && userData) {
+      // Add a welcome message right below the action buttons
+      const actionButtons = document.querySelector('.action-buttons');
+      if (actionButtons && userData && !document.querySelector('.welcome-message')) {
         const welcomeMsg = document.createElement('div');
+        welcomeMsg.className = 'welcome-message';
         welcomeMsg.style.cssText = `
           background: linear-gradient(135deg, #22c55e, #16a34a);
           color: white;
-          padding: 1rem;
+          padding: 0.9rem 1.2rem;
           border-radius: 10px;
           margin-top: 1rem;
           text-align: center;
           font-weight: 600;
+          font-size: 0.95rem;
+          box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
         `;
-        welcomeMsg.innerHTML = `👋 Welcome back, ${userData.name || user.displayName || 'User'}! You're logged in and ready to access your notes.`;
-        channelHeader.appendChild(welcomeMsg);
+        welcomeMsg.innerHTML = `👋 Hello, ${userData.name || user.displayName || 'User'}! You're all set to access your notes.`;
+        actionButtons.parentNode.insertBefore(welcomeMsg, actionButtons.nextSibling);
       }
     }
 
