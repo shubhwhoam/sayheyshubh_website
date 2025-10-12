@@ -331,6 +331,201 @@
       font-size: 1rem;
     }
 
+    /* Comments Section Styles */
+    .comments-section {
+      background: #ffffff;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+    }
+
+    .comment-form-container {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .comment-form-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: relative;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 0.9rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .char-count {
+      position: absolute;
+      bottom: -1.5rem;
+      right: 0;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .submit-comment-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #6366f1, #4f46e5);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      margin-top: 1rem;
+    }
+
+    .submit-comment-btn:hover {
+      background: linear-gradient(45deg, #4f46e5, #4338ca);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    }
+
+    .submit-comment-btn:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .comments-display {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .comments-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .comment-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid #6366f1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .comment-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transform: translateX(5px);
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .comment-author {
+      font-weight: 700;
+      color: #2d3748;
+      font-size: 1.1rem;
+    }
+
+    .comment-date {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    .comment-text {
+      color: #4a5568;
+      line-height: 1.7;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .view-more-btn {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 1rem 2.5rem;
+      background: white;
+      color: #6366f1;
+      border: 2px solid #6366f1;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .view-more-btn:hover {
+      background: #6366f1;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .success-message {
+      background: #d1fae5;
+      color: #065f46;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .error-message {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
     @media (max-width: 768px) {
       .youtube-container {
         padding: 1rem;
@@ -376,6 +571,24 @@
       .faq-question {
         font-size: 1rem;
         padding: 1.2rem;
+      }
+
+      .comments-section {
+        padding: 2rem 1rem;
+      }
+
+      .comment-form-container {
+        padding: 1.5rem;
+      }
+
+      .comment-item {
+        padding: 1.2rem;
+      }
+
+      .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
       }
     }
 
@@ -605,6 +818,61 @@
         </div>
       </div>
     </div>
+
+    <!-- Comments/Feedback Section -->
+    <div class="content-section comments-section" id="comments-section">
+      <h2 class="section-title">💬 Student Reviews & Feedback - BSc Zoology Hons Study Materials</h2>
+      <p style="text-align: center; color: #718096; margin-bottom: 2rem;">
+        Share your experience with our BSc Zoology notes and help other Delhi University students in their exam preparation journey!
+      </p>
+      
+      <!-- Comment Form -->
+      <div class="comment-form-container">
+        <h3 class="comment-form-title">Leave Your Feedback</h3>
+        <form id="commentForm" class="comment-form">
+          <div class="form-group">
+            <label for="commentName">Your Name *</label>
+            <input 
+              type="text" 
+              id="commentName" 
+              name="name" 
+              placeholder="Enter your name" 
+              required 
+              minlength="2"
+              maxlength="100"
+              autocomplete="name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="commentText">Your Feedback *</label>
+            <textarea 
+              id="commentText" 
+              name="comment" 
+              placeholder="Share your experience with our study materials..." 
+              required
+              minlength="3"
+              maxlength="1000"
+              rows="5"
+            ></textarea>
+            <span class="char-count" id="charCount">0/1000</span>
+          </div>
+          <button type="submit" class="submit-comment-btn" id="submitCommentBtn">
+            Submit Feedback
+          </button>
+        </form>
+      </div>
+
+      <!-- Comments Display -->
+      <div class="comments-display" id="commentsDisplay">
+        <h3 class="comments-title" id="commentsTitle">Loading comments...</h3>
+        <div class="comments-list" id="commentsList">
+          <!-- Comments will be loaded here -->
+        </div>
+        <button class="view-more-btn" id="viewMoreBtn" style="display: none;">
+          View More Comments
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Authentication Modal -->
@@ -710,6 +978,13 @@
     }
   }
 
+  // Comments System
+  let currentOffset = 0;
+  const commentsPerPage = 10;
+  let totalComments = 0;
+  let allLoadedComments = [];
+
+  // Character counter for comment textarea
   document.addEventListener("DOMContentLoaded", function() {
     const bubble = document.getElementById("doubts-bubble");
 
@@ -722,7 +997,215 @@
     setTimeout(() => {
       bubble.classList.remove("show");
     }, 3800);
+
+    // Setup character counter
+    const commentTextarea = document.getElementById('commentText');
+    const charCount = document.getElementById('charCount');
+    
+    if (commentTextarea && charCount) {
+      commentTextarea.addEventListener('input', function() {
+        const count = this.value.length;
+        charCount.textContent = `${count}/1000`;
+        if (count > 900) {
+          charCount.style.color = '#dc2626';
+        } else {
+          charCount.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // Setup comment form submission
+    const commentForm = document.getElementById('commentForm');
+    if (commentForm) {
+      commentForm.addEventListener('submit', handleCommentSubmit);
+    }
+
+    // Load initial comments
+    loadComments();
+
+    // Setup view more button
+    const viewMoreBtn = document.getElementById('viewMoreBtn');
+    if (viewMoreBtn) {
+      viewMoreBtn.addEventListener('click', loadMoreComments);
+    }
   });
+
+  // Handle comment submission
+  async function handleCommentSubmit(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitCommentBtn');
+    const nameInput = document.getElementById('commentName');
+    const commentInput = document.getElementById('commentText');
+    const formContainer = document.querySelector('.comment-form-container');
+    
+    // Remove any existing messages
+    const existingMsg = formContainer.querySelector('.success-message, .error-message');
+    if (existingMsg) existingMsg.remove();
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    
+    try {
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: nameInput.value,
+          comment: commentInput.value,
+          page: 'youtube'
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.className = 'success-message';
+        successMsg.textContent = 'Thank you for your feedback! Your comment has been posted successfully.';
+        formContainer.insertBefore(successMsg, formContainer.firstChild);
+        
+        // Reset form
+        nameInput.value = '';
+        commentInput.value = '';
+        document.getElementById('charCount').textContent = '0/1000';
+        
+        // Reload comments to show the new one
+        currentOffset = 0;
+        allLoadedComments = [];
+        await loadComments();
+        
+        // Scroll to comments
+        document.getElementById('commentsList').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Remove success message after 5 seconds
+        setTimeout(() => successMsg.remove(), 5000);
+      } else {
+        throw new Error(data.error || 'Failed to post comment');
+      }
+    } catch (error) {
+      console.error('Error submitting comment:', error);
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'error-message';
+      errorMsg.textContent = 'Failed to post comment. Please try again.';
+      formContainer.insertBefore(errorMsg, formContainer.firstChild);
+      setTimeout(() => errorMsg.remove(), 5000);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Feedback';
+    }
+  }
+
+  // Load comments
+  async function loadComments() {
+    try {
+      const response = await fetch(`/api/comments/youtube?limit=${commentsPerPage}&offset=0`);
+      const data = await response.json();
+      
+      if (data.success) {
+        totalComments = data.total;
+        allLoadedComments = data.comments;
+        currentOffset = data.comments.length;
+        
+        displayComments();
+        updateViewMoreButton();
+        updateCommentsTitle();
+      }
+    } catch (error) {
+      console.error('Error loading comments:', error);
+      document.getElementById('commentsTitle').textContent = 'Comments';
+      document.getElementById('commentsList').innerHTML = '<p style="text-align: center; color: #94a3b8;">Unable to load comments. Please try again later.</p>';
+    }
+  }
+
+  // Load more comments
+  async function loadMoreComments() {
+    const viewMoreBtn = document.getElementById('viewMoreBtn');
+    viewMoreBtn.disabled = true;
+    viewMoreBtn.textContent = 'Loading...';
+    
+    try {
+      const response = await fetch(`/api/comments/youtube?limit=${commentsPerPage}&offset=${currentOffset}`);
+      const data = await response.json();
+      
+      if (data.success && data.comments.length > 0) {
+        allLoadedComments = [...allLoadedComments, ...data.comments];
+        currentOffset += data.comments.length;
+        
+        displayComments();
+        updateViewMoreButton();
+      }
+    } catch (error) {
+      console.error('Error loading more comments:', error);
+    } finally {
+      viewMoreBtn.disabled = false;
+      viewMoreBtn.textContent = 'View More Comments';
+    }
+  }
+
+  // Display comments
+  function displayComments() {
+    const commentsList = document.getElementById('commentsList');
+    
+    if (allLoadedComments.length === 0) {
+      commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 2rem;">No comments yet. Be the first to share your feedback!</p>';
+      return;
+    }
+    
+    commentsList.innerHTML = allLoadedComments.map(comment => {
+      const date = new Date(comment.created_at);
+      const formattedDate = date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      
+      return `
+        <article class="comment-item" itemscope itemtype="https://schema.org/Comment">
+          <div class="comment-header">
+            <span class="comment-author" itemprop="author">${escapeHtml(comment.name)}</span>
+            <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
+          </div>
+          <p class="comment-text" itemprop="text">${escapeHtml(comment.comment)}</p>
+        </article>
+      `;
+    }).join('');
+  }
+
+  // Update view more button visibility
+  function updateViewMoreButton() {
+    const viewMoreBtn = document.getElementById('viewMoreBtn');
+    if (currentOffset < totalComments) {
+      viewMoreBtn.style.display = 'block';
+      viewMoreBtn.textContent = `View More Comments (${totalComments - currentOffset} remaining)`;
+    } else {
+      viewMoreBtn.style.display = 'none';
+    }
+  }
+
+  // Update comments title
+  function updateCommentsTitle() {
+    const commentsTitle = document.getElementById('commentsTitle');
+    if (totalComments === 0) {
+      commentsTitle.textContent = 'Student Feedback & Reviews';
+    } else if (totalComments === 1) {
+      commentsTitle.textContent = '1 Student Review';
+    } else {
+      commentsTitle.textContent = `${totalComments} Student Reviews`;
+    }
+  }
+
+  // HTML escape function for security
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
   </script>
 
   <!-- Cookie Consent Banner -->
