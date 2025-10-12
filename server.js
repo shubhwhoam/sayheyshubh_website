@@ -504,6 +504,7 @@ app.post('/migrate-purchases', async (req, res) => {
 // Comment endpoints
 // Get comments for a page with nested replies
 app.get('/api/comments/:page', async (req, res) => {
+  console.log(`[GET] /api/comments/${req.params.page} - Fetching comments`);
   try {
     const { page } = req.params;
     const limit = parseInt(req.query.limit) || 50;
@@ -558,6 +559,7 @@ app.get('/api/comments/:page', async (req, res) => {
 
 // Post a new comment (requires authentication)
 app.post('/api/comments', async (req, res) => {
+  console.log('[POST] /api/comments - Posting new comment');
   try {
     // Verify authentication
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
@@ -634,9 +636,26 @@ app.post('/api/comments', async (req, res) => {
   }
 });
 
-// Serve static files
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, req.path));
+// Serve static files - only for non-API routes
+app.use((req, res, next) => {
+  // Skip static file serving for API routes
+  if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/')) {
+    return next();
+  }
+  
+  // Try to serve static file
+  const filePath = path.join(__dirname, req.path);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      // If file not found, send index.html for client-side routing
+      res.status(err.status || 500);
+      if (err.status === 404) {
+        res.sendFile(path.join(__dirname, 'index.html'));
+      } else {
+        res.send('Error: ' + err.message);
+      }
+    }
+  });
 });
 
 app.listen(PORT, '0.0.0.0', () => {
