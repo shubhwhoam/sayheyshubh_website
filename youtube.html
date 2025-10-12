@@ -1990,6 +1990,58 @@
         welcomeMsg.innerHTML = `👋 Hello, ${userData.name || user.displayName || 'User'}! You're all set to access your notes.`;
         actionButtons.parentNode.insertBefore(welcomeMsg, actionButtons.nextSibling);
       }
+      
+      // Load user profile
+      loadUserProfile();
+    }
+
+    // Load user profile from localStorage
+    function loadUserProfile() {
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+      const userPhone = localStorage.getItem('userPhone');
+
+      if (userName) {
+        // Set user name
+        document.getElementById('userName').textContent = userName;
+
+        // Set user avatar (first letter of name)
+        document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+
+        // Set masked contact info
+        let contactInfo = '';
+        if (userEmail) {
+          const emailParts = userEmail.split('@');
+          const maskedEmail = emailParts[0].substring(0, 2) + '***@' + emailParts[1];
+          contactInfo = maskedEmail;
+        } else if (userPhone) {
+          const maskedPhone = userPhone.substring(0, 3) + '***' + userPhone.substring(userPhone.length - 2);
+          contactInfo = maskedPhone;
+        }
+
+        document.getElementById('userContact').textContent = contactInfo;
+
+        // Show user profile
+        document.getElementById('userProfile').classList.add('show');
+      }
+    }
+
+    // Logout function
+    async function logout() {
+      try {
+        await auth.signOut();
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPhone');
+
+        // Reload the page to show logged-out state
+        window.location.reload();
+      } catch (error) {
+        console.error('Logout error:', error);
+        alert('Error logging out. Please try again.');
+      }
     }
 
     // Check URL parameters and show login popup if needed
