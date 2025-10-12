@@ -18,7 +18,6 @@ const pool = new Pool({
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
@@ -637,25 +636,25 @@ app.post('/api/comments', async (req, res) => {
 });
 
 // Serve static files - only for non-API routes
+app.use(express.static('.', {
+  index: false,
+  setHeaders: (res, filePath) => {
+    // Skip if it's an API route
+    if (filePath.includes('/api/') || filePath.includes('/.netlify/')) {
+      return false;
+    }
+  }
+}));
+
+// Fallback for non-API routes
 app.use((req, res, next) => {
-  // Skip static file serving for API routes
+  // Only handle non-API routes
   if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/')) {
-    return next();
+    return res.status(404).json({ error: 'API endpoint not found' });
   }
   
-  // Try to serve static file
-  const filePath = path.join(__dirname, req.path);
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      // If file not found, send index.html for client-side routing
-      res.status(err.status || 500);
-      if (err.status === 404) {
-        res.sendFile(path.join(__dirname, 'index.html'));
-      } else {
-        res.send('Error: ' + err.message);
-      }
-    }
-  });
+  // Send index.html for any other missing files
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
