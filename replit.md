@@ -53,18 +53,27 @@ The site implements a consistent navigation structure across all pages with a re
 ## Comment System Architecture
 The YouTube page features a user feedback and comment system with the following characteristics:
 - **Authentication Required**: Users must be logged in via Firebase to post comments or replies
-- **PostgreSQL Database**: Comments stored in `youtube_comments` table with support for threaded replies via `parent_id` foreign key
+- **Firebase Firestore Database**: Comments stored in `comments` collection with flat structure using `parentId` field for threaded replies
 - **Environment-Aware API**: JavaScript automatically detects environment (local vs deployed) and uses appropriate endpoints:
   - Local development: `/api/comments` (Node.js server)
   - Netlify deployment: `/.netlify/functions/post-comment` and `/.netlify/functions/get-comments`
 - **User Profile Display**: Shows authenticated user info in header with avatar, masked contact details, and logout functionality
-- **Comment Features**: Pagination support, nested replies, character limits (1000 chars), and input validation
+- **Comment Features**: 
+  - Pagination support with offset-based loading
+  - Nested replies with expand/collapse "View Replies" button to prevent screen overflow
+  - Character limits (1000 chars) and input validation
+  - Real-time comment posting and reply functionality
 
 # External Dependencies
 
 ## Firebase Services
 - **Firebase Authentication**: User sign-in and session management
-- **Cloud Firestore**: User data storage, device management, and content access control
+- **Cloud Firestore**: User data storage, device management, content access control, and comments storage
+- **Firestore Collections**:
+  - `users`: User profiles and unlocked notes
+  - `orders`: Razorpay order metadata
+  - `transactions`: Verified payment records
+  - `comments`: User comments and replies (requires composite index on `page + parentId + createdAt`)
 - Firebase configuration includes analytics and measurement services for user tracking
 
 ## Analytics and Tracking
@@ -80,9 +89,8 @@ The YouTube page features a user feedback and comment system with the following 
 - Custom MIME type handling for various file formats including images and documents
 
 ## Database
-- **PostgreSQL**: Relational database for storing user comments and feedback
-- **Database Tables**:
-  - `youtube_comments`: Stores comments with fields for user_id, name, email, comment text, timestamps, parent_id for replies, and page identifier
+- **PostgreSQL**: Available but not currently in use (previously used for comments, now migrated to Firestore)
+- All data now stored in Firebase Firestore for unified backend infrastructure
 
 ## Payment Gateway
 - **Razorpay**: Payment processing for note purchases with webhook support for reliable payment verification
