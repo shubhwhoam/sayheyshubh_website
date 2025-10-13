@@ -823,12 +823,14 @@
       }
 
       .user-profile {
-        position: relative;
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        width: calc(100% - 2rem);
         max-width: 300px;
-        margin-bottom: 1rem;
+        z-index: 1001;
       }
     }
 
