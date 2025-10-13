@@ -586,6 +586,42 @@
       margin-top: 0.8rem;
       padding-left: 1.5rem;
       border-left: 2px solid #e2e8f0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .replies-container.show {
+      max-height: 9999px;
+    }
+
+    .view-replies-btn {
+      background: none;
+      border: none;
+      color: #6366f1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+
+    .view-replies-btn:hover {
+      background: #ede9fe;
+    }
+
+    .view-replies-btn .arrow {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .view-replies-btn.active .arrow {
+      transform: rotate(180deg);
     }
 
     .reply-item {
@@ -1563,8 +1599,16 @@
         minute: '2-digit'
       });
       
+      const repliesCount = comment.replies ? comment.replies.length : 0;
+      const viewRepliesBtn = repliesCount > 0 ? `
+        <button class="view-replies-btn" onclick="toggleReplies('${comment.id}')">
+          <span class="replies-text">View ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}</span>
+          <span class="arrow">▼</span>
+        </button>
+      ` : '';
+      
       const repliesHTML = comment.replies && comment.replies.length > 0 ? `
-        <div class="replies-container">
+        <div class="replies-container" id="replies-${comment.id}">
           ${comment.replies.map(reply => {
             const replyDate = new Date(reply.created_at);
             const formattedReplyDate = replyDate.toLocaleDateString('en-US', { 
@@ -1601,7 +1645,8 @@
           </div>
           <p class="comment-text" itemprop="text">${escapeHtml(comment.comment)}</p>
           <div class="comment-actions">
-            <button class="reply-btn" onclick="showReplyForm(${comment.id})">💬 Reply</button>
+            <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>
+            ${viewRepliesBtn}
           </div>
           ${repliesHTML}
         </article>
@@ -1637,6 +1682,26 @@
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  // Toggle replies visibility
+  function toggleReplies(commentId) {
+    const repliesContainer = document.getElementById(`replies-${commentId}`);
+    const button = event.target.closest('.view-replies-btn');
+    
+    if (repliesContainer && button) {
+      repliesContainer.classList.toggle('show');
+      button.classList.toggle('active');
+      
+      const repliesText = button.querySelector('.replies-text');
+      const repliesCount = repliesContainer.querySelectorAll('.reply-item').length;
+      
+      if (repliesContainer.classList.contains('show')) {
+        repliesText.textContent = `Hide ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}`;
+      } else {
+        repliesText.textContent = `View ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}`;
+      }
+    }
   }
   </script>
 
