@@ -66,26 +66,33 @@ exports.handler = async (event) => {
     });
     
     // Get all replies for these comments
+    // Firestore 'in' operator has a limit of 10 values, so batch the queries
     const commentIds = topComments.map(comment => comment.id);
     let replies = [];
     
     if (commentIds.length > 0) {
-      const repliesRef = db.collection('comments')
-        .where('parentId', 'in', commentIds)
-        .orderBy('createdAt', 'asc');
-      
-      const repliesSnapshot = await repliesRef.get();
-      repliesSnapshot.forEach(doc => {
-        replies.push({
-          id: doc.id,
-          user_id: doc.data().userId,
-          name: doc.data().userName,
-          email: doc.data().userEmail,
-          comment: doc.data().comment,
-          created_at: doc.data().createdAt?.toDate?.() || new Date(),
-          parent_id: doc.data().parentId
+      // Split comment IDs into chunks of 10 (Firestore limit)
+      const chunkSize = 10;
+      for (let i = 0; i < commentIds.length; i += chunkSize) {
+        const chunk = commentIds.slice(i, i + chunkSize);
+        
+        const repliesRef = db.collection('comments')
+          .where('parentId', 'in', chunk)
+          .orderBy('createdAt', 'asc');
+        
+        const repliesSnapshot = await repliesRef.get();
+        repliesSnapshot.forEach(doc => {
+          replies.push({
+            id: doc.id,
+            user_id: doc.data().userId,
+            name: doc.data().userName,
+            email: doc.data().userEmail,
+            comment: doc.data().comment,
+            created_at: doc.data().createdAt?.toDate?.() || new Date(),
+            parent_id: doc.data().parentId
+          });
         });
-      });
+      }
     }
     
     // Organize replies under their parent comments

@@ -73,7 +73,23 @@ The YouTube page features a user feedback and comment system with the following 
   - `users`: User profiles and unlocked notes
   - `orders`: Razorpay order metadata
   - `transactions`: Verified payment records
-  - `comments`: User comments and replies (requires composite index on `page + parentId + createdAt`)
+  - `comments`: User comments and replies (see required indexes below)
+
+### Required Firestore Composite Indexes
+The comment system requires the following composite indexes to function properly:
+
+1. **Top-level Comments Query**:
+   - Collection: `comments`
+   - Fields: `page` (Ascending), `parentId` (Ascending), `createdAt` (Descending)
+   - Query scope: Collection
+
+2. **Replies Query**:
+   - Collection: `comments`
+   - Fields: `parentId` (Ascending), `createdAt` (Ascending)
+   - Query scope: Collection
+
+**Note**: Firestore will automatically prompt you to create these indexes when the queries are first executed. Click the provided link in the error message to auto-generate the index configuration.
+
 - Firebase configuration includes analytics and measurement services for user tracking
 
 ## Analytics and Tracking
