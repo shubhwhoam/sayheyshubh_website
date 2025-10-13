@@ -1,10 +1,17 @@
-const { Pool } = require('pg');
+const admin = require('firebase-admin');
 
-// Initialize PostgreSQL pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('localhost') ? false : { rejectUnauthorized: false }
-});
+// Initialize Firebase Admin if not already initialized
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
+    })
+  });
+}
+
+const db = admin.firestore();
 
 exports.handler = async (event) => {
   // CORS headers
@@ -34,37 +41,65 @@ exports.handler = async (event) => {
     const limit = parseInt(params.limit) || 10;
     const offset = parseInt(params.offset) || 0;
     
-    const result = await pool.query(
-      `SELECT id, user_id, name, email, comment, created_at, parent_id 
-       FROM youtube_comments 
-       WHERE page = $1 AND parent_id IS NULL 
-       ORDER BY created_at DESC 
-       LIMIT $2 OFFSET $3`,
-      [page, limit, offset]
-    );
+    // Get top-level comments from Firestore
+    const commentsRef = db.collection('comments')
+      .where('page', '==', page)
+      .where('parentId', '==', null)
+      .orderBy('createdAt', 'desc')
+      .limit(limit)
+      .offset(offset);
     
+    const snapshot = await commentsRef.get();
+    
+    // Convert Firestore docs to array
+    const topComments = [];
+    snapshot.forEach(doc => {
+      topComments.push({
+        id: doc.id,
+        user_id: doc.data().userId,
+        name: doc.data().userName,
+        email: doc.data().userEmail,
+        comment: doc.data().comment,
+        created_at: doc.data().createdAt?.toDate?.() || new Date(),
+        parent_id: doc.data().parentId
+      });
+    });
+    
+    // Get all replies for these comments
+    const commentIds = topComments.map(comment => comment.id);
     let replies = [];
-    if (result.rows.length > 0) {
-      const commentIds = result.rows.map(row => row.id);
-      const repliesResult = await pool.query(
-        `SELECT id, user_id, name, email, comment, created_at, parent_id 
-         FROM youtube_comments 
-         WHERE parent_id = ANY($1) 
-         ORDER BY created_at ASC`,
-        [commentIds]
-      );
-      replies = repliesResult.rows;
+    
+    if (commentIds.length > 0) {
+      const repliesRef = db.collection('comments')
+        .where('parentId', 'in', commentIds)
+        .orderBy('createdAt', 'asc');
+      
+      const repliesSnapshot = await repliesRef.get();
+      repliesSnapshot.forEach(doc => {
+        replies.push({
+          id: doc.id,
+          user_id: doc.data().userId,
+          name: doc.data().userName,
+          email: doc.data().userEmail,
+          comment: doc.data().comment,
+          created_at: doc.data().createdAt?.toDate?.() || new Date(),
+          parent_id: doc.data().parentId
+        });
+      });
     }
     
-    const commentsWithReplies = result.rows.map(comment => ({
+    // Organize replies under their parent comments
+    const commentsWithReplies = topComments.map(comment => ({
       ...comment,
       replies: replies.filter(reply => reply.parent_id === comment.id)
     }));
     
-    const countResult = await pool.query(
-      'SELECT COUNT(*) FROM youtube_comments WHERE page = $1 AND parent_id IS NULL',
-      [page]
-    );
+    // Get total count of top-level comments
+    const countSnapshot = await db.collection('comments')
+      .where('page', '==', page)
+      .where('parentId', '==', null)
+      .count()
+      .get();
     
     return {
       statusCode: 200,
@@ -72,11 +107,11 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         success: true,
         comments: commentsWithReplies,
-        total: parseInt(countResult.rows[0].count)
+        total: countSnapshot.data().count
       })
     };
   } catch (error) {
-    console.error('Error fetching comments:', error);
+    console.error('Error fetching comments from Firestore:', error);
     return {
       statusCode: 500,
       headers,

@@ -1,5 +1,4 @@
 const admin = require('firebase-admin');
-const { Pool } = require('pg');
 
 // Initialize Firebase Admin if not already initialized
 if (!admin.apps.length) {
@@ -13,12 +12,6 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-
-// Initialize PostgreSQL pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('localhost') ? false : { rejectUnauthorized: false }
-});
 
 async function verifyFirebaseToken(authHeader) {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -80,7 +73,7 @@ exports.handler = async (event) => {
     
     const sanitizedComment = comment.trim().substring(0, 1000);
     const sanitizedPage = page.substring(0, 50);
-    const sanitizedParentId = parentId ? parseInt(parentId) : null;
+    const sanitizedParentId = parentId || null;
     
     if (sanitizedComment.length < 3) {
       return {
@@ -90,13 +83,11 @@ exports.handler = async (event) => {
       };
     }
     
+    // If this is a reply, verify parent comment exists
     if (sanitizedParentId) {
-      const parentCheck = await pool.query(
-        'SELECT id FROM youtube_comments WHERE id = $1',
-        [sanitizedParentId]
-      );
+      const parentDoc = await db.collection('comments').doc(sanitizedParentId).get();
       
-      if (parentCheck.rows.length === 0) {
+      if (!parentDoc.exists) {
         return {
           statusCode: 404,
           headers,
@@ -105,19 +96,37 @@ exports.handler = async (event) => {
       }
     }
     
-    const result = await pool.query(
-      `INSERT INTO youtube_comments (user_id, name, email, comment, page, parent_id) 
-       VALUES ($1, $2, $3, $4, $5, $6) 
-       RETURNING id, user_id, name, email, comment, created_at, parent_id`,
-      [authenticatedUserId, userName, userEmail, sanitizedComment, sanitizedPage, sanitizedParentId]
-    );
+    // Create new comment in Firestore
+    const commentData = {
+      userId: authenticatedUserId,
+      userName: userName,
+      userEmail: userEmail,
+      comment: sanitizedComment,
+      page: sanitizedPage,
+      parentId: sanitizedParentId,
+      createdAt: admin.firestore.FieldValue.serverTimestamp()
+    };
+    
+    const docRef = await db.collection('comments').add(commentData);
+    
+    // Get the created document to return it
+    const newCommentDoc = await docRef.get();
+    const newCommentData = newCommentDoc.data();
     
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
-        comment: result.rows[0]
+        comment: {
+          id: docRef.id,
+          user_id: newCommentData.userId,
+          name: newCommentData.userName,
+          email: newCommentData.userEmail,
+          comment: newCommentData.comment,
+          created_at: newCommentData.createdAt?.toDate?.() || new Date(),
+          parent_id: newCommentData.parentId
+        }
       })
     };
   } catch (error) {
