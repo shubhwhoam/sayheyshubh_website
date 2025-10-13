@@ -4,16 +4,9 @@ const path = require('path');
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
-const { Pool } = require('pg');
 
 const app = express();
 const PORT = 5000;
-
-// PostgreSQL connection for comments
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
-});
 
 // Middleware
 app.use(cors());
@@ -500,65 +493,89 @@ app.post('/migrate-purchases', async (req, res) => {
   }
 });
 
-// Comment endpoints
+// Comment endpoints using Firebase Firestore
 // Get comments for a page with nested replies
 app.get('/api/comments/:page', async (req, res) => {
-  console.log(`[GET] /api/comments/${req.params.page} - Fetching comments`);
+  console.log(`[GET] /api/comments/${req.params.page} - Fetching comments from Firestore`);
   try {
     const { page } = req.params;
     const limit = parseInt(req.query.limit) || 50;
     const offset = parseInt(req.query.offset) || 0;
     
-    // Get top-level comments (parent_id IS NULL)
-    const result = await pool.query(
-      `SELECT id, user_id, name, email, comment, created_at, parent_id 
-       FROM youtube_comments 
-       WHERE page = $1 AND parent_id IS NULL 
-       ORDER BY created_at DESC 
-       LIMIT $2 OFFSET $3`,
-      [page, limit, offset]
-    );
+    // Get top-level comments (parentId is null)
+    const commentsRef = db.collection('comments')
+      .where('page', '==', page)
+      .where('parentId', '==', null)
+      .orderBy('createdAt', 'desc')
+      .limit(limit)
+      .offset(offset);
+    
+    const snapshot = await commentsRef.get();
+    
+    // Convert Firestore docs to array
+    const topComments = [];
+    snapshot.forEach(doc => {
+      topComments.push({
+        id: doc.id,
+        user_id: doc.data().userId,
+        name: doc.data().userName,
+        email: doc.data().userEmail,
+        comment: doc.data().comment,
+        created_at: doc.data().createdAt?.toDate?.() || new Date(),
+        parent_id: doc.data().parentId
+      });
+    });
     
     // Get all replies for these comments
-    const commentIds = result.rows.map(row => row.id);
+    const commentIds = topComments.map(comment => comment.id);
     let replies = [];
     
     if (commentIds.length > 0) {
-      const repliesResult = await pool.query(
-        `SELECT id, user_id, name, email, comment, created_at, parent_id 
-         FROM youtube_comments 
-         WHERE parent_id = ANY($1) 
-         ORDER BY created_at ASC`,
-        [commentIds]
-      );
-      replies = repliesResult.rows;
+      const repliesRef = db.collection('comments')
+        .where('parentId', 'in', commentIds)
+        .orderBy('createdAt', 'asc');
+      
+      const repliesSnapshot = await repliesRef.get();
+      repliesSnapshot.forEach(doc => {
+        replies.push({
+          id: doc.id,
+          user_id: doc.data().userId,
+          name: doc.data().userName,
+          email: doc.data().userEmail,
+          comment: doc.data().comment,
+          created_at: doc.data().createdAt?.toDate?.() || new Date(),
+          parent_id: doc.data().parentId
+        });
+      });
     }
     
     // Organize replies under their parent comments
-    const commentsWithReplies = result.rows.map(comment => ({
+    const commentsWithReplies = topComments.map(comment => ({
       ...comment,
       replies: replies.filter(reply => reply.parent_id === comment.id)
     }));
     
-    const countResult = await pool.query(
-      'SELECT COUNT(*) FROM youtube_comments WHERE page = $1 AND parent_id IS NULL',
-      [page]
-    );
+    // Get total count of top-level comments
+    const countSnapshot = await db.collection('comments')
+      .where('page', '==', page)
+      .where('parentId', '==', null)
+      .count()
+      .get();
     
     res.json({
       success: true,
       comments: commentsWithReplies,
-      total: parseInt(countResult.rows[0].count)
+      total: countSnapshot.data().count
     });
   } catch (error) {
-    console.error('Error fetching comments:', error);
+    console.error('Error fetching comments from Firestore:', error);
     res.status(500).json({ success: false, error: 'Failed to fetch comments' });
   }
 });
 
-// Post a new comment (requires authentication)
+// Post a new comment (requires authentication) using Firestore
 app.post('/api/comments/?', async (req, res) => {
-  console.log('[POST] /api/comments - Posting new comment');
+  console.log('[POST] /api/comments - Posting new comment to Firestore');
   try {
     // Verify authentication
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
@@ -590,7 +607,7 @@ app.post('/api/comments/?', async (req, res) => {
     // Sanitize inputs
     const sanitizedComment = comment.trim().substring(0, 1000);
     const sanitizedPage = page.substring(0, 50);
-    const sanitizedParentId = parentId ? parseInt(parentId) : null;
+    const sanitizedParentId = parentId || null;
     
     if (sanitizedComment.length < 3) {
       return res.status(400).json({ 
@@ -601,12 +618,9 @@ app.post('/api/comments/?', async (req, res) => {
     
     // If this is a reply, verify parent comment exists
     if (sanitizedParentId) {
-      const parentCheck = await pool.query(
-        'SELECT id FROM youtube_comments WHERE id = $1',
-        [sanitizedParentId]
-      );
+      const parentDoc = await db.collection('comments').doc(sanitizedParentId).get();
       
-      if (parentCheck.rows.length === 0) {
+      if (!parentDoc.exists) {
         return res.status(404).json({ 
           success: false, 
           error: 'Parent comment not found' 
@@ -614,19 +628,37 @@ app.post('/api/comments/?', async (req, res) => {
       }
     }
     
-    const result = await pool.query(
-      `INSERT INTO youtube_comments (user_id, name, email, comment, page, parent_id) 
-       VALUES ($1, $2, $3, $4, $5, $6) 
-       RETURNING id, user_id, name, email, comment, created_at, parent_id`,
-      [authenticatedUserId, userName, userEmail, sanitizedComment, sanitizedPage, sanitizedParentId]
-    );
+    // Create new comment in Firestore
+    const commentData = {
+      userId: authenticatedUserId,
+      userName: userName,
+      userEmail: userEmail,
+      comment: sanitizedComment,
+      page: sanitizedPage,
+      parentId: sanitizedParentId,
+      createdAt: admin.firestore.FieldValue.serverTimestamp()
+    };
+    
+    const docRef = await db.collection('comments').add(commentData);
+    
+    // Get the created document to return it
+    const newCommentDoc = await docRef.get();
+    const newCommentData = newCommentDoc.data();
     
     res.json({
       success: true,
-      comment: result.rows[0]
+      comment: {
+        id: docRef.id,
+        user_id: newCommentData.userId,
+        name: newCommentData.userName,
+        email: newCommentData.userEmail,
+        comment: newCommentData.comment,
+        created_at: newCommentData.createdAt?.toDate?.() || new Date(),
+        parent_id: newCommentData.parentId
+      }
     });
   } catch (error) {
-    console.error('Error posting comment:', error);
+    console.error('Error posting comment to Firestore:', error);
     const statusCode = error.message && error.message.includes('authentication') ? 401 : 500;
     res.status(statusCode).json({ 
       success: false, 
