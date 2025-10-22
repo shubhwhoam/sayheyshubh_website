@@ -161,39 +161,6 @@
 
 <hr>
 
-    <div class="comment-section">
-      <h3>💬 Leave a Comment</h3>
-      <form class="comment-form">
-        <input type="text" placeholder="Your name" required />
-        <input type="email" placeholder="Your email" required />
-        <textarea rows="4" placeholder="Write your comment here..." required></textarea>
-        <button type="submit">Post Comment</button>
-      </form>
-
-      <div id="commentDisplay">
-        <div class="comment">
-          <strong>Ansh:</strong>
-          <p>This piece really opened my eyes. Thank you for writing this!</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const form = document.querySelector('.comment-form');
-    const commentDisplay = document.getElementById('commentDisplay');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const name = form.querySelector('input[type=text]').value;
-      const text = form.querySelector('textarea').value;
-
-      const newComment = document.createElement('div');
-      newComment.classList.add('comment');
-      newComment.innerHTML = `<strong>${name}:</strong><p>${text}</p>`;
-      commentDisplay.appendChild(newComment);
-      form.reset();
-    });
-  </script>
+   
 </body>
 </html>
