@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
@@ -45,20 +44,16 @@ if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
 
 // Authentication helper
 async function verifyFirebaseToken(authHeader) {
-  console.log('verifyFirebaseToken called with:', authHeader ? `Bearer ${authHeader.substring(0, 20)}...` : 'NULL/UNDEFINED');
-  
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    console.error('Authorization header missing or invalid format');
     throw new Error('Missing or invalid authorization header');
   }
   
   const idToken = authHeader.substring(7);
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    console.log('Token verified successfully for user:', decodedToken.uid);
     return decodedToken;
   } catch (error) {
-    console.error('Token verification failed:', error.message);
+    console.error('Token verification failed:', error);
     throw new Error('Invalid authentication token');
   }
 }
@@ -399,8 +394,6 @@ async function getUserPurchasedNotes(userId) {
 // Get notes endpoint - returns sanitized notes data based on user's purchases
 app.get('/.netlify/functions/get-notes', async (req, res) => {
   try {
-    console.log('GET /get-notes - Headers:', req.headers.authorization ? 'Auth header present' : 'NO AUTH HEADER');
-    
     // Verify authentication
     const decodedToken = await verifyFirebaseToken(req.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
@@ -415,8 +408,8 @@ app.get('/.netlify/functions/get-notes', async (req, res) => {
     }
 
     // Load notes configuration
+    const fs = require('fs');
     const notesConfigPath = path.join(__dirname, 'netlify', 'functions', 'config', 'notes-config.json');
-    console.log('Loading notes config from:', notesConfigPath);
     const notesConfig = JSON.parse(fs.readFileSync(notesConfigPath, 'utf8'));
 
     // Get user's purchased notes
@@ -471,8 +464,8 @@ app.get('/.netlify/functions/secure-notes', async (req, res) => {
     }
 
     // Load notes configuration to find the note URL
+    const fs = require('fs');
     const notesConfigPath = path.join(__dirname, 'netlify', 'functions', 'config', 'notes-config.json');
-    console.log('Loading notes config for secure-notes from:', notesConfigPath);
     const notesConfig = JSON.parse(fs.readFileSync(notesConfigPath, 'utf8'));
 
     // Find the note URL by searching through all semesters

@@ -17,16 +17,10 @@ class SemesterNotesLoader {
     try {
       const user = this.auth.currentUser;
       if (!user) {
-        console.error('User not authenticated - cannot load notes');
-        this.showError('Please log in to view notes.');
-        // Redirect to login page
-        setTimeout(() => {
-          window.location.href = 'youtube.html?showLogin=true';
-        }, 1500);
+        console.error('User not authenticated');
         return;
       }
 
-      console.log('Loading notes for semester:', this.semesterKey);
       const idToken = await user.getIdToken();
       
       const response = await fetch(`/.netlify/functions/get-notes?semester=${this.semesterKey}`, {
@@ -37,17 +31,11 @@ class SemesterNotesLoader {
         }
       });
 
-      console.log('Notes API response status:', response.status);
-
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Notes API error:', errorText);
         throw new Error(`Failed to load notes: ${response.status}`);
       }
 
       const result = await response.json();
-      console.log('Notes loaded successfully:', result.success);
-      
       if (!result.success) {
         throw new Error(result.error || 'Failed to load notes');
       }
