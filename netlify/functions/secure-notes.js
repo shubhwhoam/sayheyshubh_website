@@ -43,78 +43,37 @@ async function verifyFirebaseToken(authHeader) {
   }
 }
 
-async function getUserPurchasedNotes(userId) {
-  const transactionsSnapshot = await db.collection('transactions')
-    .where('userId', '==', userId)
-    .where('status', '==', 'completed')
-    .where('verified', '==', true)
-    .get();
+function findNoteByIdInConfig(notesConfig, noteId) {
+  for (const semesterKey in notesConfig) {
+    const semester = notesConfig[semesterKey];
+    if (!semester.subjects) continue;
 
-  const purchasedNotes = [];
-  transactionsSnapshot.forEach(doc => {
-    const data = doc.data();
-    if (data.noteUrl) {
-      purchasedNotes.push(data.noteUrl);
+    for (const subjectName in semester.subjects) {
+      const subject = semester.subjects[subjectName];
+      if (!subject.units) continue;
+
+      for (const unit of subject.units) {
+        if (unit.noteUrl && unit.noteUrl.includes(noteId)) {
+          return {
+            noteUrl: unit.noteUrl,
+            requiresPayment: unit.requiresPayment !== false
+          };
+        }
+      }
     }
-  });
-
-  return purchasedNotes;
-}
-
-function extractNoteId(noteUrl) {
-  if (noteUrl && noteUrl.includes('drive.google.com/file/d/')) {
-    const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-    return fileIdMatch ? fileIdMatch[1] : null;
   }
   return null;
 }
 
-function sanitizeNotesForUser(notesConfig, purchasedNotes, semesterKey) {
-  const semesterData = notesConfig[semesterKey];
-  if (!semesterData) {
-    return null;
-  }
+async function hasUserPurchasedNote(userId, noteUrl) {
+  const transactionsSnapshot = await db.collection('transactions')
+    .where('userId', '==', userId)
+    .where('noteUrl', '==', noteUrl)
+    .where('status', '==', 'completed')
+    .where('verified', '==', true)
+    .get();
 
-  const sanitized = {
-    title: semesterData.title,
-    syllabus: semesterData.syllabus,
-    syllabusUrl: semesterData.syllabusUrl || null,
-    subjects: {}
-  };
-
-  Object.keys(semesterData.subjects).forEach(subjectName => {
-    const subject = semesterData.subjects[subjectName];
-    sanitized.subjects[subjectName] = {
-      color: subject.color || 'subject-color-1',
-      units: []
-    };
-
-    subject.units.forEach(unit => {
-      const unitData = {
-        title: unit.title,
-        videoUrl: unit.videoUrl || null,
-        status: unit.status || null
-      };
-
-      if (unit.status === 'coming-soon') {
-        unitData.status = 'coming-soon';
-      } else if (unit.noteUrl) {
-        const noteId = extractNoteId(unit.noteUrl);
-        unitData.noteId = noteId;
-        
-        if (unit.requiresPayment === false || purchasedNotes.includes(unit.noteUrl)) {
-          unitData.hasAccess = true;
-        } else {
-          unitData.hasAccess = false;
-          unitData.requiresPayment = true;
-        }
-      }
-
-      sanitized.subjects[subjectName].units.push(unitData);
-    });
-  });
-
-  return sanitized;
+  return !transactionsSnapshot.empty;
 }
 
 exports.handler = async (event, context) => {
@@ -138,28 +97,42 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
 
-    const semesterKey = event.queryStringParameters?.semester;
-    if (!semesterKey) {
+    const noteId = event.queryStringParameters?.noteId;
+    if (!noteId) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Missing semester parameter' })
+        body: JSON.stringify({ success: false, error: 'Missing noteId parameter' })
       };
     }
 
     const notesConfigPath = path.join(__dirname, 'config', 'notes-config.json');
     const notesConfig = JSON.parse(fs.readFileSync(notesConfigPath, 'utf8'));
 
-    const purchasedNotes = await getUserPurchasedNotes(authenticatedUserId);
-
-    const sanitizedData = sanitizeNotesForUser(notesConfig, purchasedNotes, semesterKey);
-
-    if (!sanitizedData) {
+    const noteData = findNoteByIdInConfig(notesConfig, noteId);
+    
+    if (!noteData) {
       return {
         statusCode: 404,
         headers,
-        body: JSON.stringify({ success: false, error: 'Semester not found' })
+        body: JSON.stringify({ success: false, error: 'Note not found' })
       };
+    }
+
+    if (noteData.requiresPayment) {
+      const hasPurchased = await hasUserPurchasedNote(authenticatedUserId, noteData.noteUrl);
+      
+      if (!hasPurchased) {
+        return {
+          statusCode: 403,
+          headers,
+          body: JSON.stringify({ 
+            success: false, 
+            error: 'Payment required',
+            requiresPayment: true
+          })
+        };
+      }
     }
 
     return {
@@ -167,12 +140,12 @@ exports.handler = async (event, context) => {
       headers,
       body: JSON.stringify({
         success: true,
-        data: sanitizedData
+        noteUrl: noteData.noteUrl
       })
     };
 
   } catch (error) {
-    console.error('Error in get-notes:', error);
+    console.error('Error in secure-notes:', error);
     
     if (error.message.includes('authorization') || error.message.includes('authentication')) {
       return {
