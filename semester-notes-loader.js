@@ -168,7 +168,7 @@ class SemesterNotesLoader {
       const user = this.auth.currentUser;
       const idToken = await user.getIdToken();
 
-      const response = await fetch(`/secure-notes/${noteId}`, {
+      const response = await fetch(`/.netlify/functions/secure-notes?noteId=${noteId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${idToken}`,
@@ -185,7 +185,7 @@ class SemesterNotesLoader {
         throw new Error(noteData.error || 'Failed to access note');
       }
 
-      window.open(noteData.previewUrl, '_blank');
+      window.open(noteData.noteUrl, '_blank');
     } catch (error) {
       console.error('Error opening note:', error);
       alert('Failed to open note. You may need to unlock this note first.');
@@ -193,8 +193,7 @@ class SemesterNotesLoader {
   }
 
   showPaymentPopup(noteId, noteTitle) {
-    const notesConfigPath = `https://drive.google.com/file/d/${noteId}/view`;
-    this.currentNoteUrl = notesConfigPath;
+    this.currentNoteId = noteId;
     this.currentNoteTitle = noteTitle;
 
     const modal = document.getElementById('paymentModal');
@@ -228,8 +227,8 @@ class SemesterNotesLoader {
     }
   }
 
-  getCurrentNoteUrl() {
-    return this.currentNoteUrl;
+  getCurrentNoteId() {
+    return this.currentNoteId;
   }
 
   getCurrentNoteTitle() {
@@ -258,7 +257,7 @@ async function proceedToPayment() {
 
   const amount = parseInt(selectedPrice.getAttribute('data-price')) * 100;
   const noteTitle = window.semesterNotesLoader.getCurrentNoteTitle();
-  const noteUrl = window.semesterNotesLoader.getCurrentNoteUrl();
+  const noteId = window.semesterNotesLoader.getCurrentNoteId();
 
   const loadingDiv = document.getElementById('paymentLoading');
   if (loadingDiv) {
@@ -278,7 +277,7 @@ async function proceedToPayment() {
       body: JSON.stringify({
         amount: amount,
         noteTitle: noteTitle,
-        noteUrl: noteUrl
+        noteId: noteId
       })
     });
 
