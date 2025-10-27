@@ -15,16 +15,7 @@ The application follows a traditional multi-page architecture using vanilla HTML
 The authentication system is built around Firebase Authentication with custom device management. Users authenticate through a YouTube page entry point, with sessions tied to specific device IDs stored in localStorage. The system implements a device limit mechanism where user sessions are validated against registered devices in Firestore, preventing unauthorized access and session sharing.
 
 ## Content Protection Strategy
-Protected educational content (study notes) is gated behind authentication and payment using Firebase and Razorpay. The system implements a **secure dynamic content loading architecture** where note URLs are never exposed in HTML source code.
-
-###  Secure Notes Architecture (v2 - Enhanced Security)
-- **Centralized Configuration**: All note URLs stored in `notes-config.json` (backend only)
-- **Dynamic Content Loading**: Notes fetched via `/.netlify/functions/get-notes` API
-- **URL Protection**: Links only sent to authenticated users who have paid
-- **Zero HTML Exposure**: No hardcoded Google Drive links in HTML source
-- **Backward Compatibility**: Previous purchases preserved via Firebase transactions
-
-The `page-protection.js` handles session validation and redirects unauthorized users. The system checks authentication status, device registration, and purchase verification before allowing access to premium content.
+Protected educational content (study notes) is gated behind authentication and payment using Firebase and Razorpay. The `page-protection.js` handles session validation and redirects unauthorized users. The system checks authentication status, device registration, and purchase verification before allowing access to premium content.
 
 ## Payment System Architecture (Razorpay Integration)
 The payment system implements a secure, idempotent architecture to prevent duplicate unlocks and ensure notes remain unlocked forever once purchased.
@@ -49,19 +40,6 @@ The payment system implements a secure, idempotent architecture to prevent dupli
 - **orders**: Stores order metadata (orderId as doc ID, userId, noteUrl, amount, status)
 - **transactions**: Records completed payments (paymentId as doc ID, userId, noteUrl, verified flag)
 - **users/{userId}/unlockedNotes**: Maps noteSlug to boolean for quick access checks
-
-### Notes Configuration System:
-- **notes-config.json**: Centralized configuration file containing all note URLs, video links, and payment requirements
-- **Netlify Function: get-notes**: Secure API endpoint that validates authentication and returns sanitized note data
-- **semester-notes-loader.js**: Frontend library for dynamic note rendering without exposing URLs
-- **Update Process**: Modify `notes-config.json` to add/update notes, URLs never appear in HTML
-
-### Security Benefits:
-1. **No URL Exposure**: Google Drive links never visible in page source or browser inspector
-2. **Authentication Gated**: Must be logged in to fetch note data
-3. **Payment Verification**: Backend checks Firebase transactions before releasing URLs
-4. **Easy Maintenance**: Update one JSON file instead of multiple HTML files
-5. **Preserves Access**: Previous paying users retain access via Firebase records
 
 ### Migration Support:
 The `fix-unlocked-notes.js` function restores notes for users affected by the previous race condition bug, adding verified=true flags to existing transactions with proper batch handling for large datasets.

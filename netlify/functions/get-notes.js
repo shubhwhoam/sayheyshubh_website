@@ -99,10 +99,8 @@ function sanitizeNotesForUser(notesConfig, purchasedNotes, semesterKey) {
       if (unit.status === 'coming-soon') {
         unitData.status = 'coming-soon';
       } else if (unit.noteUrl) {
-        const noteId = extractNoteId(unit.noteUrl);
-        unitData.noteId = noteId;
-        
         if (unit.requiresPayment === false || purchasedNotes.includes(unit.noteUrl)) {
+          unitData.noteId = extractNoteId(unit.noteUrl);
           unitData.hasAccess = true;
         } else {
           unitData.hasAccess = false;
@@ -147,7 +145,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const notesConfigPath = path.join(__dirname, 'config', 'notes-config.json');
+    const notesConfigPath = path.join(process.cwd(), 'notes-config.json');
     const notesConfig = JSON.parse(fs.readFileSync(notesConfigPath, 'utf8'));
 
     const purchasedNotes = await getUserPurchasedNotes(authenticatedUserId);

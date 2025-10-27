@@ -1,7 +1,5 @@
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
-const fs = require('fs');
-const path = require('path');
 
 // Initialize Firebase Admin with secure environment variables
 if (!admin.apps.length) {
@@ -44,25 +42,6 @@ async function verifyFirebaseToken(authHeader) {
   }
 }
 
-function findNoteUrlById(notesConfig, noteId) {
-  for (const semesterKey in notesConfig) {
-    const semester = notesConfig[semesterKey];
-    if (!semester.subjects) continue;
-
-    for (const subjectName in semester.subjects) {
-      const subject = semester.subjects[subjectName];
-      if (!subject.units) continue;
-
-      for (const unit of subject.units) {
-        if (unit.noteUrl && unit.noteUrl.includes(noteId)) {
-          return unit.noteUrl;
-        }
-      }
-    }
-  }
-  return null;
-}
-
 exports.handler = async (event, context) => {
   // CORS headers
   const headers = {
@@ -93,27 +72,14 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    const { amount, noteTitle, noteId } = JSON.parse(event.body);
+    const { amount, noteTitle, noteUrl } = JSON.parse(event.body);
     
     // Basic validation
-    if (!amount || !noteTitle || !noteId) {
+    if (!amount || !noteTitle || !noteUrl) {
       return {
         statusCode: 400,
         headers,
         body: JSON.stringify({ success: false, error: 'Missing required parameters' })
-      };
-    }
-    
-    // Look up the noteUrl from the config file (server-side only)
-    const notesConfigPath = path.join(__dirname, 'config', 'notes-config.json');
-    const notesConfig = JSON.parse(fs.readFileSync(notesConfigPath, 'utf8'));
-    const noteUrl = findNoteUrlById(notesConfig, noteId);
-    
-    if (!noteUrl) {
-      return {
-        statusCode: 404,
-        headers,
-        body: JSON.stringify({ success: false, error: 'Note not found' })
       };
     }
     
@@ -135,7 +101,6 @@ exports.handler = async (event, context) => {
       receipt: `r_${Date.now().toString().slice(-8)}`,
       notes: {
         noteTitle: sanitizedNoteTitle,
-        noteId: noteId,
         userId: authenticatedUserId,
         timestamp: new Date().toISOString()
       }
@@ -164,7 +129,7 @@ exports.handler = async (event, context) => {
         orderId: order.id,
         amount: order.amount,
         currency: order.currency,
-        razorpayKeyId: process.env.RAZORPAY_KEY_ID
+        key: process.env.RAZORPAY_KEY_ID
       })
     };
   } catch (error) {
