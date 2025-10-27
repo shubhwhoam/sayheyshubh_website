@@ -172,144 +172,14 @@
   },
   "second-semester": {
     "title": "Second Semester Notes",
-    "syllabus": "(DSC-4): Non-Chordata: Coelomates, (DSC-5): Fundamentals of Biomolecules, and (DSC-6): Human Physiology-Control and Coordination Systems",
+    "syllabus": "Advanced biological concepts, genetics basics, and environmental science fundamentals",
     "syllabusUrl": "https://drive.google.com/file/d/13qmXMQZXrJUE8nASIHorqLA6ieUyIx-l/view?usp=sharing",
-    "subjects": {
-      "(DSC-4): Non-Chordata: Coelomates": {
-        "color": "subject-color-1",
-        "units": [
-          {"title": "Unit I: Annelida", "status": "coming-soon"},
-          {"title": "Unit II: Arthropoda and Onychophora", "status": "coming-soon"},
-          {"title": "Unit III: Mollusca", "status": "coming-soon"},
-          {"title": "Unit IV: Echinodermata", "status": "coming-soon"},
-          {"title": "🧠 <b>Cheat sheet</b>", "status": "coming-soon"},
-          {"title": "📝 <b>Previous year questions</b>", "status": "coming-soon"}
-        ]
-      },
-      "(DSC-5): Fundamentals of Biomolecules": {
-        "color": "subject-color-2",
-        "units": [
-          {"title": "Unit I: Carbohydrates", "status": "coming-soon"},
-          {"title": "Unit II: Lipids", "status": "coming-soon"},
-          {"title": "Unit III: Proteins", "status": "coming-soon"},
-          {"title": "Unit IV: Nucleic Acids", "status": "coming-soon"},
-          {"title": "Unit V: Enzymes", "status": "coming-soon"},
-          {"title": "🧠 <b>Cheat sheet</b>", "status": "coming-soon"},
-          {"title": "📝 <b>Previous year questions</b>", "status": "coming-soon"}
-        ]
-      },
-      "(DSC-6): Human Physiology-Control and Coordination Systems": {
-        "color": "subject-color-3",
-        "units": [
-          {"title": "Unit I: Nervous System and Sense Organs", "status": "coming-soon"},
-          {"title": "Unit II: Muscle Physiology", "status": "coming-soon"},
-          {"title": "Unit III: Endocrine System", "status": "coming-soon"},
-          {"title": "Unit IV: Reproductive System", "status": "coming-soon"},
-          {"title": "🧠 <b>Cheat sheet</b>", "status": "coming-soon"},
-          {"title": "📝 <b>Previous year questions</b>", "status": "coming-soon"}
-        ]
-      }
-    }
+    "subjects": {}
   },
   "third-semester": {
     "title": "Third Semester Notes",
-    "syllabus": "(DSC-7): Diversity of Chordates, (DSC-8): Biochemistry: Metabolic Processes, (DSC-9): Human Physiology- Life Sustaining Systems",
+    "syllabus": "Specialized zoology subjects including physiology, anatomy, and biochemistry",
     "syllabusUrl": "https://drive.google.com/file/d/1bBCnst3niOoHUN298otEn4WjeDo6GDMe/view?usp=sharing",
-    "subjects": {
-      "(DSC-7): Diversity of Chordates": {
-        "color": "subject-color-1",
-        "units": [
-          {
-            "title": "Unit I: Introduction to Chordates",
-            "noteUrl": "https://drive.google.com/file/d/1msxMjMFkpSSOevOx2GqcM-pg0qtgYbSL/view?usp=sharing",
-            "videoUrl": "https://www.youtube.com/shorts/Y1AiZj95MV0",
-            "requiresPayment": false
-          },
-          {
-            "title": "Unit II: Protochordata",
-            "noteUrl": "https://drive.google.com/file/d/1tbIjSh5Erb-a8wfXPlqwNgZU8oYu7D5W/view?usp=sharing",
-            "videoUrl": "https://www.youtube.com/@ShubhiPhilia",
-            "requiresPayment": false
-          },
-          {"title": "Unit III: Origin of Chordates", "status": "coming-soon"},
-          {"title": "Unit IV: Agnatha", "status": "coming-soon"},
-          {"title": "Unit V: Pisces", "status": "coming-soon"},
-          {"title": "Unit VI: Amphibia", "status": "coming-soon"},
-          {"title": "Unit VII: Reptilia", "status": "coming-soon"},
-          {"title": "Unit VIII: Aves", "status": "coming-soon"},
-          {"title": "Unit IX: Mammalia", "status": "coming-soon"},
-          {"title": "Unit X: Zoogeography", "status": "coming-soon"},
-          {"title": "🧠 <b>Cheat sheet</b>", "status": "coming-soon"},
-          {
-            "title": "📝 <b>Previous year questions</b>",
-            "noteUrl": "https://drive.google.com/file/d/1dI6Im7B5sov4foNCvtiVclaq6O1NbALB/view?usp=sharing",
-            "requiresPayment": false
-          },
-          {
-            "title": "📓 <b>J.Z.Young - THE LIFE OF VERTEBRATES</b>",
-            "noteUrl": "https://drive.google.com/file/d/1NE5hRjE3Q1wAVdw-J8V9NQ46KlqFiB9y/view?usp=sharing",
-            "requiresPayment": false
-          },
-          {
-            "title": "📘 <b>VERTEBRATES KOTPAL</b>",
-            "noteUrl": "https://drive.google.com/file/d/19i5jGQvOO836IpKcc3fVtO5ApZJjwUPy/view?usp=sharing",
-            "requiresPayment": false
-          },
-          {
-            "title": "📓 <b>Parker & Hazwell</b>",
-            "noteUrl": "https://drive.google.com/file/d/1zZbJtAruUt-rFipdaV-JAjNqBpg4Z5x0/view?usp=sharing",
-            "requiresPayment": false
-          },
-          {
-            "title": "📕 <b>SS lal Vertebrate</b>",
-            "noteUrl": "https://drive.google.com/file/d/1aU6X41Cmiof8Z9XfBHBwPdLeEbm8uVwa/view?usp=sharing",
-            "requiresPayment": false
-          },
-          {
-            "title": "📘 <b>Kenneth V. Kardong - Vertebrates</b>",
-            "noteUrl": "https://drive.google.com/file/d/1VJCjB9oWGY2VD087BZpIcFoPVPfKzQHJ/view?usp=sharing",
-            "requiresPayment": false
-          }
-        ]
-      },
-      "(DSC-8): Biochemistry: Metabolic Processes": {
-        "color": "subject-color-2",
-        "units": [
-          {
-            "title": "Unit I: Carbohydrate Metabolism",
-            "noteUrl": "https://drive.google.com/file/d/1N3D4zy-MaJHyn93BaYLFeEKT-2zaf55A/view?usp=sharing",
-            "videoUrl": "https://www.youtube.com/@ShubhiPhilia",
-            "requiresPayment": false
-          },
-          {"title": "Unit II: Lipid Metabolism", "status": "coming-soon"},
-          {"title": "Unit III: Protein Metabolism", "status": "coming-soon"},
-          {"title": "Unit IV: Oxidative Phosphorylation", "status": "coming-soon"},
-          {"title": "Unit V: Liver as a Major Metabolic Hub", "status": "coming-soon"},
-          {"title": "🧠 <b>Cheat sheet</b>", "status": "coming-soon"},
-          {
-            "title": "📝 <b>Previous year questions</b>",
-            "noteUrl": "https://drive.google.com/file/d/1_CJvRucOfdswiRwyq0jiwrA9zxc78rVL/view?usp=sharing",
-            "requiresPayment": false
-          }
-        ]
-      },
-      "(DSC-9): Human Physiology- Life Sustaining Systems": {
-        "color": "subject-color-3",
-        "units": [
-          {"title": "Unit I: Physiology of Digestion", "status": "coming-soon"},
-          {
-            "title": "Unit II: Blood",
-            "noteUrl": "https://drive.google.com/file/d/1-hPJY9G6snZgvTHD4hvHSg9sYR8fd812/view?usp=sharing",
-            "videoUrl": "https://www.youtube.com/shorts/FXSX5jme5nA",
-            "requiresPayment": false
-          },
-          {"title": "Unit III: Physiology of Heart", "status": "coming-soon"},
-          {"title": "Unit IV: Physiology of Respiration", "status": "coming-soon"},
-          {"title": "Unit V: Renal Physiology", "status": "coming-soon"},
-          {"title": "🧠 <b>Cheat sheet</b>", "status": "coming-soon"},
-          {"title": "📝 <b>Previous year questions</b>", "status": "coming-soon"}
-        ]
-      }
-    }
+    "subjects": {}
   }
 }

@@ -1,9 +1,2 @@
-# Block access to notes configuration file
-/notes-config.json /404.html 404
-/netlify/functions/config/* /404.html 404
-
-# API routes
 /api/*  /.netlify/functions/:splat  200
-
-# Default routing
 /*      /index.html   200
