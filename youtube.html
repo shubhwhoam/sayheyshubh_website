@@ -1694,24 +1694,30 @@
   }
 
   // Toggle replies visibility
-  function toggleReplies(commentId) {
-    const repliesContainer = document.getElementById(`replies-${commentId}`);
-    const button = event.target.closest('.view-replies-btn');
-    
-    if (repliesContainer && button) {
+    // Toggle replies visibility — updated to work with new markup
+    function toggleReplies(event, commentId) {
+      event.stopPropagation(); // avoid bubbling glitches
+
+      const repliesContainer = document.getElementById(`replies-${commentId}`);
+      const button = event.currentTarget;
+
+      if (!repliesContainer || !button) return;
+
+      // Toggle visibility classes
       repliesContainer.classList.toggle('show');
       button.classList.toggle('active');
-      
+
       const repliesText = button.querySelector('.replies-text');
       const repliesCount = repliesContainer.querySelectorAll('.reply-item').length;
-      
+
+      // Update button text
       if (repliesContainer.classList.contains('show')) {
         repliesText.textContent = `Hide ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}`;
       } else {
         repliesText.textContent = `View ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}`;
       }
     }
-  }
+
   </script>
 
   <!-- Cookie Consent Banner -->
