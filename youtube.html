@@ -1581,78 +1581,87 @@
   }
 
   // Display comments with replies
-  function displayComments() {
-    const commentsList = document.getElementById('commentsList');
-    
-    if (allLoadedComments.length === 0) {
-      commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 1.5rem;">No comments yet. Be the first to share your feedback!</p>';
-      return;
-    }
-    
-    commentsList.innerHTML = allLoadedComments.map(comment => {
-      const date = new Date(comment.created_at);
-      const formattedDate = date.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-      
-      const repliesCount = comment.replies ? comment.replies.length : 0;
-      const viewRepliesBtn = repliesCount > 0 ? `
-        <button class="view-replies-btn" onclick="toggleReplies('${comment.id}')">
-          <span class="replies-text">View ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}</span>
-          <span class="arrow">▼</span>
-        </button>
-      ` : '';
-      
-      const repliesHTML = comment.replies && comment.replies.length > 0 ? `
-        <div class="replies-container" id="replies-${comment.id}">
-          ${comment.replies.map(reply => {
-            const replyDate = new Date(reply.created_at);
-            const formattedReplyDate = replyDate.toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'short', 
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            });
-            return `
-              <div class="reply-item">
-                <div class="comment-header">
-                  <div class="comment-author-info">
-                    <span class="comment-author">${escapeHtml(reply.name)}</span>
-                    <span class="comment-email">${maskEmail(reply.email)}</span>
+    function displayComments() {
+      const commentsList = document.getElementById('commentsList');
+
+      if (allLoadedComments.length === 0) {
+        commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 1.5rem;">No comments yet. Be the first to share your feedback!</p>';
+        return;
+      }
+
+      commentsList.innerHTML = allLoadedComments.map(comment => {
+        const date = new Date(comment.created_at);
+        const formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+
+        const repliesCount = comment.replies ? comment.replies.length : 0;
+
+        const viewRepliesBtn = repliesCount > 0 ? `
+          <button class="view-replies-btn" data-comment-id="${comment.id}" onclick="toggleReplies(event, '${comment.id}')">
+            <span class="replies-text">View ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}</span>
+            <span class="arrow">▼</span>
+          </button>
+        ` : '';
+
+        const repliesHTML = (comment.replies && comment.replies.length > 0) ? `
+          <div class="replies-container" id="replies-${comment.id}">
+            ${comment.replies.map(reply => {
+              const replyDate = new Date(reply.created_at);
+              const formattedReplyDate = replyDate.toLocaleDateString('en-US', {
+                year: 'numeric', month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+              });
+
+              return `
+                <div class="reply-item" itemscope itemtype="https://schema.org/CreativeWork">
+                  <div itemscope itemtype="https://schema.org/Comment" itemprop="comment">
+                    <div class="comment-header">
+                      <div class="comment-author-info">
+                        <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                          <span itemprop="name">${escapeHtml(reply.name)}</span>
+                        </span>
+                        <span class="comment-email">${maskEmail(reply.email)}</span>
+                      </div>
+                      <time class="comment-date" datetime="${reply.created_at}" itemprop="datePublished">${formattedReplyDate}</time>
+                    </div>
+                    <div class="comment-text" itemprop="text">${escapeHtml(reply.comment)}</div>
                   </div>
-                  <time class="comment-date" datetime="${reply.created_at}">${formattedReplyDate}</time>
                 </div>
-                <p class="comment-text">${escapeHtml(reply.comment)}</p>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      ` : '';
+              `;
+            }).join('')}
+          </div>
+        ` : '';
+
       
-      return `
-        <article class="comment-item" data-comment-id="${comment.id}" itemscope itemtype="https://schema.org/Comment">
-          <div class="comment-header">
-            <div class="comment-author-info">
-              <span class="comment-author" itemprop="author">${escapeHtml(comment.name)}</span>
-              <span class="comment-email">${maskEmail(comment.email)}</span>
+        return `
+          <div class="comment-item" data-comment-id="${comment.id}" itemscope itemtype="https://schema.org/CreativeWork">
+            <div itemscope itemtype="https://schema.org/Comment" itemprop="comment">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">${escapeHtml(comment.name)}</span>
+                  </span>
+                  <span class="comment-email">${maskEmail(comment.email)}</span>
+                </div>
+                <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
+              </div>
+
+              <div class="comment-text" itemprop="text">${escapeHtml(comment.comment)}</div>
+
+              <div class="comment-actions">
+                <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>
+                ${viewRepliesBtn}
+              </div>
+
+              ${repliesHTML}
             </div>
-            <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
           </div>
-          <p class="comment-text" itemprop="text">${escapeHtml(comment.comment)}</p>
-          <div class="comment-actions">
-            <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>
-            ${viewRepliesBtn}
-          </div>
-          ${repliesHTML}
-        </article>
-      `;
-    }).join('');
-  }
+        `;
+      }).join('');
+    }
+
 
   // Update view more button
   function updateViewMoreButton() {
