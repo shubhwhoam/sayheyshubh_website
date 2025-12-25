@@ -23,6 +23,36 @@ function requestTick() {
 
 window.addEventListener('scroll', requestTick, { passive: true });
 
+// Function to handle viewing secure notes
+async function handleViewNotes(noteId, noteTitle) {
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    alert('Please sign in to view notes');
+    return;
+  }
+
+  try {
+    const token = await user.getIdToken();
+    const response = await fetch(`/secure-notes/${noteId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await response.json();
+    if (data.success && data.previewUrl) {
+      window.open(data.previewUrl, '_blank');
+    } else {
+      // If not unlocked, you might trigger the payment modal here
+      console.error('Failed to fetch preview URL:', data.error);
+      alert(data.error || 'Failed to access notes. They might need to be unlocked first.');
+    }
+  } catch (error) {
+    console.error('Error viewing notes:', error);
+    alert('An error occurred while trying to view the notes.');
+  }
+}
+
 // Mobile navigation toggle
 document.addEventListener('DOMContentLoaded', function() {
   const navToggle = document.querySelector('.nav-toggle');
