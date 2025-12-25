@@ -16,11 +16,12 @@
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>First Semester | SayHeyShubh</title>
-  <meta name="description" content="BSc Zoology First Semester detailed notes pdf, practical files, Du bsc zoology latest syallbus, previous year questions with solutions and reference books" />
+  <title>BSc Zoology First Semester Notes | SayHeyShubh</title>
+  <meta name="description" content="Download detailed BSc Zoology First Semester notes for Delhi University (DU). Covers Non-chordates, Cell Biology, and Ecology with PYQs and practical files." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
+    /* ... [Keep your existing CSS] ... */
     .subject-dropdown {
       margin-bottom: 1.5rem;
       border: 2px solid #e2e8f0;
@@ -65,8 +66,7 @@
     }
     .unit-item {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column; /* Changed for description layout */
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #f1f5f9;
       transition: all 0.3s ease;
@@ -78,10 +78,24 @@
       background: #f8fafc;
       transform: translateX(5px);
     }
+    .unit-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
     .unit-title {
       font-weight: 500;
       color: #2d3748;
       flex: 1;
+    }
+    /* SEO: New Description Style */
+    .unit-desc {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.4rem;
+      line-height: 1.4;
+      max-width: 90%;
     }
     .unit-buttons {
       display: flex;
@@ -308,7 +322,7 @@
   </header>
 
   <main class="container">
-    <h2 class="section-title">📖 First Semester Notes</h2>
+    <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology First Semester Notes (DU)</h1>
 
     <div style="text-align: center; margin-bottom: 2rem;">
       <a href="first-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to First Year</a>
@@ -322,7 +336,7 @@
           📄 Download Syllabus PDF
         </a>
       </div>
-      <p>(DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, (DSC-3) Concepts of Ecology</p>
+      <p>Comprehensive notes for (DSC-1) Non Chordata, (DSC-2) Cell Biology, and (DSC-3) Ecology.</p>
     </div>
 
     <div style="display: grid; gap: 1.5rem;">
@@ -334,76 +348,86 @@
         </div>
         <div class="units-content">
           <div class="unit-item">
-            <span class="unit-title">Unit I: Introduction to Non-chordates </span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/watch?v=FMTwnbzEWAg" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-1-dsc-1', 'Unit I: Introduction to Non-chordates')" class="download-btn">📥 View Notes</button>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit I: Introduction to Non-chordates </span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/watch?v=FMTwnbzEWAg" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-1-dsc-1', 'Unit I: Introduction to Non-chordates')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Covers general characteristics and classification of non-chordates up to classes.</p>
           </div>
+          
           <div class="unit-item">
-            <span class="unit-title">Unit II: Protista </span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/WD--edvmkNs" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-2-dsc-1', 'Unit II: Protista')" class="download-btn">📥 View Notes</button>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit II: Protista </span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/WD--edvmkNs" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-2-dsc-1', 'Unit II: Protista')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Porifera</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/oi0GWkKAvlk" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-3-dsc-1', 'Unit III: Porifera')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Cnidaria and Ctenophora</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-4-dsc-1', 'Unit IV: Cnidaria and Ctenophora')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit V: Platyhelminthes and Nemathelminthes</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-5-dsc-1', 'Unit V: Platyhelminthes and Nemathelminthes')" class="download-btn">📥 View Notes</button>
-            </div>
+            <p class="unit-desc">Study of Protozoa, locomotion, nutrition, and reproduction in Protists.</p>
           </div>
 
           <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1t9sE-3ZXbLCgpHOH64flODnkMQkwChYH/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit III: Porifera</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/oi0GWkKAvlk" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-3-dsc-1', 'Unit III: Porifera')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Canal system in sponges, skeleton, and classification of Porifera.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit IV: Cnidaria and Ctenophora</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-4-dsc-1', 'Unit IV: Cnidaria and Ctenophora')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Polymorphism in Cnidaria, coral reefs, and general characters of Ctenophora.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit V: Platyhelminthes and Nemathelminthes</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-5-dsc-1', 'Unit V: Platyhelminthes and Nemathelminthes')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Life cycles of Fasciola, Taenia, and Ascaris; parasitic adaptations.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1t9sE-3ZXbLCgpHOH64flODnkMQkwChYH/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+            <p class="unit-desc">Quick revision summary for DSC-1 Non-chordates.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1FvKcjvFbxgzPebupYxlWBtsBnoT1y7T9/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1FvKcjvFbxgzPebupYxlWBtsBnoT1y7T9/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
             </div>
+            <p class="unit-desc">DU previous year question papers (PYQ) for semester exams.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📋 <b>Complete Practical File</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1ZmdFCq_PCLsvqfkdTkZZ5JMYGuPEcSJR/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">📋 <b>Complete Practical File</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1ZmdFCq_PCLsvqfkdTkZZ5JMYGuPEcSJR/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
             </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📓 <b>Barnes, R.D. - Invertebrate Zoology</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1jPF_3baikEQQtbZOfihOnYqrX2uqJEVW/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📘 <b>INVERTEBRATES KOTPAL</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1fNjmaQuok51sg1w7wpingqZrWCIm6ihk/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📕 <b>SS lal invertebrate</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1ICJ6M_AKVJnnBFrlhLDFQKKzpiwZnaUV/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
+            <p class="unit-desc">Handwritten practical file including spotted specimens and slides.</p>
           </div>
         </div>
       </div>
@@ -415,71 +439,97 @@
         </div>
         <div class="units-content">
           <div class="unit-item">
-            <span class="unit-title">Unit I: Overview of Cells and Plasma membrane</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/gPlUwau5cwE" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-1-dsc-2', 'Unit I: Overview of Cells')" class="download-btn">📥 View Notes</button>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit I: Overview of Cells and Plasma membrane</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/gPlUwau5cwE" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-1-dsc-2', 'Unit I: Overview of Cells')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit II: Endomembrane System</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/watch?v=dNWq3hZ1xoI" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-2-dsc-2', 'Unit II: Endomembrane System')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Cytoskeleton </span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/j8rt3Aenk04" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-3-dsc-2', 'Unit III: Cytoskeleton')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Nucleus  </span>
-            <div class="unit-buttons">
-              <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-4-dsc-2', 'Unit IV: Nucleus')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit V: Cell Division</span>
-            <div class="unit-buttons">
-              <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-5-dsc-2', 'Unit V: Cell Division')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit VI: Introduction to Cell Signaling </span>
-            <div class="unit-buttons">
-              <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-6-dsc-2', 'Unit VI: Cell Signaling')" class="download-btn">📥 View Notes</button>
-            </div>
+            <p class="unit-desc">Prokaryotic vs Eukaryotic cells, Fluid Mosaic Model, and transport mechanisms.</p>
           </div>
 
           <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1bEM7QBj61aXqt8_jcnVuSHLqhnjs4cJx/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit II: Endomembrane System</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/watch?v=dNWq3hZ1xoI" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-2-dsc-2', 'Unit II: Endomembrane System')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Structure and function of ER, Golgi apparatus, Lysosomes, and Vacuoles.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit III: Cytoskeleton </span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/j8rt3Aenk04" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-3-dsc-2', 'Unit III: Cytoskeleton')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Microtubules, microfilaments, and intermediate filaments.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit IV: Nucleus  </span>
+              <div class="unit-buttons">
+                <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-4-dsc-2', 'Unit IV: Nucleus')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Nuclear envelope, chromatin structure, and nucleolus.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit V: Cell Division</span>
+              <div class="unit-buttons">
+                <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-5-dsc-2', 'Unit V: Cell Division')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Cell cycle regulation, Mitosis, and Meiosis detailed phases.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit VI: Introduction to Cell Signaling </span>
+              <div class="unit-buttons">
+                <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-6-dsc-2', 'Unit VI: Cell Signaling')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">GPCR pathways, cAMP signaling, and signal transduction basics.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1bEM7QBj61aXqt8_jcnVuSHLqhnjs4cJx/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+            <p class="unit-desc">Quick revision notes for Cell Biology.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1dyKeN4vFNPheIXowUQoZ6No6L1CSa6xy/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1dyKeN4vFNPheIXowUQoZ6No6L1CSa6xy/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
             </div>
+            <p class="unit-desc">DU PYQs for Cell Biology exams.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📋 <b>Complete Practical File</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1bluVO_HSwxM6ZokVmEM4rBjXlMPBKVFq/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">📋 <b>Complete Practical File</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1bluVO_HSwxM6ZokVmEM4rBjXlMPBKVFq/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
             </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📘 <b>Cooper 8th Edition</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1xBrzSHzjyNnUfUjCAgeiKDRuAEkSQdtP/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
+             <p class="unit-desc">Practical file covering mitosis, meiosis stages, and staining techniques.</p>
           </div>
         </div>
       </div>
@@ -491,84 +541,99 @@
         </div>
         <div class="units-content">
           <div class="unit-item">
-            <span class="unit-title">Unit I: Introduction to Ecology</span>
-            <div class="unit-buttons">
-              <a href="https://youtu.be/0QyVX0lVcMM" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-1-dsc-3', 'Unit I: Introduction to Ecology')" class="download-btn">📥 View Notes</button>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit I: Introduction to Ecology</span>
+              <div class="unit-buttons">
+                <a href="https://youtu.be/0QyVX0lVcMM" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-1-dsc-3', 'Unit I: Introduction to Ecology')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit II: Population</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/HO20RmosDmA" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-2-dsc-3', 'Unit II: Population')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Species Interactions</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/OE-KRF798Gc" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-3-dsc-3', 'Unit III: Species Interactions')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Community</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-4-dsc-3', 'Unit IV: Community')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit V: Ecosystem</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-5-dsc-3', 'Unit V: Ecosystem')" class="download-btn">📥 View Notes</button>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit VI: Applied Ecology</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-              <button onclick="handleViewNotes('unit-6-dsc-3', 'Unit VI: Applied Ecology')" class="download-btn">📥 View Notes</button>
-            </div>
+            <p class="unit-desc">History of ecology, autecology, synecology, and environmental factors.</p>
           </div>
 
           <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/19v2YFDTMkf07QxkPKfRv5KEdOw09vc9f/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit II: Population</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/HO20RmosDmA" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-2-dsc-3', 'Unit II: Population')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Population characteristics, growth curves (J & S shaped), and regulation.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit III: Species Interactions</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/OE-KRF798Gc" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-3-dsc-3', 'Unit III: Species Interactions')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Competition, predation, parasitism, commensalism, and mutualism.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit IV: Community</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-4-dsc-3', 'Unit IV: Community')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+             <p class="unit-desc">Community structure, ecotones, edge effect, and ecological succession.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit V: Ecosystem</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-5-dsc-3', 'Unit V: Ecosystem')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Energy flow, food chains, food webs, and ecological pyramids.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">Unit VI: Applied Ecology</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-6-dsc-3', 'Unit VI: Applied Ecology')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Biodiversity conservation, pollution, and environmental management.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/19v2YFDTMkf07QxkPKfRv5KEdOw09vc9f/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+             <p class="unit-desc">Ecology summary and key definitions.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1bUc-3dVC5FMrqsrixIj6kMZA4B6NRSqA/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1bUc-3dVC5FMrqsrixIj6kMZA4B6NRSqA/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
             </div>
+             <p class="unit-desc">Important questions from previous ecology exams.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📋 <b>Complete Practical File</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1Bb-x8b4YnYceEvZ_jBn_4D-QGMnER4gl/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+            <div class="unit-header-row">
+              <span class="unit-title">📋 <b>Complete Practical File</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1Bb-x8b4YnYceEvZ_jBn_4D-QGMnER4gl/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
             </div>
+             <p class="unit-desc">Quadrat method, soil analysis, and ecosystem models practicals.</p>
           </div>
-          <div class="unit-item">
-            <span class="unit-title">📘 <b>Krebs ecology</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1CzQPRNJ1z90m7dFOaICR1ZumrOQbY6MD/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📓 <b>Odum</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1GUq3ObhfXDw-NolTwJULKVu1H5QBKaDg/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📕 <b>Smith T. M. and Smith R. L. Elements of Ecology</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1wXQCHBRViPbFLwv6MfqVnn1LhfgYlfGq/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
-            </div>
-          </div>
+        </div>
       </div>
     </div>
   </main>

@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -11,18 +9,16 @@
 
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   
-  <!-- Razorpay Checkout -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Third Semester | SayHeyShubh</title>
-  <meta name="description" content="BSc Zoology Third Semester detailed notes pdf, practical files, Du bsc zoology latest syallbus, previous year questions with solutions and reference books" />
+  <title>BSc Zoology Third Semester Notes | SayHeyShubh</title>
+  <meta name="description" content="Download detailed BSc Zoology Third Semester notes for Delhi University (DU). Covers Chordates, Biochemistry, and Human Physiology with PYQs and practical files." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
@@ -81,10 +77,10 @@
         max-height: 9999px;
       }
 
-      .unit-item {
+    /* Modified Unit Item for Descriptions */
+    .unit-item {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #f1f5f9;
       transition: all 0.3s ease;
@@ -99,10 +95,26 @@
       transform: translateX(5px);
     }
 
+    .unit-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
     .unit-title {
       font-weight: 500;
       color: #2d3748;
       flex: 1;
+    }
+
+    /* SEO: New Description Style */
+    .unit-desc {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.4rem;
+      line-height: 1.4;
+      max-width: 90%;
     }
 
     .unit-buttons {
@@ -176,14 +188,20 @@
 
         .unit-item {
           padding: 0.8rem 1rem;
-          flex-direction: column;
+          /* Keep column layout for desc */
           align-items: flex-start;
           gap: 0.8rem;
+        }
+        
+        .unit-header-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
         }
 
         .unit-title {
           width: 100%;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0;
           font-size: 0.95rem;
           line-height: 1.4;
         }
@@ -438,13 +456,12 @@
   </header>
 
   <main class="container">
-    <h2 class="section-title">📖 Third Semester Notes</h2>
+    <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology Third Semester Notes & Study Material (DU)</h1>
 
     <div style="text-align: center; margin-bottom: 2rem;">
       <a href="second-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Second Year</a>
     </div>
 
-    <!-- Syllabus Section -->
     <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
         <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview</h3>
@@ -453,13 +470,11 @@
           📄 Download Syllabus PDF
         </a>
       </div>
-      <p>(DSC-7): Diversity of Chordates, (DSC-8): Biochemistry: Metabolic Processes, (DSC-9): Human Physiology- Life Sustaining Systems</p>
+      <p>Comprehensive notes for (DSC-7) Chordates, (DSC-8) Biochemistry, and (DSC-9) Human Physiology.</p>
     </div>
 
-    <!-- Subjects with Dropdown -->
     <div style="display: grid; gap: 1.5rem;">
 
-      <!-- (DSC-7): Diversity of Chordates -->
       <div class="subject-dropdown subject-color-1">
         <div class="subject-header" onclick="toggleSubject(this)">
           (DSC-7): Diversity of Chordates
@@ -467,186 +482,154 @@
         </div>
         <div class="units-content">
           <div class="unit-item">
-            <span class="unit-title">Unit I: Introduction to Chordates</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/Y1AiZj95MV0" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <button onclick="handleViewNotes('unit-1-dsc-7', 'Unit I: Introduction to Chordates')" class="download-btn">
-                📥 View Notes
-              </button>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit I: Introduction to Chordates</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/Y1AiZj95MV0" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-1-dsc-7', 'Unit I: Introduction to Chordates')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">General characteristics and evolutionary outline of Chordates.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit II: Protochordata</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1tbIjSh5Erb-a8wfXPlqwNgZU8oYu7D5W/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit II: Protochordata</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-2-dsc-7', 'Unit II: Protochordata')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Study of Urochordata (Herdmania) and Cephalochordata (Amphioxus).</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit III: Origin of Chordates</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1HYFPD9nZWH_tDRdUIGJn83h78UmYoyKP/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit III: Origin of Chordates</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-3-dsc-7', 'Unit III: Origin of Chordates')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+             <p class="unit-desc">Dipleurula concept and the Echinoderm theory of origin.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit IV: Agnatha</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/10IB3mOQ3jZKMwJ1B_nRqGYecS63jnmG5/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit IV: Agnatha</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-4-dsc-7', 'Unit IV: Agnatha')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">General characters of Cyclostomata (Petromyzon and Myxine).</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit V: Pisces</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1WCdSy9lHYmyJTjcEwj9M2R08DYM-uHsn/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit V: Pisces</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-5-dsc-7', 'Unit V: Pisces')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Migration, osmoregulation, and parental care in fishes.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit VI: Amphibia</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/15THgjaNBu04bN2p5aWKrFXLlQ2DEz383/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit VI: Amphibia</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-6-dsc-7', 'Unit VI: Amphibia')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Origin of Tetrapoda, parental care, and general characters.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit VII: Reptilia</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1QSTTQTBJ_m0WlHr0vH3PuUqJAyMI6xkD/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit VII: Reptilia</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-7-dsc-7', 'Unit VII: Reptilia')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Amniotes origin, terrestrial adaptations, and snake biting mechanism.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit VIII: Aves</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1vVbzeDjFH_5O2eVaP8Bm7RGHT5Shd0mD/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit VIII: Aves</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-8-dsc-7', 'Unit VIII: Aves')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+             <p class="unit-desc">Flight adaptations and mechanism of flight in birds.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit IX: Mammalia</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1K6tJ8P0JNfFSvSd_RsMHE0cgDG6Q-P6p/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit IX: Mammalia</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-9-dsc-7', 'Unit IX: Mammalia')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Prototheria, Metatheria, and Eutheria; dentition in mammals.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit X: Zoogeography</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1eQHdos9jHpAfkXvnNeJiPnaZTKtELgwI/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit X: Zoogeography</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-10-dsc-7', 'Unit X: Zoogeography')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Zoogeographical realms and their characteristic fauna.</p>
           </div>
           
           <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-               <a href="https://drive.google.com/file/d/1Pb2YOFKx348SIh_A6fZCHynZ59X3K_Su/view?usp=sharing" target="_blank" class="download-btn">
-                      📥 Download
-                    </a>
-                  </div>
+             <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                 <a href="https://drive.google.com/file/d/1Pb2YOFKx348SIh_A6fZCHynZ59X3K_Su/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+            <p class="unit-desc">Quick revision notes for Chordates.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1dI6Im7B5sov4foNCvtiVclaq6O1NbALB/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
+             <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1dI6Im7B5sov4foNCvtiVclaq6O1NbALB/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
               </div>
-
-              <div class="unit-item">
-                <span class="unit-title">📓 <b>J.Z.Young - THE LIFE OF
-                 VERTEBRATES</b> </span>
-                <div class="unit-buttons"> 
-                  <a href="https://drive.google.com/file/d/1NE5hRjE3Q1wAVdw-J8V9NQ46KlqFiB9y/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
-              </div>
-              
-              <div class="unit-item">
-                <span class="unit-title">📘 <b>VERTEBRATES KOTPAL</b> </span>
-                <div class="unit-buttons"> 
-                  <a href="https://drive.google.com/file/d/19i5jGQvOO836IpKcc3fVtO5ApZJjwUPy/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
-              </div>
-
-              <div class="unit-item">
-                <span class="unit-title">📓 <b>Parker & Hazwell</b> </span>
-                <div class="unit-buttons"> 
-                  <a href="https://drive.google.com/file/d/1zZbJtAruUt-rFipdaV-JAjNqBpg4Z5x0/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
-              </div>
-              
-              <div class="unit-item">
-                <span class="unit-title">📕 <b>SS lal Vertebrate</b> </span>
-                <div class="unit-buttons"> 
-                  <a href="https://drive.google.com/file/d/1aU6X41Cmiof8Z9XfBHBwPdLeEbm8uVwa/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
-              </div>
-
-              <div class="unit-item">
-                <span class="unit-title">📘 <b>Kenneth V. Kardong - Vertebrates</b> </span>
-                <div class="unit-buttons"> 
-                  <a href="https://drive.google.com/file/d/1VJCjB9oWGY2VD087BZpIcFoPVPfKzQHJ/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
-              </div>
-              
             </div>
+            <p class="unit-desc">DU PYQs for Chordates semester exams.</p>
           </div>
-          
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">📓 <b>J.Z.Young - THE LIFE OF VERTEBRATES</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1NE5hRjE3Q1wAVdw-J8V9NQ46KlqFiB9y/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+            <p class="unit-desc">Classic textbook for vertebrate zoology.</p>
+          </div>
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">📘 <b>VERTEBRATES KOTPAL</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/19i5jGQvOO836IpKcc3fVtO5ApZJjwUPy/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+             <p class="unit-desc">Essential reading for Indian university syllabus.</p>
+          </div>
         </div>
       </div>
 
-      <!-- (DSC-8): Biochemistry: Metabolic Processes -->
       <div class="subject-dropdown subject-color-2">
         <div class="subject-header" onclick="toggleSubject(this)">
           (DSC-8): Biochemistry: Metabolic Processes
@@ -654,75 +637,71 @@
         </div>
         <div class="units-content">
           <div class="unit-item">
-            <span class="unit-title">Unit I: Carbohydrate Metabolism</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/0wRoUUG7VnY" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1Ftua7qAvzJT9TCKElWWzd6Y1K8M9zED4/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+            <div class="unit-header-row">
+              <span class="unit-title">Unit I: Carbohydrate Metabolism</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/0wRoUUG7VnY" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-1-dsc-8', 'Unit I: Carbohydrate Metabolism')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit II: Lipid Metabolism</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/612LeHxPbI4" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/10DkaF0-Rve3-mRGClHJbPH169JySDesS/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Protein Metabolism</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1pfwln_CDWwt-7gcKjSnmKgARXj_Ui4ts/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Oxidative Phosphorylation</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1KMKeQzySPiV4tHAUHbCQxmD_f-qFGASi/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit V: Liver as a Major Metabolic Hub</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1_CJvRucOfdswiRwyq0jiwrA9zxc78rVL/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
+             <p class="unit-desc">Glycolysis, Citric Acid Cycle, Gluconeogenesis, and Glycogen metabolism.</p>
           </div>
 
-         
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">Unit II: Lipid Metabolism</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/612LeHxPbI4" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-2-dsc-8', 'Unit II: Lipid Metabolism')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Beta-oxidation of fatty acids and synthesis of lipids.</p>
+          </div>
+
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">Unit III: Protein Metabolism</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-3-dsc-8', 'Unit III: Protein Metabolism')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+             <p class="unit-desc">Transamination, Deamination, and Urea Cycle.</p>
+          </div>
+
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">Unit IV: Oxidative Phosphorylation</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-4-dsc-8', 'Unit IV: Oxidative Phosphorylation')" class="download-btn">📥 View Notes</button>
+              </div>
+            </div>
+            <p class="unit-desc">Electron Transport Chain (ETC) and ATP synthesis mechanism.</p>
+          </div>
+
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">Unit V: Liver as a Major Metabolic Hub</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <p class="unit-desc">Role of liver in carbohydrate, lipid, and protein metabolism integration.</p>
+          </div>
+
+          <div class="unit-item">
+             <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1_CJvRucOfdswiRwyq0jiwrA9zxc78rVL/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+             <p class="unit-desc">DU PYQs for Biochemistry exams.</p>
+          </div>
         </div>
       </div>
 
-      <!-- (DSC-9): Human Physiology- Life Sustaining Systems -->
       <div class="subject-dropdown subject-color-3">
         <div class="subject-header" onclick="toggleSubject(this)">
           (DSC-9): Human Physiology- Life Sustaining Systems
@@ -730,83 +709,80 @@
         </div>
         <div class="units-content">
           <div class="unit-item">
-            <span class="unit-title">Unit I: Physiology of Digestion</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/17bSuq6jw60NuDAyuapDAtw3_dcmb5Uo8/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit I: Physiology of Digestion</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-1-dsc-9', 'Unit I: Physiology of Digestion')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Digestion and absorption of carbohydrates, proteins, and fats.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit II: Blood</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/FXSX5jme5nA" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/15kMuItps9dpeKm-Yfjw9NJBAOOgpEnZg/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit II: Blood</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/FXSX5jme5nA" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-2-dsc-9', 'Unit II: Blood')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Blood composition, clotting mechanism, and blood groups.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit III: Physiology of Heart</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/shorts/5jQz30tNhVw" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/12Ti_WQRbrJMZoOv_HKCCWjlkrRX44txF/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit III: Physiology of Heart</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/shorts/5jQz30tNhVw" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-3-dsc-9', 'Unit III: Physiology of Heart')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Structure of heart, cardiac cycle, and ECG.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit IV: Physiology of Respiration</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/144M5o2abJWcGelV5Tqwm25vgmhxkCLEI/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit IV: Physiology of Respiration</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-4-dsc-9', 'Unit IV: Physiology of Respiration')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+             <p class="unit-desc">Mechanism of breathing, gas exchange, and transport of gases.</p>
           </div>
+
           <div class="unit-item">
-            <span class="unit-title">Unit V: Renal Physiology</span>
-            <div class="unit-buttons">
-              <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">
-                ▶️ Watch Video
-              </a>
-              <a href="https://drive.google.com/file/d/1QN4wip58cbhKJOsHlbuCKaP1pgGxDhw3/view?usp=sharing" target="_blank" class="download-btn">
-                📥 Download Notes
-              </a>
+             <div class="unit-header-row">
+              <span class="unit-title">Unit V: Renal Physiology</span>
+              <div class="unit-buttons">
+                <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
+                <button onclick="handleViewNotes('unit-5-dsc-9', 'Unit V: Renal Physiology')" class="download-btn">📥 View Notes</button>
+              </div>
             </div>
+            <p class="unit-desc">Structure of nephron, urine formation, and counter-current mechanism.</p>
           </div>
           
           <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-               <a href="https://drive.google.com/file/d/163PCYrEtybqjEcd6SNN97R3eK2rLrPHG/view?usp=sharing" target="_blank" class="download-btn">
-                      📥 Download
-                    </a>
-                  </div>
+             <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                 <a href="https://drive.google.com/file/d/163PCYrEtybqjEcd6SNN97R3eK2rLrPHG/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+             <p class="unit-desc">Quick revision notes for Human Physiology.</p>
           </div>
           <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <a href="https://drive.google.com/file/d/1Wa4ZubnAXy7LnDvru47o09ukQO9vdFPi/view?usp=sharing" target="_blank" class="download-btn">
-                    📥 Download
-                  </a>
-                </div>
+             <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/1Wa4ZubnAXy7LnDvru47o09ukQO9vdFPi/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+              </div>
+            </div>
+             <p class="unit-desc">DU PYQs for Physiology semester exams.</p>
           </div>
-
-
-          
         </div>
       </div>
-
     </div>
   </main>
 
@@ -863,20 +839,11 @@
   <script>
   document.addEventListener("DOMContentLoaded", function() {
     const bubble = document.getElementById("doubts-bubble");
-
-    // Show bubble 0.8s after button appears
-    setTimeout(() => {
-      bubble.classList.add("show");
-    }, 800);
-
-    // Hide bubble after 3 seconds
-    setTimeout(() => {
-      bubble.classList.remove("show");
-    }, 3800);
+    setTimeout(() => { bubble.classList.add("show"); }, 800);
+    setTimeout(() => { bubble.classList.remove("show"); }, 3800);
   });
   </script>
 
-  <!-- Payment Modal -->
   <div id="paymentModal" class="payment-modal">
     <div class="payment-container">
       <div class="payment-header">
@@ -920,14 +887,13 @@
     let RAZORPAY_KEY_ID = null;
 
     // Payment system variables
-    let currentNoteUrl = '';
+    let currentNoteId = ''; 
     let currentNoteTitle = '';
     let selectedPrice = 20;
 
     // Expose callback immediately so page-protection.js can call it
     window.initializePaymentForAuthenticatedUser = function(userId) {
       localStorage.setItem('userId', userId);
-      // If DOM is ready, initialize immediately; otherwise wait for DOMContentLoaded
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
           loadPurchasedNotesAndUpdateButtons();
@@ -955,35 +921,12 @@
       }
     }
 
-    // Initialize button URLs when page loads
-    function initializeButtonUrls() {
-      const downloadButtons = document.querySelectorAll('a.download-btn');
-      downloadButtons.forEach(button => {
-        // Store the original URL in a data attribute for later reference
-        if (button.href && button.href !== '#' && !button.getAttribute('data-original-url')) {
-          // Ensure we have the full URL, not relative path
-          const fullUrl = button.href.startsWith('http') ? button.href : new URL(button.href, window.location.origin).href;
-          button.setAttribute('data-original-url', fullUrl);
-        }
-      });
-    }
-
     function initializePaymentSystem() {
-      // Initialize button URLs to preserve original Google Drive links
-      initializeButtonUrls();
-      
-      // SECURITY: Lock all notes immediately by default to prevent unauthorized access
-      lockAllNotesButtons();
-      
-      // Check for existing authentication (fallback for already-authenticated users)
       const storedUserId = localStorage.getItem('userId');
       if (storedUserId && window.currentUserData && auth.currentUser) {
-        // User is already authenticated, load purchased notes
         loadPurchasedNotesAndUpdateButtons();
       }
-      // Otherwise, wait for initializePaymentForAuthenticatedUser callback from page-protection.js
 
-      // Add price selection handlers
       document.querySelectorAll('.price-option').forEach(option => {
         option.addEventListener('click', () => {
           document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
@@ -992,41 +935,9 @@
         });
       });
 
-      // Close modal when clicking outside
       document.getElementById('paymentModal').addEventListener('click', (e) => {
         if (e.target.id === 'paymentModal') {
           hidePaymentPopup();
-        }
-      });
-    }
-
-    function lockAllNotesButtons() {
-      const downloadButtons = document.querySelectorAll('a.download-btn');
-      
-      downloadButtons.forEach(button => {
-        // Skip if this is a reference book download or other free content
-        const unitTitle = button.closest('.unit-item').querySelector('.unit-title').textContent;
-        if (unitTitle.includes('📘') || unitTitle.includes('📕') || unitTitle.includes('📓') || 
-            unitTitle.includes('Previous year') || unitTitle.includes('Cheat sheet')) {
-          // Keep reference books free
-          return;
-        }
-
-        // Only lock "Download Notes" buttons (which are the view notes buttons)
-        if (button.textContent.includes('Download Notes') || button.textContent.includes('📥 Download Notes')) {
-          const originalUrl = button.href;
-          const noteTitle = unitTitle;
-
-          // Convert to locked button
-          button.href = '#';
-          button.textContent = '🔒 Unlock Notes';
-          button.style.background = '#f59e0b';
-          button.style.color = 'white';
-          
-          button.addEventListener('click', function(e) {
-            e.preventDefault();
-            showPaymentPopup(originalUrl, noteTitle);
-          });
         }
       });
     }
@@ -1036,133 +947,105 @@
       if (!userId || !auth.currentUser) return;
 
       try {
-        // Get Firebase authentication token
         const idToken = await auth.currentUser.getIdToken();
-        
-        // Check purchases via API
+
         const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${idToken}`
-          }
+          headers: { 'Authorization': `Bearer ${idToken}` }
         });
 
         if (response.ok) {
           const data = await response.json();
           const purchasedNotes = data.purchasedNotes || [];
-          
-          // Update localStorage
+
           localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
-          
-          // Update button states
           updateButtonStates(purchasedNotes);
-        } else {
-          console.error('Failed to load purchases:', response.status);
-          lockAllNotesButtons();
         }
       } catch (error) {
         console.error('Error loading purchased notes:', error);
-        lockAllNotesButtons();
       }
     }
 
-    function updateButtonStates(purchasedNotes) {
-      console.log('Updating button states with purchased notes:', purchasedNotes);
-      const downloadButtons = document.querySelectorAll('a.download-btn');
-      
-      downloadButtons.forEach(button => {
-        const unitTitle = button.closest('.unit-item').querySelector('.unit-title').textContent;
-        
-        // Skip reference books and free content
-        if (unitTitle.includes('📘') || unitTitle.includes('📕') || unitTitle.includes('📓') || 
-            unitTitle.includes('Previous year') || unitTitle.includes('Cheat sheet')) {
-          return;
-        }
+    function updateButtonStates(purchasedIds) {
+      console.log('Purchased Note IDs:', purchasedIds);
 
-        // Only process "Download Notes" or "View Notes" buttons (check for locked buttons too)
-        if (button.textContent.includes('Download Notes') || button.textContent.includes('📥 Download Notes') ||
-            button.textContent.includes('View Notes') || button.textContent.includes('📥 View Notes') ||
-            button.textContent.includes('🔒 Unlock Notes')) {
-          
-          // Get the original URL from data attribute first, then try current href
-          let originalUrl = button.getAttribute('data-original-url');
-          
-          // If no data attribute, try to get it from current href or find it in the DOM
-          if (!originalUrl || originalUrl === '#') {
-            const currentHref = button.getAttribute('href');
-            if (currentHref && currentHref !== '#' && currentHref.includes('drive.google.com')) {
-              // Current href is a valid Google Drive link
-              originalUrl = currentHref.startsWith('http') ? currentHref : new URL(currentHref, window.location.origin).href;
-              button.setAttribute('data-original-url', originalUrl);
-            } else {
-              // Try to find the original URL from the unit structure
-              const parentUnit = button.closest('.unit-item');
-              if (parentUnit) {
-                // Look for Google Drive links in the same unit that aren't this button
-                const driveLinks = Array.from(parentUnit.querySelectorAll('a[href*="drive.google.com"]'))
-                  .filter(link => link !== button && !link.href.endsWith('#'));
-                if (driveLinks.length > 0) {
-                  originalUrl = driveLinks[0].href;
-                  button.setAttribute('data-original-url', originalUrl);
-                }
-              }
-            }
-          }
-          
-          console.log(`Checking button for ${unitTitle}:`, {
-            originalUrl,
-            isPurchased: originalUrl ? purchasedNotes.includes(originalUrl) : false,
-            currentText: button.textContent
-          });
-          
-          if (originalUrl && purchasedNotes.includes(originalUrl)) {
-            // Note is purchased - show as unlocked
-            const newButton = button.cloneNode(false); // Clone without children
-            newButton.href = originalUrl;
-            newButton.textContent = '✅ View Notes';
-            newButton.style.background = '#22c55e';
-            newButton.style.color = 'white';
-            newButton.style.cursor = 'pointer';
-            newButton.target = '_blank';
-            newButton.className = button.className; // Preserve CSS classes
-            newButton.setAttribute('data-original-url', originalUrl);
-            
-            // Remove any existing event listeners by replacing the element
-            button.replaceWith(newButton);
-            
-          } else {
-            // Note is not purchased - lock it
-            button.href = '#';
-            button.textContent = '🔒 Unlock Notes';
-            button.style.background = '#f59e0b';
-            button.style.color = 'white';
-            button.style.cursor = 'pointer';
-            
-            // Remove existing handlers and add payment popup handler
-            const newButton = button.cloneNode(true);
-            newButton.addEventListener('click', function(e) {
-              e.preventDefault();
-              showPaymentPopup(originalUrl, unitTitle);
-            });
-            button.replaceWith(newButton);
-          }
+      const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
+
+      secureButtons.forEach(button => {
+        const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'/);
+        if (!match) return;
+
+        const noteId = match[1];
+
+        if (purchasedIds.includes(noteId)) {
+          button.textContent = '✅ View Notes';
+          button.style.background = '#22c55e';
+          button.style.color = 'white';
+        } else {
+          button.textContent = '🔒 Unlock Notes';
+          button.style.background = '#f59e0b';
+          button.style.color = 'white';
         }
       });
     }
 
-    function showPaymentPopup(noteUrl, noteTitle) {
-      currentNoteUrl = noteUrl;
+    async function handleViewNotes(noteId, noteTitle) {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        alert('Please sign in to view notes');
+        return;
+      }
+
+      const btn = event.currentTarget || event.target;
+      const originalText = btn.textContent;
+
+      btn.textContent = 'Checking...';
+
+      try {
+        const token = await user.getIdToken();
+
+        const response = await fetch(`/.netlify/functions/secure-notes/${noteId}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.previewUrl) {
+          window.open(data.previewUrl, '_blank');
+          btn.textContent = '✅ View Notes';
+          btn.style.background = '#22c55e';
+
+          const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+          if (!localPurchases.includes(noteId)) {
+             localPurchases.push(noteId);
+             localStorage.setItem('purchasedNotes', JSON.stringify(localPurchases));
+          }
+
+        } else if (response.status === 403) {
+          btn.textContent = originalText;
+          showPaymentPopup(noteId, noteTitle);
+
+        } else {
+          alert('Error: ' + (data.error || 'Unknown error'));
+          btn.textContent = originalText;
+        }
+      } catch (error) {
+        console.error('Error viewing note:', error);
+        alert('Network error. Please try again.');
+        btn.textContent = originalText;
+      }
+    }
+
+    function showPaymentPopup(noteId, noteTitle) {
+      currentNoteId = noteId; 
       currentNoteTitle = noteTitle || 'BSc Zoology Notes';
 
       document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
       document.getElementById('paymentModal').classList.add('show');
 
-      // Reset to default price selection
       document.querySelectorAll('.price-option').forEach(option => {
         option.classList.remove('selected');
-        if (option.dataset.price === '20') {
-          option.classList.add('selected');
-        }
+        if (option.dataset.price === '20') option.classList.add('selected');
       });
       selectedPrice = 20;
     }
@@ -1173,58 +1056,24 @@
     }
 
     function previewNote() {
-      const previewContent = `📖 Preview of ${currentNoteTitle}:
-
-✅ Comprehensive handwritten notes
-✅ Key topics and concepts covered  
-✅ Diagrams and illustrations
-✅ Important questions and answers
-✅ Exam-focused content
-✅ High-quality PDF format
-
-This is just a preview. The full notes contain:
-• Detailed explanations of all topics
-• Step-by-step problem solutions  
-• Memory techniques and tips
-• Previous year questions analysis
-• Complete coverage of syllabus
-
-Pay ₹${selectedPrice} to unlock the complete notes!`;
-
-      alert(previewContent);
+      alert(`📖 Preview of ${currentNoteTitle}:\n\n✅ Comprehensive handwritten notes\n✅ Key topics covered\n✅ High-quality PDF\n\nPay ₹${selectedPrice} to unlock full access!`);
     }
 
     async function proceedToPayment() {
-      const userId = localStorage.getItem('userId');
-      const userName = localStorage.getItem('userName');
-      const userEmail = localStorage.getItem('userEmail');
+      const user = firebase.auth().currentUser;
+      if (!user) { alert('Please log in first'); return; }
 
-      if (!userId) {
-        alert('Please log in to continue with payment');
-        return;
-      }
-
-      // Check if user is authenticated
-      if (!auth.currentUser) {
-        alert('Please log in first');
-        return;
-      }
-
-      // Check if Razorpay SDK is loaded
       if (typeof Razorpay === 'undefined') {
-        alert('Payment system not loaded. Please refresh the page and try again.');
+        alert('Payment system not loaded. Refresh and try again.');
         return;
       }
 
       document.getElementById('paymentLoading').classList.add('show');
 
       try {
+        const idToken = await user.getIdToken();
         const amountInPaise = selectedPrice * 100;
-        
-        // Get Firebase authentication token
-        const idToken = await auth.currentUser.getIdToken();
-        
-        // Create order with backend
+
         const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
           headers: { 
@@ -1234,44 +1083,24 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
           body: JSON.stringify({
             amount: amountInPaise,
             noteTitle: currentNoteTitle,
-            noteUrl: currentNoteUrl
+            noteUrl: currentNoteId 
           })
         });
 
-        if (!orderResponse.ok) {
-          const errorText = await orderResponse.text();
-          let errorMessage;
-          try {
-            const errorData = JSON.parse(errorText);
-            errorMessage = errorData.error || 'Failed to create order';
-          } catch {
-            errorMessage = `Server error (${orderResponse.status}): ${errorText}`;
-          }
-          throw new Error(errorMessage);
-        }
-
         const orderData = await orderResponse.json();
-        if (!orderData.success) {
-          throw new Error(orderData.error || 'Failed to create order');
-        }
-        
+        if (!orderData.success) throw new Error(orderData.error || 'Failed to create order');
+
         const options = {
           key: RAZORPAY_KEY_ID || orderData.key,
           amount: orderData.amount,
           currency: orderData.currency,
           order_id: orderData.orderId,
-          name: 'SayHeyShubh - BSc Zoology Notes',
+          name: 'SayHeyShubh - Notes',
           description: `Unlock: ${currentNoteTitle}`,
           handler: async function (response) {
-            // Show immediate success feedback
-            document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>✅ Payment Successful!</h3><p>Unlocking your notes...</p></div>';
-            document.getElementById('paymentLoading').classList.add('show');
-            
+            document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>✅ Success!</h3><p>Unlocking...</p></div>';
+
             try {
-              // Get Firebase authentication token for verification
-              const idToken = await auth.currentUser.getIdToken();
-              
-              // Verify payment with backend
               const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
                 headers: { 
@@ -1282,74 +1111,39 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
                   signature: response.razorpay_signature,
-                  noteUrl: currentNoteUrl
+                  noteUrl: currentNoteId 
                 })
               });
 
-              if (!verifyResponse.ok) {
-                const errorText = await verifyResponse.text();
-                let errorMessage;
-                try {
-                  const errorData = JSON.parse(errorText);
-                  errorMessage = errorData.error || 'Payment verification failed';
-                } catch {
-                  errorMessage = `Verification error (${verifyResponse.status}): ${errorText}`;
-                }
-                throw new Error(errorMessage);
-              }
-
               const verifyResult = await verifyResponse.json();
-              
-              if (verifyResult.success && verifyResult.verified) {
-                // Payment verified - update success message
-                document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>🎉 Notes Unlocked!</h3><p>You can now access your purchased content!</p></div>';
-                
-                // Wait a moment for user to see the success message
+
+              if (verifyResult.success) {
+                document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>🎉 Unlocked!</h3></div>';
+
                 setTimeout(() => {
                   hidePaymentPopup();
-                  
-                  // Update UI immediately with local state
+
                   const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
-                  if (!purchasedNotes.includes(currentNoteUrl)) {
-                    purchasedNotes.push(currentNoteUrl);
+                  if (!purchasedNotes.includes(currentNoteId)) {
+                    purchasedNotes.push(currentNoteId);
                     localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
                   }
-                  
-                  // Update button states immediately
                   updateButtonStates(purchasedNotes);
-                  
-                  // Show success alert after modal closes
-                  setTimeout(() => {
-                    alert(`🎉 Success! ₹${selectedPrice} paid for ${currentNoteTitle}. Notes are now unlocked!`);
-                  }, 300);
-                  
-                  // Sync with server in background to ensure consistency
-                  setTimeout(() => {
-                    loadPurchasedNotesAndUpdateButtons().catch(error => {
-                      console.warn('Background purchase sync failed:', error);
-                    });
-                  }, 1000);
+
+                  alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
                 }, 1500);
-                
               } else {
-                document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #ef4444;"><h3>❌ Verification Failed</h3><p>Please contact support.</p></div>';
-                setTimeout(() => {
-                  hidePaymentPopup();
-                  alert('Payment verification failed. Please contact support.');
-                }, 2000);
+                 throw new Error('Verification failed');
               }
             } catch (error) {
-              console.error('Error verifying payment:', error);
-              document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #f59e0b;"><h3>⚠️ Processing Issue</h3><p>Payment successful, but verification needs manual check.</p></div>';
-              setTimeout(() => {
-                hidePaymentPopup();
-                alert('Payment was successful but verification failed. Please contact support with your payment details.');
-              }, 2000);
+              console.error(error);
+              alert('Payment successful but verification failed. Contact support.');
+              hidePaymentPopup();
             }
           },
           prefill: {
-            name: userName || '',
-            email: userEmail || '',
+             name: localStorage.getItem('userName') || '',
+             email: localStorage.getItem('userEmail') || ''
           },
           theme: { color: '#6366f1' },
           modal: {
@@ -1359,14 +1153,12 @@ Pay ₹${selectedPrice} to unlock the complete notes!`;
           }
         };
 
-        const razorpay = new Razorpay(options);
-        razorpay.open();
-        
-        document.getElementById('paymentLoading').classList.remove('show');
+        const rzp = new Razorpay(options);
+        rzp.open();
 
       } catch (error) {
-        console.error('Payment initialization error:', error);
-        alert('Failed to initialize payment. Please try again.');
+        console.error(error);
+        alert(error.message);
         document.getElementById('paymentLoading').classList.remove('show');
       }
     }
