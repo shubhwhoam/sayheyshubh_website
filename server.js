@@ -317,24 +317,18 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
 });
 
 // Serve static files - only for non-API routes
-app.use(express.static('.', {
-  index: false,
-  setHeaders: (res, filePath) => {
-    // Skip if it's an API route or secure notes endpoint
-    if (filePath.includes('/api/') || filePath.includes('/.netlify/') || filePath.includes('/secure-notes/')) {
-      return false;
-    }
-  }
-}));
-
-// Fallback for non-API routes
 app.use((req, res, next) => {
-  // Only handle non-API routes
   if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/') || req.path.startsWith('/secure-notes/')) {
     return next();
   }
-  
-  // Send index.html for any other missing files
+  express.static('.')(req, res, next);
+});
+
+// Fallback for non-API routes
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/') || req.path.startsWith('/secure-notes/')) {
+    return res.status(404).json({ success: false, error: 'API endpoint not found' });
+  }
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
