@@ -1,3 +1,4 @@
+/secure-notes/* /.netlify/functions/secure-notes  200
 /api/*  /.netlify/functions/:splat  200
 /notes   /notes.html   200
 /*      /index.html   200

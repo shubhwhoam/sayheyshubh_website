@@ -1,3 +1,5 @@
+const notesData = require('../../notes-data.json');
+
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
 
@@ -72,7 +74,13 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    const { amount, noteTitle, noteUrl } = JSON.parse(event.body);
+    let { amount, noteTitle, noteUrl } = JSON.parse(event.body);
+
+    // If noteUrl is a secure ID (like unit-1-dsc-1), get the real URL
+    if (notesData[noteUrl]) {
+        console.log(`Resolving secure ID ${noteUrl} to real URL`);
+        noteUrl = notesData[noteUrl];
+    }
     
     // Basic validation
     if (!amount || !noteTitle || !noteUrl) {
@@ -83,11 +91,11 @@ exports.handler = async (event, context) => {
       };
     }
     
-    if (!amount || amount < 500 || amount > 5000) {
+    if (!amount || amount < 1000 || amount > 5000) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Invalid amount. Must be between ₹5 and ₹50' })
+        body: JSON.stringify({ success: false, error: 'Invalid amount. Must be between ₹10 and ₹50' })
       };
     }
 

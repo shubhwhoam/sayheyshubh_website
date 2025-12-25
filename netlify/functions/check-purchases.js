@@ -1,3 +1,5 @@
+const notesData = require('../../notes-data.json');
+
 const admin = require('firebase-admin');
 
 // Initialize Firebase Admin with secure environment variables
@@ -75,20 +77,31 @@ exports.handler = async (event, context) => {
       .where('verified', '==', true)
       .get();
 
-    const purchasedNotes = [];
+    // 1. Collect all purchased File IDs (the XYZ part of drive.google.com/file/d/XYZ)
+    const purchasedFileIds = new Set();
     transactionsSnapshot.forEach(doc => {
       const data = doc.data();
       if (data.noteUrl) {
-        purchasedNotes.push(data.noteUrl);
+         const match = data.noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+         if (match) purchasedFileIds.add(match[1]);
       }
     });
+
+    // 2. Check which of our secure IDs correspond to these files
+    const ownedIds = [];
+    for (const [id, url] of Object.entries(notesData)) {
+        const match = url.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+        if (match && purchasedFileIds.has(match[1])) {
+            ownedIds.push(id);
+        }
+    }
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
-        purchasedNotes: purchasedNotes
+        purchasedNotes: ownedIds // Returns ['unit-1-dsc-1', etc.]
       })
     };
 
