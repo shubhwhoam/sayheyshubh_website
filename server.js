@@ -316,6 +316,28 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
   }
 });
 
+// Serve static files - only for non-API routes
+app.use(express.static('.', {
+  index: false,
+  setHeaders: (res, filePath) => {
+    // Skip if it's an API route or secure notes endpoint
+    if (filePath.includes('/api/') || filePath.includes('/.netlify/') || filePath.includes('/secure-notes/')) {
+      return false;
+    }
+  }
+}));
+
+// Fallback for non-API routes
+app.use((req, res, next) => {
+  // Only handle non-API routes
+  if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/') || req.path.startsWith('/secure-notes/')) {
+    return next();
+  }
+  
+  // Send index.html for any other missing files
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // Secure notes data (in a real app, this would be in a database)
 const secureNotesData = require('./notes-data.json');
 
@@ -344,9 +366,12 @@ app.get('/secure-notes/:noteId', async (req, res) => {
     const unlockedNotes = userData?.unlockedNotes || {};
     
     // Check if user has access to this note
-    // For free units, we can skip this check or use a separate whitelist
-    if (!unlockedNotes[noteId]) {
-      // Logic for free vs paid notes could go here
+    const isFree = noteId.startsWith('syllabus-') || noteId.startsWith('free-');
+    if (!isFree && !unlockedNotes[noteId]) {
+      return res.status(403).json({ 
+        success: false, 
+        error: 'Access denied - note not unlocked' 
+      });
     }
     
     // Convert Google Drive URL to preview mode
@@ -375,304 +400,6 @@ app.get('/secure-notes/:noteId', async (req, res) => {
          error: error.message || 'Failed to access notes'
        });
   }
-});
-
-// Migration endpoint to fix existing purchases (one-time use)
-app.post('/migrate-purchases', async (req, res) => {
-  try {
-    console.log('🔄 Starting migration of existing purchases...');
-    
-    // Function to extract proper noteSlug from Google Drive URL
-    function extractNoteSlug(noteUrl) {
-      if (noteUrl.includes('drive.google.com/file/d/')) {
-        const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-        return fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
-      } else {
-        return noteUrl.split('/').pop();
-      }
-    }
-    
-    // Get all completed transactions
-    const transactionsSnapshot = await db.collection('transactions')
-      .where('status', '==', 'completed')
-      .get();
-    
-    console.log(`📊 Found ${transactionsSnapshot.size} completed transactions`);
-    
-    // Group transactions by user
-    const userTransactions = {};
-    transactionsSnapshot.forEach(doc => {
-      const data = doc.data();
-      if (data.userId && data.noteUrl) {
-        if (!userTransactions[data.userId]) {
-          userTransactions[data.userId] = [];
-        }
-        userTransactions[data.userId].push(data);
-      }
-    });
-    
-    console.log(`👥 Found transactions for ${Object.keys(userTransactions).length} users`);
-    
-    // Process each user
-    let successCount = 0;
-    let errorCount = 0;
-    const migrationDetails = [];
-    
-    for (const [userId, transactions] of Object.entries(userTransactions)) {
-      try {
-        console.log(`🔧 Processing user: ${userId}`);
-        
-        // Build the correct unlockedNotes object
-        const unlockedNotes = {};
-        const userDetails = { userId, notes: [] };
-        
-        for (const transaction of transactions) {
-          const correctNoteSlug = extractNoteSlug(transaction.noteUrl);
-          unlockedNotes[correctNoteSlug] = true;
-          userDetails.notes.push({
-            noteSlug: correctNoteSlug,
-            originalUrl: transaction.noteUrl
-          });
-          console.log(`  ✅ Adding note: ${correctNoteSlug} from URL: ${transaction.noteUrl}`);
-        }
-        
-        // Update the user's document with correct unlockedNotes
-        const userRef = db.collection('users').doc(userId);
-        await userRef.set({
-          unlockedNotes: unlockedNotes
-        }, { merge: true });
-        
-        console.log(`  ✅ Updated ${Object.keys(unlockedNotes).length} notes for user ${userId}`);
-        migrationDetails.push(userDetails);
-        successCount++;
-        
-      } catch (error) {
-        console.error(`  ❌ Error processing user ${userId}:`, error);
-        migrationDetails.push({ userId, error: error.message });
-        errorCount++;
-      }
-    }
-    
-    console.log('🎉 Migration completed!');
-    console.log(`✅ Successfully processed: ${successCount} users`);
-    console.log(`❌ Errors: ${errorCount} users`);
-    
-    res.json({
-      success: true,
-      message: 'Migration completed successfully',
-      stats: {
-        totalTransactions: transactionsSnapshot.size,
-        usersProcessed: Object.keys(userTransactions).length,
-        successfulUsers: successCount,
-        errors: errorCount
-      },
-      details: migrationDetails
-    });
-    
-  } catch (error) {
-    console.error('💥 Migration failed:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Migration failed',
-      details: error.message
-    });
-  }
-});
-
-// Comment endpoints using Firebase Firestore
-// Get comments for a page with nested replies
-app.get('/api/comments/:page', async (req, res) => {
-  console.log(`[GET] /api/comments/${req.params.page} - Fetching comments from Firestore`);
-  try {
-    const { page } = req.params;
-    const limit = parseInt(req.query.limit) || 50;
-    const offset = parseInt(req.query.offset) || 0;
-    
-    // Get top-level comments (parentId is null)
-    const commentsRef = db.collection('comments')
-      .where('page', '==', page)
-      .where('parentId', '==', null)
-      .orderBy('createdAt', 'desc')
-      .limit(limit)
-      .offset(offset);
-    
-    const snapshot = await commentsRef.get();
-    
-    // Convert Firestore docs to array
-    const topComments = [];
-    snapshot.forEach(doc => {
-      topComments.push({
-        id: doc.id,
-        user_id: doc.data().userId,
-        name: doc.data().userName,
-        email: doc.data().userEmail,
-        comment: doc.data().comment,
-        created_at: doc.data().createdAt?.toDate?.() || new Date(),
-        parent_id: doc.data().parentId
-      });
-    });
-    
-    // Get all replies for these comments
-    const commentIds = topComments.map(comment => comment.id);
-    let replies = [];
-    
-    if (commentIds.length > 0) {
-      const repliesRef = db.collection('comments')
-        .where('parentId', 'in', commentIds)
-        .orderBy('createdAt', 'asc');
-      
-      const repliesSnapshot = await repliesRef.get();
-      repliesSnapshot.forEach(doc => {
-        replies.push({
-          id: doc.id,
-          user_id: doc.data().userId,
-          name: doc.data().userName,
-          email: doc.data().userEmail,
-          comment: doc.data().comment,
-          created_at: doc.data().createdAt?.toDate?.() || new Date(),
-          parent_id: doc.data().parentId
-        });
-      });
-    }
-    
-    // Organize replies under their parent comments
-    const commentsWithReplies = topComments.map(comment => ({
-      ...comment,
-      replies: replies.filter(reply => reply.parent_id === comment.id)
-    }));
-    
-    // Get total count of top-level comments
-    const countSnapshot = await db.collection('comments')
-      .where('page', '==', page)
-      .where('parentId', '==', null)
-      .count()
-      .get();
-    
-    res.json({
-      success: true,
-      comments: commentsWithReplies,
-      total: countSnapshot.data().count
-    });
-  } catch (error) {
-    console.error('Error fetching comments from Firestore:', error);
-    res.status(500).json({ success: false, error: 'Failed to fetch comments' });
-  }
-});
-
-// Post a new comment (requires authentication) using Firestore
-app.post('/api/comments/?', async (req, res) => {
-  console.log('[POST] /api/comments - Posting new comment to Firestore');
-  try {
-    // Verify authentication
-    const decodedToken = await verifyFirebaseToken(req.headers.authorization);
-    const authenticatedUserId = decodedToken.uid;
-    
-    const { comment, page, parentId } = req.body;
-    
-    // Validation
-    if (!comment || !page) {
-      return res.status(400).json({ 
-        success: false, 
-        error: 'Comment and page are required' 
-      });
-    }
-    
-    // Get user info from Firestore
-    const userDoc = await db.collection('users').doc(authenticatedUserId).get();
-    if (!userDoc.exists) {
-      return res.status(404).json({ 
-        success: false, 
-        error: 'User not found' 
-      });
-    }
-    
-    const userData = userDoc.data();
-    const userName = userData.name || decodedToken.name || 'Anonymous';
-    const userEmail = userData.email || decodedToken.email || '';
-    
-    // Sanitize inputs
-    const sanitizedComment = comment.trim().substring(0, 1000);
-    const sanitizedPage = page.substring(0, 50);
-    const sanitizedParentId = parentId || null;
-    
-    if (sanitizedComment.length < 3) {
-      return res.status(400).json({ 
-        success: false, 
-        error: 'Comment must be at least 3 characters' 
-      });
-    }
-    
-    // If this is a reply, verify parent comment exists
-    if (sanitizedParentId) {
-      const parentDoc = await db.collection('comments').doc(sanitizedParentId).get();
-      
-      if (!parentDoc.exists) {
-        return res.status(404).json({ 
-          success: false, 
-          error: 'Parent comment not found' 
-        });
-      }
-    }
-    
-    // Create new comment in Firestore
-    const commentData = {
-      userId: authenticatedUserId,
-      userName: userName,
-      userEmail: userEmail,
-      comment: sanitizedComment,
-      page: sanitizedPage,
-      parentId: sanitizedParentId,
-      createdAt: admin.firestore.FieldValue.serverTimestamp()
-    };
-    
-    const docRef = await db.collection('comments').add(commentData);
-    
-    // Get the created document to return it
-    const newCommentDoc = await docRef.get();
-    const newCommentData = newCommentDoc.data();
-    
-    res.json({
-      success: true,
-      comment: {
-        id: docRef.id,
-        user_id: newCommentData.userId,
-        name: newCommentData.userName,
-        email: newCommentData.userEmail,
-        comment: newCommentData.comment,
-        created_at: newCommentData.createdAt?.toDate?.() || new Date(),
-        parent_id: newCommentData.parentId
-      }
-    });
-  } catch (error) {
-    console.error('Error posting comment to Firestore:', error);
-    const statusCode = error.message && error.message.includes('authentication') ? 401 : 500;
-    res.status(statusCode).json({ 
-      success: false, 
-      error: error.message || 'Failed to post comment' 
-    });
-  }
-});
-
-// Serve static files - only for non-API routes
-app.use(express.static('.', {
-  index: false,
-  setHeaders: (res, filePath) => {
-    // Skip if it's an API route
-    if (filePath.includes('/api/') || filePath.includes('/.netlify/')) {
-      return false;
-    }
-  }
-}));
-
-// Fallback for non-API routes
-app.use((req, res, next) => {
-  // Only handle non-API routes
-  if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/')) {
-    return res.status(404).json({ error: 'API endpoint not found' });
-  }
-  
-  // Send index.html for any other missing files
-  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {

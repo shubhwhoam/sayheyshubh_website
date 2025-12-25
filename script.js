@@ -35,7 +35,8 @@ async function handleViewNotes(noteId, noteTitle) {
     const token = await user.getIdToken();
     const response = await fetch(`/secure-notes/${noteId}`, {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
       }
     });
 
