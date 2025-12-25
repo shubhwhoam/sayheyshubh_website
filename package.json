@@ -16,9 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "firebase-admin": "^13.5.0",
-    "pdf-poppler": "^0.2.1",
+    "express": "^4.22.1",
+    "firebase-admin": "^13.6.0",
+    "pdf-poppler": "^0.2.3",
     "razorpay": "^2.9.6"
   }
 }
