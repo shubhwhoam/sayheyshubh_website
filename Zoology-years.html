@@ -139,12 +139,79 @@
       background: linear-gradient(135deg, #4f46e5, #3730a3);
     }
 
+    .content-section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
 
     /* User Profile & Auth Styles */
-    .user-profile { position: absolute; top: 1rem; right: 1rem; background: white; padding: 0.8rem 1.2rem; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; align-items: center; gap: 0.8rem; }
-    .user-profile.show { display: flex; }
-    .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: #6366f1; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; }
-    .logout-btn { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 15px; cursor: pointer; }
+    .user-profile {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+
+    .user-profile.show {
+      display: flex;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .user-contact {
+      font-size: 0.75rem;
+      color: #718096;
+    }
+
+    .logout-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+    }
     @media (max-width: 768px) { .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-bottom: 1rem; } }
   </style>
 </head>
@@ -190,15 +257,25 @@
       <a href="youtube.html" class="back-to-youtube-btn">← Back to YouTube Page</a>
     </div>
 
-    <div id="mainContent">
-      <div id="yearSelection" class="content-section">
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">Select Academic Year ✍️</h2>
-        <div class="navigation-buttons">
-          <a href="first-year.html" class="nav-button">📖 First Year Notes</a>
-          <a href="second-year.html" class="nav-button">📖 Second Year Notes</a>
-          <a href="third-year.html" class="nav-button">📖 Third Year Notes</a>
+      <!-- Main Content Area -->
+      <div id="mainContent">
+        <!-- Year Selection (Initial View) -->
+        <div id="yearSelection" class="content-section">
+          <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">BSc Zoology Notes 📚 | Select Academic Year ✍️ </h2>
+          <div class="navigation-buttons">
+            <a href="zoology-first-year.html" class="nav-button">
+              📖 First Year Notes
+            </a>
+            <a href="zoology-second-year.html" class="nav-button">
+              📖 Second Year Notes 
+            </a>
+            <a href="zoology-third-year.html" class="nav-button">
+              📖 Third Year Notes
+            </a>
+          </div>
         </div>
-      </div>
+
+
     </div>
   </div>
 
