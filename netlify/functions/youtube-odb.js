@@ -3,18 +3,14 @@ const admin = require('firebase-admin');
 const fs = require('fs');
 const path = require('path');
 
-// 1. Initialize Firebase (Global Scope)
-// We wrap this in a try-catch to prevent immediate crash, but log it.
+// 1. Initialize Firebase (Robust Mode)
 try {
   if (!admin.apps.length) {
-    if (!process.env.FIREBASE_PRIVATE_KEY) {
-      console.error("Missing Env Var: FIREBASE_PRIVATE_KEY");
-    } else {
+    if (process.env.FIREBASE_PRIVATE_KEY) {
       admin.initializeApp({
         credential: admin.credential.cert({
           projectId: process.env.FIREBASE_PROJECT_ID,
           clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-          // Fix formatting for Netlify env vars
           privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
         })
       });
@@ -98,37 +94,31 @@ function renderCommentHtml(comment) {
 
 // --- MAIN HANDLER ---
 async function handler(event, context) {
+  // Use Robust Path Finding
+  const possiblePaths = [
+    path.resolve(__dirname, '../../youtube.html'),
+    path.resolve(__dirname, '../youtube.html'),
+    path.resolve('youtube.html'),
+    path.resolve('./youtube.html')
+  ];
+  let templatePath = possiblePaths.find(p => fs.existsSync(p));
+
+  // FAILSAFE 1: If template is missing, return simple error (or could redirect to home)
+  if (!templatePath) {
+    console.error("Template not found");
+    return { statusCode: 500, body: "Server Error: Template Missing" };
+  }
+
   try {
-    // 1. LOCATE TEMPLATE (Updated with Debugging Info)
-    const possiblePaths = [
-      path.resolve(__dirname, '../../youtube.html'),
-      path.resolve(__dirname, '../youtube.html'),
-      path.resolve('youtube.html'),
-      path.resolve('./youtube.html')
-    ];
-    let templatePath = possiblePaths.find(p => fs.existsSync(p));
-
-    // If not found, throw explicit error to see in browser
-    if (!templatePath) {
-      const currentDirFiles = fs.readdirSync(__dirname);
-      const rootFiles = fs.readdirSync(process.cwd());
-      throw new Error(`
-        Template 'youtube.html' not found!
-        Searched paths: ${possiblePaths.join(', ')}
-        Current Dir (__dirname): ${__dirname}
-        Files in Current Dir: ${currentDirFiles.join(', ')}
-        Root Dir (cwd): ${process.cwd()}
-        Files in Root: ${rootFiles.join(', ')}
-      `);
-    }
-
     let html = fs.readFileSync(templatePath, 'utf8');
 
-    // 2. CHECK FIREBASE KEYS (Fail Loudly)
-    if (!process.env.FIREBASE_PRIVATE_KEY) throw new Error("Missing Env Var: FIREBASE_PRIVATE_KEY");
-    if (!process.env.FIREBASE_CLIENT_EMAIL) throw new Error("Missing Env Var: FIREBASE_CLIENT_EMAIL");
+    // FAILSAFE 2: If keys are missing, just return the static HTML (Client-side will handle it)
+    if (!process.env.FIREBASE_PRIVATE_KEY) {
+      console.error("Missing Firebase Keys - Serving Static File");
+      return { statusCode: 200, headers: { "Content-Type": "text/html" }, body: html };
+    }
 
-    // 3. FETCH DATA
+    // Fetch Data
     const commentsRef = db.collection('comments')
       .where('page', '==', 'youtube')
       .where('parentId', '==', null)
@@ -137,7 +127,6 @@ async function handler(event, context) {
 
     const snapshot = await commentsRef.get();
 
-    // 4. PROCESS DATA
     const topComments = [];
     snapshot.forEach(doc => {
       topComments.push({
@@ -170,18 +159,14 @@ async function handler(event, context) {
       });
     }
 
-    // 5. INJECT HTML (Safe Regex Method)
+    // Inject HTML
     const commentsHtml = topComments.map(renderCommentHtml).join('');
-
-    // Update Title
     const countSnapshot = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).count().get();
     const titleText = `${countSnapshot.data().count} Student Reviews`;
 
-    // Replace Title safely
     html = html.replace(/<h3[^>]*id="commentsTitle"[^>]*>.*?<\/h3>/s, 
       `<h3 class="comments-title" id="commentsTitle">${titleText}</h3>`);
 
-    // Replace List Container Content safely
     const listRegex = /(<div[^>]*id="commentsList"[^>]*>)([\s\S]*?)(<\/div>)/i;
     if (listRegex.test(html)) {
       html = html.replace(listRegex, `$1${commentsHtml}$3`);
@@ -196,22 +181,13 @@ async function handler(event, context) {
     };
 
   } catch (error) {
-    console.error("ODB Critical Error:", error);
-    // DISPLAY ERROR ON SCREEN FOR DEBUGGING
+    console.error("ODB Error - Serving Fallback:", error);
+    // FAILSAFE 3: On any crash, return the original static file
+    // This ensures your site NEVER goes down.
     return {
-      statusCode: 500,
+      statusCode: 200,
       headers: { "Content-Type": "text/html" },
-      body: `
-        <div style="padding: 2rem; font-family: sans-serif; text-align: center; color: #333;">
-          <h1 style="color: #e11d48;">Server Rendering Error</h1>
-          <p>The server encountered an error while loading comments.</p>
-          <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 8px; text-align: left; margin: 1rem auto; max-width: 800px; overflow: auto; border: 2px solid #e11d48;">
-            <strong>Error Message:</strong> ${error.message}<br><br>
-            <strong>Stack Trace:</strong><pre>${error.stack}</pre>
-          </div>
-          <p><em>(Fix this error in Netlify Logs or Environment Variables)</em></p>
-        </div>
-      `
+      body: fs.readFileSync(templatePath, 'utf8')
     };
   }
 }
