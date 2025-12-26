@@ -1,3 +1,5 @@
+/youtube       /.netlify/builders/youtube-odb  200!
+/youtube.html  /.netlify/builders/youtube-odb  200!
 /notes/zoology/select-year  /zoology-years.html  200
 /notes/botany              /botany.html         200
 /notes/botany/select-year  /botany-years.html   200
