@@ -10,6 +10,13 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["firebase-admin", "razorpay"]
+  included_files = ["youtube.html"]
+
+[[redirects]]
+from = "/youtube"
+to = "/.netlify/builders/youtube-odb"
+status = 200
+force = true
 
 [[redirects]]
   from = "/api/*"
