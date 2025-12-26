@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BSc Botany Notes Selection</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <style>
+    /* Reusing styles */
+    .notes-container { max-width: 1200px; margin: 0 auto; padding: 2rem; min-height: 80vh; }
+    .nav-button { background: linear-gradient(135deg, #059669, #047857); color: white; border-radius: 15px; padding: 1.5rem; font-size: 1.1rem; font-weight: 600; border: none; width: 100%; cursor: pointer; display: block; text-align: center; margin-bottom: 1rem; text-decoration: none; }
+    .nav-button:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3); }
+    .content-section { display: none; text-align: center; }
+    .content-section.active { display: block; }
+    .back-btn { background: #64748b; margin-bottom: 2rem; width: auto; display: inline-block; padding: 0.5rem 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link"><div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="botany.html" class="active">Botany Hub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="notes-container">
+    <button onclick="goBack()" class="nav-button back-btn">← Back</button>
+
+    <div class="notes-header" style="text-align: center; margin-bottom: 2rem;">
+      <h1>🌿 BSc Botany Study Material</h1>
+      <p>Select your academic year to proceed</p>
+    </div>
+
+    <div id="yearSelect" class="content-section active">
+      <button onclick="selectYear('first')" class="nav-button">📖 First Year Notes</button>
+      <button onclick="selectYear('second')" class="nav-button">📖 Second Year Notes</button>
+      <button onclick="selectYear('third')" class="nav-button">📖 Third Year Notes</button>
+    </div>
+
+    <div id="semSelect" class="content-section">
+      <h2 id="semTitle" style="margin-bottom: 1.5rem;">Select Semester</h2>
+      <div id="semButtons"></div>
+    </div>
+
+    <div id="notesList" class="content-section">
+      <h2 style="margin-bottom: 1.5rem;">Available Notes</h2>
+      <div style="background: #f0fdf4; padding: 2rem; border-radius: 10px; border: 1px dashed #059669;">
+        <h3>🚧 Content Coming Soon</h3>
+        <p>We are currently uploading Botany notes. Check back shortly!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    // Simple SPA Logic
+    const views = ['yearSelect', 'semSelect', 'notesList'];
+    let historyStack = ['yearSelect'];
+
+    function showView(viewId) {
+      views.forEach(v => document.getElementById(v).classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+    }
+
+    function selectYear(year) {
+      historyStack.push('semSelect');
+      showView('semSelect');
+      const container = document.getElementById('semButtons');
+      container.innerHTML = ''; // Clear previous
+
+      // Generate Semester Buttons
+      const sems = year === 'first' ? ['Semester 1', 'Semester 2'] : 
+                   year === 'second' ? ['Semester 3', 'Semester 4'] : ['Semester 5', 'Semester 6'];
+
+      sems.forEach(sem => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-button';
+        btn.textContent = `📝 ${sem}`;
+        btn.onclick = () => selectSem(sem);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectSem(sem) {
+      historyStack.push('notesList');
+      showView('notesList');
+      // Here you would normally load the specific notes for that semester
+    }
+
+    function goBack() {
+      if (historyStack.length > 1) {
+        historyStack.pop();
+        showView(historyStack[historyStack.length - 1]);
+      } else {
+        window.location.href = 'botany.html';
+      }
+    }
+
+    // Auth Check
+    const auth = firebase.auth();
+    auth.onAuthStateChanged(user => {
+      if (!user) window.location.href = 'botany.html';
+    });
+  </script>
+</body>
+</html>

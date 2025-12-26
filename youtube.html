@@ -905,7 +905,8 @@
         <ul>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="notes.html">Notes</a></li> 
+          <li><a href="youtube.html" class="active">YouTube</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -2069,8 +2070,9 @@
       const notesButtons = document.querySelectorAll('.notes-btn');
       notesButtons.forEach(btn => {
         btn.textContent = '📚 Access My Notes';
+        // Point to the SPECIFIC Zoology years page now
         btn.onclick = function() {
-          window.location.href = '/notes';
+          window.location.href = 'zoology-years.html';
         };
       });
       

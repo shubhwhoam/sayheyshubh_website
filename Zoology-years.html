@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BSc Zoology Notes Selection | SayHeyShubh</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+
+  <style>
+    /* ... (All styles from your previous notes.html) ... */
+    /* I am including the critical layout styles here for completeness */
+    html { scroll-behavior: smooth; }
+    .notes-container { max-width: 1200px; margin: 0 auto; padding: 2rem; min-height: 80vh; }
+    .navigation-controls { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .back-to-youtube-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem; background: linear-gradient(135deg, #ff0000, #cc0000); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; width: fit-content; }
+    .notes-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 20px; }
+    .navigation-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .nav-button { background: linear-gradient(135deg, #349b31, #18179f); color: white; border-radius: 15px; padding: 1.5rem; font-size: 1.1rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: transform 0.3s; }
+    .nav-button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+    /* User Profile & Auth Styles */
+    .user-profile { position: absolute; top: 1rem; right: 1rem; background: white; padding: 0.8rem 1.2rem; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; align-items: center; gap: 0.8rem; }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: #6366f1; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .logout-btn { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 15px; cursor: pointer; }
+    @media (max-width: 768px) { .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-bottom: 1rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div>
+        </a>
+      </div>
+      <div class="nav-toggle"><span></span><span></span><span></span></div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="youtube.html" class="active">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="notes-container">
+    <div id="userProfile" class="user-profile">
+      <div class="user-avatar" id="userAvatar">S</div>
+      <div class="user-info">
+        <div class="user-name" id="userName">User</div>
+        <div class="user-contact" id="userContact">***</div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="notes-header">
+      <h1>DU Zoology Study Material 📚</h1>
+      <h2>Semester-wise PDFs, Practical files & PYQs</h2>
+      <p>Download unit-wise study material based strictly on the latest DU Zoology syllabus.</p>
+    </div>
+
+    <div class="navigation-controls">
+      <a href="youtube.html" class="back-to-youtube-btn">← Back to YouTube Page</a>
+    </div>
+
+    <div id="mainContent">
+      <div id="yearSelection" class="content-section">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">Select Academic Year ✍️</h2>
+        <div class="navigation-buttons">
+          <a href="first-year.html" class="nav-button">📖 First Year Notes</a>
+          <a href="second-year.html" class="nav-button">📖 Second Year Notes</a>
+          <a href="third-year.html" class="nav-button">📖 Third Year Notes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container"><p>© 2025 SayHeyShubh</p></div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Firebase Config reuse
+    const firebaseConfig = {
+      apiKey: "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
+      authDomain: "sayheyshubh-7051c.firebaseapp.com",
+      projectId: "sayheyshubh-7051c",
+      storageBucket: "sayheyshubh-7051c.firebasestorage.app",
+      messagingSenderId: "992127392588",
+      appId: "1:992127392588:web:62f89024de9d48c1144de9",
+      measurementId: "G-HMQJKKEKPE"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function checkAuthStatus() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (!isLoggedIn || isLoggedIn !== 'true') {
+        window.location.href = 'youtube.html?showLogin=true';
+        return false;
+      }
+      return true;
+    }
+
+    function loadUserProfile() {
+      const userName = localStorage.getItem('userName');
+      if (userName) {
+        document.getElementById('userName').textContent = userName;
+        document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+        document.getElementById('userProfile').classList.add('show');
+      }
+    }
+
+    async function logout() {
+      await auth.signOut();
+      localStorage.clear();
+      window.location.href = 'youtube.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (checkAuthStatus()) loadUserProfile();
+    });
+  </script>
+</body>
+</html>
