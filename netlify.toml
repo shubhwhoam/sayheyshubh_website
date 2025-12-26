@@ -19,6 +19,12 @@ status = 200
 force = true
 
 [[redirects]]
+from = "/youtube.html"
+to = "/.netlify/builders/youtube-odb"
+status = 200
+force = true
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/:splat"
   status = 200

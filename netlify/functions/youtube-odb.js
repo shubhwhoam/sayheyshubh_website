@@ -3,19 +3,27 @@ const admin = require('firebase-admin');
 const fs = require('fs');
 const path = require('path');
 
-// 1. Initialize Firebase (Same logic as your get-comments.js)
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
-    })
-  });
+// 1. Initialize Firebase (Global check)
+try {
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        // Handle both escaped and unescaped newlines for reliability
+        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
+      })
+    });
+  }
+} catch (e) {
+  console.error("Firebase Init Error:", e);
 }
+
 const db = admin.firestore();
 
-// Helper: Mask Email (Matches your script.js logic)
+// --- HELPER FUNCTIONS ---
+
+// Helper: Mask Email
 function maskEmail(email) {
   if (!email || !email.includes('@')) return '***@***.com';
   const [user, domain] = email.split('@');
@@ -23,7 +31,7 @@ function maskEmail(email) {
   return user.slice(0, 2) + '***@' + domain;
 }
 
-// Helper: Escape HTML (Security & formatting)
+// Helper: Escape HTML
 function escapeHtml(text) {
   if (!text) return '';
   return text
@@ -42,6 +50,7 @@ function renderCommentHtml(comment) {
     hour: '2-digit', minute: '2-digit'
   });
 
+  // Render Replies
   const repliesHTML = (comment.replies && comment.replies.length > 0) ? `
     <div class="replies-container" id="replies-${comment.id}">
       ${comment.replies.map(reply => {
@@ -70,7 +79,7 @@ function renderCommentHtml(comment) {
     </div>
   ` : '';
 
-  // Calculate replies count for button text
+  // Render "View Replies" Button
   const repliesCount = comment.replies ? comment.replies.length : 0;
   const viewRepliesBtn = repliesCount > 0 ? `
     <button class="view-replies-btn" data-comment-id="${comment.id}" onclick="toggleReplies(event, '${comment.id}')">
@@ -102,16 +111,50 @@ function renderCommentHtml(comment) {
   `;
 }
 
-// Main Handler
+// --- MAIN HANDLER ---
+
 async function handler(event, context) {
   try {
-    // 1. Read the static HTML template
-    // We resolve from the function directory back to the root
-    const templatePath = path.resolve(__dirname, '../../youtube.html');
-    let html = fs.readFileSync(templatePath, 'utf8');
+    // ---------------------------------------------------------
+    // THE FIX: Robust Path Finding for youtube.html
+    // ---------------------------------------------------------
+    const possiblePaths = [
+      path.resolve(__dirname, '../../youtube.html'), // Standard Netlify Function path
+      path.resolve(__dirname, '../youtube.html'),    // Alternative
+      path.resolve('youtube.html'),                  // Root relative
+      path.resolve('./youtube.html')                 // Current dir relative
+    ];
 
-    // 2. Fetch Comments (Simplified Logic from your API)
-    // Get top 20 comments for SEO (Pagination isn't needed for the static bot view)
+    let templatePath = null;
+    let html = "";
+
+    // Loop through paths until we find the file
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) {
+        templatePath = p;
+        break;
+      }
+    }
+
+    if (!templatePath) {
+      // Fallback: If we genuinely can't find the file, return a simple error 
+      // instead of crashing effectively so you can debug
+      console.error(`Template youtube.html not found. Searched: ${possiblePaths.join(', ')}`);
+      return { statusCode: 500, body: "Error: youtube.html template not found in deployment." };
+    }
+
+    // Read the file content
+    html = fs.readFileSync(templatePath, 'utf8');
+
+
+    // ---------------------------------------------------------
+    // 2. Fetch Data from Firebase
+    // ---------------------------------------------------------
+    if (!process.env.FIREBASE_PRIVATE_KEY) {
+      throw new Error("Missing Env Var: FIREBASE_PRIVATE_KEY");
+    }
+
+    // Get Top 20 Comments (Enough for SEO)
     const commentsRef = db.collection('comments')
       .where('page', '==', 'youtube')
       .where('parentId', '==', null)
@@ -120,12 +163,12 @@ async function handler(event, context) {
 
     const snapshot = await commentsRef.get();
 
-    // Process comments
+    // Process Comments into a clean array
     const topComments = [];
     snapshot.forEach(doc => {
       topComments.push({
         id: doc.id,
-        name: doc.data().userName,
+        name: doc.data().userName || 'Student',
         email: doc.data().userEmail,
         comment: doc.data().comment,
         created_at: doc.data().createdAt?.toDate?.() || new Date(),
@@ -133,16 +176,10 @@ async function handler(event, context) {
       });
     });
 
-    // Fetch replies for these comments (Batch fetch)
+    // Fetch Replies (Batch fetch for efficiency)
     const commentIds = topComments.map(c => c.id);
     if (commentIds.length > 0) {
-      // In a real app, chunk this if > 10 IDs. Assuming < 10 for top 20 limit or handled simply.
-      // For ODB simplicity, let's just fetch all replies for the page or just the relevant ones.
-      // To keep it robust, we'll fetch replies where parentId is in our list.
-
-      // Note: Firestore 'in' limit is 10. We'll do a simple loop or just skip deep reply rendering for SEO if complex.
-      // Better approach for SEO: Just fetch all replies for the page (if not huge) or just skip for now.
-      // Let's implement the chunking correctly to be safe:
+      // Simple chunking for Firestore 'in' query limit (max 10)
       const chunks = [];
       for (let i = 0; i < commentIds.length; i += 10) {
         chunks.push(commentIds.slice(i, i + 10));
@@ -158,7 +195,7 @@ async function handler(event, context) {
           allReplies.push({
             id: doc.id,
             parentId: doc.data().parentId,
-            name: doc.data().userName,
+            name: doc.data().userName || 'Student',
             email: doc.data().userEmail,
             comment: doc.data().comment,
             created_at: doc.data().createdAt?.toDate?.() || new Date()
@@ -166,65 +203,66 @@ async function handler(event, context) {
         });
       }
 
-      // Attach replies to parents
+      // Attach replies to the correct parents
       topComments.forEach(parent => {
         parent.replies = allReplies.filter(r => r.parentId === parent.id);
       });
     }
 
-    // 3. Generate HTML String
+    // ---------------------------------------------------------
+    // 3. Generate HTML & Inject
+    // ---------------------------------------------------------
     const commentsHtml = topComments.map(renderCommentHtml).join('');
 
-    // Get total count for the title
+    // Update Title with Count
     const countSnapshot = await db.collection('comments')
       .where('page', '==', 'youtube')
       .where('parentId', '==', null)
       .count()
       .get();
     const totalCount = countSnapshot.data().count;
-
-    // 4. Inject into Template
-    // Replace the Title
     const titleText = totalCount === 1 ? '1 Student Review' : `${totalCount} Student Reviews`;
+
+    // Replace the Title
     html = html.replace(
       '<h3 class="comments-title" id="commentsTitle">Loading comments...</h3>',
       `<h3 class="comments-title" id="commentsTitle">${titleText}</h3>`
     );
 
-    // Replace the List Container content
-    // We match the specific HTML structure of your empty container
-    const listRegex = /<div class="comments-list" id="commentsList">\s*\s*<\/div>/;
-    const newListHtml = `<div class="comments-list" id="commentsList">${commentsHtml}</div>`;
+    // Inject the Comments List
+    // We search for the specific ID and append the content after it
+    if (html.includes('id="commentsList">')) {
+       html = html.replace('id="commentsList">', `id="commentsList">${commentsHtml}`);
 
-    // If regex doesn't match due to whitespace differences, fallback to string replacement of the ID
-    if (listRegex.test(html)) {
-      html = html.replace(listRegex, newListHtml);
-    } else {
-      // Fallback: simpler replacement
-      html = html.replace('id="commentsList">', `id="commentsList">${commentsHtml}`);
-      // Note: This leaves the closing div and comment, but browsers handle extra text fine. 
-      // For cleanliness, regex is better, but this ensures it works if whitespace changes.
+       // Clean up the "Loading" placeholder if it exists inside the div in the source file
+       // This regex removes whitespace + optional "Loading..." comment/text inside the div
+       html = html.replace(/<div class="comments-list" id="commentsList">[\s\S]*?<\/div>/, 
+          `<div class="comments-list" id="commentsList">${commentsHtml}</div>`);
     }
 
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "text/html",
-      },
+      headers: { "Content-Type": "text/html" },
       body: html,
     };
 
   } catch (error) {
     console.error("ODB Error:", error);
-    // Fallback: return the original file if something breaks, so the site never goes down
-    const templatePath = path.resolve(__dirname, '../../youtube.html');
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "text/html" },
-      body: fs.readFileSync(templatePath, 'utf8')
-    };
+
+    // Fallback: return the original static file if something breaks
+    // This ensures the site never goes down, even if the function fails.
+    // We re-use the path finding logic briefly or default to standard.
+    try {
+        const fallbackPath = path.resolve(__dirname, '../../youtube.html');
+        return {
+            statusCode: 200,
+            headers: { "Content-Type": "text/html" },
+            body: fs.readFileSync(fallbackPath, 'utf8')
+        };
+    } catch (e) {
+        return { statusCode: 500, body: "Critical Error: " + error.message };
+    }
   }
 }
 
-// Wrap with builder for ODB (Caching)
 exports.handler = builder(handler);
