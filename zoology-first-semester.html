@@ -139,6 +139,79 @@
     .subject-color-2 .subject-header { background: linear-gradient(135deg, #10b981, #059669); }
     .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
 
+    /* Mobile optimizations for smooth transitions */
+    @media (max-width: 768px) {
+      .subject-dropdown {
+        margin-bottom: 1rem;
+      }
+
+      .subject-header {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .units-content {
+        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .units-content.expanded {
+        max-height: 1000px;
+      }
+
+      .unit-item {
+        padding: 0.8rem 1rem;
+        /* Keep column layout for desc */
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+
+      .unit-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .unit-title {
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .unit-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .download-btn, .watch-btn, .coming-soon {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .units-content.expanded {
+        max-height: 9999px;
+      }
+
+      .unit-item {
+        padding: 0.7rem 0.8rem;
+      }
+
+      .unit-title {
+        font-size: 0.9rem;
+        word-break: break-word;
+      }
+
+      .download-btn, .watch-btn, .coming-soon {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
+      }
+    }
+
     /* Payment Popup Styles */
     .payment-modal {
       position: fixed;
