@@ -1534,28 +1534,63 @@
     textarea.focus();
   }
 
-  // Load comments
-  async function loadComments() {
-    try {
-      const endpoints = getApiEndpoints();
-      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=0`);
-      const data = await response.json();
-      
-      if (data.success) {
-        totalComments = data.total;
-        allLoadedComments = data.comments;
-        currentOffset = data.comments.length;
-        
-        displayComments();
+    // Modified loadComments to respect Server-Side Rendered content
+    async function loadComments() {
+      const commentsList = document.getElementById('commentsList');
+
+      // 1. HYDRATION CHECK:
+      // If we have 0 loaded comments in memory, but the HTML list is NOT empty,
+      // it means the Server (ODB) already did the job!
+      if (allLoadedComments.length === 0 && commentsList.children.length > 0 && !commentsList.innerText.includes('Unable to load')) {
+        console.log('Server-side comments detected. Skipping initial fetch.');
+
+        // Update our internal counters based on what's already on the screen
+        const serverItems = commentsList.querySelectorAll('.comment-item');
+        currentOffset = serverItems.length;
+
+        // Try to grab the total count from the title text (e.g., "13 Student Reviews")
+        const titleText = document.getElementById('commentsTitle').textContent;
+        const match = titleText.match(/(\d+)/);
+        if (match) totalComments = parseInt(match[1]);
+
         updateViewMoreButton();
-        updateCommentsTitle();
+        return; // STOP! Don't fetch again. Keep the real comments.
       }
-    } catch (error) {
-      console.error('Error loading comments:', error);
-      document.getElementById('commentsTitle').textContent = 'Comments';
-      document.getElementById('commentsList').innerHTML = '<p style="text-align: center; color: #94a3b8;">Unable to load comments. Please try again later.</p>';
+
+      // 2. STANDARD FETCH (Only runs if list is empty or user clicked "Load More")
+      try {
+        const endpoints = getApiEndpoints();
+        const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
+        const data = await response.json();
+
+        if (data.success) {
+          totalComments = data.total;
+
+          // If it's a "Load More" action, append. Otherwise, replace.
+          if (currentOffset > 0) {
+             allLoadedComments = [...allLoadedComments, ...data.comments];
+          } else {
+             allLoadedComments = data.comments;
+          }
+
+          currentOffset = allLoadedComments.length;
+
+          displayComments(); // Renders the list from scratch using JS data
+          updateViewMoreButton();
+          updateCommentsTitle();
+        }
+      } catch (error) {
+        console.error('Error loading comments:', error);
+
+        // 3. SAFETY CHECK:
+        // Only show the error message if the list is COMPLETELY EMPTY.
+        // If we have old comments on screen, it's better to show them than an error.
+        if (commentsList.children.length === 0) {
+          document.getElementById('commentsTitle').textContent = 'Comments';
+          commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8;">Unable to load comments. Please try again later.</p>';
+        }
+      }
     }
-  }
 
   // Load more comments
   async function loadMoreComments() {
