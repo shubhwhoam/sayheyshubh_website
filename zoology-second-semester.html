@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zoology Second Semester | SayHeyShubh</title>
-  <meta name="description" content="BSc Zoology Second Semester detailed study notes" />
+  <title>BSc Zoology Second Semester Notes | SayHeyShubh</title>
+  <meta name="description" content="Download detailed BSc Zoology Second Semester notes for Delhi University (DU). Covers Non-chordates, Cell Biology, and Ecology with PYQs and practical files." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
-    /* Existing styles remain unchanged */
+    /* ... [Keep your existing CSS] ... */
     .subject-dropdown {
       margin-bottom: 1.5rem;
       border: 2px solid #e2e8f0;
@@ -30,12 +29,10 @@
       overflow: hidden;
       transition: all 0.3s ease;
     }
-
     .subject-dropdown:hover {
       border-color: #6366f1;
       box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1);
     }
-
     .subject-header {
       background: linear-gradient(135deg, #6366f1, #4f46e5);
       color: white;
@@ -48,60 +45,62 @@
       font-size: 1.1rem;
       transition: all 0.3s ease;
     }
-
     .subject-header:hover {
       background: linear-gradient(135deg, #4f46e5, #3730a3);
     }
-
     .expand-icon {
       font-size: 1.2rem;
       transition: transform 0.3s ease;
     }
-
     .expand-icon.rotated {
       transform: rotate(180deg);
     }
-
     .units-content {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease;
       background: white;
     }
-
     .units-content.expanded {
-      max-height: 800px;
+      max-height: 9999px;
     }
-
     .unit-item {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column; /* Changed for description layout */
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #f1f5f9;
       transition: all 0.3s ease;
     }
-
     .unit-item:last-child {
       border-bottom: none;
     }
-
     .unit-item:hover {
       background: #f8fafc;
       transform: translateX(5px);
     }
-
+    .unit-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
     .unit-title {
       font-weight: 500;
       color: #2d3748;
       flex: 1;
     }
-
+    /* SEO: New Description Style */
+    .unit-desc {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.4rem;
+      line-height: 1.4;
+      max-width: 90%;
+    }
     .unit-buttons {
       display: flex;
       gap: 0.75rem;
     }
-
     .download-btn, .watch-btn {
       padding: 0.5rem 1rem;
       border: none;
@@ -115,45 +114,265 @@
       align-items: center;
       gap: 0.5rem;
     }
-
-    .download-btn {
+    a.download-btn {
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
     }
-
+    button.download-btn {
+        background: linear-gradient(135deg, #f59e0b, #d97706); 
+        color: white;
+      }
+    }
     .download-btn:hover {
       background: linear-gradient(135deg, #059669, #047857);
       transform: translateY(-1px);
     }
-
     .watch-btn {
       background: linear-gradient(135deg, #ef4444, #dc2626);
       color: white;
     }
-
     .watch-btn:hover {
       background: linear-gradient(135deg, #dc2626, #b91c1c);
       transform: translateY(-1px);
     }
-
-    .coming-soon {
-      background: #fbbf24;
-      color: #92400e;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
     .subject-color-1 .subject-header { background: linear-gradient(135deg, #6366f1, #4f46e5); }
     .subject-color-2 .subject-header { background: linear-gradient(135deg, #10b981, #059669); }
     .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
 
-  
+    /* Mobile optimizations for smooth transitions */
+    @media (max-width: 768px) {
+      .subject-dropdown {
+        margin-bottom: 1rem;
+      }
+
+      .subject-header {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .units-content {
+        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .units-content.expanded {
+        max-height: 1000px;
+      }
+
+      .unit-item {
+        padding: 0.8rem 1rem;
+        /* Keep column layout for desc */
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+
+      .unit-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .unit-title {
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+
+      .unit-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .download-btn, .watch-btn, .coming-soon {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .units-content.expanded {
+        max-height: 9999px;
+      }
+
+      .unit-item {
+        padding: 0.7rem 0.8rem;
+      }
+
+      .unit-title {
+        font-size: 0.9rem;
+        word-break: break-word;
+      }
+
+      .download-btn, .watch-btn, .coming-soon {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
+      }
+    }
+
+    /* Payment Popup Styles */
+    .payment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .payment-modal.show {
+      display: flex;
+    }
+    .payment-container {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    .payment-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .payment-header h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+    }
+    .payment-header p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    .close-payment {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .close-payment:hover {
+      opacity: 1;
+    }
+    .payment-body {
+      padding: 2rem;
+    }
+    .note-details {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .note-title {
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .price-selection {
+      margin-bottom: 2rem;
+    }
+    .price-selection h3 {
+      margin-bottom: 1rem;
+      color: #4a5568;
+      font-size: 1rem;
+    }
+    .price-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .price-option {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    .price-option:hover {
+      background: #edf2f7;
+      border-color: #cbd5e0;
+    }
+    .price-option.selected {
+      background: #6366f1;
+      color: white;
+      border-color: #6366f1;
+    }
+    .price-option.recommended {
+      position: relative;
+      background: #22c55e;
+      color: white;
+      border-color: #22c55e;
+    }
+    .payment-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .payment-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    .cancel-btn {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+    .cancel-btn:hover {
+      background: #cbd5e0;
+    }
+    .preview-btn {
+      background: #6366f1;
+      color: white;
+    }
+    .preview-btn:hover {
+      background: #4f46e5;
+    }
+    .pay-btn {
+      background: #22c55e;
+      color: white;
+    }
+    .pay-btn:hover {
+      background: #16a34a;
+    }
+    .payment-loading {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+      background: #f0f9ff;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .payment-loading.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
-  
+ 
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
@@ -182,171 +401,170 @@
   </header>
 
   <main class="container">
-    <h2 class="section-title">📖 BSc Zoology Second Semester Notes</h2>
+    <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology Second Semester Notes (DU)</h1>
 
     <div style="text-align: center; margin-bottom: 2rem;">
       <a href="zoology-first-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Zoology First Year</a>
     </div>
 
-    <!-- Syllabus Section -->
     <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview</h3>
-        <a href="https://drive.google.com/file/d/13qmXMQZXrJUE8nASIHorqLA6ieUyIx-l/view?usp=sharing" target="_blank" 
+        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview </h3>
+        <a href="https://drive.google.com/file/d/1J0hJYZ9Hq8_i_WkPOtYg3pNXBKqAEMhI/view?usp=sharing" target="_blank" 
            style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
           📄 Download Syllabus PDF
         </a>
       </div>
-      <p>(DSC-4): Non-Chordata: Coelomates, (DSC-5): Fundamentals of Biomolecules, and (DSC-6): Human Physiology-Control and Coordination Systems</p>
+      <p>Comprehensive notes for (DSC-4): Non-Chordata: Coelomates, (DSC-5): Fundamentals of Biomolecules, and (DSC-6): Human Physiology-Control and Coordination Systems</p>
     </div>
 
-    <!-- Subjects with Dropdown -->
-    <div style="display: grid; gap: 1.5rem;">
+      <!-- Subjects with Dropdown -->
+      <div style="display: grid; gap: 1.5rem;">
 
-      <!-- (DSC-4): Non-Chordata: Coelomates -->
-      <div class="subject-dropdown subject-color-1">
-        <div class="subject-header" onclick="toggleSubject(this)">
-          (DSC-4): Non-Chordata: Coelomates
-          <span class="expand-icon">▼</span>
+        <!-- (DSC-4): Non-Chordata: Coelomates -->
+        <div class="subject-dropdown subject-color-1">
+          <div class="subject-header" onclick="toggleSubject(this)">
+            (DSC-4): Non-Chordata: Coelomates
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="units-content">
+            <div class="unit-item">
+              <span class="unit-title">Unit I: Annelida</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit II: Arthropoda and Onychophora</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit III: Mollusca</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit IV: Echinodermata</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="units-content">
-          <div class="unit-item">
-            <span class="unit-title">Unit I: Annelida</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit II: Arthropoda and Onychophora</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Mollusca</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Echinodermata</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- (DSC-5): Fundamentals of Biomolecules -->
-      <div class="subject-dropdown subject-color-2">
-        <div class="subject-header" onclick="toggleSubject(this)">
-          (DSC-5): Fundamentals of Biomolecules
-          <span class="expand-icon">▼</span>
+        <!-- (DSC-5): Fundamentals of Biomolecules -->
+        <div class="subject-dropdown subject-color-2">
+          <div class="subject-header" onclick="toggleSubject(this)">
+            (DSC-5): Fundamentals of Biomolecules
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="units-content">
+            <div class="unit-item">
+              <span class="unit-title">Unit I: Carbohydrates</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit II: Lipids</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit III: Proteins</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit IV: Nucleic Acids</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit V: Enzymes</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="units-content">
-          <div class="unit-item">
-            <span class="unit-title">Unit I: Carbohydrates</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit II: Lipids</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Proteins</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Nucleic Acids</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit V: Enzymes</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- (DSC-6): Human Physiology-Control and Coordination Systems -->
-      <div class="subject-dropdown subject-color-3">
-        <div class="subject-header" onclick="toggleSubject(this)">
-          (DSC-6): Human Physiology-Control and Coordination Systems
-          <span class="expand-icon">▼</span>
+        <!-- (DSC-6): Human Physiology-Control and Coordination Systems -->
+        <div class="subject-dropdown subject-color-3">
+          <div class="subject-header" onclick="toggleSubject(this)">
+            (DSC-6): Human Physiology-Control and Coordination Systems
+            <span class="expand-icon">▼</span>
+          </div>
+          <div class="units-content">
+            <div class="unit-item">
+              <span class="unit-title">Unit I: Nervous System and Sense Organs</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit II: Muscle Physiology</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit III: Endocrine System</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">Unit IV: Reproductive System</span>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+
+            <div class="unit-item">
+              <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+            <div class="unit-item">
+              <span class="unit-title">📝 <b>Previous year questions</b> </span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="units-content">
-          <div class="unit-item">
-            <span class="unit-title">Unit I: Nervous System and Sense Organs</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit II: Muscle Physiology</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit III: Endocrine System</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">Unit IV: Reproductive System</span>
-            <div class="unit-buttons">
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          
-          <div class="unit-item">
-            <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-          <div class="unit-item">
-            <span class="unit-title">📝 <b>Previous year questions</b> </span>
-            <div class="unit-buttons"> 
-              <span class="coming-soon">Coming Soon</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
     </div>
   </main>
@@ -405,17 +623,353 @@
   <script>
   document.addEventListener("DOMContentLoaded", function() {
     const bubble = document.getElementById("doubts-bubble");
-
-    // Show bubble 0.8s after button appears
-    setTimeout(() => {
-      bubble.classList.add("show");
-    }, 800);
-
-    // Hide bubble after 3 seconds
-    setTimeout(() => {
-      bubble.classList.remove("show");
-    }, 3800);
+    setTimeout(() => { bubble.classList.add("show"); }, 800);
+    setTimeout(() => { bubble.classList.remove("show"); }, 3800);
   });
+  </script>
+
+  <div id="paymentModal" class="payment-modal">
+    <div class="payment-container">
+      <div class="payment-header">
+        <button class="close-payment" onclick="hidePaymentPopup()">&times;</button>
+        <h2>🔒 Unlock Study Notes</h2>
+        <p>Access premium BSc Zoology notes and study materials</p>
+      </div>
+
+      <div class="payment-body">
+        <div class="note-details">
+          <div class="note-title" id="paymentNoteTitle">Loading note...</div>
+          <p>Get instant access to comprehensive handwritten notes and study materials</p>
+        </div>
+
+        <div class="price-selection">
+          <h3>Choose your contribution amount:</h3>
+          <div class="price-options">
+            <div class="price-option" data-price="10">₹10</div>
+            <div class="price-option" data-price="15">₹15</div>
+            <div class="price-option recommended selected" data-price="20">₹20</div>
+            <div class="price-option" data-price="30">₹30</div>
+            <div class="price-option" data-price="50">₹50</div>
+          </div>
+        </div>
+
+        <div class="payment-actions">
+          <button class="payment-btn cancel-btn" onclick="hidePaymentPopup()">Cancel</button>
+          <button class="payment-btn preview-btn" onclick="previewNote()">Preview Notes</button>
+          <button class="payment-btn pay-btn" onclick="proceedToPayment()">Pay Now</button>
+        </div>
+
+        <div class="payment-loading" id="paymentLoading">
+          <p>Processing payment...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Razorpay key will be fetched from API
+    let RAZORPAY_KEY_ID = null;
+
+    // Payment system variables
+    let currentNoteId = ''; // Changed from currentNoteUrl
+    let currentNoteTitle = '';
+    let selectedPrice = 20;
+
+    // Expose callback immediately so page-protection.js can call it
+    window.initializePaymentForAuthenticatedUser = function(userId) {
+      localStorage.setItem('userId', userId);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          loadPurchasedNotesAndUpdateButtons();
+        });
+      } else {
+        loadPurchasedNotesAndUpdateButtons();
+      }
+    };
+
+    // Initialize payment system when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializePaymentSystem();
+      fetchRazorpayConfig();
+    });
+
+    async function fetchRazorpayConfig() {
+      try {
+        const response = await fetch('/.netlify/functions/public-config');
+        if (response.ok) {
+          const config = await response.json();
+          RAZORPAY_KEY_ID = config.razorpayKeyId;
+        }
+      } catch (error) {
+        console.error('Failed to fetch Razorpay config:', error);
+      }
+    }
+
+    function initializePaymentSystem() {
+      // Check for existing authentication
+      const storedUserId = localStorage.getItem('userId');
+      if (storedUserId && window.currentUserData && auth.currentUser) {
+        loadPurchasedNotesAndUpdateButtons();
+      }
+
+      // Add price selection handlers
+      document.querySelectorAll('.price-option').forEach(option => {
+        option.addEventListener('click', () => {
+          document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
+          option.classList.add('selected');
+          selectedPrice = parseInt(option.dataset.price);
+        });
+      });
+
+      // Close modal when clicking outside
+      document.getElementById('paymentModal').addEventListener('click', (e) => {
+        if (e.target.id === 'paymentModal') {
+          hidePaymentPopup();
+        }
+      });
+    }
+
+    async function loadPurchasedNotesAndUpdateButtons() {
+      const userId = localStorage.getItem('userId');
+      if (!userId || !auth.currentUser) return;
+
+      try {
+        const idToken = await auth.currentUser.getIdToken();
+
+        // This now returns a list of IDs (e.g. ['unit-1-dsc-1']) instead of URLs
+        const response = await fetch('/.netlify/functions/check-purchases', {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${idToken}` }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const purchasedNotes = data.purchasedNotes || [];
+
+          localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+          updateButtonStates(purchasedNotes);
+        }
+      } catch (error) {
+        console.error('Error loading purchased notes:', error);
+      }
+    }
+
+    // Logic to turn "Locked" buttons into "View" buttons if purchased
+    function updateButtonStates(purchasedIds) {
+      console.log('Purchased Note IDs:', purchasedIds);
+
+      // Find all buttons that have our secure handler
+      const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
+
+      secureButtons.forEach(button => {
+        // Extract the ID from the onclick attribute: handleViewNotes('unit-1-dsc-1', ...)
+        const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'/);
+        if (!match) return;
+
+        const noteId = match[1];
+
+        if (purchasedIds.includes(noteId)) {
+          // Unlocked State
+          button.textContent = '✅ View Notes';
+          button.style.background = '#22c55e';
+          button.style.color = 'white';
+        } else {
+          // Locked State (Default)
+          button.textContent = '🔒 Unlock Notes';
+          button.style.background = '#f59e0b';
+          button.style.color = 'white';
+        }
+      });
+    }
+
+    // The Main Handler: Click to View OR Click to Pay
+    async function handleViewNotes(noteId, noteTitle) {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        alert('Please sign in to view notes');
+        return;
+      }
+
+      const btn = event.currentTarget || event.target; // Get the button element
+      const originalText = btn.textContent;
+
+      // Visual feedback
+      btn.textContent = 'Checking...';
+
+      try {
+        const token = await user.getIdToken();
+
+        // 1. Try to fetch the secure note URL from our backend
+        const response = await fetch(`/.netlify/functions/secure-notes/${noteId}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.previewUrl) {
+          // 2. Success! User owns the note. Open it.
+          window.open(data.previewUrl, '_blank');
+
+          // Update button style just in case
+          btn.textContent = '✅ View Notes';
+          btn.style.background = '#22c55e';
+
+          // Update local storage so it stays green on reload
+          const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+          if (!localPurchases.includes(noteId)) {
+             localPurchases.push(noteId);
+             localStorage.setItem('purchasedNotes', JSON.stringify(localPurchases));
+          }
+
+        } else if (response.status === 403) {
+          // 3. Forbidden! User has not paid. Show Payment Popup.
+          btn.textContent = originalText; // Revert text
+          showPaymentPopup(noteId, noteTitle);
+
+        } else {
+          // Other error
+          alert('Error: ' + (data.error || 'Unknown error'));
+          btn.textContent = originalText;
+        }
+      } catch (error) {
+        console.error('Error viewing note:', error);
+        alert('Network error. Please try again.');
+        btn.textContent = originalText;
+      }
+    }
+
+    function showPaymentPopup(noteId, noteTitle) {
+      currentNoteId = noteId; // Store ID, not URL
+      currentNoteTitle = noteTitle || 'BSc Zoology Notes';
+
+      document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
+      document.getElementById('paymentModal').classList.add('show');
+
+      // Reset price
+      document.querySelectorAll('.price-option').forEach(option => {
+        option.classList.remove('selected');
+        if (option.dataset.price === '20') option.classList.add('selected');
+      });
+      selectedPrice = 20;
+    }
+
+    function hidePaymentPopup() {
+      document.getElementById('paymentModal').classList.remove('show');
+      document.getElementById('paymentLoading').classList.remove('show');
+    }
+
+    function previewNote() {
+      alert(`📖 Preview of ${currentNoteTitle}:\n\n✅ Comprehensive handwritten notes\n✅ Key topics covered\n✅ High-quality PDF\n\nPay ₹${selectedPrice} to unlock full access!`);
+    }
+
+    async function proceedToPayment() {
+      const user = firebase.auth().currentUser;
+      if (!user) { alert('Please log in first'); return; }
+
+      if (typeof Razorpay === 'undefined') {
+        alert('Payment system not loaded. Refresh and try again.');
+        return;
+      }
+
+      document.getElementById('paymentLoading').classList.add('show');
+
+      try {
+        const idToken = await user.getIdToken();
+        const amountInPaise = selectedPrice * 100;
+
+        // Create Order: We send the noteID (currentNoteId) as the noteUrl parameter
+        // The backend will resolve this ID to the real URL using notes-data.json
+        const orderResponse = await fetch('/.netlify/functions/create-order', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${idToken}`
+          },
+          body: JSON.stringify({
+            amount: amountInPaise,
+            noteTitle: currentNoteTitle,
+            noteUrl: currentNoteId // Sending ID here
+          })
+        });
+
+        const orderData = await orderResponse.json();
+        if (!orderData.success) throw new Error(orderData.error || 'Failed to create order');
+
+        const options = {
+          key: RAZORPAY_KEY_ID || orderData.key,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          order_id: orderData.orderId,
+          name: 'SayHeyShubh - Notes',
+          description: `Unlock: ${currentNoteTitle}`,
+          handler: async function (response) {
+            document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>✅ Success!</h3><p>Unlocking...</p></div>';
+
+            try {
+              // Verify Payment
+              const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${idToken}`
+                },
+                body: JSON.stringify({
+                  paymentId: response.razorpay_payment_id,
+                  orderId: response.razorpay_order_id,
+                  signature: response.razorpay_signature,
+                  noteUrl: currentNoteId // Sending ID here too
+                })
+              });
+
+              const verifyResult = await verifyResponse.json();
+
+              if (verifyResult.success) {
+                // Success!
+                document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>🎉 Unlocked!</h3></div>';
+
+                setTimeout(() => {
+                  hidePaymentPopup();
+
+                  // Update UI locally immediately
+                  const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+                  if (!purchasedNotes.includes(currentNoteId)) {
+                    purchasedNotes.push(currentNoteId);
+                    localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+                  }
+                  updateButtonStates(purchasedNotes);
+
+                  alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
+                }, 1500);
+              } else {
+                 throw new Error('Verification failed');
+              }
+            } catch (error) {
+              console.error(error);
+              alert('Payment successful but verification failed. Contact support.');
+              hidePaymentPopup();
+            }
+          },
+          prefill: {
+             name: localStorage.getItem('userName') || '',
+             email: localStorage.getItem('userEmail') || ''
+          },
+          theme: { color: '#6366f1' },
+          modal: {
+            ondismiss: function() {
+              document.getElementById('paymentLoading').classList.remove('show');
+            }
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+      } catch (error) {
+        console.error(error);
+        alert(error.message);
+        document.getElementById('paymentLoading').classList.remove('show');
+      }
+    }
   </script>
 
 </body>
