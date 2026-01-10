@@ -273,7 +273,9 @@
       padding: 1.5rem 1rem;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    }
+      cursor: pointer; 
+      transition: all 0.3s ease; 
+      }
 
     .stat-number {
       font-size: 1.8rem;
@@ -286,6 +288,12 @@
       font-size: 0.9rem;
       color: #718096;
       margin-top: 0.5rem;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+      background: #f8fafc;
     }
 
     /* FAQ Section Styles */
@@ -941,20 +949,22 @@
     <div class="stats-section">
       <h2 class="section-title">📊 BSc Zoology Hons Study Resources & Content</h2>
       <div class="stats-grid">
-        <div class="stat-item">
+        <div class="stat-item notes-access-trigger" onclick="showAuthPopup()">
           <span class="stat-number">✍️</span>
           <div class="stat-label">Handwritten Notes</div>
         </div>
-        <div class="stat-item">
+
+        <div class="stat-item" onclick="window.open('https://t.me/shubhiphilia', '_blank')">
           <span class="stat-number">📖</span>
           <div class="stat-label">Important Books</div>
         </div>
-        
-        <div class="stat-item">
+
+        <div class="stat-item notes-access-trigger" onclick="showAuthPopup()">
           <span class="stat-number">🎯</span>
           <div class="stat-label">Previous Year Questions</div>
         </div>
-        <div class="stat-item">
+
+        <div class="stat-item" onclick="window.open('https://www.youtube.com/@ShubhiPhilia', '_blank')">
           <span class="stat-number">🌟</span>
           <div class="stat-label">Academic Tips</div>
         </div>
@@ -2102,7 +2112,7 @@
     // Function to update UI for logged-in users
     function updateUIForLoggedInUser(user, userData) {
       // Change the "Download Notes" buttons to "Access Notes" since user is already logged in
-      const notesButtons = document.querySelectorAll('.notes-btn');
+      const notesButtons = document.querySelectorAll('.notes-btn, .notes-access-trigger');
       notesButtons.forEach(btn => {
         btn.textContent = '📚 Access My Notes';
         // Point to the SPECIFIC Zoology years page now
