@@ -949,7 +949,7 @@
     <div class="stats-section">
       <h2 class="section-title">📊 BSc Zoology Hons Study Resources & Content</h2>
       <div class="stats-grid">
-        <div class="stat-item notes-access-trigger" onclick="showAuthPopup()">
+        <div class="stat-item" onclick="handleRestrictedAccess()">
           <span class="stat-number">✍️</span>
           <div class="stat-label">Handwritten Notes</div>
         </div>
@@ -959,7 +959,7 @@
           <div class="stat-label">Important Books</div>
         </div>
 
-        <div class="stat-item notes-access-trigger" onclick="showAuthPopup()">
+        <div class="stat-item" onclick="handleRestrictedAccess()">
           <span class="stat-number">🎯</span>
           <div class="stat-label">Previous Year Questions</div>
         </div>
@@ -2112,7 +2112,7 @@
     // Function to update UI for logged-in users
     function updateUIForLoggedInUser(user, userData) {
       // Change the "Download Notes" buttons to "Access Notes" since user is already logged in
-      const notesButtons = document.querySelectorAll('.notes-btn, .notes-access-trigger');
+      const notesButtons = document.querySelectorAll('.notes-btn');
       notesButtons.forEach(btn => {
         btn.textContent = '📚 Access My Notes';
         // Point to the SPECIFIC Zoology years page now
@@ -2219,6 +2219,17 @@
         hideAuthPopup();
       }
     });
+
+    // Function to handle clicks on Stat Items (Notes/PYQs)
+    function handleRestrictedAccess() {
+      if (currentUser || localStorage.getItem('isLoggedIn') === 'true') {
+        // User is logged in -> Go directly to notes page
+        window.location.href = 'zoology-years.html';
+      } else {
+        // User is NOT logged in -> Show the popup
+        showAuthPopup();
+      }
+    }
   </script>
 </body>
 </html>
