@@ -1,3 +1,5 @@
+/sitemap.xml  /sitemap.xml  200
+/robots.txt   /robots.txt   200
 /youtube       /.netlify/builders/youtube-odb  200!
 /youtube.html  /.netlify/builders/youtube-odb  200!
 /notes/zoology/select-year  /zoology-years.html  200
