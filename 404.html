@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page Not Found | SayHeyShubh</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="32x32">
+  <style>
+    .error-container {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      background: linear-gradient(45deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+    .error-title {
+      font-size: 2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+    .error-text {
+      color: #718096;
+      max-width: 500px;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    .home-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #6366f1, #4f46e5);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container error-container">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Oops! Page Not Found</h2>
+    <p class="error-text">
+      The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+    </p>
+    <a href="index.html" class="home-btn">Go Back Home</a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 SayHeyShubh • Educational Content</p>
+    </div>
+  </footer>
+</body>
+</html>
