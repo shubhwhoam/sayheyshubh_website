@@ -301,7 +301,7 @@
     function checkAuthStatus() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       if (!isLoggedIn || isLoggedIn !== 'true') {
-        window.location.href = 'youtube.html?showLogin=true';
+        window.location.href = 'microbiology.html?showLogin=true';
         return false;
       }
       return true;
@@ -319,7 +319,7 @@
     async function logout() {
       await auth.signOut();
       localStorage.clear();
-      window.location.href = 'youtube.html';
+      window.location.href = 'microbiology.html';
     }
 
     document.addEventListener('DOMContentLoaded', () => {
