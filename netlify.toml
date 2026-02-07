@@ -75,14 +75,8 @@ pretty_urls = true
 # 3. GLOBAL CLEAN URL REDIRECT (The Fix for .html)
 
 [[redirects]]
-  from = "/404.html"
-    to = "/404.html"
-    status = 200
-    force = true
-
-[[redirects]]
-  from = "/:splat.html"
-  to = "/:splat"
+ from = "/:splat.html"
+ to = "/:splat"
   status = 301
   force = true
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
@@ -315,30 +314,6 @@ app.get('/.netlify/functions/check-purchases', async (req, res) => {
          error: error.message || 'Failed to check purchases'
        });
   }
-});
-
-// Clean URL handling and redirects - only for non-API routes
-app.use((req, res, next) => {
-  if (req.path.startsWith('/api/') || req.path.startsWith('/.netlify/') || req.path.startsWith('/secure-notes/')) {
-    return next();
-  }
-
-  const queryIndex = req.originalUrl.indexOf('?');
-  const queryString = queryIndex !== -1 ? req.originalUrl.slice(queryIndex) : '';
-
-  if (req.path.endsWith('.html')) {
-    const cleanPath = req.path.replace(/\.html$/, '');
-    return res.redirect(301, `${cleanPath}${queryString}`);
-  }
-
-  if (!path.extname(req.path) && req.path !== '/') {
-    const htmlPath = path.join(__dirname, `${req.path}.html`);
-    if (fs.existsSync(htmlPath)) {
-      req.url = `${req.path}.html${queryString}`;
-    }
-  }
-
-  return next();
 });
 
 // Serve static files - only for non-API routes
