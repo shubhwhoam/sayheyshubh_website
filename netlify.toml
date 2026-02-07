@@ -3,6 +3,9 @@
   publish = "."
   functions = "netlify/functions"
 
+[build.processing.html]
+pretty_urls = true
+
 [build.environment]
   NODE_VERSION = "18"
   NETLIFY_FORCE_FUNCTIONS_NODE_VERSION = "18"
@@ -70,6 +73,12 @@
   force = true
 
 # 3. GLOBAL CLEAN URL REDIRECT (The Fix for .html)
+
+[[redirects]]
+  from = "/404.html"
+    to = "/404.html"
+    status = 200
+    force = true
 
 [[redirects]]
   from = "/:splat.html"
