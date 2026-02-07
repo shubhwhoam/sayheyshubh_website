@@ -12,36 +12,24 @@
   external_node_modules = ["firebase-admin", "razorpay"]
   included_files = ["youtube.html"]
 
-# 1. SPECIFIC REDIRECTS (High Priority)
-# -------------------------------------
-
-# YouTube ODB
 [[redirects]]
-  from = "/youtube"
-  to = "/.netlify/builders/youtube-odb"
-  status = 200
-  force = true
+from = "/youtube"
+to = "/.netlify/builders/youtube-odb"
+status = 200
+force = true
 
 [[redirects]]
-  from = "/youtube.html"
-  to = "/.netlify/builders/youtube-odb"
-  status = 200
-  force = true
+from = "/youtube.html"
+to = "/.netlify/builders/youtube-odb"
+status = 200
+force = true
 
-# Secure Notes 
-[[redirects]]
-  from = "/secure-notes/*"
-  to = "/.netlify/functions/secure-notes"
-  status = 200
-  force = true
-
-# API
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/:splat"
   status = 200
-  force = true
 
+<<<<<<< HEAD
 # 2. SPECIFIC PAGE REWRITES 
 # ----------------------------------------------------------
 
@@ -73,14 +61,17 @@
 
 [[redirects]]
   from = "/:splat.html"
+=======
+  [[redirects]]
+  from = "/*.html"
+>>>>>>> parent of 68e0dc5 (deleted the _redirects file and updated the netlify.toml for redirects)
   to = "/:splat"
   status = 301
   force = true
 
-# 4. CUSTOM 404
-# -------------
-
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+  # Custom 404 Page
+  [[redirects]]
+    from = "/*"
+    to = "/404.html"
+    status = 404
+    force = false

@@ -1,0 +1,11 @@
+/sitemap.xml  /sitemap.xml  200
+/robots.txt   /robots.txt   200
+/youtube       /.netlify/builders/youtube-odb  200!
+/youtube.html  /.netlify/builders/youtube-odb  200!
+/notes/zoology/select-year  /zoology-years.html  200
+/notes/botany              /botany.html         200
+/notes/botany/select-year  /botany-years.html   200
+/notes                     /notes.html          200
+/secure-notes/* /.netlify/functions/secure-notes  200
+/api/* /.netlify/functions/:splat  200
+/* /404.html 404
