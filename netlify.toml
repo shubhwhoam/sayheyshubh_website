@@ -13,18 +13,22 @@
   included_files = ["youtube.html"]
 
 # ============================================================
-# 1. FUNCTION & SYSTEM REDIRECTS (High Priority)
+# 1. SPECIAL FUNCTION REDIRECTS
 # ============================================================
 
-# YouTube ODB (Dynamic Function)
-# When user visits /youtube, show the dynamic page
+# YouTube
 [[redirects]]
   from = "/youtube"
   to = "/.netlify/builders/youtube-odb"
   status = 200
   force = true
+[[redirects]]
+  from = "/youtube.html"
+  to = "/youtube"
+  status = 301
+  force = true
 
-# Secure Notes Function
+# Secure Notes
 [[redirects]]
   from = "/secure-notes/*"
   to = "/.netlify/functions/secure-notes"
@@ -39,33 +43,336 @@
   force = true
 
 # ============================================================
-# 2. UNIVERSAL SEO FIX (The "Pretty URL" Enforcer)
+# 2. MAIN MENU PAGES
 # ============================================================
 
-# Rule A: Homepage Cleanup
-# Redirects /index.html to just /
+# Home
 [[redirects]]
   from = "/index.html"
   to = "/"
   status = 301
   force = true
 
-# Rule B: Universal .html Stripper
-# This ONE rule handles Portfolio, Contact, Blogs, and all Subject pages.
-# It says: "If anyone visits ANY file with .html, redirect them to the name without .html"
-# Example: /portfolio.html -> /portfolio
-# Example: /microbiology.html -> /microbiology
-# Example: /zoology-first-year.html -> /zoology-first-year
+# Portfolio
+[[redirects]]
+  from = "/portfolio"
+  to = "/portfolio.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/portfolio.html"
+  to = "/portfolio"
+  status = 301
+  force = true
+
+# About
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+  force = true
+
+# Blogs
+[[redirects]]
+  from = "/blogs"
+  to = "/blogs.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/blogs.html"
+  to = "/blogs"
+  status = 301
+  force = true
+
+# Contact
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+# Notes Hub
+[[redirects]]
+  from = "/notes"
+  to = "/notes.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/notes.html"
+  to = "/notes"
+  status = 301
+  force = true
+
+# Privacy Policy
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/privacy-policy.html"
+  to = "/privacy-policy"
+  status = 301
+  force = true
+
+# Digital Marketing
+[[redirects]]
+  from = "/digital-marketing-projects"
+  to = "/digital-marketing-projects.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/digital-marketing-projects.html"
+  to = "/digital-marketing-projects"
+  status = 301
+  force = true
+
+# ============================================================
+# 3. BLOG POSTS
+# ============================================================
+
+# Figuring Out
+[[redirects]]
+  from = "/figuring-out"
+  to = "/figuring-out.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/figuring-out.html"
+  to = "/figuring-out"
+  status = 301
+  force = true
+
+# Beyond The Clinic Door
+[[redirects]]
+  from = "/beyond-the-clinic-door"
+  to = "/beyond-the-clinic-door.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/beyond-the-clinic-door.html"
+  to = "/beyond-the-clinic-door"
+  status = 301
+  force = true
+
+# ============================================================
+# 4. SUBJECT PAGES (Zoology, Botany, Microbiology)
+# ============================================================
+
+# --- ZOOLOGY ---
+[[redirects]]
+  from = "/zoology-years"
+  to = "/zoology-years.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-years.html"
+  to = "/zoology-years"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zoology-first-year"
+  to = "/zoology-first-year.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-first-year.html"
+  to = "/zoology-first-year"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zoology-second-year"
+  to = "/zoology-second-year.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-second-year.html"
+  to = "/zoology-second-year"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zoology-third-year"
+  to = "/zoology-third-year.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-third-year.html"
+  to = "/zoology-third-year"
+  status = 301
+  force = true
+
+# Zoology Semesters
+[[redirects]]
+  from = "/zoology-first-semester"
+  to = "/zoology-first-semester.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-first-semester.html"
+  to = "/zoology-first-semester"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zoology-second-semester"
+  to = "/zoology-second-semester.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-second-semester.html"
+  to = "/zoology-second-semester"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zoology-third-semester"
+  to = "/zoology-third-semester.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-third-semester.html"
+  to = "/zoology-third-semester"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zoology-fourth-semester"
+  to = "/zoology-fourth-semester.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-fourth-semester.html"
+  to = "/zoology-fourth-semester"
+  status = 301
+  force = true
+
+# --- BOTANY ---
+[[redirects]]
+  from = "/botany"
+  to = "/botany.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/botany.html"
+  to = "/botany"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/botany-years"
+  to = "/botany-years.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/botany-years.html"
+  to = "/botany-years"
+  status = 301
+  force = true
+
+# --- MICROBIOLOGY ---
+[[redirects]]
+  from = "/microbiology"
+  to = "/microbiology.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/microbiology.html"
+  to = "/microbiology"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/microbiology-years"
+  to = "/microbiology-years.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/microbiology-years.html"
+  to = "/microbiology-years"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/microbiology-first-year"
+  to = "/microbiology-first-year.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/microbiology-first-year.html"
+  to = "/microbiology-first-year"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/microbiology-second-semester"
+  to = "/microbiology-second-semester.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/microbiology-second-semester.html"
+  to = "/microbiology-second-semester"
+  status = 301
+  force = true
+
+# --- WATCH PAGES ---
+[[redirects]]
+  from = "/watch-ecology"
+  to = "/watch-ecology.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/watch-ecology.html"
+  to = "/watch-ecology"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/watch-non-chordates"
+  to = "/watch-non-chordates.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/watch-non-chordates.html"
+  to = "/watch-non-chordates"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/watch-survival-guide"
+  to = "/watch-survival-guide.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/watch-survival-guide.html"
+  to = "/watch-survival-guide"
+  status = 301
+  force = true
+
+# ============================================================
+# 5. CATCH-ALL & 404
+# ============================================================
+
+# Fallback for any new files (Best effort)
 [[redirects]]
   from = "/*.html"
   to = "/:splat"
   status = 301
   force = true
 
-# ============================================================
-# 3. CUSTOM 404 PAGE
-# ============================================================
-
+# 404
 [[redirects]]
   from = "/*"
   to = "/404.html"
