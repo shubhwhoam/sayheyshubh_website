@@ -8,40 +8,40 @@
     <changefreq>daily</changefreq>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/about.html</loc>
+    <loc>https://sayheyshubh.netlify.app/about</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/contact.html</loc>
+    <loc>https://sayheyshubh.netlify.app/contact</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/portfolio.html</loc>
+    <loc>https://sayheyshubh.netlify.app/portfolio</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/privacy-policy.html</loc>
+    <loc>https://sayheyshubh.netlify.app/privacy-policy</loc>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/notes.html</loc>
+    <loc>https://sayheyshubh.netlify.app/notes</loc>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/blogs.html</loc>
+    <loc>https://sayheyshubh.netlify.app/blogs</loc>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/youtube.html</loc>
+    <loc>https://sayheyshubh.netlify.app/youtube</loc>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/watch-ecology.html</loc>
+    <loc>https://sayheyshubh.netlify.app/watch-ecology</loc>
     <priority>0.9</priority>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/0QyVX0lVcMM/maxresdefault.jpg</video:thumbnail_loc>
@@ -54,7 +54,7 @@
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/watch-survival-guide.html</loc>
+    <loc>https://sayheyshubh.netlify.app/watch-survival-guide</loc>
     <priority>0.9</priority>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/wewhZlQ0IlI/maxresdefault.jpg</video:thumbnail_loc>
@@ -67,7 +67,7 @@
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/watch-non-chordates.html</loc>
+    <loc>https://sayheyshubh.netlify.app/watch-non-chordates</loc>
     <priority>0.9</priority>
     <video:video>
       <video:thumbnail_loc>https://i.ytimg.com/vi/FMTwnbzEWAg/maxresdefault.jpg</video:thumbnail_loc>
@@ -80,74 +80,74 @@
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/beyond-the-clinic-door.html</loc>
+    <loc>https://sayheyshubh.netlify.app/beyond-the-clinic-door</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/figuring-out.html</loc>
+    <loc>https://sayheyshubh.netlify.app/figuring-out</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/digital-marketing-projects.html</loc>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-years.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-first-year.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-second-year.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-third-year.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-first-semester.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-second-semester.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-third-semester.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sayheyshubh.netlify.app/zoology-fourth-semester.html</loc>
+    <loc>https://sayheyshubh.netlify.app/digital-marketing-projects</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/botany.html</loc>
+    <loc>https://sayheyshubh.netlify.app/zoology-years</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/botany-years.html</loc>
+    <loc>https://sayheyshubh.netlify.app/zoology-first-year</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/zoology-second-year</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/zoology-third-year</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/zoology-first-semester</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/zoology-second-semester</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/zoology-third-semester</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/zoology-fourth-semester</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://sayheyshubh.netlify.app/microbiology.html</loc>
+    <loc>https://sayheyshubh.netlify.app/botany</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/microbiology-years.html</loc>
+    <loc>https://sayheyshubh.netlify.app/botany-years</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://sayheyshubh.netlify.app/microbiology</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/microbiology-years</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/microbiology-first-year.html</loc>
+    <loc>https://sayheyshubh.netlify.app/microbiology-first-year</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/microbiology-second-semester.html</loc>
+    <loc>https://sayheyshubh.netlify.app/microbiology-second-semester</loc>
     <priority>0.7</priority>
   </url>
 
