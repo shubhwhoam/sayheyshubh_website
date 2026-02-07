@@ -12,24 +12,25 @@
   external_node_modules = ["firebase-admin", "razorpay"]
   included_files = ["youtube.html"]
 
-# 1. SPECIFIC REDIRECTS (High Priority)
-# -------------------------------------
+# =========================================
+# 1. SPECIFIC FUNCTION REDIRECTS
+# =========================================
 
-# YouTube ODB
+# YouTube ODB - Handle the clean URL (Serve content)
 [[redirects]]
   from = "/youtube"
   to = "/.netlify/builders/youtube-odb"
   status = 200
   force = true
 
+# YouTube ODB - Redirect .html to clean URL (SEO Fix)
 [[redirects]]
   from = "/youtube.html"
-  to = "/.netlify/builders/youtube-odb"
-  status = 200
+  to = "/youtube"
+  status = 301
   force = true
 
 # Secure Notes 
-
 [[redirects]]
   from = "/secure-notes/*"
   to = "/.netlify/functions/secure-notes"
@@ -37,20 +38,51 @@
   force = true
 
 # API
-
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/:splat"
   status = 200
   force = true
 
-# 2. SPECIFIC PAGE REWRITES 
-# ----------------------------------------------------------
+# =========================================
+# 2. CUSTOM PAGE REWRITES (Subject Hubs)
+# =========================================
 
+# --- NOTES HUB ---
+[[redirects]]
+  from = "/notes"
+  to = "/notes.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/notes.html"
+  to = "/notes"
+  status = 301
+  force = true
+
+# --- ZOOLOGY SECTION ---
+# (Note: zoology.html was not found in your files, so only "Select Year" is here)
 [[redirects]]
   from = "/notes/zoology/select-year"
   to = "/zoology-years.html"
   status = 200
+  force = true
+[[redirects]]
+  from = "/zoology-years.html"
+  to = "/notes/zoology/select-year"
+  status = 301
+  force = true
+
+# --- BOTANY SECTION ---
+[[redirects]]
+  from = "/notes/botany"
+  to = "/botany.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/botany.html"
+  to = "/notes/botany"
+  status = 301
   force = true
 
 [[redirects]]
@@ -58,20 +90,40 @@
   to = "/botany-years.html"
   status = 200
   force = true
-
 [[redirects]]
-  from = "/notes/botany"
-  to = "/botany.html"
+  from = "/botany-years.html"
+  to = "/notes/botany/select-year"
+  status = 301
+  force = true
+
+# --- MICROBIOLOGY SECTION ---
+[[redirects]]
+  from = "/notes/microbiology"
+  to = "/microbiology.html"
   status = 200
+  force = true
+[[redirects]]
+  from = "/microbiology.html"
+  to = "/notes/microbiology"
+  status = 301
   force = true
 
 [[redirects]]
-  from = "/notes"
-  to = "/notes.html"
+  from = "/notes/microbiology/select-year"
+  to = "/microbiology-years.html"
   status = 200
   force = true
+[[redirects]]
+  from = "/microbiology-years.html"
+  to = "/notes/microbiology/select-year"
+  status = 301
+  force = true
 
-# 3. GLOBAL CLEAN URL REDIRECT (The Fix for .html)
+# =========================================
+# 3. GLOBAL CLEAN URL REDIRECT (Catch-All)
+# =========================================
+# This handles all other files (like about.html -> /about)
+# and deep semester pages (microbiology-first-year.html -> /microbiology-first-year)
 
 [[redirects]]
   from = "/*.html"
@@ -79,9 +131,8 @@
   status = 301
   force = true
 
-  # Custom 404 Page
-  [[redirects]]
-    from = "/*"
-    to = "/404.html"
-    status = 404
-  
+# Custom 404 Page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
