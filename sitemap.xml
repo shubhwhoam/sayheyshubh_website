@@ -88,7 +88,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sayheyshubh.netlify.app/Digital-marketing-projects.html</loc>
+    <loc>https://sayheyshubh.netlify.app/digital-marketing-projects.html</loc>
     <priority>0.7</priority>
   </url>
 
@@ -131,6 +131,23 @@
   </url>
   <url>
     <loc>https://sayheyshubh.netlify.app/botany-years.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://sayheyshubh.netlify.app/microbiology.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/microbiology-years.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/microbiology-first-year.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sayheyshubh.netlify.app/microbiology-second-semester.html</loc>
     <priority>0.7</priority>
   </url>
 
