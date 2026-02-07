@@ -21,12 +21,12 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link"><div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div></a>
+        <a href="index" class="logo-link"><div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div></a>
       </div>
       <nav>
         <ul>
-          <li><a href="notes.html">Notes</a></li>
-          <li><a href="botany.html" class="active">Botany Hub</a></li>
+          <li><a href="notes">Notes</a></li>
+          <li><a href="botany" class="active">Botany Hub</a></li>
         </ul>
       </nav>
     </div>
@@ -101,14 +101,14 @@
         historyStack.pop();
         showView(historyStack[historyStack.length - 1]);
       } else {
-        window.location.href = 'botany.html';
+        window.location.href = 'botany';
       }
     }
 
     // Auth Check
     const auth = firebase.auth();
     auth.onAuthStateChanged(user => {
-      if (!user) window.location.href = 'botany.html';
+      if (!user) window.location.href = 'botany';
     });
   </script>
 </body>

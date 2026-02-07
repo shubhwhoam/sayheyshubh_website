@@ -22,7 +22,7 @@
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
 
   <style>
-    /* ... (All styles from your previous notes.html) ... */
+    /* ... (All styles from your previous notes) ... */
     /* I am including the critical layout styles here for completeness */
     html { scroll-behavior: smooth; }
     body {
@@ -219,19 +219,19 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link">
+        <a href="index" class="logo-link">
           <div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div>
         </a>
       </div>
       <div class="nav-toggle"><span></span><span></span><span></span></div>
       <nav>
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="notes.html" class="active">Notes</a></li>
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+          <li><a href="notes" class="active">Notes</a></li>
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -254,7 +254,7 @@
     </div>
 
     <div class="navigation-controls">
-      <a href="microbiology.html" class="back-to-microbiology-btn">← Back to Microbiology Page</a>
+      <a href="microbiology" class="back-to-microbiology-btn">← Back to Microbiology Page</a>
     </div>
 
       <!-- Main Content Area -->
@@ -263,13 +263,13 @@
         <div id="yearSelection" class="content-section">
           <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">BSc Microbiology Notes 📚 | Select Academic Year ✍️ </h2>
           <div class="navigation-buttons">
-            <a href="Microbiology-first-year.html" class="nav-button">
+            <a href="Microbiology-first-year" class="nav-button">
               📖 First Year Notes
             </a>
-            <a href="Microbiology-second-year.html" class="nav-button">
+            <a href="Microbiology-second-year" class="nav-button">
               📖 Second Year Notes 
             </a>
-            <a href="Microbiology-third-year.html" class="nav-button">
+            <a href="Microbiology-third-year" class="nav-button">
               📖 Third Year Notes
             </a>
           </div>
@@ -301,7 +301,7 @@
     function checkAuthStatus() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       if (!isLoggedIn || isLoggedIn !== 'true') {
-        window.location.href = 'microbiology.html?showLogin=true';
+        window.location.href = 'microbiology?showLogin=true';
         return false;
       }
       return true;
@@ -319,7 +319,7 @@
     async function logout() {
       await auth.signOut();
       localStorage.clear();
-      window.location.href = 'microbiology.html';
+      window.location.href = 'microbiology';
     }
 
     document.addEventListener('DOMContentLoaded', () => {

@@ -376,7 +376,7 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link">
+        <a href="index" class="logo-link">
           <div class="logo">
             <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
           </div>
@@ -389,12 +389,12 @@
       </div>
       <nav>
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-           <li><a href="notes.html">Notes</a></li>
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+           <li><a href="notes" class="active">Notes</a></li>
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -404,7 +404,7 @@
     <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology First Semester Notes (DU)</h1>
 
     <div style="text-align: center; margin-bottom: 2rem;">
-      <a href="zoology-first-year.html" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Zoology First Year</a>
+      <a href="zoology-first-year" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Zoology First Year</a>
     </div>
 
     <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
@@ -724,7 +724,7 @@
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • Zoology First Semester Study Materials</p>
-       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+       <p> <a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
 
@@ -746,22 +746,7 @@
       }
     }
 
-    function waitForNavAndHighlight() {
-      const navLinks = document.querySelectorAll("nav a");
-      if (navLinks.length === 0) {
-        setTimeout(waitForNavAndHighlight, 50);
-        return;
-      }
-
-      navLinks.forEach(link => {
-        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
-        if (href === "youtube") {
-          link.classList.add("active");
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
+    
   </script>
 
   <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">

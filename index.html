@@ -31,7 +31,7 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link">
+        <a href="index" class="logo-link">
           <div class="logo">
             <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
           </div>
@@ -44,12 +44,12 @@
       </div>
       <nav>
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="notes.html">Notes</a></li>
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+          <li><a href="notes">Notes</a></li>
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -100,7 +100,7 @@
           <span class="btn-icon">🎥</span>
           Visit YouTube Channel
         </a>
-        <a href="youtube.html" class="youtube-btn secondary">
+        <a href="youtube" class="youtube-btn secondary">
           <span class="btn-icon">📚</span>
           Download BSc Zoology Notes
         </a>
@@ -116,17 +116,17 @@
     <div class="featured-content">
       <h4>Featured Study Materials</h4>
       <div class="content-grid">
-        <div class="content-card" onclick="window.location.href='youtube.html'">
+        <div class="content-card" onclick="window.location.href='youtube'">
           <div class="content-icon">📑</div>
           <h5>Semester-wise Notes</h5>
           <p>Complete <strong>BSc Zoology notes PDF</strong> for all semesters</p>
         </div>
-        <div class="content-card" onclick="window.location.href='youtube.html'">
+        <div class="content-card" onclick="window.location.href='youtube'">
           <div class="content-icon">❓</div>
           <h5>Previous Year Papers</h5>
           <p><strong>DU BSc Zoology question papers</strong> subject wise PYQs</p>
         </div>
-        <div class="content-card" onclick="window.location.href='youtube.html'">
+        <div class="content-card" onclick="window.location.href='youtube'">
           <div class="content-icon">✍️</div>
           <h5>Handwritten Notes</h5>
           <p>Clear, comprehensive handwritten study materials</p>
@@ -148,8 +148,8 @@
       <div>
         <h4>Writing & Blogs</h4>
         <ul>
-          <li><a href="beyond-the-clinic-door.html" target="_blank" rel="noopener noreferrer">🧠 Beyond the Clinic Door</a></li>
-          <li><a href="figuring-out.html" target="_blank" rel="noopener noreferrer">🍂 Figuring Out</a></li>
+          <li><a href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">🧠 Beyond the Clinic Door</a></li>
+          <li><a href="figuring-out" target="_blank" rel="noopener noreferrer">🍂 Figuring Out</a></li>
 
         </ul>
       </div>
@@ -250,8 +250,8 @@
       </div>
       <div class="project">
         <span>03</span>
-        <h5><a href="beyond-the-clinic-door.html" target="_blank" rel="noopener noreferrer">CHRDS Blog</a></h5>
-        <p><a href="beyond-the-clinic-door.html" target="_blank" rel="noopener noreferrer">Wrote about mental health & disability access</a></p>
+        <h5><a href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">CHRDS Blog</a></h5>
+        <p><a href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">Wrote about mental health & disability access</a></p>
       </div>
       <div class="project">
         <span>04</span>
@@ -269,51 +269,16 @@
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • Creating Content That Connects</p>
-       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+       <p> <a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-          <script>
-            const links = document.querySelectorAll('nav a');
-            const currentPage = location.pathname.split("/").pop() || 'index.html';
-
-            links.forEach(link => {
-              const href = link.getAttribute("href");
-              if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
-                link.classList.add("active");
-              }
-            });
-          </script>
-  <script>
-    function waitForNavAndHighlight() {
-      const navLinks = document.querySelectorAll("nav a");
-      if (navLinks.length === 0) {
-        // Retry until nav is loaded
-        setTimeout(waitForNavAndHighlight, 50);
-        return;
-      }
-
-      const path = window.location.pathname;
-      let currentPage = path.split("/").pop() || "index";
-      currentPage = currentPage.replace(".html", "");
-
-      navLinks.forEach(link => {
-        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
-        if (href === currentPage) {
-          link.classList.add("active");
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
-  </script>
 
   <!-- Cookie Consent Banner -->
   <div id="cookie-banner" class="cookie-banner">
     <p>
       🍪 This website uses cookies to enhance your experience.  
-      <a href="/privacy-policy.html" target="_blank">Learn more</a>
+      <a href="/privacy-policy" target="_blank">Learn more</a>
     </p>
     <div class="cookie-buttons">
       <button id="accept-cookies" class="accept-btn">Accept</button>

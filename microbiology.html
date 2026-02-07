@@ -887,7 +887,7 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link">
+        <a href="index" class="logo-link">
           <div class="logo">
             <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
           </div>
@@ -911,12 +911,12 @@
       </div>
       <nav>
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="notes.html" class="active">Notes</a></li> 
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+          <li><a href="notes" class="active">Notes</a></li> 
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -1084,46 +1084,13 @@
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • Educational Content & Life Stories</p>
-       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+       <p> <a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
 
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
-  <script>
-    const links = document.querySelectorAll('nav a');
-    const currentPage = location.pathname.split("/").pop() || 'index.html';
-
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
-        link.classList.add("active");
-      }
-    });
-  </script>
-  <script>
-    function waitForNavAndHighlight() {
-      const navLinks = document.querySelectorAll("nav a");
-      if (navLinks.length === 0) {
-        // Retry until nav is loaded
-        setTimeout(waitForNavAndHighlight, 50);
-        return;
-      }
-
-      const path = window.location.pathname;
-      let currentPage = path.split("/").pop() || "index";
-      currentPage = currentPage.replace(".html", "");
-
-      navLinks.forEach(link => {
-        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
-        if (href === currentPage) {
-          link.classList.add("active");
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
-  </script>
+  
 
   <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
     💬
@@ -1677,7 +1644,7 @@
   <div id="cookie-banner" class="cookie-banner">
     <p>
       🍪 This website uses cookies to enhance your experience.  
-      <a href="/privacy-policy.html" target="_blank">Learn more</a>
+      <a href="/privacy-policy" target="_blank">Learn more</a>
     </p>
     <div class="cookie-buttons">
       <button id="accept-cookies" class="accept-btn">Accept</button>
@@ -2022,7 +1989,7 @@
         btn.textContent = '📚 Access My Notes';
         // Point to the SPECIFIC Microbiology years page now
         btn.onclick = function() {
-          window.location.href = 'Microbiology-years.html';
+          window.location.href = 'Microbiology-years';
         };
       });
       
@@ -2129,7 +2096,7 @@
     function handleRestrictedAccess() {
       if (currentUser || localStorage.getItem('isLoggedIn') === 'true') {
         // User is logged in -> Go directly to notes page
-        window.location.href = 'Microbiology-years.html';
+        window.location.href = 'Microbiology-years';
       } else {
         // User is NOT logged in -> Show the popup
         showAuthPopup();

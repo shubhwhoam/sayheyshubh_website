@@ -21,7 +21,7 @@
   <header>
       <div class="container nav-flex">
         <div class="logo-section">
-          <a href="index.html" class="logo-link">
+          <a href="index" class="logo-link">
             <div class="logo">
               <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
             </div>
@@ -34,12 +34,12 @@
       </div>
       <nav>
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="notes.html">Notes</a></li> 
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs" class="active">Blogs</a></li>
+          <li><a href="notes">Notes</a></li> 
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -58,7 +58,7 @@
           Accessing mental health care when you live with a disability isn’t just about scheduling an appointment. It’s about navigating silence, stigma, and spaces that weren’t built for you...
         </p>
         <!-- Read full article button -->
-       <p> <a class="read-more-btn" href="beyond-the-clinic-door.html" target="_blank" rel="noopener noreferrer">
+       <p> <a class="read-more-btn" href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">
           Read full article →
         </a></p>
         <!-- View certificate button -->
@@ -79,7 +79,7 @@
           I don't have to feel like...
         </p>
         <!-- Read full article button -->
-       <p> <a class="read-more-btn" href="figuring-out.html" target="_blank" rel="noopener noreferrer">
+       <p> <a class="read-more-btn" href="figuring-out" target="_blank" rel="noopener noreferrer">
           Read full article →
         </a></p>
         </div>
@@ -89,44 +89,9 @@
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • Thoughts & Stories</p>
-       <p> <a href="privacy-policy.html">Privacy Policy</a></p>
+       <p> <a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script>
-    const links = document.querySelectorAll('nav a');
-    const currentPage = location.pathname.split("/").pop() || 'index.html';
-
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href === currentPage || (currentPage === 'index.html' && href === '/')) {
-        link.classList.add("active");
-      }
-    });
-  </script>
-  <script>
-    function waitForNavAndHighlight() {
-      const navLinks = document.querySelectorAll("nav a");
-      if (navLinks.length === 0) {
-        // Retry until nav is loaded
-        setTimeout(waitForNavAndHighlight, 50);
-        return;
-      }
-
-      const path = window.location.pathname;
-      let currentPage = path.split("/").pop() || "index";
-      currentPage = currentPage.replace(".html", "");
-
-      navLinks.forEach(link => {
-        let href = link.getAttribute("href").replace(".html", "").replace("/", "");
-        if (href === currentPage) {
-          link.classList.add("active");
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", waitForNavAndHighlight);
-  </script>
 </body>
 </html>

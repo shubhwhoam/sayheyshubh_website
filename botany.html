@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
 
   <style>
-    /* Copied critical styles from youtube.html for consistency */
+    /* Copied critical styles from youtube for consistency */
     .youtube-container { padding: 2rem; max-width: 1200px; margin: 0 auto; }
     /* NEW: Improved Back Button Container */
     .back-nav-wrapper {
@@ -75,7 +75,7 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link"><div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div></a>
+        <a href="index" class="logo-link"><div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div></a>
       </div>
       <div class="user-profile" id="userProfile" style="display:none; align-items:center; gap:10px; background:white; padding:5px 15px; border-radius:20px;">
         <div class="user-avatar" style="width:30px; height:30px; background:#10b981; border-radius:50%; color:white; display:flex; justify-content:center; align-items:center;">U</div>
@@ -84,12 +84,12 @@
       <div class="nav-toggle"><span></span><span></span><span></span></div>
       <nav>
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="notes.html" class="active">Notes</a></li>
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+          <li><a href="notes" class="active">Notes</a></li>
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -98,7 +98,7 @@
   <div class="youtube-container">
 
     <div class="navigation-controls">
-      <a href="notes.html" class="back-nav-btn">
+      <a href="notes" class="back-nav-btn">
         ← Back to All Notes
       </a>
     </div>
@@ -154,7 +154,7 @@
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
   <script>
-    // Logic reused from youtube.html
+    // Logic reused from youtube
     function showAuthPopup() { document.getElementById('authModal').classList.add('show'); }
     function hideAuthPopup() { document.getElementById('authModal').classList.remove('show'); }
 
@@ -165,7 +165,7 @@
         // Change button to "Access" and redirect to Botany Years
         const btn = document.querySelector('.notes-btn');
         btn.textContent = '✅ Access Botany Notes';
-        btn.onclick = function() { window.location.href = 'botany-years.html'; };
+        btn.onclick = function() { window.location.href = 'botany-years'; };
       }
     });
 

@@ -161,7 +161,7 @@
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
-        <a href="index.html" class="logo-link">
+        <a href="index" class="logo-link">
           <div class="logo">
             <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
           </div>
@@ -174,18 +174,18 @@
       </div>
       <nav>
         <ul>
-          <li><a href="portfolio.html" class="active">Portfolio</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="notes.html">Notes</a></li> 
-          <li><a href="youtube.html">YouTube</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio" class="active">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+          <li><a href="notes">Notes</a></li> 
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <a href="portfolio.html" class="back-button">
+  <a href="portfolio" class="back-button">
     <span>←</span>
     <span>Back to Portfolio</span>
   </a>
@@ -244,21 +244,10 @@
   <footer>
     <div class="container">
       <p>© 2025 SayHeyShubh • Portfolio & Projects</p>
-      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+      <p><a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script>
-    const links = document.querySelectorAll('nav a');
-    const currentPage = 'portfolio.html';
-
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href === currentPage) {
-        link.classList.add("active");
-      }
-    });
-  </script>
+  
 </body>
 </html>

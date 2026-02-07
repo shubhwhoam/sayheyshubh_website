@@ -1,5 +1,5 @@
 // =================================================================
-// PAGE PROTECTION & PROFILE DISPLAY LOGIC (for notes.html and beyond)
+// PAGE PROTECTION & PROFILE DISPLAY LOGIC (for notes and beyond)
 // This file assumes firebase-config.js is loaded first.
 // =================================================================
 
@@ -13,7 +13,7 @@ auth.onAuthStateChanged(function(user) {
         // 2. User is NOT signed in. Redirect to YouTube page for login.
         // This is necessary if they navigate directly or session expires.
         // Add a parameter to indicate that login popup should be shown
-        window.location.href = 'youtube.html?showLogin=true';
+        window.location.href = 'youtube?showLogin=true';
     }
 });
 
@@ -34,7 +34,7 @@ function checkDeviceAndLoadProfile(user) {
             // Device is not registered (session expired, or data modified)
             auth.signOut();
             alert("Your session has expired or the device limit was exceeded. Please log in again.");
-            window.location.href = 'youtube.html?showLogin=true';
+            window.location.href = 'youtube?showLogin=true';
             return;
         }
 
@@ -51,7 +51,7 @@ function checkDeviceAndLoadProfile(user) {
         console.error("Profile check failed:", error);
         auth.signOut();
         alert("Authentication check failed. Redirecting to login.");
-        window.location.href = 'youtube.html?showLogin=true';
+        window.location.href = 'youtube?showLogin=true';
     });
 }
 
