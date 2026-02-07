@@ -12,32 +12,75 @@
   external_node_modules = ["firebase-admin", "razorpay"]
   included_files = ["youtube.html"]
 
+# 1. SPECIFIC REDIRECTS (High Priority)
+# -------------------------------------
+
+# YouTube ODB
 [[redirects]]
-from = "/youtube"
-to = "/.netlify/builders/youtube-odb"
-status = 200
-force = true
+  from = "/youtube"
+  to = "/.netlify/builders/youtube-odb"
+  status = 200
+  force = true
 
 [[redirects]]
-from = "/youtube.html"
-to = "/.netlify/builders/youtube-odb"
-status = 200
-force = true
+  from = "/youtube.html"
+  to = "/.netlify/builders/youtube-odb"
+  status = 200
+  force = true
 
+# Secure Notes 
+[[redirects]]
+  from = "/secure-notes/*"
+  to = "/.netlify/functions/secure-notes"
+  status = 200
+  force = true
+
+# API
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/:splat"
   status = 200
+  force = true
 
-  [[redirects]]
+# 2. SPECIFIC PAGE REWRITES 
+# ----------------------------------------------------------
+
+[[redirects]]
+  from = "/notes/zoology/select-year"
+  to = "/zoology-years.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/notes/botany/select-year"
+  to = "/botany-years.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/notes/botany"
+  to = "/botany.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/notes"
+  to = "/notes.html"
+  status = 200
+  force = true
+
+# 3. GLOBAL CLEAN URL REDIRECT (The Fix for .html)
+
+[[redirects]]
   from = "/*.html"
   to = "/:splat"
   status = 301
   force = true
 
-  # Custom 404 Page
-  [[redirects]]
-    from = "/*"
-    to = "/404.html"
-    status = 404
-    force = false
+# 4. CUSTOM 404
+# -------------
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
