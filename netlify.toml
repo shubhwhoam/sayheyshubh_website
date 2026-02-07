@@ -72,7 +72,7 @@
 # 3. GLOBAL CLEAN URL REDIRECT (The Fix for .html)
 
 [[redirects]]
-  from = "/:splat.html"
+  from = "/*.html"
   to = "/:splat"
   status = 301
   force = true

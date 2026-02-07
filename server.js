@@ -429,4 +429,5 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log('- POST /.netlify/functions/verify-payment');
   console.log('- GET  /.netlify/functions/check-purchases');
   console.log('- POST /migrate-purchases (one-time migration)');
+
 });
