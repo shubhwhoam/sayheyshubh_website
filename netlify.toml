@@ -29,9 +29,6 @@ force = true
   to = "/.netlify/functions/server/:splat"
   status = 200
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # 2. SPECIFIC PAGE REWRITES 
 # ----------------------------------------------------------
 
@@ -62,15 +59,7 @@ force = true
 # 3. GLOBAL CLEAN URL REDIRECT (The Fix for .html)
 
 [[redirects]]
-  from = "/:splat.html"
-=======
-=======
->>>>>>> parent of 68e0dc5 (deleted the _redirects file and updated the netlify.toml for redirects)
-=======
->>>>>>> parent of 68e0dc5 (deleted the _redirects file and updated the netlify.toml for redirects)
-  [[redirects]]
   from = "/*.html"
->>>>>>> parent of 68e0dc5 (deleted the _redirects file and updated the netlify.toml for redirects)
   to = "/:splat"
   status = 301
   force = true
