@@ -12,25 +12,19 @@
   external_node_modules = ["firebase-admin", "razorpay"]
   included_files = ["youtube.html"]
 
-# =========================================
-# 1. SPECIFIC FUNCTION REDIRECTS
-# =========================================
+# ============================================================
+# 1. FUNCTION & SYSTEM REDIRECTS (High Priority)
+# ============================================================
 
-# YouTube ODB - Handle the clean URL (Serve content)
+# YouTube ODB (Dynamic Function)
+# When user visits /youtube, show the dynamic page
 [[redirects]]
   from = "/youtube"
   to = "/.netlify/builders/youtube-odb"
   status = 200
   force = true
 
-# YouTube ODB - Redirect .html to clean URL (SEO Fix)
-[[redirects]]
-  from = "/youtube.html"
-  to = "/youtube"
-  status = 301
-  force = true
-
-# Secure Notes 
+# Secure Notes Function
 [[redirects]]
   from = "/secure-notes/*"
   to = "/.netlify/functions/secure-notes"
@@ -44,94 +38,34 @@
   status = 200
   force = true
 
-# =========================================
-# 2. CUSTOM PAGE REWRITES (Subject Hubs)
-# =========================================
+# ============================================================
+# 2. UNIVERSAL SEO FIX (The "Pretty URL" Enforcer)
+# ============================================================
 
-# --- NOTES HUB ---
+# Rule A: Homepage Cleanup
+# Redirects /index.html to just /
 [[redirects]]
-  from = "/notes"
-  to = "/notes.html"
-  status = 200
-  force = true
-[[redirects]]
-  from = "/notes.html"
-  to = "/notes"
+  from = "/index.html"
+  to = "/"
   status = 301
   force = true
 
-# --- ZOOLOGY SECTION ---
-# (Note: zoology.html was not found in your files, so only "Select Year" is here)
-[[redirects]]
-  from = "/notes/zoology/select-year"
-  to = "/zoology-years.html"
-  status = 200
-  force = true
-[[redirects]]
-  from = "/zoology-years.html"
-  to = "/notes/zoology/select-year"
-  status = 301
-  force = true
-
-# --- BOTANY SECTION ---
-[[redirects]]
-  from = "/notes/botany"
-  to = "/botany.html"
-  status = 200
-  force = true
-[[redirects]]
-  from = "/botany.html"
-  to = "/notes/botany"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/notes/botany/select-year"
-  to = "/botany-years.html"
-  status = 200
-  force = true
-[[redirects]]
-  from = "/botany-years.html"
-  to = "/notes/botany/select-year"
-  status = 301
-  force = true
-
-# --- MICROBIOLOGY SECTION ---
-[[redirects]]
-  from = "/notes/microbiology"
-  to = "/microbiology.html"
-  status = 200
-  force = true
-[[redirects]]
-  from = "/microbiology.html"
-  to = "/notes/microbiology"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/notes/microbiology/select-year"
-  to = "/microbiology-years.html"
-  status = 200
-  force = true
-[[redirects]]
-  from = "/microbiology-years.html"
-  to = "/notes/microbiology/select-year"
-  status = 301
-  force = true
-
-# =========================================
-# 3. GLOBAL CLEAN URL REDIRECT (Catch-All)
-# =========================================
-# This handles all other files (like about.html -> /about)
-# and deep semester pages (microbiology-first-year.html -> /microbiology-first-year)
-
+# Rule B: Universal .html Stripper
+# This ONE rule handles Portfolio, Contact, Blogs, and all Subject pages.
+# It says: "If anyone visits ANY file with .html, redirect them to the name without .html"
+# Example: /portfolio.html -> /portfolio
+# Example: /microbiology.html -> /microbiology
+# Example: /zoology-first-year.html -> /zoology-first-year
 [[redirects]]
   from = "/*.html"
   to = "/:splat"
   status = 301
   force = true
 
-# Custom 404 Page
+# ============================================================
+# 3. CUSTOM 404 PAGE
+# ============================================================
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
