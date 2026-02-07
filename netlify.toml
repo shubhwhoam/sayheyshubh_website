@@ -30,6 +30,7 @@ force = true
   status = 200
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 2. SPECIFIC PAGE REWRITES 
 # ----------------------------------------------------------
 
@@ -62,6 +63,8 @@ force = true
 [[redirects]]
   from = "/:splat.html"
 =======
+=======
+>>>>>>> parent of 68e0dc5 (deleted the _redirects file and updated the netlify.toml for redirects)
   [[redirects]]
   from = "/*.html"
 >>>>>>> parent of 68e0dc5 (deleted the _redirects file and updated the netlify.toml for redirects)
