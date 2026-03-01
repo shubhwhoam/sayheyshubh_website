@@ -556,12 +556,12 @@
           <div class="unit-item">
             <div class="unit-header-row">
               <span class="unit-title">Unit 1: Nucleic acids</span>
-              <div class="unit-buttons">
-                  <button onclick="handleViewNotes('unit-1-MICROB-DSC202', 'Unit 1: Nucleic acids')" class="download-btn">🔒 Unlock Notes</button>
+              <div class="unit-buttons"> 
+                  <a href="https://drive.google.com/file/d/1ae5WAN2BvX3jCznfU5SPyFkHdOqAyu6p/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
                 </div>
-                </div>
-                <p class="unit-desc">Introduction to importance of nucleic acids. Structures of purines and pyrimidines, nucleosides and nucleotides. Formation of DNA chains by phosphodiester bonds. Structure of DNA: the double helix. Types of DNA: A, B and Z. Properties of DNA. Types of RNA:rRNA, mRNA, tRNA</p>
               </div>
+            <p class="unit-desc"> Introduction to importance of nucleic acids. Structures of purines and pyrimidines, nucleosides and nucleotides. Formation of DNA chains by phosphodiester bonds. Structure of DNA: the double helix. Types of DNA: A, B and Z. Properties of DNA. Types of RNA:rRNA, mRNA, tRNA</p>
+          </div>
 
           <div class="unit-item">
             <div class="unit-header-row">
@@ -751,9 +751,11 @@
         <div class="price-selection">
           <h3>Choose your contribution amount:</h3>
           <div class="price-options">
-  
-            <div class="price-option recommended selected" data-price="0">₹0</div>
-           
+            <div class="price-option" data-price="10">₹10</div>
+            <div class="price-option" data-price="15">₹15</div>
+            <div class="price-option recommended selected" data-price="20">₹20</div>
+            <div class="price-option" data-price="30">₹30</div>
+            <div class="price-option" data-price="50">₹50</div>
           </div>
         </div>
 
@@ -777,7 +779,7 @@
     // Payment system variables
     let currentNoteId = ''; // Changed from currentNoteUrl
     let currentNoteTitle = '';
-    let selectedPrice = 0;
+    let selectedPrice = 20;
 
     // Expose callback immediately so page-protection.js can call it
     window.initializePaymentForAuthenticatedUser = function(userId) {
@@ -952,9 +954,9 @@
       // Reset price
       document.querySelectorAll('.price-option').forEach(option => {
         option.classList.remove('selected');
-        if (option.dataset.price === '0') option.classList.add('selected');
+        if (option.dataset.price === '20') option.classList.add('selected');
       });
-      selectedPrice = 0;
+      selectedPrice = 20;
     }
 
     function hidePaymentPopup() {
