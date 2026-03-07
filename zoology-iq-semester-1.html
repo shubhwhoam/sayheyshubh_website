@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01VF0W2CD1');
+  </script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BSc Zoology Semester 1 Important Questions | SayHeyShubh</title>
+  <title>BSc Zoology First Semester Important Questions | SayHeyShubh</title>
+  <meta name="description" content="Important questions for BSc Zoology (Hons.) First Semester DU students. Unit-wise and Topic Wise exam questions, previous year questions, and notes preview." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
     .notes-container { max-width: 1200px; margin: 0 auto; padding: 2rem; min-height: 80vh; }
     .back-btn { display: inline-flex; padding: 0.8rem 1.5rem; background: #6366f1; color: white; text-decoration: none; border-radius: 10px; font-weight: 600; margin-bottom: 2rem; }
@@ -20,8 +30,52 @@
   </style>
 </head>
 <body>
-  <div class="notes-container">
-    <a href="zoology-iq-first-year" class="back-btn">← Back to Semesters</a>
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="blogs">Blogs</a></li>
+           <li><a href="notes" class="active">Notes</a></li>
+          <li><a href="youtube">YouTube</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <main class="container">
+    <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology First Semester Important Questions (DU)</h1>
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <a href="zoology-iq-first-year" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Semester Selection</a>
+    </div>
+
+    <div class="subject-section" style="border-top-color: #f59e0b;">
+      <h2 class="subject-title">🐙 Non-Chordates</h2>
+      <div class="unit-grid">
+        <div class="unit-card">
+          <div class="unit-info">
+            <h3>Unit 1: Protista to Porifera</h3>
+            <p>Locomotion, reproduction</p>
+          </div>
+          <a href="iq-nonchordates-unit-1" class="view-btn">View Questions</a>
+        </div>
+      </div>
+    </div>
 
     <div class="subject-section">
       <h2 class="subject-title">🌿 Ecology</h2>
@@ -43,19 +97,31 @@
       </div>
     </div>
 
-    <div class="subject-section" style="border-top-color: #f59e0b;">
-      <h2 class="subject-title">🐙 Non-Chordates</h2>
-      <div class="unit-grid">
-        <div class="unit-card">
-          <div class="unit-info">
-            <h3>Unit 1: Protista to Porifera</h3>
-            <p>Locomotion, reproduction</p>
-          </div>
-          <a href="iq-nonchordates-unit-1" class="view-btn">View Questions</a>
-        </div>
+  
+  </div>
+
+    <footer>
+      <div class="container">
+        <p>© 2025 SayHeyShubh • Zoology First Semester Study Materials</p>
+         <p> <a href="privacy-policy">Privacy Policy</a></p>
       </div>
+    </footer>
+    
+    <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
+      💬
+    </a>
+
+    <div class="doubts-bubble" id="doubts-bubble">
+      Got a question?
     </div>
 
-  </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const bubble = document.getElementById("doubts-bubble");
+      setTimeout(() => { bubble.classList.add("show"); }, 800);
+      setTimeout(() => { bubble.classList.remove("show"); }, 3800);
+    });
+    </script>
+
 </body>
 </html>
