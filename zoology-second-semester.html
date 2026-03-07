@@ -130,9 +130,9 @@
 
     /* Important Questions Button */
     .ques-btn {
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #cbd5e1;
+      background: #eef2ff; /* Soft pale indigo background */
+      color: #4338ca;      /* Deep indigo text */
+      border: 1px solid #c7d2fe; /* Light indigo border */
       padding: 0.5rem 1rem;
       border-radius: 6px;
       font-size: 0.9rem;
@@ -145,8 +145,9 @@
     }
 
     .ques-btn:hover {
-      background: #e2e8f0;
-      color: #0f172a;
+      background: #e0e7ff; /* Slightly darker indigo on hover */
+      color: #312e81;      /* Darker text on hover */
+      border-color: #a5b4fc;
     }
 
     .download-btn {
@@ -382,7 +383,7 @@
               <span class="unit-title">Unit I: Annelida</span>
               <div class="unit-buttons">
                 <a href="annelida-questions" class="ques-btn">Important Questions</a>
-                <button onclick="handleViewNotes('unit-1-dsc-4', 'Unit I: Annelida')" class="download-btn">🔒 Access Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-4', 'Unit I: Annelida')" class="download-btn">🌻 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">General characteristics and classification of Annelida; Excretion in Annelida; Evolution of coelom and metamerism.</p>
@@ -393,7 +394,7 @@
               <span class="unit-title">Unit II: Arthropoda and Onychophora</span>
             <div class="unit-buttons">
               <a href="arthropoda-questions" class="ques-btn">Important Questions</a>
-              <button onclick="handleViewNotes('unit-2-dsc-4', 'Unit II: Arthropoda and Onychophora')" class="download-btn">🔒 Access Notes</button>
+              <button onclick="handleViewNotes('unit-2-dsc-4', 'Unit II: Arthropoda and Onychophora')" class="download-btn">🌻 Access Notes</button>
             </div>
             </div>
             <p class="unit-desc">General characteristics and classification; Vision and Respiration in Arthropoda; Metamorphosis in insects; Evolutionary significance of Onychopora.</p>
@@ -441,7 +442,7 @@
               <span class="unit-title">Unit I: Carbohydrates</span>
           <div class="unit-buttons">
               <a href="carbohydrates-questions" class="ques-btn">Important Questions</a>
-              <button onclick="handleViewNotes('unit-1-dsc-5', 'Unit I: Carbohydrates')" class="download-btn">🔒 Access Notes</button>
+              <button onclick="handleViewNotes('unit-1-dsc-5', 'Unit I: Carbohydrates')" class="download-btn">🌻 Access Notes</button>
             </div>
             </div>
             <p class="unit-desc">Structure and biological importance: with emphasis on aldose, ketose, chiral centre, polarised Light, Fischer nomenclature, Haworth projection formula.</p>
@@ -452,7 +453,7 @@
               <span class="unit-title">Unit II: Lipids</span>
           <div class="unit-buttons">
               <a href="lipids-questions" class="ques-btn">Important Questions</a>
-              <button onclick="handleViewNotes('unit-2-dsc-5', 'Unit II: Lipids')" class="download-btn">🔒 Access Notes</button>
+              <button onclick="handleViewNotes('unit-2-dsc-5', 'Unit II: Lipids')" class="download-btn">🌻 Access Notes</button>
             </div>
             </div>
             <p class="unit-desc">Structure and Significance: Physiologically important saturated and unsaturated fatty acids, triacylglycerols, phospholipids, glycolipids, steroids.</p>
@@ -507,7 +508,7 @@
               <span class="unit-title">Unit I: Nervous System and Sense Organs</span>
           <div class="unit-buttons">
               <a href="nervous-system-questions" class="ques-btn">Important Questions</a>
-              <button onclick="handleViewNotes('unit-1-dsc-6', 'Unit I: Nervous System and Sense Organs')" class="download-btn">🔒 Access Notes</button>
+              <button onclick="handleViewNotes('unit-1-dsc-6', 'Unit I: Nervous System and Sense Organs')" class="download-btn">🌻 Access Notes</button>
             </div>
             </div>
             <p class="unit-desc">Structure of neuron, resting membrane potential, origin and conduction of action potential across the myelinated and unmyelinated nerve fibers.</p>
@@ -518,7 +519,7 @@
               <span class="unit-title">Unit II: Muscle Physiology</span>
           <div class="unit-buttons">
               <a href="muscle-physiology-questions" class="ques-btn">Important Questions</a>
-              <button onclick="handleViewNotes('unit-2-dsc-6', 'Unit II: Muscle Physiology')" class="download-btn">🔒 Access Notes</button>
+              <button onclick="handleViewNotes('unit-2-dsc-6', 'Unit II: Muscle Physiology')" class="download-btn">🌻 Access Notes</button>
             </div>
             </div>
             <p class="unit-desc">Mechanism of muscle contraction; Sliding Filament theory, Excitation-Contraction coupling, Characteristics of muscle twitch.</p>
@@ -592,7 +593,7 @@
     <div class="payment-container">
       <div class="payment-header">
         <button class="close-payment" onclick="hidePaymentPopup()">&times;</button>
-        <h2>🔒 Unlock Study Notes</h2>
+        <h2>🌻 Unlock Study Notes</h2>
         <p>Access premium BSc Zoology notes and study materials</p>
       </div>
 
@@ -788,7 +789,7 @@
           button.style.color = 'white';
         } else {
           // STATE 2: Logged in but NOT Purchased
-          button.textContent = '💳 Unlock Notes';
+          button.textContent = '🔒 Unlock Notes';
           button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
           button.style.color = 'white';
         }
