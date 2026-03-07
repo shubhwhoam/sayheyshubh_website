@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ecology Unit 1 Important Questions | SayHeyShubh</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+  <style>
+    .notes-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .back-btn { display: inline-flex; padding: 0.8rem 1.5rem; background: #64748b; color: white; text-decoration: none; border-radius: 10px; font-weight: 600; margin-bottom: 2rem; }
+
+    .intro-box { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border-left: 5px solid #10b981; }
+    .intro-box h1 { color: #1e293b; font-size: 2rem; margin-bottom: 0.5rem; }
+    .intro-box p { color: #475569; font-size: 1.1rem; }
+
+    .questions-list { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+    .questions-list h2 { color: #ef4444; margin-bottom: 1.5rem; font-size: 1.5rem; }
+    .q-item { background: #f8fafc; padding: 1.2rem; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid #ef4444; font-weight: 500; color: #1e293b; }
+
+    .cta-box { text-align: center; background: linear-gradient(135deg, #fffbeb, #fef3c7); padding: 3rem 2rem; border-radius: 15px; border: 2px dashed #f59e0b; }
+    .cta-box h3 { color: #b45309; font-size: 1.8rem; margin-bottom: 1rem; }
+    .cta-box p { color: #92400e; margin-bottom: 2rem; font-size: 1.1rem; }
+
+    .buy-btn { background: linear-gradient(45deg, #10b981, #059669); color: white; border: none; padding: 1.2rem 2.5rem; font-size: 1.2rem; font-weight: 700; border-radius: 50px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+    .buy-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
+
+    /* Auth Modal Styles (Copied exactly from your youtube page) */
+    .auth-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 10000; }
+    .auth-modal.show { display: flex; }
+    .auth-container { background: white; padding: 2rem; border-radius: 20px; width: 90%; max-width: 400px; position: relative; }
+    .auth-header { text-align: center; margin-bottom: 2rem; }
+    .auth-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; background: white; font-weight: 600; cursor: pointer; }
+    .google-btn { border-color: #4285f4; color: #4285f4; }
+    .google-btn:hover { background: #4285f4; color: white; }
+    .close-auth { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="notes-container">
+    <a href="iq-semester-1" class="back-btn">← Back to Units</a>
+
+    <div class="intro-box">
+      <h1>Ecology - Unit 1</h1>
+      <p>Introduction to Ecology, Ecosystems, and Biosphere.</p>
+    </div>
+
+    <div class="questions-list">
+      <h2>🔥 Top Repeated Questions (PYQs)</h2>
+      <div class="q-item">Q1. Define Ecosystem. Explain the structural and functional components of an ecosystem with suitable examples. (10 Marks)</div>
+      <div class="q-item">Q2. What is Biosphere? Differentiate between Autecology and Synecology. (5 Marks)</div>
+      <div class="q-item">Q3. Describe the energy flow in an ecosystem using the Y-shaped energy flow model. (8 Marks)</div>
+    </div>
+
+    <div class="cta-box">
+      <h3>Want the Perfect Answers? 📚</h3>
+      <p>Don't waste time searching for answers in thick books. My handwritten notes contain <strong>to-the-point answers</strong> for all these PYQs, verified by DU professors.</p>
+
+      <button class="buy-btn" onclick="handleAccessNotes('zoology-first-semester')">
+        Get Complete Notes & Answers
+      </button>
+    </div>
+  </div>
+
+  <div id="authModal" class="auth-modal">
+    <div class="auth-container">
+      <button class="close-auth" onclick="hideAuthPopup()">&times;</button>
+      <div class="auth-header">
+        <h2>Login Required</h2>
+        <p>Please log in to purchase and save your notes permanently.</p>
+      </div>
+      <button class="auth-btn google-btn" onclick="customSignInWithGoogle()">
+        Continue with Google
+      </button>
+    </div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    // SMART CTA LOGIC
+    function handleAccessNotes(targetNotesPage) {
+      // 1. Check if user is already logged in
+      if (localStorage.getItem('isLoggedIn') === 'true') {
+        // Logged in! Redirect straight to the purchase/semester page
+        window.location.href = targetNotesPage;
+      } else {
+        // Not logged in. Save where they wanted to go, and show popup
+        localStorage.setItem('pendingPurchaseRedirect', targetNotesPage);
+        document.getElementById('authModal').classList.add('show');
+      }
+    }
+
+    function hideAuthPopup() {
+      document.getElementById('authModal').classList.remove('show');
+    }
+
+    // Custom Sign-in that redirects to Notes instead of reloading
+    async function customSignInWithGoogle() {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+
+        // Save auth state
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userId', user.uid);
+        localStorage.setItem('userName', user.displayName);
+
+        // Hide popup
+        hideAuthPopup();
+
+        // Check if we saved a redirect URL earlier
+        const redirectUrl = localStorage.getItem('pendingPurchaseRedirect');
+        if (redirectUrl) {
+          localStorage.removeItem('pendingPurchaseRedirect'); // clear it
+          window.location.href = redirectUrl; // Go to purchase page!
+        } else {
+          window.location.reload(); // Fallback
+        }
+
+      } catch (error) {
+        alert('Google sign-in failed: ' + error.message);
+      }
+    }
+  </script>
+</body>
+</html>

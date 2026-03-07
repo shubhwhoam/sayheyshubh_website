@@ -192,6 +192,29 @@
       box-shadow: 0 8px 25px rgba(0, 137, 123, 0.3);
     }
 
+    .questions-btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(45deg, #6366f1, #4f46e5); /* Indigo gradient */
+      color: white;
+    }
+
+    .questions-btn:hover {
+      background: linear-gradient(45deg, #4f46e5, #3730a3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+    }
+
     .content-section {
       margin: 3rem 0;
     }
@@ -935,6 +958,9 @@
         <button class="notes-btn" onclick="showAuthPopup()">
           📚 Download Notes
         </button>
+        <a href="zoology-important-questions" class="questions-btn">
+          ❓ Important Questions
+        </a>
       </div>
 
       <p class="channel-description">
