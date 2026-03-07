@@ -2101,7 +2101,6 @@
 
     // Function to update UI for logged-in users
     function updateUIForLoggedInUser(user, userData) {
-      // Add a welcome message right below the action buttons
       const actionButtons = document.querySelector('.action-buttons');
       if (actionButtons && userData && !document.querySelector('.welcome-message')) {
         const welcomeMsg = document.createElement('div');
@@ -2125,29 +2124,6 @@
       loadUserProfile();
     }
     
-      const actionButtons = document.querySelector('.action-buttons');
-      if (actionButtons && userData && !document.querySelector('.welcome-message')) {
-        const welcomeMsg = document.createElement('div');
-        welcomeMsg.className = 'welcome-message';
-        welcomeMsg.style.cssText = `
-          background: linear-gradient(135deg, #22c55e, #16a34a);
-          color: white;
-          padding: 0.9rem 1.2rem;
-          border-radius: 10px;
-          margin-top: 1rem;
-          text-align: center;
-          font-weight: 600;
-          font-size: 0.95rem;
-          box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
-        `;
-        welcomeMsg.innerHTML = `👋 Hello, ${userData.name || user.displayName || 'User'}! You're all set to access your notes.`;
-        actionButtons.parentNode.insertBefore(welcomeMsg, actionButtons.nextSibling);
-      }
-      
-      // Load user profile
-      loadUserProfile();
-    }
-
     // Load user profile from localStorage
     function loadUserProfile() {
       const userName = localStorage.getItem('userName');
