@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="robots" content="noindex, nofollow">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -18,19 +17,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BSc Zoology Notes Selection | SayHeyShubh</title>
+  <meta name="description" content="Download semester-wise PDF notes, study material, and previous year questions for DU Zoology Hons." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
 
   <style>
-    /* ... (All styles from your previous notes) ... */
-    /* I am including the critical layout styles here for completeness */
+    /* Global Box Sizing to prevent horizontal overflow in header/footer */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     html { scroll-behavior: smooth; }
     body {
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
     }
+    
+    header { width: 100%; }
+    main { flex: 1; width: 100%; }
+    footer { width: 100%; margin-top: auto; }
 
-    .notes-container { max-width: 1200px; margin: 0 auto; padding: 2rem; min-height: 80vh; will-change: transform; }
+    .notes-container { 
+      width: 100%;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 2rem; 
+      will-change: transform; 
+      flex: 1; 
+      position: relative; /* Context for absolute user profile */
+    }
     
     .navigation-controls { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
     
@@ -64,6 +83,7 @@
       background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-top: 4rem; /* Space for the absolute user profile */
     }
 
     .notes-header h1 {
@@ -81,36 +101,10 @@
       line-height: 1.6;
     }
 
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      padding: 1rem;
-      background: #f8fafc;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      color: #4a5568;
-    }
-
-    .breadcrumb-item {
-      cursor: pointer;
-      color: #6366f1;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .breadcrumb-item:hover {
-      text-decoration: underline;
-    }
-
-    .breadcrumb-separator {
-      color: #a0aec0;
-    }
-
+    /* Fixed Desktop Grid Layout */
     .navigation-buttons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr); /* Forces exactly 3 columns side-by-side */
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
@@ -120,7 +114,7 @@
       color: white;
       border: none;
       border-radius: 15px;
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
@@ -131,6 +125,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      text-align: center;
     }
 
     .nav-button:hover {
@@ -147,12 +142,11 @@
       margin-bottom: 2rem;
     }
 
-
     /* User Profile & Auth Styles */
     .user-profile {
       position: absolute;
       top: 1rem;
-      right: 1rem;
+      right: 2rem;
       background: white;
       padding: 0.8rem 1.2rem;
       border-radius: 25px;
@@ -212,10 +206,43 @@
       background: #dc2626;
       transform: translateY(-1px);
     }
-    @media (max-width: 768px) { .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-bottom: 1rem; } }
+
+    /* Robust Mobile Optimization */
+    @media (max-width: 900px) {
+      .navigation-buttons {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+      }
+    }
+
+    @media (max-width: 768px) { 
+      .notes-container {
+        padding: 1rem;
+      }
+      .user-profile { 
+        position: relative; 
+        top: 0; 
+        right: 0; 
+        width: 100%; 
+        max-width: 100%;
+        margin-bottom: 1.5rem; 
+        justify-content: space-between;
+      }
+      .notes-header {
+        margin-top: 0;
+        padding: 1.5rem 1rem;
+      }
+      .notes-header h1 {
+        font-size: 1.8rem;
+      }
+      .navigation-buttons {
+        grid-template-columns: 1fr; /* 1 column on mobile phones */
+      }
+      .content-section {
+        padding: 1.5rem 1rem;
+      }
+    }
   </style>
 </head>
-  
 <body>
   <header>
     <div class="container nav-flex">
@@ -240,17 +267,19 @@
 
   <div class="notes-container">
     <div id="userProfile" class="user-profile">
-      <div class="user-avatar" id="userAvatar">S</div>
-      <div class="user-info">
-        <div class="user-name" id="userName">User</div>
-        <div class="user-contact" id="userContact">***</div>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <div class="user-avatar" id="userAvatar">S</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">User</div>
+          <div class="user-contact" id="userContact">***</div>
+        </div>
       </div>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
     <div class="notes-header">
-      <h1>DU Zoology Study Material 📚</h1>
-      <h2>Semester-wise PDFs, Practical files & PYQs</h2>
+      <h1>BSc Zoology Study Material DU📚</h1>
+      <h2>Semester-wise PDFs, Important Questions, Practical files & PYQs</h2>
       <p>Download unit-wise study material based strictly on the latest DU Zoology syllabus.</p>
     </div>
 
@@ -258,30 +287,27 @@
       <a href="youtube" class="back-to-youtube-btn">← Back to YouTube Page</a>
     </div>
 
-      <!-- Main Content Area -->
-      <div id="mainContent">
-        <!-- Year Selection (Initial View) -->
-        <div id="yearSelection" class="content-section">
-          <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">BSc Zoology Notes 📚 | Select Academic Year ✍️ </h2>
-          <div class="navigation-buttons">
-            <a href="zoology-first-year" class="nav-button">
-              📖 First Year Notes
-            </a>
-            <a href="zoology-second-year" class="nav-button">
-              📖 Second Year Notes 
-            </a>
-            <a href="zoology-third-year" class="nav-button">
-              📖 Third Year Notes
-            </a>
-          </div>
+    <div id="mainContent">
+      <div id="yearSelection" class="content-section">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">BSc Zoology Notes 📚 | Select Academic Year ✍️ </h2>
+        <div class="navigation-buttons">
+          <a href="zoology-first-year" class="nav-button">
+            📖 First Year Notes
+          </a>
+          <a href="zoology-second-year" class="nav-button">
+            📖 Second Year Notes 
+          </a>
+          <a href="zoology-third-year" class="nav-button">
+            📖 Third Year Notes
+          </a>
         </div>
-
-
+      </div>
     </div>
   </div>
 
   <footer>
     <div class="container"><p>© 2025 SayHeyShubh</p></div>
+     <p> <a href="privacy-policy">Privacy Policy</a></p>
   </footer>
 
   <script src="script.js"></script>
@@ -299,18 +325,12 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    function checkAuthStatus() {
-      const isLoggedIn = localStorage.getItem('isLoggedIn');
-      if (!isLoggedIn || isLoggedIn !== 'true') {
-        window.location.href = 'youtube?showLogin=true';
-        return false;
-      }
-      return true;
-    }
-
+    // Silently check if the user is logged in, but don't kick them out if they aren't.
     function loadUserProfile() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
-      if (userName) {
+      
+      if (isLoggedIn === 'true' && userName) {
         document.getElementById('userName').textContent = userName;
         document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
         document.getElementById('userProfile').classList.add('show');
@@ -319,12 +339,17 @@
 
     async function logout() {
       await auth.signOut();
-      localStorage.clear();
-      window.location.href = 'youtube';
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userEmail');
+      // Reload page instead of redirecting, so they stay on this catalog page
+      window.location.reload(); 
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      if (checkAuthStatus()) loadUserProfile();
+      // Just try to load the profile. No more redirects!
+      loadUserProfile();
     });
   </script>
 </body>

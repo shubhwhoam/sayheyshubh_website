@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -11,17 +9,29 @@
 
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Zoology First Year | SayHeyShubh</title>
   <meta name="description" content="BSc Zoology First Year study notes and materials" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+
+  <style>
+    /* Structure to keep footer at the bottom */
+    html { scroll-behavior: smooth; }
+    body { 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+      margin: 0; 
+    }
+    main { flex: 1; width: 100%; }
+    footer { width: 100%; margin-top: auto; }
+  </style>
 </head>
 <body>
 
@@ -83,8 +93,7 @@
 
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
-  <script src="page-protection.js"></script>
-  
+
   <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
     💬
   </a>

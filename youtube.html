@@ -955,11 +955,8 @@
         <a href="https://www.youtube.com/@ShubhiPhilia" class="youtube-btn" target="_blank">
           🎥 Visit My Channel
         </a>
-        <button class="notes-btn" onclick="showAuthPopup()">
-          📚 Download Notes
-        </button>
-        <a href="zoology-important-questions" class="questions-btn">
-          ❓ Important Questions
+       <a href="zoology-years" class="notes-btn">
+         📚 Download Notes
         </a>
       </div>
 
@@ -975,7 +972,7 @@
     <div class="stats-section">
       <h2 class="section-title">📊 BSc Zoology Hons Study Resources & Content</h2>
       <div class="stats-grid">
-        <div class="stat-item" onclick="handleRestrictedAccess()">
+          <div class="stat-item" onclick="window.location.href='zoology-years'">
           <span class="stat-number">✍️</span>
           <div class="stat-label">Handwritten Notes</div>
         </div>
@@ -985,14 +982,14 @@
           <div class="stat-label">Important Books</div>
         </div>
 
-        <div class="stat-item" onclick="handleRestrictedAccess()">
+          <div class="stat-item" onclick="window.location.href='zoology-years'">
           <span class="stat-number">🎯</span>
           <div class="stat-label">Previous Year Questions</div>
         </div>
 
-        <div class="stat-item" onclick="window.open('https://www.youtube.com/@ShubhiPhilia', '_blank')">
+          <div class="stat-item" onclick="window.location.href='zoology-years'">
           <span class="stat-number">🌟</span>
-          <div class="stat-label">Academic Tips</div>
+          <div class="stat-label">Important Questions</div>
         </div>
       </div>
     </div>
@@ -1140,9 +1137,9 @@
           <a href="https://www.youtube.com/@ShubhiPhilia" class="youtube-btn" target="_blank">
             Subscribe Now
           </a>
-          <button class="notes-btn" onclick="showAuthPopup()">
-            Get Study Notes
-          </button>
+          <a href="zoology-years" class="notes-btn">
+            📚 Download Notes
+          </a>
         </div>
       </div>
     </div>
@@ -2104,17 +2101,30 @@
 
     // Function to update UI for logged-in users
     function updateUIForLoggedInUser(user, userData) {
-      // Change the "Download Notes" buttons to "Access Notes" since user is already logged in
-      const notesButtons = document.querySelectorAll('.notes-btn');
-      notesButtons.forEach(btn => {
-        btn.textContent = '📚 Access My Notes';
-        // Point to the SPECIFIC Zoology years page now
-        btn.onclick = function() {
-          window.location.href = 'zoology-years';
-        };
-      });
-      
       // Add a welcome message right below the action buttons
+      const actionButtons = document.querySelector('.action-buttons');
+      if (actionButtons && userData && !document.querySelector('.welcome-message')) {
+        const welcomeMsg = document.createElement('div');
+        welcomeMsg.className = 'welcome-message';
+        welcomeMsg.style.cssText = `
+          background: linear-gradient(135deg, #22c55e, #16a34a);
+          color: white;
+          padding: 0.9rem 1.2rem;
+          border-radius: 10px;
+          margin-top: 1rem;
+          text-align: center;
+          font-weight: 600;
+          font-size: 0.95rem;
+          box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        `;
+        welcomeMsg.innerHTML = `👋 Hello, ${userData.name || user.displayName || 'User'}! Welcome back.`;
+        actionButtons.parentNode.insertBefore(welcomeMsg, actionButtons.nextSibling);
+      }
+
+      // Load user profile
+      loadUserProfile();
+    }
+    
       const actionButtons = document.querySelector('.action-buttons');
       if (actionButtons && userData && !document.querySelector('.welcome-message')) {
         const welcomeMsg = document.createElement('div');
@@ -2213,16 +2223,7 @@
       }
     });
 
-    // Function to handle clicks on Stat Items (Notes/PYQs)
-    function handleRestrictedAccess() {
-      if (currentUser || localStorage.getItem('isLoggedIn') === 'true') {
-        // User is logged in -> Go directly to notes page
-        window.location.href = 'zoology-years';
-      } else {
-        // User is NOT logged in -> Show the popup
-        showAuthPopup();
-      }
-    }
+
   </script>
 </body>
 </html>
