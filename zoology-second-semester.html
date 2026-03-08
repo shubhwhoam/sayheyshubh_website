@@ -175,7 +175,7 @@
       background: linear-gradient(135deg, #6366f1, #4f46e5);
       color: white;
       padding: 1.2rem;
-      cursor: pointer;
+      cursor: default;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -188,28 +188,10 @@
       background: linear-gradient(135deg, #4f46e5, #3730a3);
     }
 
-    .expand-icon {
-      font-size: 1.2rem;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform;
-      transform: translateZ(0);
-    }
-
-    .expand-icon.rotated {
-      transform: rotate(180deg);
-    }
-
     .units-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       background: white;
-      will-change: max-height;
-      transform: translateZ(0);
-    }
-
-    .units-content.expanded {
-      max-height: 9999px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
     }
 
     .unit-item {
@@ -637,17 +619,17 @@
       </div>
     </div>
 
-    <div class="tap-hint">
-      <span>Tap a subject below to view Notes, Important Questions & PYQs</span>
-      <span class="bounce-arrow">👇</span>
+    <div class="tap-hint" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.3rem; color: #334155; font-weight: 700; margin: 0;">
+        Chapter-wise DU BSc Zoology 2nd Semester Notes, Important Questions & PYQs
+      </h2>
     </div>
     
     <div style="display: grid; gap: 1.5rem;">
 
       <div class="subject-dropdown subject-color-1">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-4): Non-Chordata: Coelomates
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -703,9 +685,8 @@
       </div>
 
       <div class="subject-dropdown subject-color-2">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-5): Fundamentals of Biomolecules
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           
@@ -769,9 +750,8 @@
       </div>
 
       <div class="subject-dropdown subject-color-3">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-6): Human Physiology-Control and Coordination Systems
-          <span class="expand-icon">▼</span>
         </div>
         
         <div class="units-content">
@@ -1026,20 +1006,6 @@
       }
     }
 
-    // Toggle Subjects UI
-    function toggleSubject(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.expand-icon');
-      const isExpanded = content.classList.contains('expanded');
-
-      if (isExpanded) {
-        content.classList.remove('expanded');
-        icon.classList.remove('rotated');
-      } else {
-        content.classList.add('expanded');
-        icon.classList.add('rotated');
-      }
-    }
 
     // Doubts bubble UI
     document.addEventListener("DOMContentLoaded", function() {
