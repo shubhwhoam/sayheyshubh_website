@@ -385,6 +385,29 @@
 
     .faq-answer p { margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem; }
 
+    /* Tap Hint Animation */
+    .tap-hint {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #64748b; /* Neutral slate grey instead of clickable purple */
+      font-weight: 500; /* Slightly softer weight */
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tap-hint .bounce-arrow {
+      font-size: 1.5rem;
+      animation: gentleBounce 2s infinite;
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
     /* Bottom Navigation Pills */
     .bottom-nav-links {
       display: flex;
@@ -612,6 +635,11 @@
         <div style="border-left-color: #10b981;"><strong>🧬 DSC-5 Fundamentals of Biomolecules:</strong> Covers Carbohydrates, Lipids, Proteins, Nucleic Acids and Enzymes.</div>
         <div style="border-left-color: #8b5cf6;"><strong>🧠 DSC-6 Human Physiology:</strong> Focuses on the Nervous System and sense organs, Muscles, Endocrine and Reproductive System.</div>
       </div>
+    </div>
+
+    <div class="tap-hint">
+      <span>Tap a subject below to view Notes, Important Questions & PYQs</span>
+      <span class="bounce-arrow">👇</span>
     </div>
     
     <div style="display: grid; gap: 1.5rem;">
