@@ -298,18 +298,12 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    function checkAuthStatus() {
-      const isLoggedIn = localStorage.getItem('isLoggedIn');
-      if (!isLoggedIn || isLoggedIn !== 'true') {
-        window.location.href = 'microbiology?showLogin=true';
-        return false;
-      }
-      return true;
-    }
-
+    // Silently check if the user is logged in, but don't kick them out if they aren't.
     function loadUserProfile() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
-      if (userName) {
+      
+      if (isLoggedIn === 'true' && userName) {
         document.getElementById('userName').textContent = userName;
         document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
         document.getElementById('userProfile').classList.add('show');
@@ -318,12 +312,17 @@
 
     async function logout() {
       await auth.signOut();
-      localStorage.clear();
-      window.location.href = 'microbiology';
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userEmail');
+      // Reload page instead of redirecting, so they stay on this catalog page
+      window.location.reload(); 
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      if (checkAuthStatus()) loadUserProfile();
+      // Just try to load the profile. No more redirects!
+      loadUserProfile();
     });
   </script>
 </body>
