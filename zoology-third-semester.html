@@ -866,9 +866,10 @@
         <div class="price-selection">
           <h3>Choose your contribution amount:</h3>
           <div class="price-options">
-            <div class="price-option" data-price="15">₹15</div>
-            <div class="price-option recommended selected" data-price="20">₹20</div>
+            <div class="price-option" data-price="20">₹20</div>
+            <div class="price-option recommended selected" data-price="25">₹25</div>
             <div class="price-option" data-price="30">₹30</div>
+            <div class="price-option" data-price="35">₹35</div>
             <div class="price-option" data-price="50">₹50</div>
           </div>
         </div>
@@ -893,7 +894,7 @@
     // Payment system variables
     let currentNoteId = ''; 
     let currentNoteTitle = '';
-    let selectedPrice = 20;
+    let selectedPrice = 25;
 
     // Expose callback immediately so page-protection.js can call it
     window.initializePaymentForAuthenticatedUser = function(userId) {
@@ -1049,9 +1050,9 @@
 
       document.querySelectorAll('.price-option').forEach(option => {
         option.classList.remove('selected');
-        if (option.dataset.price === '20') option.classList.add('selected');
+        if (option.dataset.price === '25') option.classList.add('selected');
       });
-      selectedPrice = 20;
+      selectedPrice = 25;
     }
 
     function hidePaymentPopup() {
