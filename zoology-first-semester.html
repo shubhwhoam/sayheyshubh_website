@@ -19,10 +19,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BSc Zoology First Semester Notes | SayHeyShubh</title>
   <meta name="description" content="Download detailed BSc Zoology First Semester notes for Delhi University (DU). Covers Non-chordates, Cell Biology, and Ecology with PYQs and practical files." />
+  
+  <link rel="canonical" href="https://sayheyshubh.netlify.app/zoology-first-semester">
+  
+  <script type="application/ld+json">
+    {
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+      {
+       "@type": "Question",
+       "name": "What subjects are included in BSc Zoology 1st semester DU?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "The first semester of BSc Zoology at Delhi University includes Non Chordata - Protists to Pseudocoelomates, Biology of Cell: Structure, and Concepts of Ecology."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Are these notes based on the Delhi University syllabus?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes. These notes are structured exactly according to the latest Delhi University BSc Zoology (Hons.) syllabus and include unit-wise explanations, diagrams, and important questions."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Do these notes include practical files?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes! Complete handwritten practical files including spotted specimens, slides, and procedures are available for download."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Do these notes include previous year questions?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes! Important previous year questions (PYQs) from past Delhi University Zoology exams are integrated into the units for download for better exam preparation."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "If I have a doubt, where can I ask it?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "If you have any doubts related to the notes, BSc Zoology syllabus or any other general doubt, you can reach out via Email: sayheyshubh@gmail.com, or Instagram: @sayheyshubh. You can also join the Telegram community."
+       }
+      }
+     ]
+    }
+    </script>
+
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
-    /* ... [Keep your existing CSS] ... */
+    html { scroll-behavior: smooth; }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    main { flex: 1; width: 100%; }
+    footer { width: 100%; margin-top: auto; }
+    
+    /* SEO-Friendly Header UI */
+    .seo-header {
+      text-align: center;
+      margin: 1.5rem auto 2.5rem auto;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+    }
+    
+    .seo-header h1 {
+      font-size: 2.2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+    
+    .seo-header p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Modern Syllabus Card */
+    .syllabus-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      border-top: 5px solid #0ea5e9;
+    }
+    
+    .syllabus-text-list {
+      margin-top: 1.5rem;
+      color: #334155;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .syllabus-text-list div {
+      margin-bottom: 0.8rem;
+      padding-left: 1rem;
+      border-left: 3px solid #e2e8f0;
+    }
+
     .subject-dropdown {
       margin-bottom: 1.5rem;
       border: 2px solid #e2e8f0;
@@ -30,15 +142,17 @@
       overflow: hidden;
       transition: all 0.3s ease;
     }
+
     .subject-dropdown:hover {
       border-color: #6366f1;
       box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1);
     }
+
     .subject-header {
       background: linear-gradient(135deg, #6366f1, #4f46e5);
       color: white;
       padding: 1.2rem;
-      cursor: pointer;
+      cursor: default;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -46,51 +160,45 @@
       font-size: 1.1rem;
       transition: all 0.3s ease;
     }
+
     .subject-header:hover {
       background: linear-gradient(135deg, #4f46e5, #3730a3);
     }
-    .expand-icon {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-    .expand-icon.rotated {
-      transform: rotate(180deg);
-    }
+
     .units-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
       background: white;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
     }
-    .units-content.expanded {
-      max-height: 9999px;
-    }
+
     .unit-item {
       display: flex;
-      flex-direction: column; /* Changed for description layout */
+      flex-direction: column;
       padding: 1rem 1.5rem;
       border-bottom: 1px solid #f1f5f9;
       transition: all 0.3s ease;
     }
-    .unit-item:last-child {
-      border-bottom: none;
-    }
+
+    .unit-item:last-child { border-bottom: none; }
+
     .unit-item:hover {
       background: #f8fafc;
       transform: translateX(5px);
     }
+
     .unit-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
     }
+
     .unit-title {
       font-weight: 500;
       color: #2d3748;
       flex: 1;
     }
-    /* SEO: New Description Style */
+
     .unit-desc {
       font-size: 0.85rem;
       color: #64748b;
@@ -98,10 +206,33 @@
       line-height: 1.4;
       max-width: 90%;
     }
+
     .unit-buttons {
       display: flex;
       gap: 0.75rem;
     }
+
+    .ques-btn {
+      background: #eef2ff;
+      color: #4338ca;      
+      border: 1px solid #c7d2fe; 
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ques-btn:hover {
+      background: #e0e7ff; 
+      color: #312e81;      
+      border-color: #a5b4fc;
+    }
+
     .download-btn, .watch-btn {
       padding: 0.5rem 1rem;
       border: none;
@@ -115,106 +246,210 @@
       align-items: center;
       gap: 0.5rem;
     }
+
     a.download-btn {
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
     }
+
     button.download-btn {
-        background: linear-gradient(135deg, #f59e0b, #d97706); 
-        color: white;
-      }
+      background: linear-gradient(135deg, #f59e0b, #d97706); 
+      color: white;
     }
+
     .download-btn:hover {
-      background: linear-gradient(135deg, #059669, #047857);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
       transform: translateY(-1px);
     }
+    
     .watch-btn {
       background: linear-gradient(135deg, #ef4444, #dc2626);
       color: white;
     }
+
     .watch-btn:hover {
       background: linear-gradient(135deg, #dc2626, #b91c1c);
       transform: translateY(-1px);
     }
-    .subject-color-1 .subject-header { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+
+    .coming-soon {
+      background: #fbbf24;
+      color: #92400e;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
     .subject-color-2 .subject-header { background: linear-gradient(135deg, #10b981, #059669); }
     .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
 
-    /* Mobile optimizations for smooth transitions */
+    /* FAQ SECTION STYLES */
+    .faq-section {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-top: 5px solid #6366f1;
+    }
+    
+    .faq-section h2 {
+      text-align: center;
+      color: #2d3748;
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .faq-container { max-width: 900px; margin: 0 auto; }
+
+    .faq-item {
+      background: #f8fafc;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover { border-color: #cbd5e1; }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #2d3748;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover { color: #6366f1; }
+
+    .faq-icon {
+      font-size: 1.5rem;
+      color: #6366f1;
+      font-weight: 300;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question.active .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+
+    .faq-answer p { margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem; }
+
+    /* Tap Hint */
+    .tap-hint {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #64748b; 
+      font-weight: 500; 
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Bottom Navigation Pills */
+    .bottom-nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    
+    .nav-pill {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-pill:hover {
+      background: #e2e8f0;
+      color: #1e293b;
+      transform: translateY(-2px);
+    }
+    
+    .nav-pill.primary {
+      background: #eef2ff;
+      color: #4338ca;
+    }
+    .nav-pill.primary:hover {
+      background: #e0e7ff;
+    }
+
+    /* User Profile Styles */
+    .user-profile {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #4f46e5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.8rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 600; color: #2d3748; }
+    .user-contact { font-size: 0.75rem; color: #718096; }
+    .logout-btn { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+    .logout-btn:hover { background: #dc2626; transform: translateY(-1px); }
+
+    /* Mobile optimizations */
     @media (max-width: 768px) {
-      .subject-dropdown {
-        margin-bottom: 1rem;
-      }
-
-      .subject-header {
-        padding: 1rem;
-        font-size: 1rem;
-      }
-
-      .units-content {
-        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .units-content.expanded {
-        max-height: 1000px;
-      }
-
-      .unit-item {
-        padding: 0.8rem 1rem;
-        /* Keep column layout for desc */
-        align-items: flex-start;
-        gap: 0.8rem;
-      }
-
-      .unit-header-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-
-      .unit-title {
-        width: 100%;
-        margin-bottom: 0;
-        font-size: 0.95rem;
-        line-height: 1.4;
-      }
-
-      .unit-buttons {
-        width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-
-      .download-btn, .watch-btn, .coming-soon {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
-        white-space: nowrap;
-      }
+      .seo-header h1 { font-size: 1.8rem; }
+      .seo-header p { font-size: 1rem; }
+      .subject-dropdown { margin-bottom: 1rem; }
+      .subject-header { padding: 1rem; font-size: 1rem; }
+      .units-content { transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .units-content.expanded { max-height: 1000px; }
+      .unit-item { padding: 0.8rem 1rem; align-items: flex-start; gap: 0.8rem; }
+      .unit-header-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .unit-title { width: 100%; margin-bottom: 0; font-size: 0.95rem; line-height: 1.4; }
+      .unit-buttons { width: 100%; justify-content: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+      .download-btn, .watch-btn, .ques-btn, .coming-soon { font-size: 0.8rem; padding: 0.4rem 0.8rem; white-space: nowrap; }
+      .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-bottom: 1rem; justify-content: space-between; }
+      .faq-section { padding: 1.5rem 1rem; }
     }
 
     @media (max-width: 480px) {
-      .units-content.expanded {
-        max-height: 9999px;
-      }
-
-      .unit-item {
-        padding: 0.7rem 0.8rem;
-      }
-
-      .unit-title {
-        font-size: 0.9rem;
-        word-break: break-word;
-      }
-
-      .download-btn, .watch-btn, .coming-soon {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.6rem;
-      }
+      .units-content.expanded { max-height: 9999px; }
+      .unit-item { padding: 0.7rem 0.8rem; }
+      .unit-title { font-size: 0.9rem; word-break: break-word; }
+      .download-btn, .watch-btn, .ques-btn, .coming-soon { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
     }
 
-    /* Payment Popup Styles */
-    .payment-modal {
+    /* Payment & Auth Popup Styles */
+    .payment-modal, .auth-modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -224,12 +459,12 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      z-index: 10000;
     }
-    .payment-modal.show {
-      display: flex;
-    }
-    .payment-container {
+
+    .payment-modal.show, .auth-modal.show { display: flex; }
+
+    .payment-container, .auth-container {
       background: white;
       max-width: 500px;
       width: 90%;
@@ -238,23 +473,14 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       position: relative;
     }
-    .payment-header {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-    }
-    .payment-header h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
-    }
-    .payment-header p {
-      margin: 0;
-      opacity: 0.9;
-      font-size: 0.9rem;
-    }
-    .close-payment {
+    
+    .auth-container { padding: 2rem; text-align: center; }
+
+    .payment-header { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; padding: 2rem; text-align: center; position: relative; }
+    .payment-header h2 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
+    .payment-header p { margin: 0; opacity: 0.9; font-size: 0.9rem; }
+
+    .close-payment, .close-auth {
       position: absolute;
       top: 1rem;
       right: 1rem;
@@ -266,110 +492,37 @@
       opacity: 0.8;
       transition: opacity 0.3s ease;
     }
-    .close-payment:hover {
-      opacity: 1;
-    }
-    .payment-body {
-      padding: 2rem;
-    }
-    .note-details {
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    .note-title {
-      font-weight: 600;
-      color: #2d3748;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-    .price-selection {
-      margin-bottom: 2rem;
-    }
-    .price-selection h3 {
-      margin-bottom: 1rem;
-      color: #4a5568;
-      font-size: 1rem;
-    }
-    .price-options {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .price-option {
-      background: #f7fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-    .price-option:hover {
-      background: #edf2f7;
-      border-color: #cbd5e0;
-    }
-    .price-option.selected {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-    .price-option.recommended {
-      position: relative;
-      background: #22c55e;
-      color: white;
-      border-color: #22c55e;
-    }
-    .payment-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .payment-btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    .cancel-btn {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-    .cancel-btn:hover {
-      background: #cbd5e0;
-    }
-    .preview-btn {
-      background: #6366f1;
-      color: white;
-    }
-    .preview-btn:hover {
-      background: #4f46e5;
-    }
-    .pay-btn {
-      background: #22c55e;
-      color: white;
-    }
-    .pay-btn:hover {
-      background: #16a34a;
-    }
-    .payment-loading {
-      display: none;
-      text-align: center;
-      padding: 1rem;
-      background: #f0f9ff;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-    .payment-loading.show {
-      display: block;
-    }
+    .close-auth { color: #718096; }
+    .close-payment:hover, .close-auth:hover { opacity: 1; }
+
+    .payment-body { padding: 2rem; }
+    .note-details { background: #f8fafc; border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; text-align: center; }
+    .note-title { font-weight: 600; color: #2d3748; margin-bottom: 1rem; font-size: 1.1rem; }
+    .price-selection { margin-bottom: 2rem; }
+    .price-selection h3 { margin-bottom: 1rem; color: #4a5568; font-size: 1rem; }
+    .price-options { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+
+    .price-option { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.5rem 1rem; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+    .price-option:hover { background: #edf2f7; border-color: #cbd5e0; }
+    .price-option.selected { background: #6366f1; color: white; border-color: #6366f1; }
+    .price-option.recommended { background: #22c55e; color: white; border-color: #22c55e; }
+
+    .payment-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .payment-btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; }
+    .cancel-btn { background: #e2e8f0; color: #4a5568; }
+    .cancel-btn:hover { background: #cbd5e0; }
+    .preview-btn { background: #6366f1; color: white; }
+    .preview-btn:hover { background: #4f46e5; }
+    .pay-btn { background: #22c55e; color: white; }
+    .pay-btn:hover { background: #16a34a; }
+
+    .payment-loading { display: none; text-align: center; padding: 1rem; background: #f0f9ff; border-radius: 8px; margin-top: 1rem; }
+    .payment-loading.show { display: block; }
+    
+    .auth-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; background: white; font-weight: 600; cursor: pointer; margin-top: 1.5rem; transition: all 0.3s ease; }
+    .google-btn { border-color: #4285f4; color: #4285f4; }
+    .google-btn:hover { background: #4285f4; color: white; }
+
   </style>
 </head>
 <body>
@@ -401,30 +554,59 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology First Semester Notes (DU)</h1>
-
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <a href="zoology-first-year" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Zoology First Year</a>
+  <main class="container" style="position: relative;">
+    
+    <div id="userProfile" class="user-profile">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <div class="user-avatar" id="userAvatar">S</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">User</div>
+          <div class="user-contact" id="userContact">***</div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview For First Semester BSc Zoology Hons</h3>
+    <div class="seo-header">
+      <h1>📖 BSc Zoology First Semester Notes (DU)</h1>
+      <p>
+        These <strong>BSc Zoology 1st Semester Notes for Delhi University (DU)</strong> cover the full syllabus perfectly. Each unit includes exam-oriented explanations, diagrams, and <strong>important questions based on previous DU exams</strong> to help Zoology Honours students prepare effectively.
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <a href="zoology-first-year" style="color: #6366f1; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">← Back to First Year</a>
+      </div>
+    </div>
+
+    <div class="syllabus-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 BSc Zoology (Hons.) Semester 1 Syllabus Overview</h3>
         <a href="https://drive.google.com/file/d/1xDtJ2BOJPJnh8IPOzQUeGAqCEzSySU4O/view?usp=sharing" target="_blank" 
-           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-          📄 Download Syllabus PDF
+           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          📄 Download Official DU Syllabus PDF
         </a>
       </div>
-      <p>Comprehensive notes for (DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, and (DSC-3) Concepts of Ecology.</p>
+      <p style="color: #475569; margin-top: 1rem; line-height: 1.6; font-size: 1.05rem;">
+        The first semester of <strong>BSc Zoology (Hons.)</strong> introduces students to non-chordates, cell biology, and ecology. The core subjects include:
+      </p>
+      
+      <div class="syllabus-text-list">
+        <div style="border-left-color: #6366f1;"><strong>🦠 DSC-1 Non Chordata:</strong> Protists to Pseudocoelomates.</div>
+        <div style="border-left-color: #10b981;"><strong>🔬 DSC-2 Biology of Cell:</strong> Structure and Function.</div>
+        <div style="border-left-color: #8b5cf6;"><strong>🌍 DSC-3 Concepts of Ecology:</strong> Populations, Communities, and Ecosystems.</div>
+      </div>
+    </div>
+
+    <div class="tap-hint" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.3rem; color: #334155; font-weight: 700; margin: 0;">
+        Chapter-wise DU BSc Zoology 1st Semester Notes, Important Questions & PYQs
+      </h2>
     </div>
 
     <div style="display: grid; gap: 1.5rem;">
 
       <div class="subject-dropdown subject-color-1">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-1) Non Chordata - Protists to Pseudocoelomates
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -432,7 +614,7 @@
               <span class="unit-title">Unit I: Introduction to Non-chordates </span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/watch?v=FMTwnbzEWAg" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-1-dsc-1', 'Unit I: Introduction to Non-chordates')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-1', 'Unit I: Introduction to Non-chordates')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">General characteristics of non-chordates and basis of classification.</p>
@@ -443,11 +625,10 @@
               <span class="unit-title">Unit II: Protista </span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/WD--edvmkNs" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-2-dsc-1', 'Unit II: Protista')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-2-dsc-1', 'Unit II: Protista')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics and classification of Protista; Life cycle of Plasmodium vivax; Locomotion and
-            reproduction in Protista.</p>
+            <p class="unit-desc">General characteristics and classification of Protista; Life cycle of Plasmodium vivax; Locomotion and reproduction in Protista.</p>
           </div>
 
           <div class="unit-item">
@@ -455,7 +636,7 @@
               <span class="unit-title">Unit III: Porifera</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/oi0GWkKAvlk" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-3-dsc-1', 'Unit III: Porifera')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-3-dsc-1', 'Unit III: Porifera')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Introduction to Parazoa; General characteristics and classification of Porifera; Canal system (Ascon, Sycon, and Leucon) in sponges.</p>
@@ -466,7 +647,7 @@
               <span class="unit-title">Unit IV: Cnidaria and Ctenophora</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-4-dsc-1', 'Unit IV: Cnidaria and Ctenophora')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-4-dsc-1', 'Unit IV: Cnidaria and Ctenophora')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Introduction to Metazoa; General characteristics and classification of Cnidaria and Ctenophora; Polymorphism in Cnidaria; Corals and coral reefs.</p>
@@ -477,18 +658,17 @@
               <span class="unit-title">Unit V: Platyhelminthes and Nemathelminthes</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-5-dsc-1', 'Unit V: Platyhelminthes and Nemathelminthes')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-5-dsc-1', 'Unit V: Platyhelminthes and Nemathelminthes')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics and classification; Parasitic adaptations of Helminthes; Life cycle of
-            Taenia solium and Ascaris lumbricoides.</p>
+            <p class="unit-desc">General characteristics and classification; Parasitic adaptations of Helminthes; Life cycle of Taenia solium and Ascaris lumbricoides.</p>
           </div>
 
           <div class="unit-item">
             <div class="unit-header-row">
               <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/13cRlMd66YsWlw_GlAneB0r9yb7iDu0rb/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/13cRlMd66YsWlw_GlAneB0r9yb7iDu0rb/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">Quick Revision Summary and Most Important Questions for DSC-1 Non-chordates.</p>
@@ -497,7 +677,7 @@
             <div class="unit-header-row">
               <span class="unit-title">📝 <b>Previous year questions</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1EO0FiT_5jbXPrYB8DjKp4Z7tnVgKpDvl/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1EO0FiT_5jbXPrYB8DjKp4Z7tnVgKpDvl/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">DU previous year question papers (PYQ) for BSc Zoology first semester exams.</p>
@@ -506,7 +686,7 @@
             <div class="unit-header-row">
               <span class="unit-title">📋 <b>Complete Practical File</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/190SkSa4aHrUWoEUx7Fc1k4vYNhB8JlFo/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/190SkSa4aHrUWoEUx7Fc1k4vYNhB8JlFo/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">Handwritten practical file including spotted specimens and slides for BSc Zoology first semester DU.</p>
@@ -515,9 +695,8 @@
       </div>
 
       <div class="subject-dropdown subject-color-2">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-2) Biology of Cell: Structure
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -525,7 +704,7 @@
               <span class="unit-title">Unit I: Overview of Cells and Plasma membrane</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/gPlUwau5cwE" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-1-dsc-2', 'Unit I: Overview of Cells')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-2', 'Unit I: Overview of Cells')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Prokaryotic and Eukaryotic cells; Various models of plasma membrane structures, Transport across membranes: active and passive transport, facilitated transport; Cell-cell junctions, structures, and functions: Tight junctions, adherens junctions, gap junctions.</p>
@@ -536,11 +715,10 @@
               <span class="unit-title">Unit II: Endomembrane System</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/watch?v=dNWq3hZ1xoI" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-2-dsc-2', 'Unit II: Endomembrane System')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-2-dsc-2', 'Unit II: Endomembrane System')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">Structure and Functions: Endoplasmic Reticulum (ER), Golgi apparatus, Signal hypothesis, Vesicular transport from ER to Golgi apparatus, Protein sorting and transport from Golgi
- apparatus, Coated Vesicles, Lysosomes, Peroxisomes. Structure of Mitochondria, Semiautonomous nature, Endosymbiotic hypothesis; Respiratory chain, Chemiosmotic hypothesis, ATP Synthase.</p>
+            <p class="unit-desc">Structure and Functions: Endoplasmic Reticulum (ER), Golgi apparatus, Signal hypothesis, Vesicular transport from ER to Golgi apparatus, Protein sorting and transport from Golgi apparatus, Coated Vesicles, Lysosomes, Peroxisomes. Structure of Mitochondria, Semiautonomous nature, Endosymbiotic hypothesis; Respiratory chain, Chemiosmotic hypothesis, ATP Synthase.</p>
           </div>
 
           <div class="unit-item">
@@ -548,7 +726,7 @@
               <span class="unit-title">Unit III: Cytoskeleton </span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/j8rt3Aenk04" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-3-dsc-2', 'Unit III: Cytoskeleton')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-3-dsc-2', 'Unit III: Cytoskeleton')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Structure and Functions of Microtubules, Microfilaments and Intermediate filaments.</p>
@@ -559,7 +737,7 @@
               <span class="unit-title">Unit IV: Nucleus  </span>
               <div class="unit-buttons">
                 <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-4-dsc-2', 'Unit IV: Nucleus')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-4-dsc-2', 'Unit IV: Nucleus')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Structure of Nucleus, Nuclear envelope, nuclear pore complex, Transport of molecules across nuclear membrane, nucleosome, nucleolus; Chromatin: euchromatin, heterochromatin.</p>
@@ -570,7 +748,7 @@
               <span class="unit-title">Unit V: Cell Division</span>
               <div class="unit-buttons">
                 <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-5-dsc-2', 'Unit V: Cell Division')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-5-dsc-2', 'Unit V: Cell Division')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Mitosis, Meiosis, Cell cycle and its regulation, Cell division checkpoints</p>
@@ -581,7 +759,7 @@
               <span class="unit-title">Unit VI: Introduction to Cell Signaling </span>
               <div class="unit-buttons">
                 <a href="https://youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-6-dsc-2', 'Unit VI: Cell Signaling')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-6-dsc-2', 'Unit VI: Cell Signaling')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Cell Signaling through G-protein coupled receptor (GPCR) and role of secondary messenger: cAMP and protein kinase A.</p>
@@ -591,7 +769,7 @@
             <div class="unit-header-row">
               <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1_FYyYdEju1pdwu4hESRKQyymdLIz2-f6/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1_FYyYdEju1pdwu4hESRKQyymdLIz2-f6/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">Quick revision notes and Most Important Questions for Cell Biology.</p>
@@ -600,7 +778,7 @@
             <div class="unit-header-row">
               <span class="unit-title">📝 <b>Previous year questions</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1dyKeN4vFNPheIXowUQoZ6No6L1CSa6xy/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1dyKeN4vFNPheIXowUQoZ6No6L1CSa6xy/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">DU PYQs for Cell Biology exams.</p>
@@ -609,7 +787,7 @@
             <div class="unit-header-row">
               <span class="unit-title">📋 <b>Complete Practical File</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1RjBjhIXrHGsIdptizcxDt89rPYg8mYu2/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1RjBjhIXrHGsIdptizcxDt89rPYg8mYu2/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">Practical file covering all the experiments with procedures, diagrams and photographs.</p>
@@ -618,9 +796,8 @@
       </div>
 
       <div class="subject-dropdown subject-color-3">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-3) Concepts of Ecology
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -628,7 +805,7 @@
               <span class="unit-title">Unit I: Introduction to Ecology</span>
               <div class="unit-buttons">
                 <a href="https://youtu.be/0QyVX0lVcMM" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-1-dsc-3', 'Unit I: Introduction to Ecology')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-3', 'Unit I: Introduction to Ecology')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Autecology and Synecology, Laws of limiting factors, Study of physical factors: Temperature and Light.</p>
@@ -639,11 +816,10 @@
               <span class="unit-title">Unit II: Population</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/HO20RmosDmA" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-2-dsc-3', 'Unit II: Population')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-2-dsc-3', 'Unit II: Population')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">Unitary and Modular populations; Unique and group attributes of population: density, natality, mortality, life tables, fecundity tables, survivorship curves, age ratio, sex ratio,
- dispersal and dispersion; Exponential and logistic growth, equations and patterns, r and k strategies; Intraspecific population regulation: density-dependent and independent factors.</p>
+            <p class="unit-desc">Unitary and Modular populations; Unique and group attributes of population: density, natality, mortality, life tables, fecundity tables, survivorship curves, age ratio, sex ratio, dispersal and dispersion; Exponential and logistic growth, equations and patterns, r and k strategies; Intraspecific population regulation: density-dependent and independent factors.</p>
           </div>
 
           <div class="unit-item">
@@ -651,7 +827,7 @@
               <span class="unit-title">Unit III: Species Interactions</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/OE-KRF798Gc" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-3-dsc-3', 'Unit III: Species Interactions')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-3-dsc-3', 'Unit III: Species Interactions')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Types of species interactions, Interspecific competition: Lotka-Volterra model of competition, Gause’s Principle with laboratory and field examples, Niche concept; Predation: Lotka-Volterra equations, Functional and numerical responses, predator defence mechanisms, Resource partitioning.</p>
@@ -662,7 +838,7 @@
               <span class="unit-title">Unit IV: Community</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-4-dsc-3', 'Unit IV: Community')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-4-dsc-3', 'Unit IV: Community')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
              <p class="unit-desc">Community characteristics: species richness, dominance, diversity, abundance, guilds, ecotone and edge effect; Ecological succession with examples and types.</p>
@@ -673,7 +849,7 @@
               <span class="unit-title">Unit V: Ecosystem</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-5-dsc-3', 'Unit V: Ecosystem')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-5-dsc-3', 'Unit V: Ecosystem')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Types of Ecosystems: Terrestrial ecosystem, vertical stratification in tropical forest; Food chain: detritus and grazing food chains, linear and Y-shaped food chains, food web; Energy flow through the ecosystem; Ecological pyramids and Ecological efficiencies; Biogeochemical cycle- nitrogen cycle.</p>
@@ -684,7 +860,7 @@
               <span class="unit-title">Unit VI: Applied Ecology</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@shubhiphilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-6-dsc-3', 'Unit VI: Applied Ecology')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-6-dsc-3', 'Unit VI: Applied Ecology')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Ecology in wildlife conservation and management, Protected areas: National Parks, Biosphere reserves and Sanctuaries; Restoration ecology, Principles of Environmental impact assessment.</p>
@@ -694,7 +870,7 @@
             <div class="unit-header-row">
               <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/19v2YFDTMkf07QxkPKfRv5KEdOw09vc9f/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/19v2YFDTMkf07QxkPKfRv5KEdOw09vc9f/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">Ecology First semester Most Important Questions and short revision notes</p>
@@ -703,7 +879,7 @@
             <div class="unit-header-row">
               <span class="unit-title">📝 <b>Previous year questions</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/16sBH0de1mZZTQCM1eLHhANBsGFDbinvY/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/16sBH0de1mZZTQCM1eLHhANBsGFDbinvY/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">DU BSc Zoology first sem Ecology PYQs</p>
@@ -712,7 +888,7 @@
             <div class="unit-header-row">
               <span class="unit-title">📋 <b>Complete Practical File</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1Bb-x8b4YnYceEvZ_jBn_4D-QGMnER4gl/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1Bb-x8b4YnYceEvZ_jBn_4D-QGMnER4gl/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">Covers all the practicals for first semester Concepts of Ecology</p>
@@ -720,6 +896,78 @@
         </div>
       </div>
     </div>
+
+    <div class="faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+      <div class="faq-container">
+        
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What subjects are included in BSc Zoology 1st semester DU?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The first semester of BSc Zoology at Delhi University includes Non Chordata - Protists to Pseudocoelomates, Biology of Cell: Structure, and Concepts of Ecology.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Are these notes based on the Delhi University syllabus?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. These notes are structured exactly according to the latest Delhi University BSc Zoology (Hons.) syllabus and include unit-wise explanations, diagrams, and important questions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Do these notes include practical files?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Complete handwritten practical files including spotted specimens, slides, and procedures are available for download for all subjects where practicals are applicable.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Do these notes include previous year questions?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Important previous year questions (PYQs) from past Delhi University Zoology exams are integrated into the units for download for better exam preparation.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>If I have a doubt, where can I ask it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>If you have any doubts related to the notes, BSc Zoology syllabus or any other general doubt, you can reach out through the following platforms:
+            <ul> 
+              <li>📧 Email: sayheyshubh@gmail.com</li>
+              <li>📸 Instagram: @sayheyshubh (DM me anytime)</li>
+            </ul>
+            You can also join the Telegram community, where many students discuss topics, share resources, and help each other with doubts.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div style="margin-bottom: 2rem; text-align: center; padding: 2.5rem 2rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+      <h2 style="font-size: 1.4rem; color: #2d3748; margin-bottom: 1.5rem;">🔍 Explore Other Zoology Notes</h2>
+      <div class="bottom-nav-links">
+        <a href="zoology-second-semester" class="nav-pill">BSc Zoology 2nd Semester</a>
+        <a href="zoology-third-semester" class="nav-pill">BSc Zoology 3rd Semester</a>
+        <a href="notes" class="nav-pill primary">View All Notes →</a>
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -729,27 +977,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="page-protection.js"></script>
-  <script>
-    function toggleSubject(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.expand-icon');
-      const isExpanded = content.classList.contains('expanded');
-
-      if (isExpanded) {
-        content.classList.remove('expanded');
-        icon.classList.remove('rotated');
-      } else {
-        content.classList.add('expanded');
-        icon.classList.add('rotated');
-      }
-    }
-
-    
-  </script>
-
   <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
     💬
   </a>
@@ -758,19 +985,28 @@
     Got a question?
   </div>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const bubble = document.getElementById("doubts-bubble");
-    setTimeout(() => { bubble.classList.add("show"); }, 800);
-    setTimeout(() => { bubble.classList.remove("show"); }, 3800);
-  });
-  </script>
+  <div id="authModal" class="auth-modal">
+    <div class="auth-container">
+      <button class="close-auth" onclick="hideAuthPopup()">&times;</button>
+      <h2>Login Required</h2>
+      <p style="color: #64748b; margin-top: 10px; font-size: 0.95rem;">Please log in securely to purchase new notes or access your unlocked materials.</p>
+      <button class="auth-btn google-btn" onclick="signInWithGoogle()">
+        <svg width="20" height="20" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </button>
+    </div>
+  </div>
 
   <div id="paymentModal" class="payment-modal">
     <div class="payment-container">
       <div class="payment-header">
         <button class="close-payment" onclick="hidePaymentPopup()">&times;</button>
-        <h2>🔒 Unlock Study Notes</h2>
+        <h2>🌻 Unlock Study Notes</h2>
         <p>Access premium BSc Zoology notes and study materials</p>
       </div>
 
@@ -783,7 +1019,6 @@
         <div class="price-selection">
           <h3>Choose your contribution amount:</h3>
           <div class="price-options">
-            <div class="price-option" data-price="10">₹10</div>
             <div class="price-option" data-price="15">₹15</div>
             <div class="price-option recommended selected" data-price="20">₹20</div>
             <div class="price-option" data-price="30">₹30</div>
@@ -804,29 +1039,90 @@
     </div>
   </div>
 
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
   <script>
-    // Razorpay key will be fetched from API
-    let RAZORPAY_KEY_ID = null;
+    // FAQ Toggle UI Logic
+    function toggleFAQ(button) {
+      const answer = button.nextElementSibling;
+      const isActive = button.classList.contains('active');
+      
+      // Close all FAQs
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.classList.remove('active');
+        q.nextElementSibling.classList.remove('active');
+      });
+      
+      // Open clicked FAQ if it wasn't active
+      if (!isActive) {
+        button.classList.add('active');
+        answer.classList.add('active');
+      }
+    }
 
-    // Payment system variables
-    let currentNoteId = ''; // Changed from currentNoteUrl
+    // Doubts bubble UI
+    document.addEventListener("DOMContentLoaded", function() {
+      const bubble = document.getElementById("doubts-bubble");
+      setTimeout(() => { bubble.classList.add("show"); }, 800);
+      setTimeout(() => { bubble.classList.remove("show"); }, 3800);
+    });
+
+    // Profile UI Load
+    function loadUserProfile() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userName = localStorage.getItem('userName');
+      
+      if (isLoggedIn === 'true' && userName) {
+        document.getElementById('userName').textContent = userName;
+        document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+        document.getElementById('userProfile').classList.add('show');
+      }
+    }
+
+    async function logout() {
+      await auth.signOut();
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('purchasedNotes'); // Clear purchased cache
+      window.location.reload(); 
+    }
+
+    // --- AUTHENTICATION SYSTEM ---
+    function showAuthPopup() {
+      document.getElementById('authModal').classList.add('show');
+    }
+
+    function hideAuthPopup() {
+      document.getElementById('authModal').classList.remove('show');
+    }
+
+    async function signInWithGoogle() {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+        
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userId', user.uid);
+        localStorage.setItem('userName', user.displayName);
+        localStorage.setItem('userEmail', user.email);
+        
+        hideAuthPopup();
+        window.location.reload(); 
+      } catch (error) {
+        alert('Google sign-in failed: ' + error.message);
+      }
+    }
+
+    // --- PAYMENT & UNLOCK SYSTEM ---
+    let RAZORPAY_KEY_ID = null;
+    let currentNoteId = ''; 
     let currentNoteTitle = '';
     let selectedPrice = 20;
 
-    // Expose callback immediately so page-protection.js can call it
-    window.initializePaymentForAuthenticatedUser = function(userId) {
-      localStorage.setItem('userId', userId);
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          loadPurchasedNotesAndUpdateButtons();
-        });
-      } else {
-        loadPurchasedNotesAndUpdateButtons();
-      }
-    };
-
-    // Initialize payment system when page loads
     document.addEventListener('DOMContentLoaded', function() {
+      loadUserProfile();
       initializePaymentSystem();
       fetchRazorpayConfig();
     });
@@ -844,13 +1140,12 @@
     }
 
     function initializePaymentSystem() {
-      // Check for existing authentication
-      const storedUserId = localStorage.getItem('userId');
-      if (storedUserId && window.currentUserData && auth.currentUser) {
-        loadPurchasedNotesAndUpdateButtons();
-      }
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          loadPurchasedNotesAndUpdateButtons();
+        }
+      });
 
-      // Add price selection handlers
       document.querySelectorAll('.price-option').forEach(option => {
         option.addEventListener('click', () => {
           document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
@@ -859,22 +1154,20 @@
         });
       });
 
-      // Close modal when clicking outside
       document.getElementById('paymentModal').addEventListener('click', (e) => {
-        if (e.target.id === 'paymentModal') {
-          hidePaymentPopup();
-        }
+        if (e.target.id === 'paymentModal') hidePaymentPopup();
+      });
+      document.getElementById('authModal').addEventListener('click', (e) => {
+        if (e.target.id === 'authModal') hideAuthPopup();
       });
     }
 
     async function loadPurchasedNotesAndUpdateButtons() {
-      const userId = localStorage.getItem('userId');
-      if (!userId || !auth.currentUser) return;
+      const user = auth.currentUser;
+      if (!user) return;
 
       try {
-        const idToken = await auth.currentUser.getIdToken();
-
-        // This now returns a list of IDs (e.g. ['unit-1-dsc-1']) instead of URLs
+        const idToken = await user.getIdToken();
         const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${idToken}` }
@@ -883,7 +1176,6 @@
         if (response.ok) {
           const data = await response.json();
           const purchasedNotes = data.purchasedNotes || [];
-
           localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
           updateButtonStates(purchasedNotes);
         }
@@ -892,80 +1184,61 @@
       }
     }
 
-    // Logic to turn "Locked" buttons into "View" buttons if purchased
     function updateButtonStates(purchasedIds) {
       console.log('Purchased Note IDs:', purchasedIds);
-
-      // Find all buttons that have our secure handler
       const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
-
+      
       secureButtons.forEach(button => {
-        // Extract the ID from the onclick attribute: handleViewNotes('unit-1-dsc-1', ...)
         const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'/);
         if (!match) return;
-
+        
         const noteId = match[1];
 
         if (purchasedIds.includes(noteId)) {
-          // Unlocked State
           button.textContent = '✅ View Notes';
           button.style.background = '#22c55e';
           button.style.color = 'white';
         } else {
-          // Locked State (Default)
           button.textContent = '🔒 Unlock Notes';
-          button.style.background = '#f59e0b';
+          button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
           button.style.color = 'white';
         }
       });
     }
 
-    // The Main Handler: Click to View OR Click to Pay
     async function handleViewNotes(noteId, noteTitle) {
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
+      
       if (!user) {
-        alert('Please sign in to view notes');
+        showAuthPopup();
         return;
       }
 
-      const btn = event.currentTarget || event.target; // Get the button element
+      const btn = event.currentTarget || event.target;
       const originalText = btn.textContent;
-
-      // Visual feedback
       btn.textContent = 'Checking...';
 
       try {
         const token = await user.getIdToken();
-
-        // 1. Try to fetch the secure note URL from our backend
         const response = await fetch(`/.netlify/functions/secure-notes/${noteId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
-
         const data = await response.json();
 
         if (data.success && data.previewUrl) {
-          // 2. Success! User owns the note. Open it.
           window.open(data.previewUrl, '_blank');
-
-          // Update button style just in case
           btn.textContent = '✅ View Notes';
           btn.style.background = '#22c55e';
-
-          // Update local storage so it stays green on reload
+          
           const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
           if (!localPurchases.includes(noteId)) {
              localPurchases.push(noteId);
              localStorage.setItem('purchasedNotes', JSON.stringify(localPurchases));
           }
-
         } else if (response.status === 403) {
-          // 3. Forbidden! User has not paid. Show Payment Popup.
-          btn.textContent = originalText; // Revert text
+          btn.textContent = originalText;
           showPaymentPopup(noteId, noteTitle);
-
         } else {
-          // Other error
           alert('Error: ' + (data.error || 'Unknown error'));
           btn.textContent = originalText;
         }
@@ -977,13 +1250,11 @@
     }
 
     function showPaymentPopup(noteId, noteTitle) {
-      currentNoteId = noteId; // Store ID, not URL
+      currentNoteId = noteId;
       currentNoteTitle = noteTitle || 'BSc Zoology Notes';
-
       document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
       document.getElementById('paymentModal').classList.add('show');
-
-      // Reset price
+      
       document.querySelectorAll('.price-option').forEach(option => {
         option.classList.remove('selected');
         if (option.dataset.price === '20') option.classList.add('selected');
@@ -1001,13 +1272,9 @@
     }
 
     async function proceedToPayment() {
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
       if (!user) { alert('Please log in first'); return; }
-
-      if (typeof Razorpay === 'undefined') {
-        alert('Payment system not loaded. Refresh and try again.');
-        return;
-      }
+      if (typeof Razorpay === 'undefined') { alert('Payment system not loaded. Refresh and try again.'); return; }
 
       document.getElementById('paymentLoading').classList.add('show');
 
@@ -1015,19 +1282,10 @@
         const idToken = await user.getIdToken();
         const amountInPaise = selectedPrice * 100;
 
-        // Create Order: We send the noteID (currentNoteId) as the noteUrl parameter
-        // The backend will resolve this ID to the real URL using notes-data.json
         const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${idToken}`
-          },
-          body: JSON.stringify({
-            amount: amountInPaise,
-            noteTitle: currentNoteTitle,
-            noteUrl: currentNoteId // Sending ID here
-          })
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
+          body: JSON.stringify({ amount: amountInPaise, noteTitle: currentNoteTitle, noteUrl: currentNoteId })
         });
 
         const orderData = await orderResponse.json();
@@ -1044,38 +1302,29 @@
             document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>✅ Success!</h3><p>Unlocking...</p></div>';
 
             try {
-              // Verify Payment
               const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
-                headers: { 
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${idToken}`
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
                 body: JSON.stringify({
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
                   signature: response.razorpay_signature,
-                  noteUrl: currentNoteId // Sending ID here too
+                  noteUrl: currentNoteId 
                 })
               });
 
               const verifyResult = await verifyResponse.json();
 
               if (verifyResult.success) {
-                // Success!
                 document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>🎉 Unlocked!</h3></div>';
-
                 setTimeout(() => {
                   hidePaymentPopup();
-
-                  // Update UI locally immediately
                   const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
                   if (!purchasedNotes.includes(currentNoteId)) {
                     purchasedNotes.push(currentNoteId);
                     localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
                   }
                   updateButtonStates(purchasedNotes);
-
                   alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
                 }, 1500);
               } else {
@@ -1109,6 +1358,5 @@
       }
     }
   </script>
-
 </body>
 </html>

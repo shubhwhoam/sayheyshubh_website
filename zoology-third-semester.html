@@ -6,23 +6,136 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-01VF0W2CD1');
   </script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  
+
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
+     crossorigin="anonymous"></script>
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BSc Zoology Third Semester Notes | SayHeyShubh</title>
   <meta name="description" content="Download detailed BSc Zoology Third Semester notes for Delhi University (DU). Covers Chordates, Biochemistry, and Human Physiology with PYQs and practical files." />
+
+  <link rel="canonical" href="https://sayheyshubh.netlify.app/zoology-third-semester">
+  
+  <script type="application/ld+json">
+    {
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+      {
+       "@type": "Question",
+       "name": "What subjects are included in BSc Zoology 3rd semester DU?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "The third semester of BSc Zoology at Delhi University includes Diversity of Chordates, Biochemistry: Metabolic Processes, and Human Physiology: Life Sustaining Systems."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Are these notes based on the Delhi University syllabus?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes. These notes are structured exactly according to the latest Delhi University BSc Zoology (Hons.) syllabus and include unit-wise explanations, diagrams, and important questions."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Do the Biochemistry notes include metabolic pathways?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes. The notes comprehensively cover all major pathways including Glycolysis, Krebs Cycle, Beta-oxidation, and Oxidative Phosphorylation required for the exams."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Do these notes include previous year questions?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes! Important previous year questions (PYQs) from past Delhi University Zoology exams are integrated into the units for download for better exam preparation."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "If I have a doubt, where can I ask it?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "If you have any doubts related to the notes, BSc Zoology syllabus or any other general doubt, you can reach out via Email: sayheyshubh@gmail.com, or Instagram: @sayheyshubh. You can also join the Telegram community."
+       }
+      }
+     ]
+    }
+    </script>
+
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
   <style>
-    /* Existing styles remain unchanged */
+    html { scroll-behavior: smooth; }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    main { flex: 1; width: 100%; }
+    footer { width: 100%; margin-top: auto; }
+    
+    /* SEO-Friendly Header UI */
+    .seo-header {
+      text-align: center;
+      margin: 1.5rem auto 2.5rem auto;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+    }
+    
+    .seo-header h1 {
+      font-size: 2.2rem;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+    
+    .seo-header p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Modern Syllabus Card */
+    .syllabus-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      border-top: 5px solid #0ea5e9;
+    }
+    
+    .syllabus-text-list {
+      margin-top: 1.5rem;
+      color: #334155;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .syllabus-text-list div {
+      margin-bottom: 0.8rem;
+      padding-left: 1rem;
+      border-left: 3px solid #e2e8f0;
+    }
+
     .subject-dropdown {
       margin-bottom: 1.5rem;
       border: 2px solid #e2e8f0;
@@ -40,7 +153,7 @@
       background: linear-gradient(135deg, #6366f1, #4f46e5);
       color: white;
       padding: 1.2rem;
-      cursor: pointer;
+      cursor: default;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -53,31 +166,12 @@
       background: linear-gradient(135deg, #4f46e5, #3730a3);
     }
 
-    .expand-icon {
-      font-size: 1.2rem;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: transform;
-        transform: translateZ(0);
-      }
+    .units-content {
+      background: white;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
 
-      .expand-icon.rotated {
-        transform: rotate(180deg);
-      }
-
-      .units-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        background: white;
-        will-change: max-height;
-        transform: translateZ(0);
-      }
-
-      .units-content.expanded {
-        max-height: 9999px;
-      }
-
-    /* Modified Unit Item for Descriptions */
     .unit-item {
       display: flex;
       flex-direction: column;
@@ -86,9 +180,7 @@
       transition: all 0.3s ease;
     }
 
-    .unit-item:last-child {
-      border-bottom: none;
-    }
+    .unit-item:last-child { border-bottom: none; }
 
     .unit-item:hover {
       background: #f8fafc;
@@ -108,7 +200,6 @@
       flex: 1;
     }
 
-    /* SEO: New Description Style */
     .unit-desc {
       font-size: 0.85rem;
       color: #64748b;
@@ -120,6 +211,27 @@
     .unit-buttons {
       display: flex;
       gap: 0.75rem;
+    }
+
+    .ques-btn {
+      background: #eef2ff;
+      color: #4338ca;      
+      border: 1px solid #c7d2fe; 
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ques-btn:hover {
+      background: #e0e7ff; 
+      color: #312e81;      
+      border-color: #a5b4fc;
     }
 
     .download-btn, .watch-btn {
@@ -140,17 +252,17 @@
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
     }
-    
+
     button.download-btn {
       background: linear-gradient(135deg, #f59e0b, #d97706); 
       color: white;
     }
 
     .download-btn:hover {
-      background: linear-gradient(135deg, #059669, #047857);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
       transform: translateY(-1px);
     }
-
+    
     .watch-btn {
       background: linear-gradient(135deg, #ef4444, #dc2626);
       color: white;
@@ -172,81 +284,172 @@
 
     .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
 
-      /* Mobile optimizations for smooth transitions */
-      @media (max-width: 768px) {
-        .subject-dropdown {
-          margin-bottom: 1rem;
-        }
+    /* FAQ SECTION STYLES */
+    .faq-section {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-top: 5px solid #6366f1;
+    }
+    
+    .faq-section h2 {
+      text-align: center;
+      color: #2d3748;
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
 
-        .subject-header {
-          padding: 1rem;
-          font-size: 1rem;
-        }
+    .faq-container { max-width: 900px; margin: 0 auto; }
 
-        .units-content {
-          transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+    .faq-item {
+      background: #f8fafc;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
 
-        .units-content.expanded {
-          max-height: 1000px;
-        }
+    .faq-item:hover { border-color: #cbd5e1; }
 
-        .unit-item {
-          padding: 0.8rem 1rem;
-          /* Keep column layout for desc */
-          align-items: flex-start;
-          gap: 0.8rem;
-        }
-        
-        .unit-header-row {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.5rem;
-        }
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #2d3748;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
 
-        .unit-title {
-          width: 100%;
-          margin-bottom: 0;
-          font-size: 0.95rem;
-          line-height: 1.4;
-        }
+    .faq-question:hover { color: #6366f1; }
 
-        .unit-buttons {
-          width: 100%;
-          justify-content: flex-start;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
+    .faq-icon {
+      font-size: 1.5rem;
+      color: #6366f1;
+      font-weight: 300;
+      transition: transform 0.3s ease;
+    }
 
-        .download-btn, .watch-btn, .coming-soon {
-          font-size: 0.8rem;
-          padding: 0.4rem 0.8rem;
-          white-space: nowrap;
-        }
-      }
+    .faq-question.active .faq-icon { transform: rotate(45deg); }
 
-      @media (max-width: 480px) {
-        .units-content.expanded {
-          max-height: 9999px;
-        }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
 
-        .unit-item {
-          padding: 0.7rem 0.8rem;
-        }
+    .faq-answer.active {
+      max-height: 500px;
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
 
-        .unit-title {
-          font-size: 0.9rem;
-          word-break: break-word;
-        }
+    .faq-answer p { margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem; }
 
-        .download-btn, .watch-btn, .coming-soon {
-          font-size: 0.75rem;
-          padding: 0.35rem 0.6rem;
-        }
-      }
+    /* Tap Hint */
+    .tap-hint {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #64748b; 
+      font-weight: 500; 
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
 
-    /* Payment Popup Styles */
-    .payment-modal {
+    /* Bottom Navigation Pills */
+    .bottom-nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    
+    .nav-pill {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-pill:hover {
+      background: #e2e8f0;
+      color: #1e293b;
+      transform: translateY(-2px);
+    }
+    
+    .nav-pill.primary {
+      background: #eef2ff;
+      color: #4338ca;
+    }
+    .nav-pill.primary:hover {
+      background: #e0e7ff;
+    }
+
+    /* User Profile Styles */
+    .user-profile {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #4f46e5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.8rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 600; color: #2d3748; }
+    .user-contact { font-size: 0.75rem; color: #718096; }
+    .logout-btn { background: #ef4444; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+    .logout-btn:hover { background: #dc2626; transform: translateY(-1px); }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .seo-header h1 { font-size: 1.8rem; }
+      .seo-header p { font-size: 1rem; }
+      .subject-dropdown { margin-bottom: 1rem; }
+      .subject-header { padding: 1rem; font-size: 1rem; }
+      .units-content { transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .units-content.expanded { max-height: 1000px; }
+      .unit-item { padding: 0.8rem 1rem; align-items: flex-start; gap: 0.8rem; }
+      .unit-header-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .unit-title { width: 100%; margin-bottom: 0; font-size: 0.95rem; line-height: 1.4; }
+      .unit-buttons { width: 100%; justify-content: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+      .download-btn, .watch-btn, .ques-btn, .coming-soon { font-size: 0.8rem; padding: 0.4rem 0.8rem; white-space: nowrap; }
+      .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-bottom: 1rem; justify-content: space-between; }
+      .faq-section { padding: 1.5rem 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .units-content.expanded { max-height: 9999px; }
+      .unit-item { padding: 0.7rem 0.8rem; }
+      .unit-title { font-size: 0.9rem; word-break: break-word; }
+      .download-btn, .watch-btn, .ques-btn, .coming-soon { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
+    }
+
+    /* Payment & Auth Popup Styles */
+    .payment-modal, .auth-modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -256,14 +459,12 @@
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      z-index: 10000;
     }
 
-    .payment-modal.show {
-      display: flex;
-    }
+    .payment-modal.show, .auth-modal.show { display: flex; }
 
-    .payment-container {
+    .payment-container, .auth-container {
       background: white;
       max-width: 500px;
       width: 90%;
@@ -272,27 +473,14 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       position: relative;
     }
+    
+    .auth-container { padding: 2rem; text-align: center; }
 
-    .payment-header {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-    }
+    .payment-header { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; padding: 2rem; text-align: center; position: relative; }
+    .payment-header h2 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
+    .payment-header p { margin: 0; opacity: 0.9; font-size: 0.9rem; }
 
-    .payment-header h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
-    }
-
-    .payment-header p {
-      margin: 0;
-      opacity: 0.9;
-      font-size: 0.9rem;
-    }
-
-    .close-payment {
+    .close-payment, .close-auth {
       position: absolute;
       top: 1rem;
       right: 1rem;
@@ -304,142 +492,47 @@
       opacity: 0.8;
       transition: opacity 0.3s ease;
     }
+    .close-auth { color: #718096; }
+    .close-payment:hover, .close-auth:hover { opacity: 1; }
 
-    .close-payment:hover {
-      opacity: 1;
-    }
+    .payment-body { padding: 2rem; }
+    .note-details { background: #f8fafc; border-radius: 10px; padding: 1.5rem; margin-bottom: 2rem; text-align: center; }
+    .note-title { font-weight: 600; color: #2d3748; margin-bottom: 1rem; font-size: 1.1rem; }
+    .price-selection { margin-bottom: 2rem; }
+    .price-selection h3 { margin-bottom: 1rem; color: #4a5568; font-size: 1rem; }
+    .price-options { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
 
-    .payment-body {
-      padding: 2rem;
-    }
+    .price-option { background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 0.5rem 1rem; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
+    .price-option:hover { background: #edf2f7; border-color: #cbd5e0; }
+    .price-option.selected { background: #6366f1; color: white; border-color: #6366f1; }
+    .price-option.recommended { background: #22c55e; color: white; border-color: #22c55e; }
 
-    .note-details {
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+    .payment-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .payment-btn { padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; }
+    .cancel-btn { background: #e2e8f0; color: #4a5568; }
+    .cancel-btn:hover { background: #cbd5e0; }
+    .preview-btn { background: #6366f1; color: white; }
+    .preview-btn:hover { background: #4f46e5; }
+    .pay-btn { background: #22c55e; color: white; }
+    .pay-btn:hover { background: #16a34a; }
 
-    .note-title {
-      font-weight: 600;
-      color: #2d3748;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
+    .payment-loading { display: none; text-align: center; padding: 1rem; background: #f0f9ff; border-radius: 8px; margin-top: 1rem; }
+    .payment-loading.show { display: block; }
+    
+    .auth-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.8rem; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; background: white; font-weight: 600; cursor: pointer; margin-top: 1.5rem; transition: all 0.3s ease; }
+    .google-btn { border-color: #4285f4; color: #4285f4; }
+    .google-btn:hover { background: #4285f4; color: white; }
 
-    .price-selection {
-      margin-bottom: 2rem;
-    }
-
-    .price-selection h3 {
-      margin-bottom: 1rem;
-      color: #4a5568;
-      font-size: 1rem;
-    }
-
-    .price-options {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .price-option {
-      background: #f7fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-
-    .price-option:hover {
-      background: #edf2f7;
-      border-color: #cbd5e0;
-    }
-
-    .price-option.selected {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-
-    .price-option.recommended {
-      position: relative;
-      background: #22c55e;
-      color: white;
-      border-color: #22c55e;
-    }
-
-    .payment-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .payment-btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .cancel-btn {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-
-    .cancel-btn:hover {
-      background: #cbd5e0;
-    }
-
-    .preview-btn {
-      background: #6366f1;
-      color: white;
-    }
-
-    .preview-btn:hover {
-      background: #4f46e5;
-    }
-
-    .pay-btn {
-      background: #22c55e;
-      color: white;
-    }
-
-    .pay-btn:hover {
-      background: #16a34a;
-    }
-
-    .payment-loading {
-      display: none;
-      text-align: center;
-      padding: 1rem;
-      background: #f0f9ff;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-
-    .payment-loading.show {
-      display: block;
-    }
-
-    </style>
-  </head>
+  </style>
+</head>
 <body>
-  
+
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
         <a href="index" class="logo-link">
           <div class="logo">
-            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh Zoology Notes">
           </div>
         </a>
       </div>
@@ -461,30 +554,59 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1 class="section-title" style="font-size: 1.8rem;">📖 BSc Zoology Third Semester Notes & Study Material (DU)</h1>
-
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <a href="zoology-second-year" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Second Year</a>
+  <main class="container" style="position: relative;">
+    
+    <div id="userProfile" class="user-profile">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <div class="user-avatar" id="userAvatar">S</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">User</div>
+          <div class="user-contact" id="userContact">***</div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 Syllabus Overview</h3>
+    <div class="seo-header">
+      <h1>📖 BSc Zoology Third Semester Notes (DU)</h1>
+      <p>
+        These <strong>BSc Zoology 3rd Semester Notes for Delhi University (DU)</strong> cover the full syllabus perfectly. Each unit includes exam-oriented explanations, diagrams, and <strong>important questions based on previous DU exams</strong> to help Zoology Honours students prepare effectively.
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <a href="zoology-second-year" style="color: #6366f1; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">← Back to Second Year</a>
+      </div>
+    </div>
+
+    <div class="syllabus-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+        <h3 style="color: #0369a1; margin: 0; font-size: 1.4rem; font-weight: 700;">📋 BSc Zoology (Hons.) Semester 3 Syllabus Overview</h3>
         <a href="https://drive.google.com/file/d/1N0o5bB7Q_7eT248VHDr4SU7IK5GPp95I/view?usp=sharing" target="_blank" 
-           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;">
-          📄 Download Syllabus PDF
+           style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          📄 Download Official DU Syllabus PDF
         </a>
       </div>
-      <p>Comprehensive notes for (DSC-7) Chordates, (DSC-8) Biochemistry, and (DSC-9) Human Physiology.</p>
+      <p style="color: #475569; margin-top: 1rem; line-height: 1.6; font-size: 1.05rem;">
+        The third semester of <strong>BSc Zoology (Hons.)</strong> introduces students to chordates, biochemistry, and human physiology. The core subjects include:
+      </p>
+      
+      <div class="syllabus-text-list">
+        <div style="border-left-color: #6366f1;"><strong>🐠 DSC-7 Diversity of Chordates:</strong> Includes Protochordata, Agnatha, Pisces, Amphibia, Reptilia, Aves, and Mammalia.</div>
+        <div style="border-left-color: #10b981;"><strong>🧪 DSC-8 Biochemistry - Metabolic Processes:</strong> Covers Carbohydrate, Lipid, and Protein Metabolism, plus Oxidative Phosphorylation.</div>
+        <div style="border-left-color: #8b5cf6;"><strong>🫀 DSC-9 Human Physiology - Life Sustaining Systems:</strong> Focuses on Digestion, Blood, Heart, Respiration, and Renal Physiology.</div>
+      </div>
     </div>
 
+    <div class="tap-hint" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.3rem; color: #334155; font-weight: 700; margin: 0;">
+        Chapter-wise DU BSc Zoology 3rd Semester Notes, Important Questions & PYQs
+      </h2>
+    </div>
+    
     <div style="display: grid; gap: 1.5rem;">
 
       <div class="subject-dropdown subject-color-1">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-7): Diversity of Chordates
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -492,7 +614,7 @@
               <span class="unit-title">Unit I: Introduction to Chordates</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/Y1AiZj95MV0" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-1-dsc-7', 'Unit I: Introduction to Chordates')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-7', 'Unit I: Introduction to Chordates')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">General characteristics and outline classification.</p>
@@ -503,11 +625,10 @@
               <span class="unit-title">Unit II: Protochordata</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-2-dsc-7', 'Unit II: Protochordata')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-2-dsc-7', 'Unit II: Protochordata')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics of Hemichordata, Urochordata and Cephalochordata; Study of
-            Tornaria and Ascidian larval forms in protochordates.</p>
+            <p class="unit-desc">General characteristics of Hemichordata, Urochordata and Cephalochordata; Study of Tornaria and Ascidian larval forms in protochordates.</p>
           </div>
 
           <div class="unit-item">
@@ -515,11 +636,10 @@
               <span class="unit-title">Unit III: Origin of Chordates</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-3-dsc-7', 'Unit III: Origin of Chordates')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-3-dsc-7', 'Unit III: Origin of Chordates')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-             <p class="unit-desc">Theories of Origin of chordates with detailed concept of Dipleurula and the
-             Echinoderm theory.</p>
+             <p class="unit-desc">Theories of Origin of chordates with detailed concept of Dipleurula and the Echinoderm theory.</p>
           </div>
 
           <div class="unit-item">
@@ -527,7 +647,7 @@
               <span class="unit-title">Unit IV: Agnatha</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-4-dsc-7', 'Unit IV: Agnatha')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-4-dsc-7', 'Unit IV: Agnatha')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">General characteristics and classification of cyclostomes up to Class.</p>
@@ -538,11 +658,10 @@
               <span class="unit-title">Unit V: Pisces</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-5-dsc-7', 'Unit V: Pisces')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-5-dsc-7', 'Unit V: Pisces')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics of Chondrichthyes and Osteichthyes; Classification up to
-            order; Osmoregulation; Swim bladder in fishes</p>
+            <p class="unit-desc">General characteristics of Chondrichthyes and Osteichthyes; Classification up to order; Osmoregulation; Swim bladder in fishes.</p>
           </div>
 
           <div class="unit-item">
@@ -550,11 +669,10 @@
               <span class="unit-title">Unit VI: Amphibia</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-6-dsc-7', 'Unit VI: Amphibia')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-6-dsc-7', 'Unit VI: Amphibia')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics and classification up to order; Origin of Tetrapods
-            (Evolution of terrestrial ectotherms); Parental care in Amphibians.</p>
+            <p class="unit-desc">General characteristics and classification up to order; Origin of Tetrapods (Evolution of terrestrial ectotherms); Parental care in Amphibians.</p>
           </div>
 
           <div class="unit-item">
@@ -562,11 +680,10 @@
               <span class="unit-title">Unit VII: Reptilia</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-7-dsc-7', 'Unit VII: Reptilia')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-7-dsc-7', 'Unit VII: Reptilia')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics and classification up to order; Affinities and evolutionary
-            significance of Sphenodon; Poison apparatus and biting mechanism in snakes.</p>
+            <p class="unit-desc">General characteristics and classification up to order; Affinities and evolutionary significance of Sphenodon; Poison apparatus and biting mechanism in snakes.</p>
           </div>
 
           <div class="unit-item">
@@ -574,11 +691,10 @@
               <span class="unit-title">Unit VIII: Aves</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-8-dsc-7', 'Unit VIII: Aves')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-8-dsc-7', 'Unit VIII: Aves')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-             <p class="unit-desc">General characteristics and classification up to order; Flight adaptations; Migration
-             in birds.</p>
+             <p class="unit-desc">General characteristics and classification up to order; Flight adaptations; Migration in birds.</p>
           </div>
 
           <div class="unit-item">
@@ -586,11 +702,10 @@
               <span class="unit-title">Unit IX: Mammalia</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-9-dsc-7', 'Unit IX: Mammalia')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-9-dsc-7', 'Unit IX: Mammalia')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">General characteristics and classification up to order; Adaptive radiation with
-            reference to locomotory appendages of mammalia.</p>
+            <p class="unit-desc">General characteristics and classification up to order; Adaptive radiation with reference to locomotory appendages of mammalia.</p>
           </div>
 
           <div class="unit-item">
@@ -598,7 +713,7 @@
               <span class="unit-title">Unit X: Zoogeography</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-10-dsc-7', 'Unit X: Zoogeography')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-10-dsc-7', 'Unit X: Zoogeography')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Zoogeographical realms, Plate tectonics and Continental drift theory.</p>
@@ -608,7 +723,7 @@
              <div class="unit-header-row">
               <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
               <div class="unit-buttons"> 
-                 <a href="https://drive.google.com/file/d/1OdY_WbsfxxETCIqiJq9mp5i2rZrSB3wm/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                 <a href="https://drive.google.com/file/d/1OdY_WbsfxxETCIqiJq9mp5i2rZrSB3wm/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">Most important questions and PYQs included of Chordates semester 3 DU</p>
@@ -617,7 +732,7 @@
              <div class="unit-header-row">
               <span class="unit-title">📝 <b>Previous year questions</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1sYkGGJskkONChPzs2eAXGrUJdsYg8-jj/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1sYkGGJskkONChPzs2eAXGrUJdsYg8-jj/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">All the PYQs of Introduction Of Chordates semester 3 DU</p>
@@ -627,9 +742,8 @@
       </div>
 
       <div class="subject-dropdown subject-color-2">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-8): Biochemistry: Metabolic Processes
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -637,11 +751,10 @@
               <span class="unit-title">Unit I: Carbohydrate Metabolism</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/0wRoUUG7VnY" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-1-dsc-8', 'Unit I: Carbohydrate Metabolism')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-8', 'Unit I: Carbohydrate Metabolism')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-             <p class="unit-desc">Glycolysis, Citric acid cycle, Phosphate pentose pathway, Gluconeogenesis,
-             Glycogenolysis and Glycogenesis.</p>
+             <p class="unit-desc">Glycolysis, Citric acid cycle, Phosphate pentose pathway, Gluconeogenesis, Glycogenolysis and Glycogenesis.</p>
           </div>
 
           <div class="unit-item">
@@ -649,11 +762,10 @@
               <span class="unit-title">Unit II: Lipid Metabolism</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/612LeHxPbI4" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-2-dsc-8', 'Unit II: Lipid Metabolism')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-2-dsc-8', 'Unit II: Lipid Metabolism')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">β-oxidation and omega-oxidation of saturated fatty acids with even number of carbon
-            atoms; Biosynthesis of palmitic acid; Ketogenesis.</p>
+            <p class="unit-desc">β-oxidation and omega-oxidation of saturated fatty acids with even number of carbon atoms; Biosynthesis of palmitic acid; Ketogenesis.</p>
           </div>
 
           <div class="unit-item">
@@ -661,7 +773,7 @@
               <span class="unit-title">Unit III: Protein Metabolism</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-3-dsc-8', 'Unit III: Protein Metabolism')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-3-dsc-8', 'Unit III: Protein Metabolism')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
              <p class="unit-desc">Catabolism of amino acids: Transamination, Deamination, Urea cycle.</p>
@@ -672,12 +784,10 @@
               <span class="unit-title">Unit IV: Oxidative Phosphorylation</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-4-dsc-8', 'Unit IV: Oxidative Phosphorylation')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-4-dsc-8', 'Unit IV: Oxidative Phosphorylation')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">Redox systems; review of mitochondrial respiratory chain: electron carriers, sites of
-            ATP production, Oxidative phosphorylation; Chemiosmotic hypothesis, mitochondrial
-            shuttle system.</p>
+            <p class="unit-desc">Redox systems; review of mitochondrial respiratory chain: electron carriers, sites of ATP production, Oxidative phosphorylation; Chemiosmotic hypothesis, mitochondrial shuttle system.</p>
           </div>
 
           <div class="unit-item">
@@ -687,16 +797,14 @@
                 <span class="coming-soon">Coming Soon</span>
               </div>
             </div>
-            <p class="unit-desc">Inter-connection of glucose-6-phosphate, pyruvate and acetyl-CoA; fates of amino
-            acids, fatty acids and glucose in liver cells; cascade of metabolic events in fasting and
-            starvation.</p>
+            <p class="unit-desc">Inter-connection of glucose-6-phosphate, pyruvate and acetyl-CoA; fates of amino acids, fatty acids and glucose in liver cells; cascade of metabolic events in fasting and starvation.</p>
           </div>
 
           <div class="unit-item">
              <div class="unit-header-row">
               <span class="unit-title">📝 <b>Previous year questions</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1pIIjJsYZsQD_jlGOy0BoIH4HLzS-nC4M/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1pIIjJsYZsQD_jlGOy0BoIH4HLzS-nC4M/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">DU PYQs for Biochemistry exams.</p>
@@ -705,7 +813,7 @@
              <div class="unit-header-row">
               <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
               <div class="unit-buttons"> 
-                 <a href="https://drive.google.com/file/d/15yxH8isfDnPQwZWibZh3gEkxMYgO7w0U/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                 <a href="https://drive.google.com/file/d/15yxH8isfDnPQwZWibZh3gEkxMYgO7w0U/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
             <p class="unit-desc">Most important questions and PYQs included for Biochemistry semester 3 DU</p>
@@ -715,9 +823,8 @@
       </div>
 
       <div class="subject-dropdown subject-color-3">
-        <div class="subject-header" onclick="toggleSubject(this)">
+        <div class="subject-header">
           (DSC-9): Human Physiology- Life Sustaining Systems
-          <span class="expand-icon">▼</span>
         </div>
         <div class="units-content">
           <div class="unit-item">
@@ -725,12 +832,10 @@
               <span class="unit-title">Unit I: Physiology of Digestion</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-1-dsc-9', 'Unit I: Physiology of Digestion')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-1-dsc-9', 'Unit I: Physiology of Digestion')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">Overview of gastrointestinal tract and its associated glands; digestion; Absorption of
-            carbohydrates, lipids, proteins; Hormonal control of secretion of enzymes in
-            gastrointestinal tract.</p>
+            <p class="unit-desc">Overview of gastrointestinal tract and its associated glands; digestion; Absorption of carbohydrates, lipids, proteins; Hormonal control of secretion of enzymes in gastrointestinal tract.</p>
           </div>
 
           <div class="unit-item">
@@ -738,7 +843,7 @@
               <span class="unit-title">Unit II: Blood</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/FXSX5jme5nA" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-2-dsc-9', 'Unit II: Blood')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-2-dsc-9', 'Unit II: Blood')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
             <p class="unit-desc">Structure and functions of haemoglobin; Blood clotting system, Fibrinolytic system.</p>
@@ -749,12 +854,10 @@
               <span class="unit-title">Unit III: Physiology of Heart</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/shorts/5jQz30tNhVw" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-3-dsc-9', 'Unit III: Physiology of Heart')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-3-dsc-9', 'Unit III: Physiology of Heart')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">Structure of heart; Coronary circulation; Origin and conduction of cardiac impulses;
-            Cardiac cycle; Cardiac output and its regulation; nervous and chemical regulation of
-            heart rate.</p>
+            <p class="unit-desc">Structure of heart; Coronary circulation; Origin and conduction of cardiac impulses; Cardiac cycle; Cardiac output and its regulation; nervous and chemical regulation of heart rate.</p>
           </div>
 
           <div class="unit-item">
@@ -762,12 +865,10 @@
               <span class="unit-title">Unit IV: Physiology of Respiration</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-4-dsc-9', 'Unit IV: Physiology of Respiration')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-4-dsc-9', 'Unit IV: Physiology of Respiration')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-             <p class="unit-desc">Overview of respiratory system; Mechanism of respiration, Respiratory volumes and
-             capacities; Transport of oxygen and carbon dioxide in blood; Dissociation curves and
-             the factors influencing it; regulation of respiration.</p>
+             <p class="unit-desc">Overview of respiratory system; Mechanism of respiration, Respiratory volumes and capacities; Transport of oxygen and carbon dioxide in blood; Dissociation curves and the factors influencing it; regulation of respiration.</p>
           </div>
 
           <div class="unit-item">
@@ -775,18 +876,17 @@
               <span class="unit-title">Unit V: Renal Physiology</span>
               <div class="unit-buttons">
                 <a href="https://www.youtube.com/@ShubhiPhilia" target="_blank" class="watch-btn">▶️ Watch Video</a>
-                <button onclick="handleViewNotes('unit-5-dsc-9', 'Unit V: Renal Physiology')" class="download-btn">🔒 Unlock Notes</button>
+                <button onclick="handleViewNotes('unit-5-dsc-9', 'Unit V: Renal Physiology')" class="download-btn">🌱 Access Notes</button>
               </div>
             </div>
-            <p class="unit-desc">Structure of kidney and its functional unit; Mechanism of urine formation; Regulation
-            of water balance; Regulation of acid-base balance.</p>
+            <p class="unit-desc">Structure of kidney and its functional unit; Mechanism of urine formation; Regulation of water balance; Regulation of acid-base balance.</p>
           </div>
           
           <div class="unit-item">
              <div class="unit-header-row">
               <span class="unit-title">🧠 <b>Cheat sheet</b> </span>
               <div class="unit-buttons"> 
-                 <a href="https://drive.google.com/file/d/12euMVQHe_nGjbCAuJjGBUrLtGoHxDtg3/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                 <a href="https://drive.google.com/file/d/12euMVQHe_nGjbCAuJjGBUrLtGoHxDtg3/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">Quick revision notes and Most important questions for Human Physiology semester 3 DU.</p>
@@ -795,7 +895,7 @@
              <div class="unit-header-row">
               <span class="unit-title">📝 <b>Previous year questions</b> </span>
               <div class="unit-buttons"> 
-                <a href="https://drive.google.com/file/d/1i6b-bMPjPSNnoRPEEIfYvYjcXaIreDiH/view?usp=sharing" target="_blank" class="download-btn">📥 Download</a>
+                <a href="https://drive.google.com/file/d/1i6b-bMPjPSNnoRPEEIfYvYjcXaIreDiH/view?usp=sharing" target="_blank" class="download-btn" style="background: #6366f1;">📥 Download</a>
               </div>
             </div>
              <p class="unit-desc">DU PYQs for Human Physiology semester 3 exams.</p>
@@ -804,6 +904,78 @@
         
       </div>
     </div>
+
+    <div class="faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+      <div class="faq-container">
+        
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What subjects are included in BSc Zoology 3rd semester DU?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The third semester of BSc Zoology at Delhi University includes Diversity of Chordates, Biochemistry: Metabolic Processes, and Human Physiology: Life Sustaining Systems.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Are these notes based on the Delhi University syllabus?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. These notes are structured exactly according to the latest Delhi University BSc Zoology (Hons.) syllabus and include unit-wise explanations, diagrams, and important questions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Do the Biochemistry notes include metabolic pathways?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. The notes comprehensively cover all major pathways including Glycolysis, Krebs Cycle, Beta-oxidation, and Oxidative Phosphorylation required for the exams.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Do these notes include previous year questions?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Important previous year questions (PYQs) from past Delhi University Zoology exams are integrated into the units for download for better exam preparation.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>If I have a doubt, where can I ask it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>If you have any doubts related to the notes, BSc Zoology syllabus or any other general doubt, you can reach out through the following platforms:
+            <ul> 
+              <li>📧 Email: sayheyshubh@gmail.com</li>
+              <li>📸 Instagram: @sayheyshubh (DM me anytime)</li>
+            </ul>
+            You can also join the Telegram community, where many students discuss topics, share resources, and help each other with doubts.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div style="margin-bottom: 2rem; text-align: center; padding: 2.5rem 2rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+      <h2 style="font-size: 1.4rem; color: #2d3748; margin-bottom: 1.5rem;">🔍 Explore Other Zoology Notes</h2>
+      <div class="bottom-nav-links">
+        <a href="zoology-first-semester" class="nav-pill">BSc Zoology 1st Semester</a>
+        <a href="zoology-second-semester" class="nav-pill">BSc Zoology 2nd Semester</a>
+        <a href="notes" class="nav-pill primary">View All Notes →</a>
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -813,26 +985,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="page-protection.js"></script>
-  <script>
-    function toggleSubject(header) {
-      const content = header.nextElementSibling;
-      const icon = header.querySelector('.expand-icon');
-      const isExpanded = content.classList.contains('expanded');
-
-      if (isExpanded) {
-        content.classList.remove('expanded');
-        icon.classList.remove('rotated');
-      } else {
-        content.classList.add('expanded');
-        icon.classList.add('rotated');
-      }
-    }
-
-   
-  </script>
   <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
     💬
   </a>
@@ -841,19 +993,28 @@
     Got a question?
   </div>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const bubble = document.getElementById("doubts-bubble");
-    setTimeout(() => { bubble.classList.add("show"); }, 800);
-    setTimeout(() => { bubble.classList.remove("show"); }, 3800);
-  });
-  </script>
+  <div id="authModal" class="auth-modal">
+    <div class="auth-container">
+      <button class="close-auth" onclick="hideAuthPopup()">&times;</button>
+      <h2>Login Required</h2>
+      <p style="color: #64748b; margin-top: 10px; font-size: 0.95rem;">Please log in securely to purchase new notes or access your unlocked materials.</p>
+      <button class="auth-btn google-btn" onclick="signInWithGoogle()">
+        <svg width="20" height="20" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </button>
+    </div>
+  </div>
 
   <div id="paymentModal" class="payment-modal">
     <div class="payment-container">
       <div class="payment-header">
         <button class="close-payment" onclick="hidePaymentPopup()">&times;</button>
-        <h2>🔒 Unlock Study Notes</h2>
+        <h2>🌻 Unlock Study Notes</h2>
         <p>Access premium BSc Zoology notes and study materials</p>
       </div>
 
@@ -887,29 +1048,90 @@
     </div>
   </div>
 
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
   <script>
-    // Razorpay key will be fetched from API
-    let RAZORPAY_KEY_ID = null;
+    // FAQ Toggle UI Logic
+    function toggleFAQ(button) {
+      const answer = button.nextElementSibling;
+      const isActive = button.classList.contains('active');
+      
+      // Close all FAQs
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.classList.remove('active');
+        q.nextElementSibling.classList.remove('active');
+      });
+      
+      // Open clicked FAQ if it wasn't active
+      if (!isActive) {
+        button.classList.add('active');
+        answer.classList.add('active');
+      }
+    }
 
-    // Payment system variables
+    // Doubts bubble UI
+    document.addEventListener("DOMContentLoaded", function() {
+      const bubble = document.getElementById("doubts-bubble");
+      setTimeout(() => { bubble.classList.add("show"); }, 800);
+      setTimeout(() => { bubble.classList.remove("show"); }, 3800);
+    });
+
+    // Profile UI Load
+    function loadUserProfile() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userName = localStorage.getItem('userName');
+      
+      if (isLoggedIn === 'true' && userName) {
+        document.getElementById('userName').textContent = userName;
+        document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+        document.getElementById('userProfile').classList.add('show');
+      }
+    }
+
+    async function logout() {
+      await auth.signOut();
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('purchasedNotes'); // Clear purchased cache
+      window.location.reload(); 
+    }
+
+    // --- AUTHENTICATION SYSTEM ---
+    function showAuthPopup() {
+      document.getElementById('authModal').classList.add('show');
+    }
+
+    function hideAuthPopup() {
+      document.getElementById('authModal').classList.remove('show');
+    }
+
+    async function signInWithGoogle() {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+        
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userId', user.uid);
+        localStorage.setItem('userName', user.displayName);
+        localStorage.setItem('userEmail', user.email);
+        
+        hideAuthPopup();
+        window.location.reload(); 
+      } catch (error) {
+        alert('Google sign-in failed: ' + error.message);
+      }
+    }
+
+    // --- PAYMENT & UNLOCK SYSTEM ---
+    let RAZORPAY_KEY_ID = null;
     let currentNoteId = ''; 
     let currentNoteTitle = '';
-    let selectedPrice = 25;
+    let selectedPrice = 25; // Defaulted to ₹25 for 3rd sem
 
-    // Expose callback immediately so page-protection.js can call it
-    window.initializePaymentForAuthenticatedUser = function(userId) {
-      localStorage.setItem('userId', userId);
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          loadPurchasedNotesAndUpdateButtons();
-        });
-      } else {
-        loadPurchasedNotesAndUpdateButtons();
-      }
-    };
-
-    // Initialize payment system when page loads
     document.addEventListener('DOMContentLoaded', function() {
+      loadUserProfile();
       initializePaymentSystem();
       fetchRazorpayConfig();
     });
@@ -927,10 +1149,11 @@
     }
 
     function initializePaymentSystem() {
-      const storedUserId = localStorage.getItem('userId');
-      if (storedUserId && window.currentUserData && auth.currentUser) {
-        loadPurchasedNotesAndUpdateButtons();
-      }
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          loadPurchasedNotesAndUpdateButtons();
+        }
+      });
 
       document.querySelectorAll('.price-option').forEach(option => {
         option.addEventListener('click', () => {
@@ -941,19 +1164,19 @@
       });
 
       document.getElementById('paymentModal').addEventListener('click', (e) => {
-        if (e.target.id === 'paymentModal') {
-          hidePaymentPopup();
-        }
+        if (e.target.id === 'paymentModal') hidePaymentPopup();
+      });
+      document.getElementById('authModal').addEventListener('click', (e) => {
+        if (e.target.id === 'authModal') hideAuthPopup();
       });
     }
 
     async function loadPurchasedNotesAndUpdateButtons() {
-      const userId = localStorage.getItem('userId');
-      if (!userId || !auth.currentUser) return;
+      const user = auth.currentUser;
+      if (!user) return;
 
       try {
-        const idToken = await auth.currentUser.getIdToken();
-
+        const idToken = await user.getIdToken();
         const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${idToken}` }
@@ -962,7 +1185,6 @@
         if (response.ok) {
           const data = await response.json();
           const purchasedNotes = data.purchasedNotes || [];
-
           localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
           updateButtonStates(purchasedNotes);
         }
@@ -973,13 +1195,12 @@
 
     function updateButtonStates(purchasedIds) {
       console.log('Purchased Note IDs:', purchasedIds);
-
       const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
-
+      
       secureButtons.forEach(button => {
         const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'/);
         if (!match) return;
-
+        
         const noteId = match[1];
 
         if (purchasedIds.includes(noteId)) {
@@ -988,48 +1209,44 @@
           button.style.color = 'white';
         } else {
           button.textContent = '🔒 Unlock Notes';
-          button.style.background = '#f59e0b';
+          button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
           button.style.color = 'white';
         }
       });
     }
 
     async function handleViewNotes(noteId, noteTitle) {
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
+      
       if (!user) {
-        alert('Please sign in to view notes');
+        showAuthPopup();
         return;
       }
 
       const btn = event.currentTarget || event.target;
       const originalText = btn.textContent;
-
       btn.textContent = 'Checking...';
 
       try {
         const token = await user.getIdToken();
-
         const response = await fetch(`/.netlify/functions/secure-notes/${noteId}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
-
         const data = await response.json();
 
         if (data.success && data.previewUrl) {
           window.open(data.previewUrl, '_blank');
           btn.textContent = '✅ View Notes';
           btn.style.background = '#22c55e';
-
+          
           const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
           if (!localPurchases.includes(noteId)) {
              localPurchases.push(noteId);
              localStorage.setItem('purchasedNotes', JSON.stringify(localPurchases));
           }
-
         } else if (response.status === 403) {
           btn.textContent = originalText;
           showPaymentPopup(noteId, noteTitle);
-
         } else {
           alert('Error: ' + (data.error || 'Unknown error'));
           btn.textContent = originalText;
@@ -1042,12 +1259,11 @@
     }
 
     function showPaymentPopup(noteId, noteTitle) {
-      currentNoteId = noteId; 
+      currentNoteId = noteId;
       currentNoteTitle = noteTitle || 'BSc Zoology Notes';
-
       document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
       document.getElementById('paymentModal').classList.add('show');
-
+      
       document.querySelectorAll('.price-option').forEach(option => {
         option.classList.remove('selected');
         if (option.dataset.price === '25') option.classList.add('selected');
@@ -1065,13 +1281,9 @@
     }
 
     async function proceedToPayment() {
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
       if (!user) { alert('Please log in first'); return; }
-
-      if (typeof Razorpay === 'undefined') {
-        alert('Payment system not loaded. Refresh and try again.');
-        return;
-      }
+      if (typeof Razorpay === 'undefined') { alert('Payment system not loaded. Refresh and try again.'); return; }
 
       document.getElementById('paymentLoading').classList.add('show');
 
@@ -1081,15 +1293,8 @@
 
         const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${idToken}`
-          },
-          body: JSON.stringify({
-            amount: amountInPaise,
-            noteTitle: currentNoteTitle,
-            noteUrl: currentNoteId 
-          })
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
+          body: JSON.stringify({ amount: amountInPaise, noteTitle: currentNoteTitle, noteUrl: currentNoteId })
         });
 
         const orderData = await orderResponse.json();
@@ -1108,10 +1313,7 @@
             try {
               const verifyResponse = await fetch('/.netlify/functions/verify-payment', {
                 method: 'POST',
-                headers: { 
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${idToken}`
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
                 body: JSON.stringify({
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
@@ -1124,17 +1326,14 @@
 
               if (verifyResult.success) {
                 document.getElementById('paymentLoading').innerHTML = '<div style="text-align: center; color: #22c55e;"><h3>🎉 Unlocked!</h3></div>';
-
                 setTimeout(() => {
                   hidePaymentPopup();
-
                   const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
                   if (!purchasedNotes.includes(currentNoteId)) {
                     purchasedNotes.push(currentNoteId);
                     localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
                   }
                   updateButtonStates(purchasedNotes);
-
                   alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
                 }, 1500);
               } else {
@@ -1168,6 +1367,5 @@
       }
     }
   </script>
-
 </body>
 </html>
