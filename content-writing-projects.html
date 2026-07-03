@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Writing Portfolio | SayHeyShubh</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+    /* COMPACT & MODERN GRID */
+    .writing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0 60px 0;
+    }
+    
+    .writing-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .writing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.1);
+      border-color: #cbd5e1;
+    }
+
+    /* Top Accent Line */
+    .writing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1, #3b82f6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .writing-card:hover::before {
+      opacity: 1;
+    }
+
+    /* CARD CONTENT PADDING */
+    .writing-content {
+      padding: 25px 25px 0 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* MINI PILL BADGE */
+    .writing-category {
+      align-self: flex-start;
+      background: #f1f5f9;
+      color: #6366f1;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .writing-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    /* SHORTER, TRUNCATED SNIPPET */
+    .writing-snippet {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      position: relative;
+      /* Limits text to 3 lines with an ellipsis */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .writing-snippet::before {
+      content: '"';
+      color: #cbd5e1;
+      font-size: 1.5rem;
+      font-family: Georgia, serif;
+      line-height: 0;
+      vertical-align: bottom;
+      margin-right: 4px;
+    }
+
+    /* COMPACT META INFO */
+    .meta-list {
+      margin-top: auto;
+      padding-top: 15px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .meta-item {
+      font-size: 0.85rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meta-item strong {
+      color: #334155;
+    }
+
+    /* SLEEK BUTTON IN FOOTER */
+    .card-footer {
+      padding: 20px 25px;
+      background: #fafafa;
+      border-top: 1px solid #f1f5f9;
+      margin-top: 20px;
+    }
+
+    .read-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #4f46e5;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .read-link span {
+      transition: transform 0.3s ease;
+    }
+
+    .writing-card:hover .read-link {
+      color: #3730a3;
+    }
+
+    .writing-card:hover .read-link span {
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Standard Header -->
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="seo-header" style="text-align: center; padding: 2rem;">
+      <h1>✍️ Content Writing Portfolio</h1>
+
+      <p style="max-width: 700px; margin: 0 auto 1.5rem auto; color: #4a5568; line-height: 1.6;">
+        Specializing in research-backed educational content, mental health advocacy, and highly relatable student storytelling. 
+      </p>
+
+      <!-- Professional Showcase Note with better visual hierarchy -->
+      <div style="background: #f1f5f9; border: 1px solid #e2e8f0; padding: 15px 25px; border-radius: 50px; display: inline-block; margin-bottom: 2rem;">
+        <p style="margin: 0; color: #1e293b; font-weight: 500; font-size: 0.95rem;">
+          💡 <strong>Beyond the samples:</strong> This entire website is a live showcase of my content writing, desing and marketing skills.
+        </p>
+      </div>
+
+      <div>
+        <a href="portfolio.html" style="color: #6366f1; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; justify-content: center;">
+          ← Back to Main Portfolio
+        </a>
+      </div>
+    </div>
+
+    <!-- CARDS GRID -->
+    <div class="writing-grid">
+      
+      <!-- Sample 1 -->
+      <div class="writing-card">
+        <div class="writing-content">
+          <div class="writing-category">Research</div>
+          <h3 class="writing-title">Shoolini University: MSc Data Science</h3>
+
+          <div class="writing-snippet">
+            The university has a strong campus environment, but the biggest unknown is programme-specific placements. Admission requires verifying real data...
+          </div>
+
+          <div class="meta-list">
+            <div class="meta-item"><span>🎯</span> <div><strong>Focus:</strong> Due diligence & fee analysis</div></div>
+            <div class="meta-item"><span>👥</span> <div><strong>For:</strong> Prospective students</div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="shoolini-university" class="read-link">Read Full Report <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- Sample 2 -->
+      <div class="writing-card">
+        <div class="writing-content">
+          <div class="writing-category">Article</div>
+          <h3 class="writing-title">Beyond the Clinic Door</h3>
+
+          <div class="writing-snippet">
+            Accessing mental health care with a disability isn’t just about appointments. It’s about navigating silence, stigma, and spaces that weren’t built for you.
+          </div>
+
+          <div class="meta-list">
+            <div class="meta-item"><span>🎯</span> <div><strong>Focus:</strong> Mental health advocacy</div></div>
+            <div class="meta-item"><span>👥</span> <div><strong>For:</strong> General readers & policymakers</div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="beyond-the-clinic-door.html" class="read-link" target="_blank">Read Full Article <span>→</span></a>
+        </div>
+      </div>
+     
+      <!-- Sample 3 -->
+      <div class="writing-card">
+        <div class="writing-content">
+          <div class="writing-category">Mindset Essay</div>
+          <h3 class="writing-title">Self-Awareness vs. Cringe</h3>
+          
+          <div class="writing-snippet">
+            Nobody cares about your 'cringe phase' when you win. Use your self-awareness to understand the needs of others, not to hold yourself back.
+          </div>
+          
+          <div class="meta-list">
+            <div class="meta-item"><span>🎯</span> <div><strong>Focus:</strong> Overcoming overthinking</div></div>
+            <div class="meta-item"><span>👥</span> <div><strong>For:</strong> Creators & young professionals</div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="self-awareness-vs-cringe" class="read-link">Read Full Post <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- Sample 4 -->
+      <div class="writing-card">
+        <div class="writing-content">
+          <div class="writing-category">Storytelling</div>
+          <h3 class="writing-title">Homesick in the Hostel</h3>
+          
+          <div class="writing-snippet">
+            Being away from home feels like growing up too fast. Everyone expects you to succeed, and when everyone else seems happy, you quietly feel lost.
+          </div>
+          
+          <div class="meta-list">
+            <div class="meta-item"><span>🎯</span> <div><strong>Focus:</strong> Relatable college experiences</div></div>
+            <div class="meta-item"><span>👥</span> <div><strong>For:</strong> First-year hostel students</div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="Homesick-in-Hostel" class="read-link">Read Full Story <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- Sample 5: The Art of Asking -->
+      <div class="writing-card">
+        <div class="writing-content">
+          <div class="writing-category">Thought Leadership</div>
+          <h3 class="writing-title">The Art of Asking</h3>
+
+          <div class="writing-snippet">
+            Most people aren’t stuck because they’re incapable. They’re stuck because they never ask clearly enough. Stop showing up to the ocean of opportunity with a teaspoon.
+          </div>
+
+          <div class="meta-list">
+            <div class="meta-item"><span>🎯</span> <div><strong>Focus:</strong> Career growth & mindset</div></div>
+            <div class="meta-item"><span>👥</span> <div><strong>For:</strong> Students & young professionals</div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <!-- Make sure the href matches the name you gave to the HTML file -->
+          <a href="art-of-asking.html" class="read-link">Read Full Post <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- Sample 6: Figuring Out -->
+      <div class="writing-card">
+        <div class="writing-content">
+          <div class="writing-category">Mindset Essay</div>
+          <h3 class="writing-title">I don't have to have it all figured out</h3>
+
+          <div class="writing-snippet">
+            Comparing yourself to others is designed to make you feel behind. You don’t have to have a life purpose figured out today; you just have to go out and do things.
+          </div>
+
+          <div class="meta-list">
+            <div class="meta-item"><span>🎯</span> <div><strong>Focus:</strong> Overcoming comparison & anxiety</div></div>
+            <div class="meta-item"><span>👥</span> <div><strong>For:</strong> Students & anxious achievers</div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="figuring-out.html" class="read-link">Read Full Essay <span>→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 SayHeyShubh | Portfolio & Projects</p>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

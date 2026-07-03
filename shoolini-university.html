@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shoolini University: MSc Data Science Research Briefing</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+
+    /* REPORT SPECIFIC STYLES */
+    .back-nav {
+      margin-bottom: 20px;
+    }
+    .back-btn {
+      color: #6366f1; 
+      text-decoration: none; 
+      font-weight: 600; 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 0.5rem; 
+      background: #f1f5f9; 
+      padding: 10px 20px; 
+      border-radius: 8px; 
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #e2e8f0;
+      color: #4f46e5;
+    }
+    
+    /* REPORT SPECIFIC STYLES */
+    .report-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    .report-category {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+    }
+    .report-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    .report-meta {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .report-content {
+      max-width: 850px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+    }
+
+    .report-section {
+      margin-bottom: 40px;
+    }
+
+    .report-section h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    p, li {
+      color: #475569;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin-bottom: 15px;
+    }
+
+    /* MODERN TABLES */
+    .modern-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background: #f8fafc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .modern-table th, .modern-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .modern-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+    }
+    .modern-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* CALLOUT BOXES */
+    .highlight-box {
+      background: #eef2ff;
+      border-left: 4px solid #6366f1;
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+    .highlight-box strong {
+      color: #4338ca;
+    }
+
+    /* PROS & CONS GRID */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .pro-box, .con-box {
+      padding: 25px;
+      border-radius: 12px;
+    }
+    .pro-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+    .pro-box h3 { color: #166534; margin-bottom: 15px; }
+    .con-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+    .con-box h3 { color: #991b1b; margin-bottom: 15px; }
+
+    .comparison-grid ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .comparison-grid li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    /* SENSITIVE NEWS SECTION */
+    .alert-section {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      padding: 30px;
+      border-radius: 12px;
+    }
+    .alert-section h2 {
+      color: #92400e;
+      border-bottom-color: #fde68a;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+    }
+    .checklist li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    /* VERDICT */
+    .verdict-box {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .verdict-box h2 {
+      color: white;
+      border: none;
+      justify-content: center;
+    }
+    .verdict-box p {
+      color: #e0e7ff;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+      .report-title { font-size: 2rem; }
+      .report-content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Standard Header -->
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- BACK BUTTON ADDED HERE -->
+    <div class="back-nav">
+      <a href="content-writing-projects" class="back-btn">
+        ← Back to Content Writing Projects
+      </a>
+    </div>
+    
+    <div class="report-header">
+      <span class="report-category">Research Briefing</span>
+      <h1 class="report-title">Shoolini University: MSc Data Science</h1>
+      <p class="report-meta">
+        Compiled July 2026 · Sources: Official university website, Shiksha, CollegeDunia, Careers360, CollegeDekho, and news reports. Figures marked "official" come directly from the university; others are third-party estimates.
+      </p>
+    </div>
+
+    <div class="report-content">
+
+      <!-- FEES SECTION -->
+      <section class="report-section">
+        <h2>💰 1. Fees & Financials (AY 2026–27)</h2>
+        <p>On-campus MSc Data Science & Analytics tuition rates:</p>
+        <table class="modern-table">
+          <tr>
+            <th>Fee Structure</th>
+            <th>HP / J&K Domicile</th>
+            <th>Non-HP Domicile</th>
+          </tr>
+          <tr>
+            <td>Per Semester</td>
+            <td>₹66,750</td>
+            <td>₹72,500</td>
+          </tr>
+          <tr>
+            <td><strong>2-Year Total (Approx.)</strong></td>
+            <td><strong>~₹2.67 lakh</strong></td>
+            <td><strong>~₹2.90 lakh</strong></td>
+          </tr>
+        </table>
+
+        <p><em>Note: Tuition rises ~5% per year. A one-time ₹10,000 refundable academic security deposit also applies.</em></p>
+
+        <p><strong>Hostel Fees (Per Semester):</strong></p>
+        <ul>
+          <li>Triple occupancy: ₹68,000 – ₹78,000</li>
+          <li>Double occupancy: ₹78,000 – ₹93,000</li>
+          <li>Full range: ₹38,000 – ₹1,02,000</li>
+        </ul>
+
+        <div class="highlight-box">
+          <strong>Realistic 2-Year All-In Estimate:</strong><br>
+          Tuition + mid-tier hostel + deposit for a non-HP student comes to roughly <strong>₹4.5–5.5 lakh total</strong> for the full MSc, before personal expenses and travel.
+        </div>
+      </section>
+
+      <!-- LOCATION & LIFE -->
+      <section class="report-section">
+        <h2>📍 2. Location & Campus Life</h2>
+        <p>The campus is situated in the Kasauli Hills, Solan district, Himachal Pradesh (~1,500m elevation), surrounded by pine and deodar forests.</p>
+        <p>It sits about 11–12 km from Solan town, making it fairly isolated and not within walking distance of a city center.</p>
+        <p><strong>The Trade-off:</strong> You get clean air, quiet, and an excellent environment for focus, but limited off-campus nightlife. Most social life is confined to the campus, which houses 9 cafeterias, a gym, a sports complex, a 24x7 library, and a cineplex.</p>
+      </section>
+
+      <!-- PLACEMENTS -->
+      <section class="report-section">
+        <h2>📈 3. Placements Reality Check</h2>
+        <p>This area requires the most scrutiny, as headline numbers often differ from course-specific realities.</p>
+        <table class="modern-table">
+          <tr>
+            <th>Metric</th>
+            <th>Figure</th>
+            <th>Context</th>
+          </tr>
+          <tr>
+            <td>Highest Package</td>
+            <td>₹42–45 LPA</td>
+            <td>Outlier CSE student, not representative</td>
+          </tr>
+          <tr>
+            <td>Median Package (2-yr PG)</td>
+            <td>₹4.8 LPA</td>
+            <td>NIRF 2025 data, university-wide</td>
+          </tr>
+          <tr>
+            <td><strong>MSc Data Science Data</strong></td>
+            <td><strong>Not published</strong></td>
+            <td><strong>No verified batch stats available on official pages</strong></td>
+          </tr>
+        </table>
+        <p><strong>Recommendation:</strong> Do not rely on university-wide marketing figures. Ask admissions in writing for the MSc Data Science batch's actual placement percentage and median package for the last two completed batches.</p>
+      </section>
+
+      <!-- PROS AND CONS -->
+      <section class="report-section">
+        <h2>⚖️ 4. Reviews Overview</h2>
+        <div class="comparison-grid">
+          <div class="pro-box">
+            <h3>Pros</h3>
+            <ul>
+              <li>Scenic, peaceful campus with strong lab infrastructure (104+ labs).</li>
+              <li>Approachable, industry-expert faculty with PhDs.</li>
+              <li>Strong scholarship program (up to 25–100% merit waivers).</li>
+              <li>Genuine international tie-ups (e.g., University of Melbourne).</li>
+              <li>Research-driven "One Student One Patent" initiative.</li>
+            </ul>
+          </div>
+          <div class="con-box">
+            <h3>Cons</h3>
+            <ul>
+              <li>Placement quality is uneven; tech-adjacent courses fare better than others.</li>
+              <li>Hostel food is repeatedly described as merely "bearable".</li>
+              <li>Genuinely remote from any city, impacting weekend social expectations.</li>
+              <li>MSc Data Science lacks a long, independent placement track record.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- RECENT NEWS -->
+      <section class="report-section alert-section">
+        <h2>⚠️ 5. Important Context: Recent News (April 2026)</h2>
+        <p><strong>1. Placement Dispute Investigation</strong><br>
+        MBA graduate Nitin Chauhan died by su**ide on March 29, 2026, after allegedly facing a massive cut in a promised placement package without support from the placement cell . This triggered significant student protests. The university subsequently removed a senior official from her role and formed an internal inquiry panel.</p>
+
+        <p><strong>2. Campus Altercation</strong><br>
+        A physical fight among female students went viral around the same period, prompting a disciplinary committee probe.</p>
+
+        <p><em>While isolated incidents happen at large institutions, the placement-related tragedy highlights the need to ask admissions directly about how placement offers are verified and what safeguards exist for students.</em></p>
+      </section>
+
+      <!-- CHECKLIST -->
+      <section class="report-section">
+        <h2>📋 6. Due Diligence Checklist</h2>
+        <ul class="checklist">
+          <li><strong>Curriculum:</strong> Verify it includes Python, SQL, Statistics, ML, Deep Learning, NLP, Big Data, and a capstone project.</li>
+          <li><strong>Faculty:</strong> Review faculty profiles on LinkedIn/Google Scholar.</li>
+          <li><strong>Internships:</strong> Ask about the percentage of paid vs. unpaid internships and partner companies.</li>
+          <li><strong>Alumni:</strong> Speak to at least three current students or alumni.</li>
+          <li><strong>Hidden Costs:</strong> Confirm exam fees, deposits, laptop requirements, and transport charges.</li>
+        </ul>
+      </section>
+
+      <!-- VERDICT -->
+      <div class="verdict-box">
+        <h2>Final Verdict</h2>
+        <p>Shoolini University offers a strong campus environment and research focus, but the biggest unknown is programme-specific placement performance. Admission is a reasonable choice only after verifying recent MSc Data Science placement statistics, curriculum relevance, and internship support directly with current students and the administration.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 SayHeyShubh | Portfolio & Projects</p>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

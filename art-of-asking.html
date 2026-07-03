@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Art of Asking | Content Writing Sample</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+    body {
+      background-color: #f8fafc;
+    }
+
+    .back-nav {
+      margin: 20px 0 30px 0;
+      text-align: center;
+    }
+
+    .back-btn {
+      color: #6366f1; 
+      text-decoration: none; 
+      font-weight: 600; 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 0.5rem; 
+      background: #f1f5f9; 
+      padding: 10px 20px; 
+      border-radius: 8px; 
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #e2e8f0;
+      color: #4f46e5;
+    }
+
+    /* SOCIAL STORY CARD */
+    .story-card {
+      max-width: 650px;
+      margin: 0 auto 60px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .story-header {
+      padding: 30px 40px 20px 40px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .author-info h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .author-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .platform-badge {
+      margin-left: auto;
+      background: #eff6ff;
+      color: #2563eb;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .story-content {
+      padding: 40px;
+    }
+
+    .story-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 25px;
+      line-height: 1.3;
+    }
+
+    .story-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 18px;
+    }
+
+    .punchline {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 1.15rem;
+      margin: 25px 0;
+    }
+
+    .story-quote {
+      font-style: italic;
+      color: #475569;
+      padding: 15px 20px;
+      background: #f8fafc;
+      border-left: 4px solid #3b82f6;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+      font-size: 1.1rem;
+    }
+
+    .bullet-list {
+      margin: 20px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      color: #334155;
+    }
+
+    .bullet-list li::before {
+      content: '•';
+      color: #3b82f6;
+      font-weight: bold;
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -4px;
+    }
+
+    .rule-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .rule-box h3 {
+      color: #1d4ed8;
+      font-size: 1.1rem;
+      margin: 0 0 10px 0;
+    }
+
+    .rule-box p {
+      margin: 0;
+      font-size: 1rem;
+      color: #1e3a8a;
+    }
+
+    .inspiration-tag {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-style: italic;
+      margin-top: 30px;
+    }
+
+    .hashtags {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed #e2e8f0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hashtag {
+      color: #3b82f6;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .story-header {
+        padding: 20px;
+      }
+      .story-content {
+        padding: 25px 20px;
+      }
+      .platform-badge {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index.html" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="youtube.html">YouTube</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Back Navigation -->
+    <div class="back-nav">
+      <a href="content-writing-projects.html" class="back-btn">
+        ← Back to Content Writing Portfolio
+      </a>
+    </div>
+
+    <!-- Story Container -->
+    <article class="story-card">
+
+      <!-- Social Style Header -->
+      <div class="story-header">
+        <div class="author-avatar">S</div>
+        <div class="author-info">
+          <h2>Shubham Kumar</h2>
+          <p>Content Creator | Digital Marketer</p>
+        </div>
+        <div class="platform-badge">LinkedIn Post</div>
+      </div>
+
+      <!-- Story Content -->
+      <div class="story-content">
+        <h1 class="story-title">Don’t wait for opportunities. Heard it somewhere, right? So what should you actually wait for?</h1>
+
+        <p class="punchline">Short answer? Nothing. And that changes everything.</p>
+
+        <p>Because when you wait, you’re not just delaying action.<br>
+        You’re delaying learning.</p>
+
+        <p>And most learning begins the same way: by asking.</p>
+
+        <p><strong>Here’s the uncomfortable truth:</strong></p>
+
+        <p>Most people aren’t stuck because they’re incapable. <br>
+        They’re stuck because they never ask clearly enough. They keep waiting for the right moment to ask.</p>
+
+        <div class="story-quote">
+          "Opportunity is like the ocean; there’s plenty for everyone." — Jim Rohn
+        </div>
+
+        <p><strong>The problem?</strong><br>
+        Most people show up with a teaspoon. 🥄</p>
+
+        <p>They hope. They wish. They wait.</p>
+
+        <p>Think about it:</p>
+        <ul class="bullet-list">
+          <li>You don’t fail because you lack talent.</li>
+          <li>You don’t fail because there isn’t enough opportunity.</li>
+          <li>You fail because your asks are vague, hesitant, and unclear.</li>
+        </ul>
+
+        <p class="punchline">Asking is not a weakness. Asking is a skill.</p>
+
+        <p>So, if you want to trade your teaspoon for at least a bucket 🪣, follow these two rules:</p>
+
+        <div class="rule-box">
+          <h3>1. Ask with intelligence.</h3>
+          <p>Be specific. Be intentional. Vague goals produce vague results. When you clearly define what you want, you don’t just wish for it; you start moving towards it. And clarity is power.</p>
+        </div>
+
+        <div class="rule-box">
+          <h3>2. Ask with faith.</h3>
+          <p>Not blind optimism, but childlike belief backed by adult planning. Make plans like a pro. Believe in them like a child.</p>
+        </div>
+
+        <p>This shift changes everything: how you approach people, learning, and growth.</p>
+
+        <p><strong>So, for the next 3 months, try to do this:</strong><br>
+        Ask more clearly. Ask better. Ask intentionally.</p>
+
+        <p>You might be surprised how much was already available to you once you stopped showing up with a teaspoon.</p>
+
+        <p class="inspiration-tag">(Inspired by Jim Rohn’s California conference: “The Challenge to Succeed”)</p>
+
+        <!-- Hashtags -->
+        <div class="hashtags">
+          <span class="hashtag">#CareerGrowth</span>
+          <span class="hashtag">#SuccessMindset</span>
+          <span class="hashtag">#TheArtOfAsking</span>
+          <span class="hashtag">#PersonalGrowth</span>
+          <span class="hashtag">#Leadership</span>
+          <span class="hashtag">#SayHeyShubh</span>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 SayHeyShubh | Portfolio & Projects</p>
+      <p><a href="privacy-policy.html">Privacy Policy</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
