@@ -51,7 +51,7 @@ function handleSignOut() {
         localStorage.removeItem('userName');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userPhone');
-        window.location.href = 'youtube.html';
+        window.location.href = 'zoology';
     }).catch((error) => {
         console.error('Sign out error:', error);
         alert('Failed to sign out. Please try again.');

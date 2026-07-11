@@ -96,10 +96,10 @@ function renderCommentHtml(comment) {
 async function handler(event, context) {
   // Use Robust Path Finding
   const possiblePaths = [
-    path.resolve(__dirname, '../../youtube.html'),
-    path.resolve(__dirname, '../youtube.html'),
-    path.resolve('youtube.html'),
-    path.resolve('./youtube.html')
+    path.resolve(__dirname, '../../zoology.html'),
+    path.resolve(__dirname, '../zoology.html'),
+    path.resolve('zoology.html'),
+    path.resolve('./zoology.html')
   ];
   let templatePath = possiblePaths.find(p => fs.existsSync(p));
 

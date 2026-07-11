@@ -18,15 +18,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="SayHeyShubh - BSc Zoology Hons student at Delhi University, YouTuber and content creator. Explore handwritten Zoology notes, DU previous year papers, academic blogs, projects and study resources for students." />
-  <meta name="keywords" content="BSc Zoology Hons notes PDF download, DU BSc Zoology previous year question papers, BSc Zoology Hons DU, Delhi University Zoology notes, BSc Zoology study material, handwritten notes, semester wise notes, Zoology Honours notes PDF">
-  <title>SayHeyShubh | Zoology Student, Youtuber & Study notes</title>
+    content="SayHeyShubh is India's student-driven learning community for Delhi University students — handwritten BSc Zoology Hons notes PDF, Botany and Microbiology notes, DU previous year question papers, and a growing community of student contributors." />
+  <meta name="keywords" content="DU students learning community, BSc Zoology Hons notes PDF download, DU BSc Zoology previous year question papers, BSc Botany notes DU, BSc Microbiology notes DU, Delhi University notes community, handwritten notes, semester wise notes, student contributors DU">
+  <title>SayHeyShubh | DU Students' Notes & Learning Community</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <style>
+    /* Hero now uses a semantic H1 (was H2) — mirror existing hero-text h2 sizing */
+    .hero-text h1 { font-size: 48px; margin-bottom: 20px; color: #1a202c; }
+    @media (max-width: 768px) { .hero-text h1 { font-size: 2.5rem; margin-bottom: 15px; } }
+    @media (max-width: 480px) { .hero-text h1 { font-size: 1.6rem; line-height: 1.3; margin-bottom: 12px; } }
+  </style>
 </head>
 
 <body>
@@ -44,14 +50,13 @@
         <span></span>
         <span></span>
       </div>
-      <nav>
+                  <nav>
         <ul>
-          <li><a href="portfolio">Portfolio</a></li>
-          <li><a href="blogs">Blogs</a></li>
           <li><a href="notes">Notes</a></li>
-          <li><a href="youtube">YouTube</a></li>
+          <li><a href="portfolio">Portfolio</a></li>
+          <li><a href="community">Community</a></li>
+          <li><a href="blogs">Blog</a></li>
           <li><a href="about">About</a></li>
-          <li><a href="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -59,213 +64,103 @@
 
   <section class="hero">
     <div class="hero-text">
-      <h2>Hi, I'm Shubham <img src="attached_assets/hi_1753419293614.png" alt="Wave" class="emoji-icon" /></h2>
-      <p>BSc (H) Zoology student | Content Creator | Blog writer | Digital Marketer</p>
+      <h1>India's Student-Driven <span style="color:#6366f1;">DU Learning Community</span></h1>
+      <p>SayHeyShubh started as one BSc Zoology student's handwritten notes. It's growing into a student-built home for Zoology, Botany, and Microbiology at Delhi University — notes, previous year papers, and a community that helps each other through college.</p>
+      <div class="hero-ctas" style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+        <a href="notes" class="youtube-btn primary">📚 Explore Notes</a>
+        <a href="community" class="youtube-btn secondary">🤝 Meet the Community</a>
+      </div>
     </div>
     <div class="hero-image">
-      <img src="attached_assets/shubham_1753383095126.jpg" alt="Shubham Kumar">
+      <img src="attached_assets/shubham_1753383095126.jpg" alt="SayHeyShubh founder Shubham Kumar">
+    </div>
+  </section>
+
+  <section class="why-us" style="max-width:1100px; margin:3rem auto; padding:0 2rem;">
+    <h2 style="text-align:center; margin-bottom:2rem;">Why SayHeyShubh?</h2>
+    <div class="columns">
+      <div>
+        <h4>📝 Built by Students, for Students</h4>
+        <p>Every note is prepared and reviewed by DU students who've actually sat the exam — not generic, outsourced content.</p>
+      </div>
+      <div>
+        <h4>📚 Multi-Subject, One Home</h4>
+        <p>What began as Zoology notes now covers Botany and Microbiology too, with more subjects on the way as the community grows.</p>
+      </div>
+      <div>
+        <h4>🤝 A Growing Community</h4>
+        <p>Beyond notes, SayHeyShubh is becoming a place where DU students connect, contribute, and help each other succeed.</p>
+      </div>
     </div>
   </section>
 
   
-    <!-- YouTube Section Preview -->
-    <section class="youtube-preview">
+  <section class="subjects" style="max-width:1100px; margin:3rem auto; padding:0 2rem;">
+    <h2 style="text-align:center;">📚 Explore Notes by Subject</h2>
+    <p style="text-align:center; max-width:650px; margin:0.5rem auto 2rem; color:#4a5568;">Handwritten <strong>BSc notes PDF</strong>, <strong>DU previous year question papers</strong>, and semester-wise study material — prepared by DU students, for DU students.</p>
+    <div class="content-grid">
+      <div class="content-card" onclick="window.location.href='zoology'">
+        <div class="content-icon">🐾</div>
+        <h5>Zoology</h5>
+        <p><strong>BSc Zoology Hons notes PDF</strong>, handwritten notes & <strong>DU previous year question papers</strong></p>
+      </div>
+      <div class="content-card" onclick="window.location.href='botany'">
+        <div class="content-icon">🌿</div>
+        <h5>Botany</h5>
+        <p><strong>BSc Botany Hons notes</strong> for Delhi University students, semester-wise</p>
+      </div>
+      <div class="content-card" onclick="window.location.href='microbiology'">
+        <div class="content-icon">🔬</div>
+        <h5>Microbiology</h5>
+        <p><strong>BSc Microbiology Hons notes</strong>, prepared and reviewed by student contributors</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Section -->
+  <section class="youtube-preview">
     <div class="youtube-content">
       <div class="channel-preview">
         <div class="channel-info">
           <img src="attached_assets/shubhiphilia.jpg" alt="ShubhiPhilia BSc Zoology Channel" class="channel-thumb">
           <div class="channel-details">
-            <h4>ShubhiPhilia 🎓</h4>
-            <p><strong>BSc Zoology Hons DU</strong> - Study Notes, Previous Year Questions & Academic Guidance</p>
-            <p class="channel-description">Handwritten notes, exam tips, and study materials for <strong>BSc Zoology Honours Delhi University</strong> students. Download PDF notes for all semesters based on latest syllabus!</p>
-          </div>
-        </div>
-        
-        <div class="youtube-stats">
-          <div class="stat-item">
-            <span class="stat-icon">📖</span>
-            <span class="stat-text">Study Notes</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-icon">📝</span>
-            <span class="stat-text">Previous Papers</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-icon">🎯</span>
-            <span class="stat-text">Exam Tips</span>
+            <h4>🎥 Learn With Us on YouTube — ShubhiPhilia</h4>
+            <p class="channel-description">Alongside the notes, we make video lessons, exam tips, and survival guides for <strong>BSc Zoology Honours Delhi University</strong> students — a companion to the written notes, not a replacement for them.</p>
           </div>
         </div>
       </div>
-      
-      <div class="youtube-actions">
+
+      <div class="content-grid" style="margin-top:1.5rem;">
+        <a href="watch-ecology" class="content-card" style="text-decoration:none; color:inherit;">
+          <img src="https://i.ytimg.com/vi/0QyVX0lVcMM/hqdefault.jpg" alt="Introduction to Ecology video" style="width:100%; border-radius:12px; margin-bottom:0.8rem;">
+          <h5>Introduction to Ecology</h5>
+          <p>BSc Zoology Honours Semester 1</p>
+        </a>
+        <a href="watch-survival-guide" class="content-card" style="text-decoration:none; color:inherit;">
+          <img src="https://i.ytimg.com/vi/wewhZlQ0IlI/hqdefault.jpg" alt="BSc Zoology First Year Survival Guide video" style="width:100%; border-radius:12px; margin-bottom:0.8rem;">
+          <h5>First Year Survival Guide</h5>
+          <p>Exam tips & college life for BSc Zoology</p>
+        </a>
+        <a href="watch-non-chordates" class="content-card" style="text-decoration:none; color:inherit;">
+          <img src="https://i.ytimg.com/vi/FMTwnbzEWAg/hqdefault.jpg" alt="Introduction to Non-Chordates video" style="width:100%; border-radius:12px; margin-bottom:0.8rem;">
+          <h5>Introduction to Non-Chordates</h5>
+          <p>Classification & exam-important topics</p>
+        </a>
+      </div>
+
+      <div class="youtube-actions" style="margin-top:1.5rem;">
         <a href="https://www.youtube.com/@ShubhiPhilia" class="youtube-btn primary" target="_blank">
           <span class="btn-icon">🎥</span>
           Visit YouTube Channel
         </a>
-        <a href="youtube" class="youtube-btn secondary">
-          <span class="btn-icon">📚</span>
-          Download BSc Zoology Notes
-        </a>
-      </div>
-    </div>
-
-  
-    <div class="youtube-header">
-      <h1>📚 BSc Zoology Study Materials & Notes</h1>
-      <p>Access comprehensive <strong>BSc Zoology Hons notes PDF</strong>, <strong>DU BSc Zoology previous year question papers</strong>, <strong>Semester wise notes</strong> and <strong>Handwritten study material</strong> for Delhi University students.</p>
-    </div>
-    
-    <div class="featured-content">
-      <h4>Featured Study Materials</h4>
-      <div class="content-grid">
-        <div class="content-card" onclick="window.location.href='youtube'">
-          <div class="content-icon">📑</div>
-          <h5>Semester-wise Notes</h5>
-          <p>Complete <strong>BSc Zoology notes PDF</strong> for all semesters</p>
-        </div>
-        <div class="content-card" onclick="window.location.href='youtube'">
-          <div class="content-icon">❓</div>
-          <h5>Previous Year Papers</h5>
-          <p><strong>DU BSc Zoology question papers</strong> subject wise PYQs</p>
-        </div>
-        <div class="content-card" onclick="window.location.href='youtube'">
-          <div class="content-icon">✍️</div>
-          <h5>Handwritten Notes</h5>
-          <p>Clear, comprehensive handwritten study materials</p>
-        </div>
       </div>
     </div>
   </section>
 
-  <section class="experience">
-    <h3>Experience</h3>
-    <div class="columns">
-      <div>
-        <h4>Content Creation</h4>
-        <ul>
-          <li>(Will add soon)</li>
-
-        </ul>
-      </div>
-      <div>
-        <h4>Writing & Blogs</h4>
-        <ul>
-          <li><a href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">🧠 Beyond the Clinic Door</a></li>
-          <li><a href="figuring-out" target="_blank" rel="noopener noreferrer">🍂 Figuring Out</a></li>
-
-        </ul>
-      </div>
-      <div>
-        <h4>Volunteering</h4>
-        <ul>
-          <li>(Will add soon)</li>
-
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact-tools">
-    <div class="contact">
-      <h4><img src="attached_assets/handshake_1753419769810.png" alt="handshake" class="emoji-icon" /> Let's Connect</h4>
-      <div class="contact-grid">
-        <a href="https://www.linkedin.com/in/sayheyshubh" class="contact-item linkedin" target="_blank">
-          <div class="contact-icon"><img src="attached_assets/linkedin_1753420361924.png" alt="linkedin" class="emoji-icon" /></div>
-          <div class="contact-info">
-            <h5>LinkedIn</h5>
-            <p>Professional networking</p>
-          </div>
-        </a>
-        <a href="https://instagram.com/sayheyshubh" class="contact-item instagram" target="_blank">
-          <div class="contact-icon"><img src="attached_assets/instagram_1753420550133.png" alt="instagram" class="emoji-icon" /></div>
-          <div class="contact-info">
-            <h5>Instagram</h5>
-            <p>Creative content & UGC</p>
-          </div>
-        </a>
-        <a href="https://t.me/shubhwhoam" class="contact-item telegram" target="_blank">
-          <div class="contact-icon"><img src="attached_assets/telegram_1753420699066.png" alt="telegram" class="emoji-icon" /></div>
-          <div class="contact-info">
-            <h5>Telegram</h5>
-            <p>Quick messaging</p>
-          </div>
-        </a>
-        <a href="https://www.youtube.com/@Shubhiphilia" class="contact-item youtube" target="_blank">
-          <div class="contact-icon"><img src="attached_assets/youtube_1753420818875.png" alt="youtube" class="emoji-icon" /></div>
-          <div class="contact-info">
-            <h5>YouTube</h5>
-            <p>Video content & vlogs</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="certificates">
-      <h4><img src="attached_assets/trophy_1753420106469.png" alt="trophy" class="emoji-icon" /> My Certificates</h4>
-  <div class="certificates-grid">
-
-      <div class="certificate-card">
-        <div class="certificate-icon">🧠</div>
-        <h3>TCS iON Career Edge - Young Professional</h3>
-        <p><b>Tata Consultancy Services</b><br><small>Skills: Communication · Presentation Skills · Artificial Intelligence (AI) · Information Technology · Accounting · Professional Writing · Public Speaking · Data Analysis</small></p>
-        <a href="https://drive.google.com/file/d/1HmRzDeHx4tNXXCI1Tx096PFRlvifb1ty/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
-      </div>
-
-      <div class="certificate-card">
-        <div class="certificate-icon">☁️</div>
-        <h3>Introduction to Generative AI Studio</h3>
-        <p><b>Simplilearn</b><br><small>Skills: Generative AI · Vertex AI · AI Prompting · Prompt Design · Prompt Engineering · Google Cloud Platform (GCP)</small></p>
-        <a href="https://drive.google.com/file/d/1c8d8iGay13Wb8Fn5VzdztpXhemuqnbgO/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
-      </div>
-
-    <div class="certificate-card">
-      <div class="certificate-icon">☁️</div>
-      <h3>Introduction to MS Excel</h3>
-      <p><b>Simplilearn</b><br><small>Skills: Microsoft Excel · Data Entry · Data Analysis · Databases</small></p>
-      <a href="https://drive.google.com/file/d/1aij017YJmlQiOcIc5AIoUjR3kjo3LRIR/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
-    </div>
-
-    <div class="certificate-card">
-      <div class="certificate-icon">☁️</div>
-      <h3>Fundamentals of Digital Marketing</h3>
-      <p><b>Google Digital Garage</b><br><small>Skills: Digital Marketing · AI in marketing · Advertising Campaigns · Search Engine Optimization (SEO)</small></p>
-      <a href="https://drive.google.com/file/d/19j-zYXxvg2caBuiyvphuJj9Eiwuotkxo/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
-    </div>
-
-      <!-- Add more cards below the same way -->
-
-    </div>
-  </section>
-
-  <section class="projects">
-    <h3>Projects</h3>
-    <div class="project-list">
-      <div class="project">
-        <span>01</span>
-        <h5><a href="https://www.youtube.com/@shubhiphilia"  target="_blank">YouTube Channel</a></h5>
-        <p><a href="https://www.youtube.com/@shubhiphilia"  target="_blank">Study Content, academic Tips, and relatable videos</a></p>
-      </div>
-      <div class="project">
-        <span>02</span>
-        <h5>Video Editing</h5>
-        <p>(Coming soon)</p>
-      </div>
-      <div class="project">
-        <span>03</span>
-        <h5><a href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">CHRDS Blog</a></h5>
-        <p><a href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">Wrote about mental health & disability access</a></p>
-      </div>
-      <div class="project">
-        <span>04</span>
-        <h5>Marketing Strategy</h5>
-        <p>(Coming soon)</p>
-      </div>
-      <div class="project">
-        <span>05</span>
-        <h5>Productivity Tracker (Student Tool)</h5>
-        <p>(Coming soon)</p>
-      </div>
-    </div>
+  <section class="community-teaser" style="max-width:900px; margin:3rem auto; padding:2.5rem 2rem; text-align:center; background:linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius:20px;">
+    <h2>🤝 More Than Notes — A Community</h2>
+    <p style="max-width:650px; margin:0.8rem auto 1.5rem; color:#4a5568; line-height:1.7;">SayHeyShubh is run by a small, growing team of DU student contributors who prepare and review notes together. See who's behind it, or find out how to join in.</p>
+    <a href="community" class="youtube-btn primary">Meet the Community</a>
   </section>
 
   <footer>

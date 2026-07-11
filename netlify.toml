@@ -10,21 +10,33 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["firebase-admin", "razorpay"]
-  included_files = ["youtube.html"]
+  included_files = ["zoology.html"]
 
 # ============================================================
 # 1. SPECIAL FUNCTION REDIRECTS
 # ============================================================
 
-# YouTube
+# Zoology (formerly "YouTube" page — renamed for clarity, same content/engine)
 [[redirects]]
-  from = "/youtube"
-  to = "/.netlify/builders/youtube-odb"
+  from = "/zoology"
+  to = "/.netlify/builders/zoology-odb"
   status = 200
   force = true
 [[redirects]]
+  from = "/zoology.html"
+  to = "/zoology"
+  status = 301
+  force = true
+
+# Legacy URL — permanently redirect old /youtube traffic and SEO equity to /zoology
+[[redirects]]
+  from = "/youtube"
+  to = "/zoology"
+  status = 301
+  force = true
+[[redirects]]
   from = "/youtube.html"
-  to = "/youtube"
+  to = "/zoology"
   status = 301
   force = true
 
@@ -89,15 +101,27 @@
   status = 301
   force = true
 
-# Contact
+# Contact (merged into About — permanent redirect preserves link equity)
 [[redirects]]
   from = "/contact"
-  to = "/contact.html"
-  status = 200
+  to = "/about"
+  status = 301
   force = true
 [[redirects]]
   from = "/contact.html"
-  to = "/contact"
+  to = "/about"
+  status = 301
+  force = true
+
+# Community
+[[redirects]]
+  from = "/community"
+  to = "/community.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/community.html"
+  to = "/community"
   status = 301
   force = true
 
