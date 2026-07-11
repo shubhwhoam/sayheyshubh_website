@@ -10,147 +10,378 @@
     gtag('js', new Date());
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
-     crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meet the Community | Student Contributors at SayHeyShubh</title>
-  <meta name="description" content="Meet the Delhi University students who prepare and review notes for SayHeyShubh, and learn how to join our student contributor community across Zoology, Botany, and Microbiology." />
-  <meta name="keywords" content="SayHeyShubh contributors, DU student notes contributors, join SayHeyShubh, student community Delhi University, become a note contributor" />
+  <title>Meet the Team | SayHeyShubh Community</title>
+  <meta name="description" content="Meet the Delhi University students behind SayHeyShubh. Discover our founding contributors and learn how to join the team." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  
   <style>
-    .community-container {
-      max-width: 1200px;
-      margin: 4rem auto;
-      padding: 0 2rem;
+    /* --- ED-TECH STYLE COMMUNITY PAGE --- */
+    body {
+      background-color: #f8fafc;
     }
-    .community-header {
+
+    /* 1. Impactful Hero Section */
+    .edtech-hero {
+      background: linear-gradient(to bottom, #ffffff, #afa8d43b);
+      padding: 5rem 2rem;
       text-align: center;
-      margin-bottom: 3rem;
-      padding: 2.5rem 2rem;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid #e2e8f0;
     }
-    .community-header h1 {
-      font-size: 2.4rem;
-      color: #2d3748;
-      margin-bottom: 1rem;
+
+    .hero-badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #4f46e5;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
     }
-    .community-header p {
-      color: #4a5568;
-      max-width: 700px;
-      margin: 0 auto;
-      font-size: 1.1rem;
+
+    .edtech-hero h1 {
+      font-size: 3.5rem;
+      color: #0f172a;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .edtech-hero h1 span {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .edtech-hero p {
+      font-size: 1.2rem;
+      color: #475569;
+      max-width: 750px;
+      margin: 0 auto 3rem auto;
       line-height: 1.7;
     }
-    .contributors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+
+    /* Floating Stats in Hero */
+    .hero-stats-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      background: white;
+      padding: 1.5rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+      min-width: 200px;
+    }
+
+    .hero-stat h3 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin: 0 0 0.2rem 0;
+      font-weight: 800;
+    }
+
+    .hero-stat p {
+      margin: 0;
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* 2. Premium Team Cards */
+    .team-section {
+      max-width: 1200px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title-wrapper {
+      text-align: center;
       margin-bottom: 4rem;
     }
-    .contributor-card {
+
+    .section-title-wrapper h2 {
+      font-size: 2.2rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title-wrapper p {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .team-card {
       background: white;
       border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
       border: 1px solid #e2e8f0;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
     }
-    .contributor-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-      border-color: #6366f1;
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
     }
-    .contributor-avatar {
-      width: 90px;
-      height: 90px;
+
+    .card-top-accent {
+      height: 6px;
+      width: 100%;
+    }
+    
+    .accent-zool { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+    .accent-micro { background: linear-gradient(90deg, #a1b910, #869605); }
+    .accent-botany { background: linear-gradient(90deg, #9ce18c, #91ce7b); }
+
+    .team-card-inner {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 6px);
+    }
+
+    .team-avatar-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .team-avatar {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      margin: 0 auto 1.2rem;
+      object-fit: cover;
+      border: 2px solid #f1f5f9;
+      padding: 4px;
+      background: white;
+    }
+
+    .placeholder-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #f8fafc;
+      color: #6366f1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
+      font-size: 2.5rem;
+      font-weight: 800;
+      border: 2px solid #e2e8f0;
+    }
+
+    .team-role-tag-shubham {
+      background: #eef2ff;
+      color: #4f46e5;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .team-role-tag-raina {
+      background: #c7f2cc70;
+      color: #42bd40;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .team-role-tag-aditi {
+      background: #f0f2c770;
+      color: #bda440;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .tag-founder { background: #eef2ff; color: #4f46e5; }
+    .tag-open { background: #fef2f2; color: #dc2626; border: 1px dashed #fca5a5; }
+
+    .team-name {
+      font-size: 1.6rem;
+      color: #1e293b;
+      margin-bottom: 0.3rem;
       font-weight: 800;
     }
-    .contributor-card h3 {
-      color: #1a202c;
+
+    .team-college {
+      color: #64748b;
+      font-size: 0.9rem;
+      font-weight: 500;
       margin-bottom: 0.3rem;
-      font-size: 1.3rem;
     }
-    .contributor-role {
-      color: #6366f1;
-      font-weight: 600;
-      font-size: 0.95rem;
+
+    .team-year {
+      color: #64748b;
+      font-size: 0.9rem;
+      font-weight: 500;
       margin-bottom: 0.8rem;
     }
-    .contributor-card p.bio {
-      color: #718096;
+
+    .team-bio {
+      color: #475569;
       line-height: 1.6;
       font-size: 0.95rem;
+      margin-bottom: 2rem;
+      flex-grow: 1;
     }
+
+    .team-socials {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .team-socials a {
+      color: #94a3b8;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .team-socials a:hover { color: #4f46e5; }
+
+    .apply-btn-card {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: white;
+      color: #dc2626;
+      border: 2px solid #fecaca;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .apply-btn-card:hover {
+      background: #fef2f2;
+      border-color: #dc2626;
+    }
+
+    /* 3. Why Join Us (Perks Grid) */
     .join-section {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      text-align: center;
-      color: white;
-      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+      background: white;
+      padding: 6rem 2rem;
+      border-top: 1px solid #e2e8f0;
     }
-    .join-section h2 {
-      font-size: 2rem;
+
+    .join-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .perk-box {
+      background: #f8fafc;
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.3s ease;
+    }
+
+    .perk-box:hover {
+      transform: translateY(-5px);
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      border-color: #e2e8f0;
+    }
+
+    .perk-icon {
+      font-size: 2.5rem;
+      color: #4f46e5;
+      margin-bottom: 1.5rem;
+    }
+
+    .perk-box h4 {
+      font-size: 1.3rem;
+      color: #1e293b;
       margin-bottom: 1rem;
     }
-    .join-section p {
-      max-width: 650px;
-      margin: 0 auto 1.5rem;
-      font-size: 1.05rem;
-      line-height: 1.7;
-      opacity: 0.95;
+
+    .perk-box p {
+      color: #64748b;
+      line-height: 1.6;
     }
-    .join-perks {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1.5rem 0 2rem;
+
+    .cta-wrapper {
+      text-align: center;
+      margin-top: 4rem;
     }
-    .join-perk {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 50px;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    .join-btn {
+
+    .btn-massive {
       display: inline-block;
-      background: white;
-      color: #6366f1;
-      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1.2rem 3rem;
       border-radius: 50px;
-      text-decoration: none;
+      font-size: 1.1rem;
       font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
       transition: all 0.3s ease;
     }
-    .join-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    .btn-massive:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
     }
-    .section-label {
-      text-align: center;
-      color: #2d3748;
-      font-size: 1.6rem;
-      margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      .edtech-hero h1 { font-size: 2.2rem; }
+      .hero-stats-wrapper { gap: 1rem; }
+      .hero-stat { min-width: 140px; padding: 1rem; }
+      .hero-stat h3 { font-size: 1.8rem; }
     }
   </style>
 </head>
@@ -179,49 +410,115 @@
     </div>
   </header>
 
-  <div class="community-container">
-    <div class="community-header">
-      <h1>🤝 Meet the SayHeyShubh Community</h1>
-      <p>SayHeyShubh started as one student's Zoology notes. It's becoming a Delhi University students' learning community — built by students, reviewed by students, for students. Here's who's behind the notes, and how you can join in.</p>
-    </div>
+  <!-- 1. HERO SECTION -->
+  <section class="edtech-hero">
+    <div class="hero-badge">Our Mission</div>
+    <h1>Empowering DU Students, <br><span>Making Every Semester Simpler.</span></h1>
+    <p>SayHeyShubh isn't just a website; it's a movement. We are a passionate team of founding collaborators from across Delhi University working to ensure high-quality study materials are accessible to everyone.</p>
+  </section>
 
-    <h2 class="section-label">✍️ Student Contributors</h2>
-    <div class="contributors-grid">
-      <div class="contributor-card">
-        <div class="contributor-avatar">S</div>
-        <h3>Shubham Kumar</h3>
-        <div class="contributor-role">Founder · BSc Zoology (Hons)</div>
-        <p class="bio">Started SayHeyShubh with handwritten Zoology notes and now leads the platform, content, and community.</p>
-      </div>
-      <div class="contributor-card">
-        <div class="contributor-avatar">A</div>
-        <h3>Aditi</h3>
-        <div class="contributor-role">BSc Microbiology (Hons)</div>
-        <p class="bio">Prepares and reviews the Microbiology notes on SayHeyShubh, keeping them syllabus-aligned and PYQ-focused.</p>
-      </div>
-      <div class="contributor-card">
-        <div class="contributor-avatar">?</div>
-        <h3>Your Name Here</h3>
-        <div class="contributor-role">BSc Botany (Hons) — Open</div>
-        <p class="bio">We're looking for a Botany student to help build out notes for this subject. Could be you.</p>
-      </div>
+  <!-- 2. TEAM GRID -->
+  <section class="team-section">
+    <div class="section-title-wrapper">
+      <h2>Meet the Founding Team</h2>
+      <p>Every resource on this platform exists because students chose to help other students.</p>
     </div>
+    
+    <div class="team-grid">
+      
+      <!-- Shubham Kumar -->
+      <div class="team-card">
+        <div class="card-top-accent accent-zool"></div>
+        <div class="team-card-inner">
+          <div class="team-avatar-wrapper">
+            <img src="attached_assets/shubham_1753383095126.jpg" alt="Shubham Kumar founder and BSc Zoology lead at SayHeyShubh" class="team-avatar">
+          </div>
+          <span class="team-role-tag-shubham">Founder & Zoology Lead</span>
+          <h3 class="team-name">Shubham Kumar</h3>
+          <div class="team-college">Deen Dayal Upadhyaya College</div>
+          <div class="team-year">(3rd Year)</div>
+          <p class="team-bio">"I started sharing my notes so my juniors wouldn't have to face the same panic I did. Now, we are building a centralized hub for all DU science students."</p>
+          <div class="team-socials">
+            <a href="https://linkedin.com/in/sayheyshubh" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com/sayheyshubh" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
 
-    <div class="join-section">
-      <h2>🚀 Become a Contributor</h2>
-      <p>If you're a DU student who takes great notes, understands your syllabus inside out, and wants to help thousands of other students while building a public portfolio — we'd love to have you on the team.</p>
-      <div class="join-perks">
-        <span class="join-perk">📌 Featured on this page</span>
-        <span class="join-perk">📄 Portfolio-ready credit</span>
-        <span class="join-perk">🎓 Help students across DU</span>
+      <!-- Aditi -->
+      <div class="team-card">
+        <div class="card-top-accent accent-micro"></div>
+        <div class="team-card-inner">
+          <div class="team-avatar-wrapper">
+            <div class="placeholder-avatar">A</div>
+          </div>
+          <span class="team-role-tag-aditi">Microbiology Lead</span>
+          <h3 class="team-name">Aditi Singh</h3>
+          <div class="team-college">Gargi College</div>
+          <div class="team-year">(2nd Year)</div>
+          <p class="team-bio">"I believe quality study material can make learning less stressful and more enjoyable. Through SayHeyShubh, I'm contributing microbiology resources to help students prepare smarter and succeed together."</p>
+          <div class="team-socials">
+            <a href="https://www.linkedin.com/in/aditi-singh-914889379" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
       </div>
-      <a href="about#contact" class="join-btn">Reach Out to Join</a>
+
+      <!-- Raina -->
+      <div class="team-card">
+        <div class="card-top-accent accent-botany"></div>
+        <div class="team-card-inner">
+          <div class="team-avatar-wrapper">
+            <img src="attached_assets/raina_malik.jpg" alt="Raina Malik BSc Botany Lead at SayHeyShubh" class="team-avatar">
+          </div>
+          <span class="team-role-tag-raina">Botany Lead</span>
+          <h3 class="team-name">Raina Malik</h3>
+          <div class="team-college">Sri Venkateswara College</div>
+          <div class="team-year">(2nd Year)</div>
+          <p class="team-bio">"Creating structured notes not only strengthens my own understanding but also helps fellow students learn with confidence. I'm proud to contribute to a platform built by students, for students."</p>
+          <div class="team-socials" style="border: none; padding-top: 0;">
+            <a href="https://www.linkedin.com/in/rainamalik19" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </section>
+
+  <!-- 3. WHY JOIN US -->
+  <section class="join-section">
+    <div class="join-container">
+      <div class="section-title-wrapper">
+        <h2>Why Join the Mission?</h2>
+        <p>Becoming a SayHeyShubh contributor isn't just about sharing PDFs. It's about stepping up.</p>
+      </div>
+      
+      <div class="perks-grid">
+        <div class="perk-box">
+          <i class="fas fa-id-card perk-icon"></i>
+          <h4>Build a Public Portfolio</h4>
+          <p>Your name, profile, and LinkedIn link will be featured, proving your subject matter expertise to future employers.</p>
+        </div>
+        <div class="perk-box">
+          <i class="fas fa-users perk-icon"></i>
+          <h4>Grow Your Network</h4>
+          <p>Collaborate with driven, top-performing students from colleges all across Delhi University and build connections that last beyond graduation.</p>
+        </div>
+        <div class="perk-box">
+          <i class="fas fa-crown perk-icon"></i>
+          <h4>Leave a Legacy</h4>
+          <p>Stop your hard work from collecting dust. Turn your personal study notes into a resource that helps hundreds of juniors for years to come.</p>
+        </div>
+      </div>
+
+      <div class="cta-wrapper">
+        <a href="about#contact" class="btn-massive">Reach Out & Join Us</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
-      <p>© 2025 SayHeyShubh • Built by students, for students</p>
+      <p>© 2026 SayHeyShubh • Built by students, for students</p>
       <p><a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
