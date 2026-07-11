@@ -33,6 +33,81 @@
     @media (max-width: 768px) { .hero-text h1 { font-size: 2.5rem; margin-bottom: 15px; } }
     @media (max-width: 480px) { .hero-text h1 { font-size: 1.6rem; line-height: 1.3; margin-bottom: 12px; } }
   </style>
+
+  <!-- JSON-LD Schema for Educational Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "SayHeyShubh",
+    "description": "India's student-driven DU learning community. Handwritten BSc Zoology, Botany, and Microbiology notes, previous year question papers, and a growing community of student contributors.",
+    "url": "https://sayheyshubh.netlify.app",
+    "logo": "https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png",
+    "sameAs": [
+      "https://www.youtube.com/@ShubhiPhilia",
+      "https://t.me/shubhiphilia",
+      "https://instagram.com/sayheyshubh",
+      "https://linkedin.com/in/sayheyshubh"
+    ],
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Roshni Kumari" },
+        "reviewBody": "It won't be wrong to say that this site has been everything that I needed, being a fresher who was tensed regarding the course and syllabus, this platform brought an end to all the worries."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Kajal Kheria" },
+        "reviewBody": "Thank you so much for being a lifesaver in my 1st year of college! Your notes and study materials were super helpful, and I really appreciate the time you took to share em."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Saniya Kain" },
+        "reviewBody": "Honestly, these notes are a masterpiece! The way everything is organized and explained makes studying so much easier."
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Schema for Website -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SayHeyShubh",
+    "url": "https://sayheyshubh.netlify.app"
+  }
+  </script>
+
+  <!-- JSON-LD Schema for FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is SayHeyShubh?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SayHeyShubh is a student-driven learning community for Delhi University students, starting with BSc Zoology and growing to cover Botany and Microbiology, built by DU students for DU students." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is SayHeyShubh officially affiliated with Delhi University?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, SayHeyShubh is an independent, student-run platform. It's not officially affiliated with Delhi University or any specific college, but it's built by and for DU students." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which subjects are currently covered?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Zoology and Microbiology are fully live with semester-wise notes and previous year question papers. Botany is being prepared by a student contributor and will go live subject-by-subject." }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I become a contributor?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you're a DU student who takes great notes and wants to help other students, visit the Community page to find out how to join." }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -76,6 +151,24 @@
     </div>
   </section>
 
+  <section class="how-it-works" style="max-width:1000px; margin:3rem auto; padding:0 2rem;">
+    <h2 style="text-align:center; margin-bottom:2rem;">How It Works</h2>
+    <div class="columns">
+      <div>
+        <h4>1️⃣ Browse Your Subject</h4>
+        <p>Pick Zoology, Botany, or Microbiology and find your semester's notes.</p>
+      </div>
+      <div>
+        <h4>2️⃣ Sign In & Unlock</h4>
+        <p>Log in to access full semester-wise notes and previous year question papers.</p>
+      </div>
+      <div>
+        <h4>3️⃣ Study & Succeed</h4>
+        <p>Use exam-focused, student-written notes to prep smarter — and share feedback with the community.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="why-us" style="max-width:1100px; margin:3rem auto; padding:0 2rem;">
     <h2 style="text-align:center; margin-bottom:2rem;">Why SayHeyShubh?</h2>
     <div class="columns">
@@ -94,10 +187,27 @@
     </div>
   </section>
 
-  
+  <section class="testimonials" style="max-width:1100px; margin:3rem auto; padding:0 2rem;">
+    <h2 style="text-align:center; margin-bottom:2rem;">💬 What Students Are Saying</h2>
+    <div class="columns">
+      <div style="background:white; border-radius:16px; padding:1.8rem; box-shadow:0 6px 20px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
+        <p style="color:#4a5568; line-height:1.6; font-style:italic;">"It won't be wrong to say that this site has been everything that I needed, being a fresher who was tensed regarding the course and syllabus, this platform brought an end to all the worries. The notes are awesome and thanks a lot for starting this."</p>
+        <p style="margin-top:1rem; font-weight:600; color:#1a202c;">— Roshni Kumari</p>
+      </div>
+      <div style="background:white; border-radius:16px; padding:1.8rem; box-shadow:0 6px 20px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
+        <p style="color:#4a5568; line-height:1.6; font-style:italic;">"Thank you so much for being a lifesaver in my 1st year of college! Your notes and study materials were super helpful, and I really appreciate the time you took to share em."</p>
+        <p style="margin-top:1rem; font-weight:600; color:#1a202c;">— Kajal Kheria</p>
+      </div>
+      <div style="background:white; border-radius:16px; padding:1.8rem; box-shadow:0 6px 20px rgba(0,0,0,0.06); border:1px solid #e2e8f0;">
+        <p style="color:#4a5568; line-height:1.6; font-style:italic;">"Honestly, these notes are a masterpiece! The way everything is organized and explained makes studying so much easier. Truly some of the best notes I've come across — super aesthetic, clear, and effective!"</p>
+        <p style="margin-top:1rem; font-weight:600; color:#1a202c;">— Saniya Kain</p>
+      </div>
+    </div>
+  </section>
+
   <section class="subjects" style="max-width:1100px; margin:3rem auto; padding:0 2rem;">
     <h2 style="text-align:center;">📚 Explore Notes by Subject</h2>
-    <p style="text-align:center; max-width:650px; margin:0.5rem auto 2rem; color:#4a5568;">Handwritten <strong>BSc notes PDF</strong>, <strong>DU previous year question papers</strong>, and semester-wise study material — prepared by DU students, for DU students.</p>
+    <p style="text-align:center; max-width:650px; margin:0.5rem auto 2rem; color:#4a5568;">Handwritten <strong>BSc notes PDF</strong>, <strong>DU previous year question papers</strong>, and semester-wise study material — aligned with the <strong>DU FYUP/NEP syllabus</strong>, prepared by DU students, for DU students.</p>
     <div class="content-grid">
       <div class="content-card" onclick="window.location.href='zoology'">
         <div class="content-icon">🐾</div>
@@ -154,6 +264,26 @@
           Visit YouTube Channel
         </a>
       </div>
+    </div>
+  </section>
+
+  <section class="home-faq" style="max-width:850px; margin:3rem auto 2rem; padding:0 2rem;">
+    <h2 style="text-align:center; margin-bottom:2rem;">❓ Frequently Asked Questions</h2>
+    <div class="faq-item" style="margin-bottom:1.5rem;">
+      <h3 style="color:#1a202c; margin-bottom:0.4rem;">What is SayHeyShubh?</h3>
+      <p style="color:#4a5568; line-height:1.6;">SayHeyShubh is a student-driven learning community for Delhi University students — starting with BSc Zoology and growing to cover Botany and Microbiology, built by DU students for DU students.</p>
+    </div>
+    <div class="faq-item" style="margin-bottom:1.5rem;">
+      <h3 style="color:#1a202c; margin-bottom:0.4rem;">Is SayHeyShubh officially affiliated with Delhi University?</h3>
+      <p style="color:#4a5568; line-height:1.6;">No — SayHeyShubh is an independent, student-run platform. It's not officially affiliated with Delhi University or any specific college, but it's built by and for DU students.</p>
+    </div>
+    <div class="faq-item" style="margin-bottom:1.5rem;">
+      <h3 style="color:#1a202c; margin-bottom:0.4rem;">Which subjects are currently covered?</h3>
+      <p style="color:#4a5568; line-height:1.6;">Zoology and Microbiology are fully live with semester-wise notes and previous year question papers. Botany is being prepared by a student contributor and will go live subject-by-subject.</p>
+    </div>
+    <div class="faq-item">
+      <h3 style="color:#1a202c; margin-bottom:0.4rem;">How can I become a contributor?</h3>
+      <p style="color:#4a5568; line-height:1.6;">If you're a DU student who takes great notes and wants to help other students, visit the <a href="community" style="color:#6366f1;">Community page</a> to find out how to join.</p>
     </div>
   </section>
 
