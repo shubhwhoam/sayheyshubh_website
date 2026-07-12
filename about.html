@@ -1,40 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="canonical" href="https://sayheyshubh.netlify.app/about" />
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>About SayHeyShubh & Founder Shubham Kumar</title>
+  <meta name="description" content="Discover the story behind SayHeyShubh—Delhi University's premier student-driven learning platform. Meet founder Shubham Kumar, blending science with digital storytelling." />
+  <meta name="keywords" content="SayHeyShubh, Shubham Kumar, DU Zoology student, Delhi University learning community, BSc notes DU, student content creator, Shubhiphilia">
+  <meta name="author" content="Shubham Kumar">
+
+  <!-- Open Graph / Facebook / WhatsApp SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sayheyshubh.netlify.app/about">
+  <meta property="og:title" content="About SayHeyShubh | The DU Student Movement">
+  <meta property="og:description" content="From a stack of handwritten Zoology notes to a centralized DU learning ecosystem. Read our story and meet the founder.">
+  <meta property="og:image" content="attached_assets/mainlogo_1753383095126.png">
+
+  <!-- Twitter SEO Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About SayHeyShubh & Founder Shubham Kumar">
+  <meta name="twitter:description" content="Building the ultimate DU learning community. Read the story behind SayHeyShubh.">
+
+  <!-- Google Tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
-     crossorigin="anonymous"></script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About | SayHeyShubh</title>
-  <meta name="description" content="Meet Shubham Kumar, founder of SayHeyShubh — a BSc Zoology student at Delhi University building a student-driven notes and learning community, plus his certifications, YouTube channel, and mission." />
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
-   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+
+  <style>
+    /* Premium Modern Clean Global Styles */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      --dark-text: #1e293b;
+      --body-light: #f8fafc;
+      --card-border: #e2e8f0;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--body-light);
+      color: var(--dark-text);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Page Wrapper Fixes Overlap */
+    .page-wrapper {
+      padding-top: 95px;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto 5rem auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    /* Pill-Shaped Breadcrumb */
+    .breadcrumb-trail {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      background: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .breadcrumb-trail a {
+      color: #6366f1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .breadcrumb-trail a:hover {
+      color: #4f46e5;
+    }
+
+    /* Story / Platform Header */
+    .story-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 5rem 2rem;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--card-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .story-header::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0) 100%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .story-header h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    .story-header p {
+      font-size: 1.15rem;
+      color: #475569;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-logo-large {
+      width: 250px;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* The Problem & Solution Section */
+    .narrative-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 5rem;
+      align-items: center;
+    }
+    .narrative-box {
+      background: white;
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      border: 1px solid var(--card-border);
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .narrative-box.highlight {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.25);
+    }
+    .narrative-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    .narrative-box h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 1rem 0;
+      line-height: 1.3;
+    }
+    .narrative-box p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin: 0;
+      opacity: 0.9;
+    }
+    .narrative-box.highlight h3 { color: white; }
+    .narrative-box:not(.highlight) h3 { color: #0f172a; }
+    .narrative-box:not(.highlight) p { color: #475569; }
+
+    /* Reusable Columns / Feature Boxes */
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+    .feature-box {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease;
+    }
+    .feature-box:hover {
+      transform: translateY(-4px);
+    }
+    .feature-icon-wrapper {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+    .feature-box h4 {
+      font-size: 1.25rem;
+      color: #0f172a;
+      margin: 0 0 0.8rem 0;
+      font-weight: 700;
+    }
+    .feature-box p {
+      color: #475569;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Founder Section (Meet the Architect) */
+    .founder-section {
+      margin-bottom: 6rem;
+      padding-top: 4rem;
+      border-top: 1px solid var(--card-border);
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    .about-hero {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+    .about-hero-text {
+      flex: 1;
+    }
+    .about-hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 1rem 0;
+      line-height: 1.1;
+    }
+    .about-hero-text .subtitle {
+      font-size: 1.15rem;
+      color: #4f46e5;
+      font-weight: 600;
+      margin: 0 0 1.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .about-hero-text p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #475569;
+      margin-bottom: 1.2rem;
+    }
+    .about-hero-text p strong {
+      color: #1e293b;
+    }
+    
+    /* Profile Image */
+    .about-hero-image-wrapper {
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .about-hero-image-wrapper img {
+      width: 350px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border: 8px solid white;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .about-hero-image-wrapper:hover img {
+      transform: scale(1.03);
+      box-shadow: 0 25px 50px rgba(99, 102, 241, 0.15);
+      border-color: #f8fafc;
+    }
+    .founder-badge {
+      background: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      color: #334155;
+      font-size: 0.95rem;
+    }
+    .founder-badge i {
+      color: #6366f1;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+    .skill-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+      border-color: #cbd5e1;
+    }
+    .skill-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .skill-card h3 {
+      font-size: 1.2rem;
+      color: #0f172a;
+      margin: 0 0 0.8rem 0;
+    }
+    .skill-card p {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Beyond Academics Banner */
+    .ecosystem-banner {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      margin-bottom: 6rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .ecosystem-banner::before {
+      content: '\f16a'; /* YouTube icon */
+      font-family: 'Font Awesome 6 Brands';
+      position: absolute;
+      font-size: 25rem;
+      color: rgba(255,255,255,0.03);
+      top: -20%;
+      right: -5%;
+      transform: rotate(-15deg);
+      pointer-events: none;
+    }
+    .ecosystem-content {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    .ecosystem-content h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 0 0 1rem 0;
+      color: white;
+    }
+    .ecosystem-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 0 0 1.5rem 0;
+      color: #cbd5e1;
+    }
+    .ecosystem-highlight {
+      background: rgba(255,255,255,0.1);
+      border-left: 4px solid #ef4444;
+      padding: 1.5rem;
+      border-radius: 0 12px 12px 0;
+    }
+    .ecosystem-highlight p {
+      margin: 0;
+      font-style: italic;
+      color: white;
+      font-size: 1.05rem;
+    }
+
+    /* Certifications Grid */
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 6rem;
+    }
+    .certificate-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .certificate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+      border-color: #cbd5e1;
+    }
+    .cert-icon {
+      font-size: 2.5rem;
+      color: #f59e0b;
+      margin-bottom: 1rem;
+    }
+    .certificate-card h3 {
+      font-size: 1.15rem;
+      color: #0f172a;
+      margin: 0 0 0.8rem 0;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+    .certificate-card p {
+      font-size: 0.9rem;
+      color: #64748b;
+      line-height: 1.6;
+      margin: 0 0 1.5rem 0;
+    }
+    .certificate-card p b {
+      color: #334155;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .view-button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: #f1f5f9;
+      color: #4f46e5;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .view-button:hover {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: white;
+      padding: 4rem 2rem;
+      border-radius: 24px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      text-align: center;
+    }
+    .contact-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 1rem 0;
+    }
+    .contact-section p {
+      color: #475569;
+      font-size: 1.1rem;
+      margin: 0 auto 3rem auto;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .social-links-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 50px;
+      color: #334155;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .social-pill:hover {
+      transform: translateY(-3px);
+      background: white;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      border-color: #cbd5e1;
+    }
+    .social-pill i {
+      font-size: 1.2rem;
+    }
+    .social-pill.gmail:hover { color: #ea4335; border-color: #fca5a5; }
+    .social-pill.linkedin:hover { color: #0a66c2; border-color: #93c5fd; }
+    .social-pill.instagram:hover { color: #e1306c; border-color: #f9a8d4; }
+    .social-pill.telegram:hover { color: #0088cc; border-color: #7dd3fc; }
+    .social-pill.youtube:hover { color: #ff0000; border-color: #fca5a5; }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .page-wrapper {
+        padding-top: 80px;
+      }
+      .about-container {
+        padding: 0 1.5rem;
+      }
+      .story-header {
+        padding: 3rem 1.5rem;
+      }
+      .story-header h1 {
+        font-size: 2.2rem;
+      }
+      .narrative-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .narrative-box {
+        padding: 2.5rem 1.5rem;
+      }
+      .about-hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 3rem;
+      }
+      .about-hero-text h2 {
+        font-size: 2.2rem;
+      }
+      .about-hero-text .subtitle {
+        justify-content: center;
+      }
+      .about-hero-image-wrapper img {
+        width: 250px;
+        height: 250px;
+      }
+      .ecosystem-banner {
+        padding: 3rem 1.5rem;
+        flex-direction: column;
+        text-align: center;
+      }
+      .ecosystem-highlight {
+        border-left: none;
+        border-top: 4px solid #ef4444;
+        border-radius: 0 0 12px 12px;
+      }
+      .contact-section {
+        padding: 3rem 1.5rem;
+      }
+      .social-pill {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Consistent Header Nav Architecture -->
   <header>
-      <div class="container nav-flex">
-        <div class="logo-section">
-          <a href="index" class="logo-link">
-            <div class="logo">
-              <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
-            </div>
-          </a>
-        </div>
-      <div class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh - Delhi University Dynamic Learning Hub">
+          </div>
+        </a>
       </div>
-                  <nav>
+      <div class="nav-toggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>                   
+      <nav>
         <ul>
           <li><a href="notes">Notes</a></li>
           <li><a href="portfolio">Portfolio</a></li>
@@ -46,83 +621,214 @@
     </div>
   </header>
 
-  <main class="container about">
-    <h2 class="section-title"><span class="emoji"><img src="attached_assets/hi_1753419293614.png" alt="Wave" class="emoji-icon" /></span> <span class="text">About Me</span></h2>
+  <!-- Content Wrapper -->
+  <main class="page-wrapper">
+    <div class="about-container">
 
-    <section class="about-intro">
-      <p>Hi! I'm <strong>Shubham Kumar</strong>, </p>
+      <!-- Interactive Pill Breadcrumbs -->
+      <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+        <a href="index"><i class="fa-solid fa-house" style="font-size:0.8rem; margin-right:4px;"></i> Home</a> 
+        <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
+        <span style="color: #0f172a;">About Us</span>
+      </nav>
 
-      <p>A BSc Zoology (Hons.) student at <strong> Deen Dayal Upadhyaya College,</strong>  University of Delhi with a deep curiosity about science, and the intricate workings of the natural world. My academic journey is driven by a passion for understanding living organisms from microscopic life forms to complex ecosystems, and how they relate to human behavior, psychology, and creativity.</p>
+      <!-- The Origin Story of SayHeyShubh -->
+      <section class="story-header">
+        <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh Brand Logo" class="brand-logo-large">
+        <h1>From Handwritten Notes to a DU Movement</h1>
+        <p>SayHeyShubh wasn't engineered in a corporate boardroom. It was born in the classrooms of Deen Dayal Upadhyaya College. What started as one student sharing their handwritten Zoology notes has evolved into a centralized, peer-reviewed academic ecosystem serving thousands of Delhi University undergraduates.</p>
+      </section>
 
-      <p>I am also a self-driven digital marketer and storyteller, dedicated to making complex scientific concepts accessible and engaging for my peers. This mission led me to create <strong>SayHeyShubh,</strong> a dedicated website, and a companion YouTube channel, <strong>Shubhiphilia</strong>. Both platforms serve as a hub for high-quality study materials and notes specifically tailored for BSc Zoology students. Building these platforms from the ground up has allowed me to merge my love for zoology with practical skills in web development, search engine optimization (SEO), and digital content creation. I’m actively learning digital marketing to expand my skill set and understand how impactful content, storytelling, and strategy can come together to drive awareness and change. </p>
-
-       <p>Open to opportunities that blend <strong>scientific exploration, digital marketing, strategic communication, and creative problem-solving.</strong></p>
-
-       <p>It all started on YouTube — I began posting handwritten Zoology notes and study tips on my channel, <strong>Shubhiphilia</strong>, for fellow DU students. That grew into SayHeyShubh, and now into a small team of student contributors covering Zoology, Botany, and Microbiology.</p>
-    </section>
-
-    <section class="about-points">
-      <h3><span class="emoji">💡</span> <span class="text">A Few Things About Me:</span></h3>
-      <ul>
-        <li>Create YouTube content around student life, study material, emotional support, and study motivation</li>
-        <li>Skilled in video editing (CapCut, Premiere Pro) & design (Canva, Photoshop, Adobe Express)</li>
-        <li>Completed a certificate in Emotional Intelligence (Grade: Outstanding)</li>
-        <li>Interested in Neuropsychology, mental health, and digital storytelling</li>
-        <li>Combine strategic SEO and content creation with hands-on web development skills to build and grow an online presence.</li>
-      </ul>
-    </section>
-
-    <section class="about-goal">
-      <h3><span class="emoji">🎯</span> <span class="text">My Mission</span></h3>
-      <p>To tell stories that make people feel seen, heard, and inspired. Whether it’s through a short video, a caption, or a conversation. I believe in creating content that connects deeply and honestly.</p>
-    </section>
-
-    <section class="certificates">
-      <h3><img src="attached_assets/trophy_1753420106469.png" alt="trophy" class="emoji-icon" /> Certifications & Accomplishments</h3>
-      <div class="certificates-grid">
-        <div class="certificate-card">
-          <div class="certificate-icon">🧠</div>
-          <h3>TCS iON Career Edge - Young Professional</h3>
-          <p><b>Tata Consultancy Services</b><br><small>Skills: Communication · Presentation Skills · Artificial Intelligence (AI) · Information Technology · Accounting · Professional Writing · Public Speaking · Data Analysis</small></p>
-          <a href="https://drive.google.com/file/d/1HmRzDeHx4tNXXCI1Tx096PFRlvifb1ty/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
+      <!-- Problem & Solution Narrative Grid -->
+      <div class="narrative-grid">
+        <div class="narrative-box">
+          <div class="narrative-icon" style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <h3>The Scattered Syllabus Problem</h3>
+          <p>With the implementation of the FYUP/NEP framework, DU students faced a massive challenge: textbooks were outdated, syllabus guidelines were confusing, and reliable, high-yield previous year questions (PYQs) were scattered across dozens of unverified internet portals. Freshers were spending more time searching for resources than actually studying.</p>
         </div>
-        <div class="certificate-card">
-          <div class="certificate-icon">☁️</div>
-          <h3>Introduction to Generative AI Studio</h3>
-          <p><b>Simplilearn</b><br><small>Skills: Generative AI · Vertex AI · AI Prompting · Prompt Design · Prompt Engineering · Google Cloud Platform (GCP)</small></p>
-          <a href="https://drive.google.com/file/d/1c8d8iGay13Wb8Fn5VzdztpXhemuqnbgO/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
-        </div>
-        <div class="certificate-card">
-          <div class="certificate-icon">☁️</div>
-          <h3>Introduction to MS Excel</h3>
-          <p><b>Simplilearn</b><br><small>Skills: Microsoft Excel · Data Entry · Data Analysis · Databases</small></p>
-          <a href="https://drive.google.com/file/d/1aij017YJmlQiOcIc5AIoUjR3kjo3LRIR/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
-        </div>
-        <div class="certificate-card">
-          <div class="certificate-icon">☁️</div>
-          <h3>Fundamentals of Digital Marketing</h3>
-          <p><b>Google Digital Garage</b><br><small>Skills: Digital Marketing · AI in marketing · Advertising Campaigns · Search Engine Optimization (SEO)</small></p>
-          <a href="https://drive.google.com/file/d/19j-zYXxvg2caBuiyvphuJj9Eiwuotkxo/view?usp=sharing" target="_blank" class="view-button">View certificate</a>
+        <div class="narrative-box highlight">
+          <div class="narrative-icon" style="color: #fcd34d;"><i class="fa-solid fa-lightbulb"></i></div>
+          <h3>The Centralized Solution</h3>
+          <p>We built the bridge. SayHeyShubh consolidates verified, semester-wise handwritten notes, exact practical file methodologies, and solved PYQ databases into one sleek, highly accessible platform. We merged deep academic rigor with modern digital accessibility to ensure no DU science student ever has to study in the dark again.</p>
         </div>
       </div>
-    </section>
 
-    <section class="contact-links" id="contact">
-      <h3><span class="emoji">📞</span> <span class="text">Get In Touch</span></h3>
-      <ul>
-        <li><img src="attached_assets/gmail_1753422644462.png" alt="gmail" class="emoji-icon" /> <a href="mailto:shubhamkmr.work@gmail.com">shubhamkmr.work@gmail.com</a></li>
-        <li><img src="attached_assets/linkedin_1753420361924.png" alt="linkedin" class="emoji-icon" /> <a href="https://linkedin.com/in/sayheyshubh" target="_blank">LinkedIn - @sayheyshubh</a></li>
-        <li><img src="attached_assets/instagram_1753420550133.png" alt="instagram" class="emoji-icon" /> <a href="https://instagram.com/sayheyshubh" target="_blank">Instagram - @sayheyshubh</a></li>
-        <li><img src="attached_assets/telegram_1753420699066.png" alt="telegram" class="emoji-icon" /> <a href="https://t.me/shubhiphilia" target="_blank">Telegram - @Shubhiphilia</a></li>
-        <li><img src="attached_assets/youtube_1753420818875.png" alt="youtube" class="emoji-icon" /> <a href="https://youtube.com/@shubhiphilia" target="_blank">YouTube - @Shubhiphilia</a></li>
-      </ul>
-    </section>
+      <!-- Core Philosophy Section -->
+      <section style="margin-bottom: 6rem;">
+        <h2 class="section-title" style="justify-content: center; margin-bottom: 3rem;">Our Core Philosophy</h2>
+        <div class="columns">
+          <div class="feature-box">
+            <div class="feature-icon-wrapper" style="background:#e0f2fe; color:#0ea5e9;">
+              <i class="fa-solid fa-lock-open"></i>
+            </div>
+            <h4>Accessibility First</h4>
+            <p>Education shouldn't be hidden behind massive paywalls or clunky websites. We prioritize delivering clean, easily downloadable, and beautifully formatted resources straight to your mobile screen.</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-wrapper" style="background:#fef3c7; color:#f59e0b;">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <h4>Absolute Authenticity</h4>
+            <p>No AI-generated fluff. No outsourced articles. Every single note on this platform is handwritten and verified by a Delhi University student who has successfully conquered the exact same syllabus.</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon-wrapper" style="background:#fce7f3; color:#d946ef;">
+              <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+            <h4>Radical Empathy</h4>
+            <p>College is stressful enough. We don't just provide academic notes; we foster an environment that openly discusses mental health, exam anxiety, and the real struggles of hostel life.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Meet the Founder -->
+      <section class="founder-section">
+        <h2 class="section-title">Meet the Architect</h2>
+        <div class="about-hero">
+          <div class="about-hero-text">
+            <h2>Hi, I'm Shubham Kumar. <span style="display:inline-block; animation: wave 2.5s infinite; transform-origin: 70% 70%;">👋</span></h2>
+            <div class="subtitle">
+              <i class="fa-solid fa-microscope"></i> BSc Zoology (Hons), Delhi University
+            </div>
+            <p>I am driven by a deep curiosity about both the intricate workings of the natural world and the massive scale of digital technology. My academic journey focuses on understanding living organisms—from microscopic life forms to complex ecosystems.</p>
+            <p>But beyond textbooks, I am a self-driven digital marketer, web developer, and storyteller. I realized early on that brilliant scientific concepts are useless if they aren't accessible. That realization pushed me to create <strong>SayHeyShubh</strong>.</p>
+            <p>Building this platform from the ground up allowed me to merge my love for Zoology with practical, real-world skills in <strong>UI/UX design, search engine optimization (SEO), and digital content strategy.</strong> I am constantly exploring opportunities that blend scientific exploration with creative, strategic problem-solving.</p>
+          </div>
+          <div class="about-hero-image-wrapper">
+            <img src="attached_assets/shubham_1753383095126.jpg" alt="Shubham Kumar - Founder of SayHeyShubh">
+            <div class="founder-badge">
+              <i class="fa-solid fa-check-circle"></i> Shubham Kumar • Founder
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wave Animation Keyframes -->
+      <style>
+        @keyframes wave {
+          0% { transform: rotate( 0.0deg) }
+          10% { transform: rotate(14.0deg) }
+          20% { transform: rotate(-8.0deg) }
+          30% { transform: rotate(14.0deg) }
+          40% { transform: rotate(-4.0deg) }
+          50% { transform: rotate(10.0deg) }
+          60% { transform: rotate( 0.0deg) }
+          100% { transform: rotate( 0.0deg) }
+        }
+      </style>
+
+      <!-- Founder Skills & Interests -->
+      <h2 class="section-title"><i class="fa-solid fa-bolt"></i> The Founder's Toolkit</h2>
+      <section class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon" style="background:#fee2e2; color:#ef4444;">
+            <i class="fa-solid fa-video"></i>
+          </div>
+          <h3>Content Architecture</h3>
+          <p>Producing high-retention YouTube videos centered around student life, emotional support, and exam motivation.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon" style="background:#e0e7ff; color:#6366f1;">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <h3>Web & SEO Strategy</h3>
+          <p>Combining technical Search Engine Optimization with hands-on web development to scale community platforms.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon" style="background:#fef3c7; color:#f59e0b;">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3>Empathy & Psychology</h3>
+          <p>Applying principles of Neuropsychology and emotional intelligence to create relatable digital storytelling.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon" style="background:#dcfce7; color:#10b981;">
+            <i class="fa-solid fa-pen-nib"></i>
+          </div>
+          <h3>Digital Design</h3>
+          <p>Skilled in dynamic video editing (Premiere Pro, CapCut) and modern graphic design UI workflows.</p>
+        </div>
+      </section>
+
+      <!-- Beyond Academics Banner (Shubhiphilia Ecosystem) -->
+      <section class="ecosystem-banner">
+        <div class="ecosystem-content">
+          <h2>Beyond Academics: The Shubhiphilia Ecosystem</h2>
+          <p>SayHeyShubh is the technical hub for your syllabus, but learning doesn't stop at PDFs. Through my YouTube channel, <strong>Shubhiphilia</strong>, we dive into the realities of college life. From navigating mid-semester slumps and sharing raw hostel experiences, to breaking down complex Zoology chapters visually—it's a complete survival guide for Delhi University students.</p>
+          <div class="ecosystem-highlight">
+            <p>"To tell stories that make people feel seen, heard, and inspired. I believe in creating educational content that connects deeply and honestly, far beyond just passing exams."</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <h2 class="section-title"><i class="fa-solid fa-award"></i> Certifications & Accolades</h2>
+      <section class="certificates-grid">
+        <!-- Certificate 1 -->
+        <div class="certificate-card">
+          <div class="cert-icon"><i class="fa-solid fa-certificate"></i></div>
+          <h3>TCS iON Career Edge - Young Professional</h3>
+          <p><b>Tata Consultancy Services</b>
+          Communication • Presentation • AI • IT • Accounting • Public Speaking</p>
+          <a href="https://drive.google.com/file/d/1HmRzDeHx4tNXXCI1Tx096PFRlvifb1ty/view?usp=sharing" target="_blank" class="view-button">View Certificate</a>
+        </div>
+        <!-- Certificate 2 -->
+        <div class="certificate-card">
+          <div class="cert-icon"><i class="fa-solid fa-cloud"></i></div>
+          <h3>Introduction to Generative AI Studio</h3>
+          <p><b>Simplilearn & Google Cloud</b>
+          Generative AI • Vertex AI • Prompt Design • Prompt Engineering</p>
+          <a href="https://drive.google.com/file/d/1c8d8iGay13Wb8Fn5VzdztpXhemuqnbgO/view?usp=sharing" target="_blank" class="view-button">View Certificate</a>
+        </div>
+        <!-- Certificate 3 -->
+        <div class="certificate-card">
+          <div class="cert-icon"><i class="fa-solid fa-table-cells"></i></div>
+          <h3>Introduction to MS Excel</h3>
+          <p><b>Simplilearn</b>
+          Microsoft Excel • Data Entry • Data Analysis • Database Management</p>
+          <a href="https://drive.google.com/file/d/1aij017YJmlQiOcIc5AIoUjR3kjo3LRIR/view?usp=sharing" target="_blank" class="view-button">View Certificate</a>
+        </div>
+        <!-- Certificate 4 -->
+        <div class="certificate-card">
+          <div class="cert-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Fundamentals of Digital Marketing</h3>
+          <p><b>Google Digital Garage</b>
+          Digital Marketing • AI in Marketing • Ad Campaigns • SEO Strategy</p>
+          <a href="https://drive.google.com/file/d/19j-zYXxvg2caBuiyvphuJj9Eiwuotkxo/view?usp=sharing" target="_blank" class="view-button">View Certificate</a>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <h2>Let's Build Something Together</h2>
+        <p>Whether you want to collaborate on a digital marketing project, join SayHeyShubh as a student contributor, or just chat about Delhi University life—my inbox is always open.</p>
+        <div class="social-links-grid">
+          <a href="mailto:shubhamkmr.work@gmail.com" class="social-pill gmail">
+            <i class="fa-solid fa-envelope"></i> Email Me
+          </a>
+          <a href="https://linkedin.com/in/sayheyshubh" target="_blank" class="social-pill linkedin">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://instagram.com/sayheyshubh" target="_blank" class="social-pill instagram">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="https://t.me/shubhiphilia" target="_blank" class="social-pill telegram">
+            <i class="fa-brands fa-telegram"></i> Telegram
+          </a>
+          <a href="https://youtube.com/@shubhiphilia" target="_blank" class="social-pill youtube">
+            <i class="fa-brands fa-youtube"></i> YouTube
+          </a>
+        </div>
+      </section>
+
+    </div>
   </main>
 
+  <!-- Clean Minimalist Footer Component -->
   <footer>
-    <div class="container">
-      <p>© 2025 SayHeyShubh • Thanks for stopping by!</p>
-       <p> <a href="privacy-policy">Privacy Policy</a></p>
+    <div class="container" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding: 2rem 0; color: #64748b; font-size: 0.95rem;">
+      <p>&copy; 2026 SayHeyShubh. Crafted for Student Impact & Creative Growth.</p>
+      <p><a href="privacy-policy" style="color:#6366f1; text-decoration:none; font-weight:500;">Privacy Policy & Safety Framework</a></p>
     </div>
   </footer>
 
