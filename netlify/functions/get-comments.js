@@ -60,6 +60,7 @@ exports.handler = async (event) => {
         name: doc.data().userName,
         email: doc.data().userEmail,
         comment: doc.data().comment,
+        rating: doc.data().rating ?? null,
         created_at: doc.data().createdAt?.toDate?.() || new Date(),
         parent_id: doc.data().parentId
       });
@@ -107,6 +108,25 @@ exports.handler = async (event) => {
       .where('parentId', '==', null)
       .count()
       .get();
+
+    // Compute a real aggregate rating from actual rated comments (no fabricated numbers)
+    const allForPage = await db.collection('comments')
+      .where('page', '==', page)
+      .where('parentId', '==', null)
+      .get();
+    let ratingSum = 0;
+    let ratingCount = 0;
+    allForPage.forEach(doc => {
+      const r = doc.data().rating;
+      if (typeof r === 'number' && r >= 1 && r <= 5) {
+        ratingSum += r;
+        ratingCount += 1;
+      }
+    });
+    const ratingSummary = {
+      average: ratingCount > 0 ? Math.round((ratingSum / ratingCount) * 10) / 10 : null,
+      count: ratingCount
+    };
     
     return {
       statusCode: 200,
@@ -114,7 +134,8 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         success: true,
         comments: commentsWithReplies,
-        total: countSnapshot.data().count
+        total: countSnapshot.data().count,
+        ratingSummary
       })
     };
   } catch (error) {

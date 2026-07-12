@@ -48,13 +48,13 @@ exports.handler = async (event) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    const { comment, page, parentId } = JSON.parse(event.body);
+    const { comment, page, parentId, rating } = JSON.parse(event.body);
     
-    if (!comment || !page) {
+    if (!page) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Comment and page are required' })
+        body: JSON.stringify({ success: false, error: 'Page is required' })
       };
     }
     
@@ -71,15 +71,30 @@ exports.handler = async (event) => {
     const userName = userData.name || decodedToken.name || 'Anonymous';
     const userEmail = userData.email || decodedToken.email || '';
     
-    const sanitizedComment = comment.trim().substring(0, 1000);
+    const sanitizedComment = (comment || '').trim().substring(0, 1000);
     const sanitizedPage = page.substring(0, 50);
     const sanitizedParentId = parentId || null;
-    
-    if (sanitizedComment.length < 3) {
+
+    // Rating is required for a new top-level review, but not for replies
+    let sanitizedRating = null;
+    if (!sanitizedParentId) {
+      const ratingNum = Number(rating);
+      if (!Number.isInteger(ratingNum) || ratingNum < 1 || ratingNum > 5) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: 'A star rating (1-5) is required' })
+        };
+      }
+      sanitizedRating = ratingNum;
+    }
+
+    // Written feedback is optional, but if provided must be meaningful
+    if (sanitizedComment.length > 0 && sanitizedComment.length < 3) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Comment must be at least 3 characters' })
+        body: JSON.stringify({ success: false, error: 'Comment must be at least 3 characters if provided' })
       };
     }
     
@@ -102,6 +117,7 @@ exports.handler = async (event) => {
       userName: userName,
       userEmail: userEmail,
       comment: sanitizedComment,
+      rating: sanitizedRating,
       page: sanitizedPage,
       parentId: sanitizedParentId,
       createdAt: admin.firestore.FieldValue.serverTimestamp()
@@ -124,6 +140,7 @@ exports.handler = async (event) => {
           name: newCommentData.userName,
           email: newCommentData.userEmail,
           comment: newCommentData.comment,
+          rating: newCommentData.rating,
           created_at: newCommentData.createdAt?.toDate?.() || new Date(),
           parent_id: newCommentData.parentId
         }
