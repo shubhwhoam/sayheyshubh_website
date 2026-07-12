@@ -530,6 +530,35 @@
       min-height: 80px;
     }
 
+    /* Star Rating Picker (interactive, for the form) */
+    .star-picker {
+      display: flex;
+      gap: 0.3rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+    .star-picker .star {
+      color: #cbd5e1;
+      transition: color 0.15s ease, transform 0.1s ease;
+    }
+    .star-picker .star.filled {
+      color: #f59e0b;
+    }
+    .star-picker .star:hover {
+      transform: scale(1.15);
+    }
+
+    /* Star Rating Display (read-only, for posted comments) */
+    .star-display {
+      color: #f59e0b;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.4rem;
+    }
+    .star-display .empty {
+      color: #e2e8f0;
+    }
+
     .char-count {
       position: absolute;
       bottom: -1.3rem;
@@ -1380,25 +1409,48 @@
     
     if (isAuthenticated) {
       container.innerHTML = `
-        <h3 class="comment-form-title">Share Your Experience</h3>
+        <h3 class="comment-form-title">Rate & Share Your Experience</h3>
         <form id="commentForm" class="comment-form">
           <div class="form-group">
-            <label for="commentText">How did these notes help you in DU Zoology exams? *</label>
+            <label>How would you rate these notes? *</label>
+            <div class="star-picker" id="starPicker" role="radiogroup" aria-label="Star rating">
+              <span class="star" data-value="1">★</span>
+              <span class="star" data-value="2">★</span>
+              <span class="star" data-value="3">★</span>
+              <span class="star" data-value="4">★</span>
+              <span class="star" data-value="5">★</span>
+            </div>
+            <input type="hidden" id="selectedRating" value="0">
+          </div>
+          <div class="form-group">
+            <label for="commentText">Want to add written feedback? (optional)</label>
             <textarea 
               id="commentText" 
               name="comment" 
               placeholder="Share your experience with our study materials..." 
-              required
-              minlength="3"
               maxlength="1000"
             ></textarea>
             <span class="char-count" id="charCount">0/1000</span>
           </div>
           <button type="submit" class="submit-comment-btn" id="submitCommentBtn">
-            Post Comment
+            Post Rating
           </button>
         </form>
       `;
+
+      // Setup star picker
+      const starPicker = document.getElementById('starPicker');
+      const selectedRatingInput = document.getElementById('selectedRating');
+      const stars = starPicker.querySelectorAll('.star');
+      stars.forEach(star => {
+        star.addEventListener('click', function() {
+          const value = parseInt(this.dataset.value, 10);
+          selectedRatingInput.value = value;
+          stars.forEach(s => {
+            s.classList.toggle('filled', parseInt(s.dataset.value, 10) <= value);
+          });
+        });
+      });
       
       // Setup character counter
       const commentTextarea = document.getElementById('commentText');
@@ -1439,11 +1491,21 @@
 
     const submitBtn = document.getElementById('submitCommentBtn');
     const commentInput = document.getElementById('commentText');
+    const ratingInput = document.getElementById('selectedRating');
     const formContainer = document.getElementById('commentFormContainer');
     
     // Remove any existing messages
     const existingMsg = formContainer.querySelector('.success-message, .error-message');
     if (existingMsg) existingMsg.remove();
+
+    const selectedRating = parseInt(ratingInput.value, 10);
+    if (!selectedRating || selectedRating < 1 || selectedRating > 5) {
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'error-message';
+      errorMsg.textContent = '⭐ Please select a star rating before posting.';
+      formContainer.insertBefore(errorMsg, formContainer.firstChild);
+      return;
+    }
     
     submitBtn.disabled = true;
     submitBtn.textContent = 'Posting...';
@@ -1460,6 +1522,7 @@
         },
         body: JSON.stringify({
           comment: commentInput.value,
+          rating: selectedRating,
           page: 'youtube'
         })
       });
@@ -1476,6 +1539,8 @@
         // Reset form
         commentInput.value = '';
         document.getElementById('charCount').textContent = '0/1000';
+        ratingInput.value = '0';
+        document.querySelectorAll('#starPicker .star').forEach(s => s.classList.remove('filled'));
         
         // Reload comments
         currentOffset = 0;
@@ -1687,6 +1752,15 @@
   }
 
   // Display comments with replies
+    function renderStarsHtml(rating) {
+      if (!rating || rating < 1 || rating > 5) return '';
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        stars += i <= rating ? '★' : '<span class="empty">★</span>';
+      }
+      return `<div class="star-display" aria-label="${rating} out of 5 stars">${stars}</div>`;
+    }
+
     function displayComments() {
       const commentsList = document.getElementById('commentsList');
 
@@ -1740,10 +1814,19 @@
           </div>
         ` : '';
 
-      
+        const hasRating = comment.rating && comment.rating >= 1 && comment.rating <= 5;
+        const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
+        const reviewRatingHtml = hasRating ? `
+          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+            <meta itemprop="ratingValue" content="${comment.rating}">
+            <meta itemprop="bestRating" content="5">
+          </div>
+        ` : '';
+        const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
+
         return `
           <div class="comment-item" data-comment-id="${comment.id}" itemscope itemtype="https://schema.org/CreativeWork">
-            <div itemscope itemtype="https://schema.org/Comment" itemprop="comment">
+            <div itemscope itemtype="${itemType}" itemprop="comment">
               <div class="comment-header">
                 <div class="comment-author-info">
                   <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -1754,7 +1837,9 @@
                 <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
               </div>
 
-              <div class="comment-text" itemprop="text">${escapeHtml(comment.comment)}</div>
+              ${renderStarsHtml(comment.rating)}
+              ${reviewRatingHtml}
+              ${commentTextHtml}
 
               <div class="comment-actions">
                 <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>

@@ -116,10 +116,10 @@ function renderCommentHtml(comment) {
 async function handler(event, context) {
   // Use Robust Path Finding
   const possiblePaths = [
-    path.resolve(__dirname, '../../zoology.html'),
-    path.resolve(__dirname, '../zoology.html'),
-    path.resolve('zoology.html'),
-    path.resolve('./zoology.html')
+    path.resolve(__dirname, '../../microbiology.html'),
+    path.resolve(__dirname, '../microbiology.html'),
+    path.resolve('microbiology.html'),
+    path.resolve('./microbiology.html')
   ];
   let templatePath = possiblePaths.find(p => fs.existsSync(p));
 
@@ -140,7 +140,7 @@ async function handler(event, context) {
 
     // Fetch Data
     const commentsRef = db.collection('comments')
-      .where('page', '==', 'youtube')
+      .where('page', '==', 'microbiology')
       .where('parentId', '==', null)
       .orderBy('createdAt', 'desc')
       .limit(20);
@@ -182,7 +182,7 @@ async function handler(event, context) {
 
     // Inject HTML
     const commentsHtml = topComments.map(renderCommentHtml).join('');
-    const countSnapshot = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).count().get();
+    const countSnapshot = await db.collection('comments').where('page', '==', 'microbiology').where('parentId', '==', null).count().get();
     const titleText = `${countSnapshot.data().count} Student Reviews`;
 
     html = html.replace(/<h3[^>]*id="commentsTitle"[^>]*>.*?<\/h3>/s, 
@@ -196,7 +196,7 @@ async function handler(event, context) {
     }
 
     // Compute a REAL aggregate rating from all rated comments (no fabricated numbers)
-    const allForPage = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).get();
+    const allForPage = await db.collection('comments').where('page', '==', 'microbiology').where('parentId', '==', null).get();
     let ratingSum = 0;
     let ratingCount = 0;
     allForPage.forEach(doc => {
