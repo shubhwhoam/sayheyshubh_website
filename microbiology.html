@@ -1696,7 +1696,7 @@
           commentsList.children.length > 0 &&
           !commentsList.innerText.includes("Unable to load")
         ) {
-          console.log("Server-side comments detected. Skipping initial fetch.");
+          console.log("Server-side comments detected. Verifying freshness in background...");
 
           // Update our internal counters based on what's already on the screen
           const serverItems = commentsList.querySelectorAll(".comment-item");
@@ -1709,7 +1709,28 @@
           if (match) totalComments = parseInt(match[1]);
 
           updateViewMoreButton();
-          return; // STOP! Don't fetch again. Keep the real comments.
+
+          // BACKGROUND FRESHNESS CHECK:
+          // Netlify's on-demand builder caches the server-rendered page between deploys,
+          // so the SSR snapshot can be briefly behind live Firestore data. Quietly check
+          // live data and swap in fresh comments if something newer exists.
+          try {
+            const endpoints = getApiEndpoints();
+            const freshResponse = await fetch(`${endpoints.getComments}?page=microbiology&limit=${commentsPerPage}&offset=0`);
+            const freshData = await freshResponse.json();
+            if (freshData.success && freshData.total > totalComments) {
+              console.log("Newer comments found — refreshing from live data.");
+              currentOffset = freshData.comments.length;
+              totalComments = freshData.total;
+              allLoadedComments = freshData.comments;
+              displayComments();
+              updateViewMoreButton();
+            }
+          } catch (e) {
+            console.warn("Background freshness check failed, keeping server-rendered comments.", e);
+          }
+
+          return; // Server-rendered comments are shown; live check happens quietly above
         }
 
         // 2. STANDARD FETCH (Only runs if list is empty or user clicked "Load More")
