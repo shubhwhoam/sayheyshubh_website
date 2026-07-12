@@ -351,6 +351,17 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/microbiology-first-semester"
+  to = "/microbiology-first-semester.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/microbiology-first-semester.html"
+  to = "/microbiology-first-semester"
+  status = 301
+  force = true
+
 # --- WATCH PAGES ---
 [[redirects]]
   from = "/watch-ecology"
