@@ -1456,6 +1456,7 @@
           allLoadedComments = freshData.comments;
           displayComments();
           updateViewMoreButton();
+          updateCommentsTitle();
         }
       } catch (e) {
         console.warn('Background freshness check failed, keeping server-rendered comments.', e);
