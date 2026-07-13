@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="canonical" href="https://sayheyshubh.netlify.app/portfolio" />
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Digital Portfolio | Shubham Kumar - SayHeyShubh</title>
+  <meta name="description" content="Explore the creative portfolio of Shubham Kumar. Showcasing expertise in Digital Marketing, Content Writing, SEO, and Content Creation." />
+  <meta name="keywords" content="Shubham Kumar portfolio, digital marketing portfolio, content writing portfolio, SEO expert Delhi University, content creator portfolio, SayHeyShubh projects">
+  <meta name="author" content="Shubham Kumar">
+
+  <!-- Open Graph / Facebook / WhatsApp SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sayheyshubh.netlify.app/portfolio">
+  <meta property="og:site_name" content="SayHeyShubh">
+  <meta property="og:title" content="Digital Portfolio | Shubham Kumar">
+  <meta property="og:description" content="Explore the Content Writing, Digital Marketing, and Content Creation portfolio of Shubham Kumar.">
+  <meta property="og:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
+
+  <!-- Twitter SEO Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Digital Portfolio | Shubham Kumar">
+  <meta name="twitter:description" content="Explore the Content Writing, Digital Marketing, and Content Creation portfolio of Shubham Kumar.">
+  <meta name="twitter:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+
+  <!-- Google Tag Manager (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -8,195 +41,421 @@
     gtag('js', new Date());
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio | SayHeyShubh</title>
-  <link rel="canonical" href="https://sayheyshubh.netlify.app/portfolio" />
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sayheyshubh.netlify.app/portfolio">
-  <meta property="og:site_name" content="SayHeyShubh">
-  <meta property="og:title" content="Portfolio | SayHeyShubh">
-  <meta property="og:description" content="Explore the Content Writing, Digital Marketing, and Content Creation portfolio of Shubham Kumar.">
-  <meta property="og:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Portfolio | SayHeyShubh">
-  <meta name="twitter:description" content="Explore the Content Writing, Digital Marketing, and Content Creation portfolio of Shubham Kumar.">
-  <meta name="twitter:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
-  <meta name="description" content="Explore the Content writing, Digital Marketing, and Content Creation portfolio of Shubham Kumar." />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
+
+  <!-- JSON-LD Schema for Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sayheyshubh.netlify.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://sayheyshubh.netlify.app/portfolio" }
+    ]
+  }
+  </script>
+
   <style>
-    .portfolio-hero {
-      text-align: center;
-      padding: 60px 20px 40px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      margin-bottom: 50px;
+    /* Premium Modern Clean Global Styles */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      --dark-text: #1e293b;
+      --body-light: #f8fafc;
+      --card-border: #e2e8f0;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--body-light);
+      color: var(--dark-text);
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .portfolio-hero h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    /* Page Wrapper Fixes Overlap */
+    .page-wrapper {
+      padding-top: 95px; 
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .portfolio-hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      opacity: 0.95;
+    .portfolio-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto 5rem auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+      flex: 1;
     }
 
-    .portfolio-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-      padding: 0 20px;
-    }
-
-    .portfolio-card {
+    /* Pill-Shaped Breadcrumb */
+    .breadcrumb-trail {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+      font-weight: 600;
       background: white;
-      border-radius: 16px;
-      padding: 35px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .breadcrumb-trail a {
+      color: #6366f1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .breadcrumb-trail a:hover {
+      color: #4f46e5;
+    }
+
+    /* Page Header */
+    .portfolio-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 5rem 2rem;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--card-border);
       position: relative;
       overflow: hidden;
     }
-
-    .portfolio-card::before {
+    .portfolio-header::before {
       content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(99,102,241,0) 70%);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .portfolio-header h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    .portfolio-header h1 span {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .portfolio-header p {
+      font-size: 1.15rem;
+      color: #475569;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* Portfolio Cards Grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 6rem;
+    }
+    .portfolio-card {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+      border: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+    }
+
+    /* Top Accent Bars */
+    .card-top-accent {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
+      height: 6px;
     }
-
-    .portfolio-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    }
-
-    .portfolio-card:hover::before {
-      transform: scaleX(1);
-    }
+    .accent-dm { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+    .accent-cw { background: linear-gradient(90deg, #10b981, #059669); }
+    .accent-cc { background: linear-gradient(90deg, #f59e0b, #d97706); }
 
     .card-icon {
-      font-size: 50px;
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-
-    .card-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-      color: #1a202c;
-    }
-
-    .card-description {
-      color: #4a5568;
-      line-height: 1.7;
-      margin-bottom: 25px;
-      font-size: 1rem;
-    }
-
-    .card-btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    }
-
-    .card-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
-
-    .coming-soon-badge {
-      display: inline-block;
-      background: #f7fafc;
-      color: #718096;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border: 1px solid #e2e8f0;
-    }
-
-    .cta-section {
-      text-align: center;
-      padding: 50px 20px;
-      background: #f8f9ff;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
       border-radius: 16px;
-      margin: 20px;
+    }
+    .icon-dm { background: #eff6ff; color: #3b82f6; }
+    .icon-cw { background: #d1fae5; color: #10b981; }
+    .icon-cc { background: #fef3c7; color: #f59e0b; }
+
+    .portfolio-card h3 {
+      color: #0f172a;
+      margin: 0 0 1rem 0;
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+    .portfolio-card p {
+      color: #64748b;
+      margin: 0 0 2.5rem 0;
+      line-height: 1.6;
+      font-size: 1rem;
+      flex-grow: 1;
     }
 
-    .cta-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #1a202c;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 15px 35px;
-      background: #667eea;
-      color: white;
-      font-weight: 600;
-      border-radius: 8px;
+    /* Action Buttons */
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .btn-dm {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    }
+    .btn-dm:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); }
+    
+    .btn-cw {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    }
+    .btn-cw:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
+
+    .btn-cc {
+      background: #f1f5f9;
+      color: #94a3b8;
+      cursor: not-allowed;
+      border: 1px dashed #cbd5e1;
+    }
+
+    /* Tools & Tech Stack Section */
+    .tech-stack-container {
+      background: white;
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      margin-bottom: 6rem;
+      text-align: center;
+    }
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.5rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #475569;
+      font-size: 0.95rem;
       transition: all 0.3s ease;
     }
+    .tech-pill:hover {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-color: #cbd5e1;
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+    .tech-pill i { font-size: 1.1rem; }
 
-    .cta-btn:hover {
-      background: #5568d3;
-      transform: scale(1.05);
+    /* The Workflow / Approach Section */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 6rem;
+    }
+    .workflow-step {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .workflow-step:hover {
+      transform: translateY(-5px);
+      border-color: #cbd5e1;
+    }
+    .step-number {
+      position: absolute;
+      top: -15px;
+      left: 2rem;
+      width: 40px; height: 40px;
+      background: var(--primary-gradient);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    }
+    .workflow-step h4 {
+      font-size: 1.3rem;
+      color: #0f172a;
+      margin: 1.5rem 0 0.8rem 0;
+      font-weight: 700;
+    }
+    .workflow-step p {
+      color: #475569;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
     }
 
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 24px;
+      padding: 5rem 3rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -50px; left: -50px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, rgba(99,102,241,0) 70%);
+      border-radius: 50%;
+    }
+    .cta-banner h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 0 0 1rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-banner p {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-massive {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--primary-gradient);
+      color: white;
+      padding: 1.2rem 3.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-massive:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Mobile Responsiveness */
     @media (max-width: 768px) {
-      .portfolio-hero h1 {
-        font-size: 2rem;
-      }
-
-      .portfolio-hero p {
-        font-size: 1rem;
-      }
-
-      .portfolio-cards {
-        grid-template-columns: 1fr;
-      }
+      .page-wrapper { padding-top: 80px; }
+      .portfolio-container { padding: 0 1.5rem; }
+      .portfolio-header { padding: 3rem 1.5rem; }
+      .portfolio-header h1 { font-size: 2.2rem; }
+      .portfolio-header p { font-size: 1rem; }
+      .portfolio-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .portfolio-card { padding: 2.5rem 1.5rem; text-align: center; align-items: center; }
+      .card-icon { margin: 0 auto 1.5rem auto; }
+      .section-title { font-size: 1.8rem; }
+      .tech-stack-container { padding: 3rem 1.5rem; }
+      .workflow-grid { grid-template-columns: 1fr; }
+      .cta-banner { padding: 3rem 1.5rem; }
+      .cta-banner h2 { font-size: 1.8rem; }
+      .btn-massive { width: 100%; box-sizing: border-box; justify-content: center; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Consistent Header Nav Architecture -->
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
         <a href="index" class="logo-link">
           <div class="logo">
-            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh - Delhi University Dynamic Learning Hub">
           </div>
         </a>
       </div>
-      <div class="nav-toggle">
+      <div class="nav-toggle" aria-label="Toggle Navigation Menu">
         <span></span>
         <span></span>
         <span></span>
-      </div>
-                  <nav>
+      </div>                   
+      <nav>
         <ul>
           <li><a href="notes">Notes</a></li>
           <li><a href="portfolio" class="active">Portfolio</a></li>
@@ -208,47 +467,113 @@
     </div>
   </header>
 
-  <div class="portfolio-hero">
-    <h1>My Portfolio</h1>
-    <p>Showcasing my expertise in digital marketing, Content writing, and Content creation. Explore my projects and see how I bring ideas to life.</p>
-  </div>
+  <!-- Content Wrapper applies necessary padding for fixed headers -->
+  <main class="page-wrapper">
+    <div class="portfolio-container">
+      
+      <!-- Interactive Pill Breadcrumbs -->
+      <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+        <a href="index"><i class="fa-solid fa-house" style="font-size:0.8rem; margin-right:4px;"></i> Home</a> 
+        <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
+        <span style="color: #0f172a;">Portfolio</span>
+      </nav>
 
-  <main class="container">
-    <div class="portfolio-cards">
-      <div class="portfolio-card">
-        <div class="card-icon">📊</div>
-        <h3 class="card-title">Digital Marketing</h3>
-        <p class="card-description">Strategic social media campaigns, paid ads optimization, SEO, and content marketing that drive real results and engagement.</p>
-        <a href="digital-marketing-projects" class="card-btn">View Projects</a>
+      <!-- Page Header -->
+      <div class="portfolio-header">
+        <h1>Digital Portfolio & <span>Case Studies</span></h1>
+        <p>A curated collection of my work across content writing, digital marketing, and visual storytelling. Discover how I turn complex ideas into engaging, high-retention digital experiences.</p>
       </div>
 
-      <div class="portfolio-card">
-        <div class="card-icon">📝</div>
-        <h3 class="card-title">Content Writing</h3>
-        <p class="card-description">Transforming ideas into meaningful narratives. Specializing in authentic storytelling, research and strategic content that connects, educates, and inspires.</p>
-      <a href="content-writing-projects" class="card-btn">View Projects</a>
+      <!-- Core Portfolio Cards Grid -->
+      <div class="portfolio-grid">
+        
+        <!-- Digital Marketing -->
+        <div class="portfolio-card">
+          <div class="card-top-accent accent-dm"></div>
+          <div class="card-icon icon-dm">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3>Digital Marketing</h3>
+          <p>Strategic SEO implementations, organic growth roadmaps, and audience targeting. Showcasing hands-on experience in building and ranking platforms like SayHeyShubh.</p>
+          <a href="digital-marketing-projects" class="btn-action btn-dm">View Strategies</a>
+        </div>
+
+        <!-- Content Writing -->
+        <div class="portfolio-card">
+          <div class="card-top-accent accent-cw"></div>
+          <div class="card-icon icon-cw">
+            <i class="fa-solid fa-pen-nib"></i>
+          </div>
+          <h3>Content Writing</h3>
+          <p>Research-backed educational writing, compelling thought leadership, and relatable storytelling designed to build deep connections with student audiences.</p>
+          <a href="content-writing-projects" class="btn-action btn-cw">Read Articles</a>
+        </div>
+
+        <!-- Content Creation (Video) -->
+        <div class="portfolio-card">
+          <div class="card-top-accent accent-cc"></div>
+          <div class="card-icon icon-cc">
+            <i class="fa-solid fa-clapperboard"></i>
+          </div>
+          <h3>Content Creation</h3>
+          <p>End-to-end video production, smooth editing workflows, and visual storytelling. Building highly engaged YouTube communities through authentic content.</p>
+          <div class="btn-action btn-cc"><i class="fa-solid fa-lock"></i> Case Studies Soon</div>
+        </div>
+
       </div>
 
-      <div class="portfolio-card">
-        <div class="card-icon">🎬</div>
-        <h3 class="card-title">Content Creation</h3>
-        <p class="card-description">From smooth slow-mo edits to engaging study vlogs, I create compelling stories that connect and inspire viewers.</p>
-        <span class="coming-soon-badge">Coming Soon</span>
+      <!-- NEW: The Growth Framework (Workflow) -->
+      <h2 class="section-title">My Growth Framework</h2>
+      <div class="workflow-grid">
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <h4>Research & Empathy</h4>
+          <p>Great content starts with listening. Whether it's SEO keyword mapping or reading student comments, I identify the exact pain points the audience is facing before drafting a single word.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <h4>Strategic Execution</h4>
+          <p>Blending clean UI/UX with compelling copy. I focus on creating structured, highly scannable digital assets that hold attention and guide the user toward a specific action.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <h4>Analytics & Scaling</h4>
+          <p>Publishing is just the start. I actively track engagement metrics, iterate on feedback, and optimize technical SEO to ensure long-term, compounding organic growth.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="cta-section">
-      <h2>Ready to Work Together?</h2>
-      <a href="about#contact" class="cta-btn">Let's Collaborate</a>
+      <!-- NEW: Tech Stack / Creative Arsenal -->
+      <div class="tech-stack-container">
+        <h2 class="section-title" style="margin-bottom: 1rem;">The Creative Arsenal</h2>
+        <p style="color: #64748b; font-size: 1.05rem; max-width: 600px; margin: 0 auto;">The tools and technologies I use daily to build, write, and scale digital platforms.</p>
+        <div class="tech-grid">
+          <span class="tech-pill"><i class="fa-brands fa-google" style="color: #4285F4;"></i> Google Analytics & Search Console</span>
+          <span class="tech-pill"><i class="fa-solid fa-magnifying-glass-chart" style="color: #f59e0b;"></i> Technical SEO</span>
+          <span class="tech-pill"><i class="fa-solid fa-code" style="color: #3b82f6;"></i> HTML / CSS / JS Fundamentals</span>
+          <span class="tech-pill"><i class="fa-solid fa-video" style="color: #8b5cf6;"></i> Premiere Pro & CapCut</span>
+          <span class="tech-pill"><i class="fa-solid fa-palette" style="color: #0ea5e9;"></i> Canva & UI Design</span>
+          <span class="tech-pill"><i class="fa-solid fa-pen-clip" style="color: #10b981;"></i> Copywriting</span>
+        </div>
+      </div>
+
+      <!-- CTA Banner -->
+      <div class="cta-banner">
+        <h2>Ready to Build Something Impactful?</h2>
+        <p>Whether you need a digital marketing strategy, compelling copy, or a collaborator for your next big project—let's make it happen.</p>
+        <a href="about#contact" class="btn-massive"><i class="fa-regular fa-envelope-open"></i> Let's Collaborate</a>
+      </div>
+
     </div>
   </main>
 
+  <!-- Clean Minimalist Footer Component -->
   <footer>
-    <div class="container">
-      <p>© 2025 SayHeyShubh • Portfolio & Projects</p>
-      <p><a href="privacy-policy">Privacy Policy</a></p>
+    <div class="container" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding: 2rem 0; color: #64748b; font-size: 0.95rem;">
+      <p>&copy; 2026 SayHeyShubh. Crafted for Student Impact & Creative Growth.</p>
+      <p><a href="privacy-policy" style="color:#6366f1; text-decoration:none; font-weight:500;">Privacy Policy & Safety Framework</a></p>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
