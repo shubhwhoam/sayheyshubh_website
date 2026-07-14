@@ -1,56 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-01VF0W2CD1');
   </script>
+  
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zoology First Year | SayHeyShubh</title>
-  <meta name="description" content="BSc Zoology First Year study notes and materials" />
+  <title>BSc Zoology 1st Year Notes PDF Download | DU Semester 1 & 2</title>
+  
+  <meta name="description" content="Download handwritten BSc Zoology 1st year notes PDF for Delhi University. Complete study material and PYQs for Semester 1 and Semester 2 (NEP/FYUP syllabus)." />
+  <meta name="keywords" content="bsc zoology 1st year notes pdf, bsc 1st year zoology notes, bsc 2nd semester zoology notes, bsc 2nd semester zoology syllabus, du zoology 1st year, first semester zoology notes, non-chordates notes, ecology notes, human physiology">
+  <link rel="canonical" href="https://sayheyshubh.netlify.app/zoology-first-year">
+
+  <!-- JSON-LD Schema for Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sayheyshubh.netlify.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Notes", "item": "https://sayheyshubh.netlify.app/notes" },
+      { "@type": "ListItem", "position": 3, "name": "Zoology", "item": "https://sayheyshubh.netlify.app/zoology" },
+      { "@type": "ListItem", "position": 4, "name": "1st Year", "item": "https://sayheyshubh.netlify.app/zoology-first-year" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Schema for FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are these 1st year notes based on the latest DU syllabus?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, both Semester 1 and Semester 2 notes strictly follow the latest Delhi University FYUP/NEP syllabus for BSc Zoology Hons." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do the notes include practical files?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, alongside the theory PDFs, we also provide handwritten practical files for your lab submissions." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* Structure to keep footer at the bottom */
-    html { scroll-behavior: smooth; }
-    body { 
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh; 
-      margin: 0; 
+    /* --- MODERN ED-TECH STYLING --- */
+    body {
+      background-color: #fcfcfd;
+      font-family: 'Inter', sans-serif;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
     }
+
     main { flex: 1; width: 100%; }
     footer { width: 100%; margin-top: auto; }
+
+    .notes-container { 
+      width: 100%;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 0 1rem 4rem 1rem; 
+      position: relative; 
+    }
+
+    /* Breadcrumbs */
+    .visual-breadcrumb {
+      padding: 1.5rem 0 0 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
+    }
+    .visual-breadcrumb a { color: #6366f1; text-decoration: none; transition: color 0.2s ease; }
+    .visual-breadcrumb a:hover { color: #4f46e5; text-decoration: underline; }
+    .visual-breadcrumb span { margin: 0 0.4rem; color: #cbd5e1; }
+
+    /* Directory Header */
+    .directory-header {
+      text-align: center;
+      margin: 1.5rem 0 3rem 0;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header-tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #c7d2fe;
+    }
+
+    .directory-header h1 {
+      font-size: 2.8rem;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .directory-header p {
+      font-size: 1.15rem;
+      color: #475569;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Semester Selection Cards (Grid) */
+    .sem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .sem-card {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .sem-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.1);
+      border-color: #a5b4fc;
+    }
+
+    .sem-icon {
+      width: 80px;
+      height: 80px;
+      background: #eef2ff;
+      color: #4f46e5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.15);
+    }
+
+    .sem-card h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .dsc-list {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .dsc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+    
+    .dsc-item:last-child { margin-bottom: 0; }
+    .dsc-item i { color: #6366f1; margin-top: 0.2rem; }
+
+    .sem-btn-faux {
+      display: inline-block;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 1.05rem;
+    }
+
+    .sem-card:hover .sem-btn-faux {
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* SEO Content Section */
+    .seo-roadmap-section {
+      background: white;
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 4rem;
+    }
+
+    .seo-roadmap-section h2 {
+      font-size: 2.2rem;
+      color: #0f172a;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .seo-roadmap-section .lead-text {
+      text-align: center;
+      color: #64748b;
+      font-size: 1.15rem;
+      max-width: 800px;
+      margin: 0 auto 3rem auto;
+      line-height: 1.7;
+    }
+
+    .content-box {
+      margin-bottom: 2rem;
+      padding: 2rem;
+      background: #f8fafc;
+      border-radius: 16px;
+      border-left: 4px solid #6366f1;
+    }
+
+    .content-box h3 {
+      font-size: 1.4rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-box p {
+      color: #475569;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 0 auto 4rem auto;
+    }
+
+    .faq-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1e293b;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover { border-color: #cbd5e1; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover { color: #4f46e5; }
+    .faq-icon { font-size: 1.5rem; color: #4f46e5; font-weight: 300; transition: transform 0.3s ease; }
+    .faq-question.active .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: #f8fafc;
+      border-top: 1px solid transparent;
+    }
+
+    .faq-answer.active {
+      max-height: 9999px;
+      padding: 1.5rem;
+      border-top-color: #e2e8f0;
+    }
+
+    .faq-answer p { margin: 0 0 1rem 0; color: #475569; line-height: 1.7; font-size: 1rem; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+
+    /* Navigation Controls */
+    .navigation-controls { display: flex; justify-content: center; margin-top: 3rem; }
+    
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: white;
+      color: #475569;
+      border: 2px solid #e2e8f0;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover { background: #f8fafc; color: #0f172a; border-color: #cbd5e1; transform: translateY(-2px); }
+
+    /* User Profile Styles */
+    .user-profile {
+      position: absolute; top: 1rem; right: 2rem; background: white; padding: 0.6rem 1rem;
+      border-radius: 50px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0;
+      display: none; align-items: center; gap: 0.8rem; font-size: 0.9rem; z-index: 100;
+    }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #4f46e5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 700; color: #1e293b; }
+    .user-contact { font-size: 0.75rem; color: #64748b; }
+    .logout-btn { background: #fef2f2; color: #dc2626; border: none; padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+    .logout-btn:hover { background: #fee2e2; }
+
+    @media (max-width: 768px) { 
+      .directory-header { padding: 3rem 1.5rem; }
+      .directory-header h1 { font-size: 2.2rem; }
+      .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; justify-content: space-between; }
+      .seo-roadmap-section { padding: 2.5rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
-
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
         <a href="index" class="logo-link">
-          <div class="logo">
-            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
-          </div>
+          <div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh"></div>
         </a>
       </div>
-      <div class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-                  <nav>
+      <div class="nav-toggle"><span></span><span></span><span></span></div>
+      <nav>
         <ul>
           <li><a href="notes" class="active">Notes</a></li>
           <li><a href="portfolio">Portfolio</a></li>
@@ -62,61 +403,206 @@
     </div>
   </header>
 
-  <main class="container">
-    <h2 class="section-title">📚 First Year - BSc Zoology (Hons)</h2>
-
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <a href="zoology-years" style="color: #6366f1; text-decoration: none; font-weight: 600;">← Back to Year Selection</a>
+  <main class="notes-container">
+    
+    <!-- User Profile -->
+    <div id="userProfile" class="user-profile">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">User</div>
+          <div class="user-contact" id="userContact">***</div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-      <div style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-        <h3 style="color: white; margin-bottom: 1rem;">First Semester</h3>
-        <p style="margin-bottom: 1.5rem; opacity: 0.9;">(DSC-1) Non Chordata - Protists to Pseudocoelomates, (DSC-2) Biology of Cell: Structure, (DSC-3) Concepts of Ecology</p>
-        <a href="zoology-first-semester" style="background: white; color: #6366f1; padding: 0.8rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600;">View Notes</a>
+    <!-- Visual Breadcrumb -->
+    <nav class="visual-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span>/</span> <a href="notes">Notes</a> <span>/</span> <a href="zoology">BSc Zoology</a> <span>/</span> 1st Year
+    </nav>
+
+    <!-- Header -->
+    <div class="directory-header">
+      <div class="header-tag">DU FYUP/NEP Curriculum</div>
+      <h1>BSc Zoology 1st Year Notes PDF Download</h1>
+      <p>Kickstart your Delhi University journey. Choose your semester below to access premium, handwritten study materials, practical files, and previous year question papers (PYQs).</p>
+    </div>
+
+    <!-- Semester Selection Grid -->
+    <div class="sem-grid">
+      
+      <!-- Semester 1 -->
+      <a href="zoology-first-semester" class="sem-card">
+        <div class="sem-icon"><i class="fas fa-microscope"></i></div>
+        <h2>Semester 1</h2>
+        <div class="dsc-list">
+          <div class="dsc-item">
+            <i class="fas fa-check-circle"></i>
+            <span><strong>DSC-1:</strong> Non-Chordata (Protists to Pseudocoelomates)</span>
+          </div>
+          <div class="dsc-item">
+            <i class="fas fa-check-circle"></i>
+            <span><strong>DSC-2:</strong> Biology of Cell (Structure & Function)</span>
+          </div>
+          <div class="dsc-item">
+            <i class="fas fa-check-circle"></i>
+            <span><strong>DSC-3:</strong> Concepts of Ecology</span>
+          </div>
+        </div>
+        <div class="sem-btn-faux">Access Sem 1 Notes</div>
+      </a>
+
+      <!-- Semester 2 -->
+      <a href="zoology-second-semester" class="sem-card">
+        <div class="sem-icon"><i class="fas fa-dna"></i></div>
+        <h2>Semester 2</h2>
+        <div class="dsc-list">
+          <div class="dsc-item">
+            <i class="fas fa-check-circle"></i>
+            <span><strong>DSC-4:</strong> Non-Chordata (Coelomates)</span>
+          </div>
+          <div class="dsc-item">
+            <i class="fas fa-check-circle"></i>
+            <span><strong>DSC-5:</strong> Fundamentals of Biomolecules</span>
+          </div>
+          <div class="dsc-item">
+            <i class="fas fa-check-circle"></i>
+            <span><strong>DSC-6:</strong> Human Physiology (Control & Coordination)</span>
+          </div>
+        </div>
+        <div class="sem-btn-faux">Access Sem 2 Notes</div>
+      </a>
+
+    </div>
+
+    <!-- SEO & Context Section -->
+    <div class="seo-roadmap-section">
+      <h2>Master Your 1st Year DU Syllabus</h2>
+      <p class="lead-text">Transitioning to college academics can be stressful. We’ve organized exactly what you need to ace your exams, right from your very first internal assessment.</p>
+      
+      <div class="content-box">
+        <h3><i class="fas fa-book-open"></i> Cracking the Foundation</h3>
+        <p>If you are hunting for comprehensive <strong>bsc zoology 1st year notes pdf</strong>, you are in the right place. Semester 1 sets the groundwork with deep dives into non-chordates and ecology. Our notes distill complex topics from heavy reference books into easy-to-digest, exam-ready PDFs with clear diagrams.</p>
+      </div>
+      
+      <div class="content-box">
+        <h3><i class="fas fa-project-diagram"></i> Advancing into Semester 2</h3>
+        <p>As you move forward, the <strong>bsc 2nd semester zoology syllabus</strong> gets highly technical. Our <strong>bsc 2nd semester zoology notes</strong> break down intricate biochemical pathways and human physiology into simplified flowcharts. We ensure you don't just memorize, but actually understand the core concepts needed for scoring high marks.</p>
       </div>
 
-      <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 2rem; border-radius: 15px; text-align: center;">
-        <h3 style="color: white; margin-bottom: 1rem;">Second Semester</h3>
-        <p style="margin-bottom: 1.5rem; opacity: 0.9;">(DSC-4): Non-Chordata: Coelomates, (DSC-5): Fundamentals of Biomolecules, and (DSC-6): Human Physiology-Control and Coordination Systems</p>
-        <a href="zoology-second-semester" style="background: white; color: #10b981; padding: 0.8rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600;">View Notes</a>
+      <div class="content-box">
+        <h3><i class="fas fa-bullseye"></i> Exam Preparation & PYQs</h3>
+        <p>Studying the syllabus isn't enough; you need to know how questions are framed. Inside each semester page, we provide fully analyzed Delhi University Past Year Questions (PYQs). By combining our <strong>first semester zoology notes</strong> with targeted PYQ practice, you will walk into your exam hall completely prepared.</p>
       </div>
     </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Are these 1st year notes based on the latest DU syllabus?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, absolutely. Both Semester 1 and Semester 2 notes strictly follow the latest Delhi University FYUP/NEP syllabus for BSc Zoology Hons.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Do the notes include practical files?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! Alongside the theory PDFs, we also provide handwritten practical files and diagrams to help you prepare your lab submissions accurately.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Back Navigation -->
+    <div class="navigation-controls">
+      <a href="zoology-years" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Year Selection</a>
+    </div>
+
   </main>
 
   <footer>
     <div class="container">
-      <p>© 2025 SayHeyShubh • Zoology First Year Study Materials</p>
-       <p> <a href="privacy-policy">Privacy Policy</a></p>
+      <p>© 2026 SayHeyShubh • Zoology First Year Study Materials</p>
+      <p><a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
 
   <script src="script.js"></script>
-  <script src="firebase-config.js"></script>
 
-  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
-    💬
-  </a>
-
-  <div class="doubts-bubble" id="doubts-bubble">
-    Got a question?
-  </div>
+  <!-- Telegram Doubt Button -->
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">💬</a>
+  <div class="doubts-bubble" id="doubts-bubble">Got a question?</div>
 
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const bubble = document.getElementById("doubts-bubble");
+    // FAQ Toggle Function
+    function toggleFAQ(button) {
+      const answer = button.nextElementSibling;
+      const isActive = button.classList.contains('active');
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.classList.remove('active');
+        q.nextElementSibling.classList.remove('active');
+      });
+      if (!isActive) {
+        button.classList.add('active');
+        answer.classList.add('active');
+      }
+    }
 
-    // Show bubble 0.8s after button appears
-    setTimeout(() => {
-      bubble.classList.add("show");
-    }, 800);
+    // Doubts Bubble Logic
+    document.addEventListener("DOMContentLoaded", function() {
+      const bubble = document.getElementById("doubts-bubble");
+      setTimeout(() => { bubble.classList.add("show"); }, 800);
+      setTimeout(() => { bubble.classList.remove("show"); }, 3800);
+      
+      // Load User Profile Check
+      loadUserProfile();
+    });
 
-    // Hide bubble after 3 seconds
-    setTimeout(() => {
-      bubble.classList.remove("show");
-    }, 3800);
-  });
+    // Firebase Auth logic
+    function loadUserProfile() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+      const userPhone = localStorage.getItem('userPhone');
+      
+      if (isLoggedIn === 'true' && userName) {
+        document.getElementById('userName').textContent = userName;
+        document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+
+        let contactInfo = '';
+        if (userEmail) {
+          const emailParts = userEmail.split('@');
+          contactInfo = emailParts[0].substring(0, 2) + '***@' + emailParts[1];
+        } else if (userPhone) {
+          contactInfo = userPhone.substring(0, 3) + '***' + userPhone.substring(userPhone.length - 2);
+        }
+        document.getElementById('userContact').textContent = contactInfo;
+        document.getElementById('userProfile').classList.add('show');
+      }
+    }
+
+    async function logout() {
+      // Assuming firebase is initialized in firebase-config.js which you'd normally link
+      // For standalone safety on this page based on your code:
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userPhone');
+      window.location.reload(); 
+    }
   </script>
-
 </body>
 </html>

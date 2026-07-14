@@ -7,45 +7,281 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blogs | SayHeyShubh</title>
+  <title>Creator Journal & Blogs | SayHeyShubh</title>
   <link rel="canonical" href="https://sayheyshubh.netlify.app/blogs" />
+  
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sayheyshubh.netlify.app/blogs">
   <meta property="og:site_name" content="SayHeyShubh">
-  <meta property="og:title" content="Blogs | SayHeyShubh">
+  <meta property="og:title" content="Creator Journal & Blogs | SayHeyShubh">
   <meta property="og:description" content="Read Shubham Kumar's blogs on mental health, digital creativity, content writing, and student life.">
   <meta property="og:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blogs | SayHeyShubh">
+  <meta name="twitter:title" content="Creator Journal & Blogs | SayHeyShubh">
   <meta name="twitter:description" content="Read Shubham Kumar's blogs on mental health, digital creativity, content writing, and student life.">
   <meta name="twitter:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
   <meta name="description" content="Read Shubham Kumar's blogs on mental health, digital creativity, content writing, and student life." />
+  
   <link rel="stylesheet" href="style.css" />
-   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- JSON-LD Schema for Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sayheyshubh.netlify.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Blogs", "item": "https://sayheyshubh.netlify.app/blogs" }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD Schema for Blog Collection -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "SayHeyShubh Creator Journal",
+    "description": "Thoughts, stories, and writings from Shubham Kumar on mental health, student life, and digital creativity.",
+    "url": "https://sayheyshubh.netlify.app/blogs",
+    "author": {
+      "@type": "Person",
+      "name": "Shubham Kumar"
+    }
+  }
+  </script>
+
+  <style>
+    /* --- MODERN BLOG HUB STYLING --- */
+    body {
+      background-color: #fcfcfd;
+      font-family: 'Inter', sans-serif;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Breadcrumbs */
+    .visual-breadcrumb {
+      padding: 1.5rem 0 0 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .visual-breadcrumb a {
+      color: #6366f1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .visual-breadcrumb a:hover {
+      color: #4f46e5;
+      text-decoration: underline;
+    }
+    .visual-breadcrumb span {
+      margin: 0 0.4rem;
+      color: #cbd5e1;
+    }
+
+    /* Hero Section */
+    .blog-hero {
+      background: linear-gradient(to bottom, #ffffff, #f8fafc);
+      padding: 4rem 2rem;
+      border-bottom: 1px solid #e2e8f0;
+      border-radius: 20px;
+      text-align: center;
+      margin: 1.5rem auto 4rem auto;
+      max-width: 1000px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #4f46e5;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .blog-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    /* Blog Grid & Cards */
+    .blog-container {
+      max-width: 900px;
+      margin: 0 auto 6rem auto;
+      padding: 0 1rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      gap: 3rem;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.08);
+      border-color: #c7d2fe;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .topic-tag {
+      background: #eef2ff;
+      color: #4f46e5;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .topic-tag.mindset {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .publish-date {
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .blog-title {
+      font-size: 2rem;
+      color: #1e293b;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .blog-excerpt {
+      color: #475569;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .blog-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .read-btn {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .read-btn:hover {
+      background: linear-gradient(135deg, #4f46e5, #3730a3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    }
+
+    .cert-btn {
+      background: white;
+      color: #475569;
+      border: 2px solid #e2e8f0;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cert-btn:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .blog-hero { padding: 3rem 1.5rem; border-radius: 0 0 24px 24px; margin-top: 0; }
+      .blog-hero h1 { font-size: 2.2rem; }
+      .blog-card { padding: 2rem 1.5rem; }
+      .blog-title { font-size: 1.6rem; }
+      .read-btn, .cert-btn { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
   <header>
-      <div class="container nav-flex">
-        <div class="logo-section">
-          <a href="index" class="logo-link">
-            <div class="logo">
-              <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
-            </div>
-          </a>
-        </div>
+    <div class="container nav-flex">
+      <div class="logo-section">
+        <a href="index" class="logo-link">
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh">
+          </div>
+        </a>
+      </div>
       <div class="nav-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
-                  <nav>
+      <nav>
         <ul>
           <li><a href="notes">Notes</a></li>
           <li><a href="portfolio">Portfolio</a></li>
@@ -57,51 +293,66 @@
     </div>
   </header>
 
-  <main class="container blogs">
-    <h2 class="section-title">📝 My Blogs & Writings</h2>
-    <p style="text-align: center; margin-bottom: 30px;">Thoughts, stories, captions, and writing pieces straight from my journey as a creator & student.</p>
+  <!-- Visual Breadcrumb -->
+  <nav class="visual-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a> <span>/</span> Blogs
+  </nav>
 
-    <!-- Blog Post 1 -->
-    <article class="blog-post">
-      <div class="blog-card">
-        <h2>1. Beyond the Clinic Door: The Silent Struggles of Accessing Mental Health Services with a Disability 🧠</h2>
-        <p class="meta">Published: June 2025 | Topic: Mental Health & Disability</p>
-        <p>
-          Accessing mental health care when you live with a disability isn’t just about scheduling an appointment. It’s about navigating silence, stigma, and spaces that weren’t built for you...
-        </p>
-        <!-- Read full article button -->
-       <p> <a class="read-more-btn" href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">
-          Read full article →
-        </a></p>
-        <!-- View certificate button -->
-        <p> <a class="view-button" href="https://drive.google.com/file/d/1pncZ4BHzgP1fH3paOya5imdvLpBPgRUn/view?usp=sharing" target="_blank" >View certificate</a></p>
-         
-      </div>
-    </article>
+  <!-- HERO SECTION -->
+  <section class="blog-hero">
+    <div class="hero-badge">Creator Journal</div>
+    <h1>Thoughts & Stories</h1>
+    <p>Honest writing straight from my journey as a student and creator. Exploring mental health, personal growth, and the beautiful mess of figuring life out.</p>
+  </section>
 
-    <!-- Blog Post 2 -->
-    <article class="blog-post">
-      <div class="blog-card">
-        <h2>2. I don't have to have it all figured out 🍂</h2>
-        <p class="meta">Published: August 2025 | Topic: Mental Health & Mindset</p>
-        <p>
-          Well...
-          I don't have to have it all figured out.
-          I don't have to worry about what my career will carry, who, when, or if I'll get married.
-          I don't have to feel like...
-        </p>
-        <!-- Read full article button -->
-       <p> <a class="read-more-btn" href="figuring-out" target="_blank" rel="noopener noreferrer">
-          Read full article →
-        </a></p>
+  <!-- BLOG GRID -->
+  <main class="blog-container">
+    <div class="blog-grid">
+
+      <!-- Blog Post 1 -->
+      <article class="blog-card">
+        <div class="blog-meta">
+          <span class="topic-tag">Mental Health & Disability</span>
+          <span class="publish-date"><i class="far fa-calendar-alt"></i> June 2025</span>
         </div>
-        </article>
+        <h2 class="blog-title">Beyond the Clinic Door: The Silent Struggles of Accessing Mental Health Services</h2>
+        <p class="blog-excerpt">
+          Accessing mental health care when you live with a disability isn’t just about scheduling an appointment. It’s about navigating silence, stigma, and spaces that weren’t built for you. A deep dive into the hidden architectural and social barriers.
+        </p>
+        <div class="blog-actions">
+          <a class="read-btn" href="beyond-the-clinic-door" target="_blank" rel="noopener noreferrer">
+            Read Article <i class="fas fa-arrow-right"></i>
+          </a>
+          <a class="cert-btn" href="https://drive.google.com/file/d/1pncZ4BHzgP1fH3paOya5imdvLpBPgRUn/view?usp=sharing" target="_blank">
+            <i class="fas fa-award"></i> View Certificate
+          </a>
+        </div>
+      </article>
 
+      <!-- Blog Post 2 -->
+      <article class="blog-card">
+        <div class="blog-meta">
+          <span class="topic-tag mindset">Mental Health & Mindset</span>
+          <span class="publish-date"><i class="far fa-calendar-alt"></i> August 2025</span>
+        </div>
+        <h2 class="blog-title">I don't have to have it all figured out</h2>
+        <p class="blog-excerpt">
+          I don't have to worry about what my career will carry, who, when, or if I'll get married. I don't have to feel like I'm running out of time. A poetic reflection on comparison, anxiety, and finding peace in the present moment.
+        </p>
+        <div class="blog-actions">
+          <a class="read-btn" href="figuring-out" target="_blank" rel="noopener noreferrer">
+            Read Article <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </article>
+
+    </div>
   </main>
+
   <footer>
     <div class="container">
-      <p>© 2025 SayHeyShubh • Thoughts & Stories</p>
-       <p> <a href="privacy-policy">Privacy Policy</a></p>
+      <p>© 2026 SayHeyShubh • Thoughts & Stories</p>
+      <p><a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
   <script src="script.js"></script>

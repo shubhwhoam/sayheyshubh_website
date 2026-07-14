@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -8,18 +9,23 @@
     gtag('js', new Date());
     gtag('config', 'G-01VF0W2CD1');
   </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
+  
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
-     crossorigin="anonymous"></script>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BSc Zoology Notes Selection | SayHeyShubh</title>
-  <meta name="description" content="Download semester-wise PDF notes, study material, and previous year questions for DU Zoology Hons." />
+  <title>BSc Zoology Hons Study Material & Notes PDF Download | SayHeyShubh</title>
+  
+  <meta name="description" content="Download complete year-wise and semester-wise PDF notes, study material, and previous year questions for DU BSc Zoology Hons. Aligned with the latest DU NEP/FYUP syllabus." />
+  <meta name="keywords" content="bsc zoology hons study material, bsc zoology hons pdf notes download, bsc 4th semester zoology notes, bsc 2nd semester zoology notes, bsc zoology 2nd semester notes, animal behaviour pyq du, bsc zoology 4th sem notes, bsc second semester zoology, bsc 2nd semester zoology syllabus, bsc botany notes, delhi university zoology notes">
+  
   <link rel="canonical" href="https://sayheyshubh.netlify.app/zoology-years">
+  
+  <!-- JSON-LD Schema for Breadcrumb -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,30 +34,56 @@
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sayheyshubh.netlify.app/" },
       { "@type": "ListItem", "position": 2, "name": "Notes", "item": "https://sayheyshubh.netlify.app/notes" },
       { "@type": "ListItem", "position": 3, "name": "Zoology", "item": "https://sayheyshubh.netlify.app/zoology" },
-      { "@type": "ListItem", "position": 4, "name": "Select Year", "item": "https://sayheyshubh.netlify.app/zoology-years" }
+      { "@type": "ListItem", "position": 4, "name": "Yearly Notes", "item": "https://sayheyshubh.netlify.app/zoology-years" }
     ]
   }
   </script>
+
+  <!-- JSON-LD Schema for FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are these BSc Zoology notes aligned with the latest DU syllabus?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, all our study materials are meticulously updated to follow the latest Delhi University FYUP/NEP syllabus for BSc Zoology Hons." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide bsc botany notes as well?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes! While this page is dedicated to Zoology, you can find complete bsc botany notes and microbiology study materials in our main Notes directory." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I download the bsc zoology 2nd semester notes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Simply click on the 'First Year' card above, navigate to Semester 2, and you will find unit-wise PDFs, practical files, and previous year question papers available for download." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* Global Box Sizing to prevent horizontal overflow in header/footer */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    html { scroll-behavior: smooth; }
+    /* --- MODERN ED-TECH STYLING --- */
     body {
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
+      background-color: #fcfcfd;
+      font-family: 'Inter', sans-serif;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       margin: 0;
     }
-    
-    header { width: 100%; }
+
     main { flex: 1; width: 100%; }
     footer { width: 100%; margin-top: auto; }
 
@@ -59,201 +91,341 @@
       width: 100%;
       max-width: 1200px; 
       margin: 0 auto; 
-      padding: 2rem; 
-      will-change: transform; 
-      flex: 1; 
-      position: relative; /* Context for absolute user profile */
+      padding: 0 1rem 4rem 1rem; 
+      position: relative; 
     }
-    
-    .navigation-controls { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+
+    /* Breadcrumbs */
+    .visual-breadcrumb {
+      padding: 1.5rem 0 0 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
+    }
+    .visual-breadcrumb a {
+      color: #6366f1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .visual-breadcrumb a:hover { color: #4f46e5; text-decoration: underline; }
+    .visual-breadcrumb span { margin: 0 0.4rem; color: #cbd5e1; }
+
+    /* Directory Header */
+    .directory-header {
+      text-align: center;
+      margin: 1.5rem 0 3rem 0;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header-tag {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #bbf7d0;
+    }
+
+    .directory-header h1 {
+      font-size: 2.8rem;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .directory-header p {
+      font-size: 1.15rem;
+      color: #475569;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Year Selection Cards (Grid) */
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .year-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .year-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.1);
+      border-color: #a7f3d0;
+    }
+
+    .year-icon {
+      width: 80px;
+      height: 80px;
+      background: #ecfdf5;
+      color: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15);
+    }
+
+    .year-card h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 0.8rem;
+    }
+
+    .sem-tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sem-tag {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .year-desc {
+      color: #64748b;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .year-btn-faux {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 1.05rem;
+    }
+
+    .year-card:hover .year-btn-faux {
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* SEO Content Section */
+    .seo-roadmap-section {
+      background: white;
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 4rem;
+    }
+
+    .seo-roadmap-section h2 {
+      font-size: 2.2rem;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .seo-roadmap-section .lead-text {
+      text-align: center;
+      color: #64748b;
+      font-size: 1.15rem;
+      max-width: 800px;
+      margin: 0 auto 3rem auto;
+      line-height: 1.7;
+    }
+
+    .syllabus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .syllabus-box {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 16px;
+      border-left: 4px solid #10b981;
+    }
+
+    .syllabus-box h3 {
+      font-size: 1.4rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .syllabus-box p {
+      color: #475569;
+      line-height: 1.7;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 0 auto 4rem auto;
+    }
+
+    .faq-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1e293b;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover { border-color: #cbd5e1; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover { color: #10b981; }
+    .faq-icon { font-size: 1.5rem; color: #10b981; font-weight: 300; transition: transform 0.3s ease; }
+    .faq-question.active .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: #f8fafc;
+      border-top: 1px solid transparent;
+    }
+
+    .faq-answer.active {
+      max-height: 9999px;
+      padding: 1.5rem;
+      border-top-color: #e2e8f0;
+    }
+
+    .faq-answer p { margin: 0 0 1rem 0; color: #475569; line-height: 1.7; font-size: 1rem; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+
+    /* Navigation Controls */
+    .navigation-controls { 
+      display: flex; 
+      justify-content: center; 
+      margin-top: 3rem; 
+    }
     
     .back-to-zoology-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-      color: white;
+      padding: 1rem 2rem;
+      background: white;
+      color: #475569;
+      border: 2px solid #e2e8f0;
       text-decoration: none;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
-      width: fit-content;
-      border: none;
     }
 
     .back-to-zoology-btn:hover {
-      background: linear-gradient(135deg, #cc0000, #990000);
+      background: #f8fafc;
+      color: #0f172a;
+      border-color: #cbd5e1;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
-    }
-    
-    .notes-header {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding: 2rem;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      margin-top: 4rem; /* Space for the absolute user profile */
     }
 
-    .notes-header h1 {
-      font-size: 2.5rem;
-      color: #2d3748;
-      margin-bottom: 1rem;
-      font-weight: 800;
-    }
-
-    .notes-header p {
-      font-size: 1.1rem;
-      color: #4a5568;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* Fixed Desktop Grid Layout */
-    .navigation-buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Forces exactly 3 columns side-by-side */
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .nav-button {
-      background: linear-gradient(135deg, #349b31, #18179f);
-      color: white;
-      border: none;
-      border-radius: 15px;
-      padding: 1.5rem 1rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
-
-    .nav-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
-      background: linear-gradient(135deg, #4f46e5, #3730a3);
-    }
-
-    .content-section {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      margin-bottom: 2rem;
-    }
-
-    /* User Profile & Auth Styles */
+    /* User Profile Styles */
     .user-profile {
       position: absolute;
       top: 1rem;
       right: 2rem;
       background: white;
-      padding: 0.8rem 1.2rem;
-      border-radius: 25px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
       display: none;
       align-items: center;
       gap: 0.8rem;
       font-size: 0.9rem;
       z-index: 100;
     }
-
-    .user-profile.show {
-      display: flex;
-    }
-
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 0.8rem;
-    }
-
-    .user-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .user-name {
-      font-weight: 600;
-      color: #2d3748;
-    }
-
-    .user-contact {
-      font-size: 0.75rem;
-      color: #718096;
-    }
-
-    .logout-btn {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 15px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .logout-btn:hover {
-      background: #dc2626;
-      transform: translateY(-1px);
-    }
-
-    /* Robust Mobile Optimization */
-    @media (max-width: 900px) {
-      .navigation-buttons {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-      }
-    }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 700; color: #1e293b; }
+    .user-contact { font-size: 0.75rem; color: #64748b; }
+    .logout-btn { background: #fef2f2; color: #dc2626; border: none; padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+    .logout-btn:hover { background: #fee2e2; }
 
     @media (max-width: 768px) { 
-      .notes-container {
-        padding: 1rem;
-      }
+      .directory-header { padding: 3rem 1.5rem; }
+      .directory-header h1 { font-size: 2.2rem; }
       .user-profile { 
         position: relative; 
         top: 0; 
         right: 0; 
         width: 100%; 
         max-width: 100%;
+        margin-top: 1rem;
         margin-bottom: 1.5rem; 
         justify-content: space-between;
       }
-      .notes-header {
-        margin-top: 0;
-        padding: 1.5rem 1rem;
-      }
-      .notes-header h1 {
-        font-size: 1.8rem;
-      }
-      .navigation-buttons {
-        grid-template-columns: 1fr; /* 1 column on mobile phones */
-      }
-      .content-section {
-        padding: 1.5rem 1rem;
-      }
+      .seo-roadmap-section { padding: 2.5rem 1.5rem; }
     }
   </style>
 </head>
@@ -266,7 +438,7 @@
         </a>
       </div>
       <div class="nav-toggle"><span></span><span></span><span></span></div>
-                  <nav>
+      <nav>
         <ul>
           <li><a href="notes" class="active">Notes</a></li>
           <li><a href="portfolio">Portfolio</a></li>
@@ -278,10 +450,12 @@
     </div>
   </header>
 
-  <div class="notes-container">
+  <main class="notes-container">
+    
+    <!-- User Profile -->
     <div id="userProfile" class="user-profile">
       <div style="display: flex; align-items: center; gap: 0.8rem;">
-        <div class="user-avatar" id="userAvatar">S</div>
+        <div class="user-avatar" id="userAvatar">U</div>
         <div class="user-info">
           <div class="user-name" id="userName">User</div>
           <div class="user-contact" id="userContact">***</div>
@@ -290,44 +464,155 @@
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <div class="notes-header">
-      <h1>BSc Zoology Study Material DU📚</h1>
-      <h2>Semester-wise PDFs, Important Questions, Practical files & PYQs</h2>
-      <p>Download unit-wise study material based strictly on the latest DU Zoology syllabus.</p>
+    <!-- Visual Breadcrumb -->
+    <nav class="visual-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span>/</span> <a href="notes">Notes</a> <span>/</span> <a href="zoology">BSc Zoology</a> <span>/</span> Yearly Notes
+    </nav>
+
+    <!-- Header -->
+    <div class="directory-header">
+      <div class="header-tag">Delhi University • NEP/FYUP</div>
+      <h1>BSc Zoology Hons Study Material & Notes PDF Download</h1>
+      <p>Your ultimate directory for <strong>bsc zoology hons study material</strong>. Choose your academic year below to access verified handwritten notes, comprehensive practical files, and fully solved previous year question papers.</p>
     </div>
 
-    <p style="text-align:center; max-width:700px; margin:0 auto 2rem; color:#4a5568; line-height:1.7;">Select your academic year below to find semester-wise notes, previous year question papers, and exam-focused study material — all prepared by DU students who've studied the exact same syllabus.</p>
+    <!-- Year Selection Grid -->
+    <div class="year-grid">
+      
+      <!-- First Year -->
+      <a href="zoology-first-year" class="year-card">
+        <div class="year-icon"><i class="fas fa-microscope"></i></div>
+        <h2>First Year</h2>
+        <div class="sem-tags">
+          <span class="sem-tag">Semester 1</span>
+          <span class="sem-tag">Semester 2</span>
+        </div>
+        <p class="year-desc">Start strong. Access essential resources including Non-Chordates, Ecology, Cell Biology, and early evolutionary fundamentals.</p>
+        <div class="year-btn-faux">Access 1st Year Notes</div>
+      </a>
 
-    <div class="navigation-controls">
-      <a href="zoology" class="back-to-zoology-btn">← Back to Zoology Page</a>
+      <!-- Second Year -->
+      <a href="zoology-second-year" class="year-card">
+        <div class="year-icon"><i class="fas fa-frog"></i></div>
+        <h2>Second Year</h2>
+        <div class="sem-tags">
+          <span class="sem-tag">Semester 3</span>
+          <span class="sem-tag">Semester 4</span>
+        </div>
+        <p class="year-desc">Dive into core biological processes. Find comprehensive materials for Physiology, Biochemistry, and Chordates.</p>
+        <div class="year-btn-faux">Access 2nd Year Notes</div>
+      </a>
+
+      <!-- Third Year -->
+      <a href="zoology-third-year" class="year-card">
+        <div class="year-icon"><i class="fas fa-dna"></i></div>
+        <h2>Third Year</h2>
+        <div class="sem-tags">
+          <span class="sem-tag">Semester 5</span>
+          <span class="sem-tag">Semester 6</span>
+        </div>
+        <p class="year-desc">Master advanced zoological sciences. Detailed resources for Genetics, Immunology, and Developmental Biology.</p>
+        <div class="year-btn-faux">Access 3rd Year Notes</div>
+      </a>
+
     </div>
 
-    <div id="mainContent">
-      <div id="yearSelection" class="content-section">
-        <h2 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">BSc Zoology Notes 📚 | Select Academic Year ✍️ </h2>
-        <div class="navigation-buttons">
-          <a href="zoology-first-year" class="nav-button">
-            📖 First Year Notes
-          </a>
-          <a href="zoology-second-year" class="nav-button">
-            📖 Second Year Notes 
-          </a>
-          <a href="zoology-third-year" class="nav-button">
-            📖 Third Year Notes
-          </a>
+    <!-- SEO & Context Roadmap Section -->
+    <div class="seo-roadmap-section">
+      <h2>The Complete DU Zoology Syllabus Roadmap</h2>
+      <p class="lead-text">Navigating the Delhi University curriculum can be overwhelming. We have broken down the massive syllabus into digestible, exam-focused modules so you never have to search for external study materials again.</p>
+      
+      <div class="syllabus-grid">
+        <div class="syllabus-box">
+          <h3><i class="fas fa-leaf" style="color:#10b981;"></i> 1st Year Foundations</h3>
+          <p>If you are looking for <strong>bsc second semester zoology</strong> resources, you're in the right place. Our Semester 1 and 2 sections meticulously cover the exact <strong>bsc 2nd semester zoology syllabus</strong>. You will find everything from basic taxonomy to detailed <strong>bsc 2nd semester zoology notes</strong> that ensure your foundational concepts are rock solid.</p>
+        </div>
+        
+        <div class="syllabus-box">
+          <h3><i class="fas fa-paw" style="color:#10b981;"></i> 2nd Year Specialization</h3>
+          <p>The second year introduces high-weightage topics. Our directory includes comprehensive <strong>bsc 4th semester zoology notes</strong> (also searched as <strong>bsc zoology 4th sem notes</strong>). One of the most challenging papers is Animal Behaviour—we have included a dedicated <strong>animal behaviour pyq du</strong> analysis to help you predict exact exam questions.</p>
+        </div>
+
+        <div class="syllabus-box">
+          <h3><i class="fas fa-chart-line" style="color:#10b981;"></i> 3rd Year Mastery</h3>
+          <p>As you transition into your final semesters, our materials focus heavily on scoring maximum marks in advanced modules like Molecular Biology and Biotechnology, ensuring you graduate with a top-tier CGPA. We also cross-reference advanced topics with competitive exam blueprints.</p>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Are these BSc Zoology notes aligned with the latest DU syllabus?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, absolutely. All our study materials are meticulously updated to follow the latest Delhi University FYUP/NEP syllabus for BSc Zoology Hons. Whenever DU updates the curriculum, our student contributors update the PDFs.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Do you provide bsc botany notes as well?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! While this page is dedicated entirely to our Zoology department, you can find complete <strong>bsc botany notes</strong> and microbiology study materials by navigating to our main Notes directory using the top menu.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do I download the bsc zoology 2nd semester notes?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Simply click on the "First Year" card above, navigate to the Semester 2 section, and you will find unit-wise <strong>bsc zoology 2nd semester notes</strong>, practical files, and previous year question papers available for instant download.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Back Navigation -->
+    <div class="navigation-controls">
+      <a href="zoology" class="back-to-zoology-btn"><i class="fas fa-arrow-left"></i> Return to Zoology Overview</a>
+    </div>
+
+  </main>
 
   <footer>
-    <div class="container"><p>© 2025 SayHeyShubh</p></div>
-     <p> <a href="privacy-policy">Privacy Policy</a></p>
+    <div class="container">
+      <p>© 2026 SayHeyShubh • Built by students, for students</p>
+      <p><a href="privacy-policy">Privacy Policy</a></p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
   <script>
-    // Firebase Config reuse
+    // FAQ Toggle Function
+    function toggleFAQ(button) {
+      const answer = button.nextElementSibling;
+      const isActive = button.classList.contains('active');
+      
+      // Close all FAQs
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.classList.remove('active');
+        q.nextElementSibling.classList.remove('active');
+      });
+      
+      // Open clicked FAQ if it wasn't active
+      if (!isActive) {
+        button.classList.add('active');
+        answer.classList.add('active');
+      }
+    }
+
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyDo2dd1484akY3VmHM0lzQlF1DhX35FD94",
       authDomain: "sayheyshubh-7051c.firebaseapp.com",
@@ -340,30 +625,44 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    // Silently check if the user is logged in, but don't kick them out if they aren't.
+    // Load User Profile
     function loadUserProfile() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+      const userPhone = localStorage.getItem('userPhone');
       
       if (isLoggedIn === 'true' && userName) {
         document.getElementById('userName').textContent = userName;
         document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
+
+        let contactInfo = '';
+        if (userEmail) {
+          const emailParts = userEmail.split('@');
+          contactInfo = emailParts[0].substring(0, 2) + '***@' + emailParts[1];
+        } else if (userPhone) {
+          contactInfo = userPhone.substring(0, 3) + '***' + userPhone.substring(userPhone.length - 2);
+        }
+        document.getElementById('userContact').textContent = contactInfo;
         document.getElementById('userProfile').classList.add('show');
       }
     }
 
     async function logout() {
-      await auth.signOut();
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userEmail');
-      // Reload page instead of redirecting, so they stay on this catalog page
-      window.location.reload(); 
+      try {
+        await auth.signOut();
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPhone');
+        window.location.reload(); 
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Just try to load the profile. No more redirects!
       loadUserProfile();
     });
   </script>
