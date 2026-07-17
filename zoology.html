@@ -1100,6 +1100,7 @@
   const commentsPerPage = 10;
   let totalComments = 0;
   let allLoadedComments = [];
+  let allFetchedComments = []; // ADD THIS NEW VARIABLE
   let currentUserAuth = null;
   let activeReplyForm = null;
 
@@ -1451,9 +1452,11 @@
         const freshData = await freshResponse.json();
         if (freshData.success && freshData.total > totalComments) {
           console.log('Newer comments found — refreshing from live data.');
-          currentOffset = freshData.comments.length;
+          allFetchedComments = freshData.comments; 
+          allLoadedComments = allFetchedComments.slice(0, commentsPerPage);
+          currentOffset = allLoadedComments.length;
           totalComments = freshData.total;
-          allLoadedComments = freshData.comments;
+          
           displayComments();
           updateViewMoreButton();
           updateCommentsTitle();
@@ -1468,18 +1471,15 @@
     // 2. STANDARD FETCH
     try {
       const endpoints = getApiEndpoints();
-      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
+      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=0`);
       const data = await response.json();
 
       if (data.success) {
-        totalComments = data.total;
+        totalComments = data.total || data.comments.length;
+        allFetchedComments = data.comments; // Store everything API returns
 
-        if (currentOffset > 0) {
-           allLoadedComments = [...allLoadedComments, ...data.comments];
-        } else {
-           allLoadedComments = data.comments;
-        }
-
+        // Slice to ensure only 10 load initially, regardless of API behavior
+        allLoadedComments = allFetchedComments.slice(0, commentsPerPage);
         currentOffset = allLoadedComments.length;
 
         displayComments();
@@ -1503,16 +1503,27 @@
     viewMoreBtn.textContent = 'Loading...';
     
     try {
-      const endpoints = getApiEndpoints();
-      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
-      const data = await response.json();
-      
-      if (data.success && data.comments.length > 0) {
-        allLoadedComments = [...allLoadedComments, ...data.comments];
-        currentOffset += data.comments.length;
+      // Check if backend already sent us the remaining comments in memory
+      if (allFetchedComments.length > currentOffset) {
+        const nextBatch = allFetchedComments.slice(currentOffset, currentOffset + commentsPerPage);
+        allLoadedComments = [...allLoadedComments, ...nextBatch];
+        currentOffset += nextBatch.length;
         
         displayComments();
         updateViewMoreButton();
+      } else {
+        // Fallback to API if the backend actually uses pagination properly
+        const endpoints = getApiEndpoints();
+        const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
+        const data = await response.json();
+        
+        if (data.success && data.comments.length > 0) {
+          allLoadedComments = [...allLoadedComments, ...data.comments];
+          currentOffset += data.comments.length;
+          
+          displayComments();
+          updateViewMoreButton();
+        }
       }
     } catch (error) {
       console.error('Error loading more comments:', error);
@@ -1588,15 +1599,15 @@
       const hasRating = comment.rating && comment.rating >= 1 && comment.rating <= 5;
       const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
       
-      // FIXED SCHEMA HERE -> Injects itemReviewed specifically into the generated HTML string if it is a Review
+      // FIXED SCHEMA HERE -> Uses span and meta tags to prevent Google from ignoring hidden divs
       const reviewRatingHtml = hasRating ? `
-        <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+        <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
           <meta itemprop="ratingValue" content="${comment.rating}">
           <meta itemprop="bestRating" content="5">
-        </div>
-        <div itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course" style="display:none;">
+        </span>
+        <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
           <meta itemprop="name" content="BSc Zoology Honours Notes">
-        </div>
+        </span>
       ` : '';
       
       const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
