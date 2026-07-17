@@ -1100,7 +1100,7 @@
   const commentsPerPage = 10;
   let totalComments = 0;
   let allLoadedComments = [];
-  let allFetchedComments = []; // ADD THIS NEW VARIABLE
+  let allFetchedComments = []; // Ensures slicing targets memory cache
   let currentUserAuth = null;
   let activeReplyForm = null;
 
@@ -1427,58 +1427,21 @@
     textarea.focus();
   }
 
-  // Modified loadComments to respect Server-Side Rendered content
+  // Load comments (Hydration bypass removed to strictly enforce client-side pagination limits)
   async function loadComments() {
     const commentsList = document.getElementById('commentsList');
 
-    // 1. HYDRATION CHECK:
-    if (allLoadedComments.length === 0 && commentsList.children.length > 0 && !commentsList.innerText.includes('Unable to load')) {
-      console.log('Server-side comments detected. Verifying freshness in background...');
-
-      // Update our internal counters
-      const serverItems = commentsList.querySelectorAll('.comment-item');
-      currentOffset = serverItems.length;
-
-      const titleText = document.getElementById('commentsTitle').textContent;
-      const match = titleText.match(/(\d+)/);
-      if (match) totalComments = parseInt(match[1]);
-
-      updateViewMoreButton();
-
-      // BACKGROUND FRESHNESS CHECK:
-      try {
-        const endpoints = getApiEndpoints();
-        const freshResponse = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=0`);
-        const freshData = await freshResponse.json();
-        if (freshData.success && freshData.total > totalComments) {
-          console.log('Newer comments found — refreshing from live data.');
-          allFetchedComments = freshData.comments; 
-          allLoadedComments = allFetchedComments.slice(0, commentsPerPage);
-          currentOffset = allLoadedComments.length;
-          totalComments = freshData.total;
-          
-          displayComments();
-          updateViewMoreButton();
-          updateCommentsTitle();
-        }
-      } catch (e) {
-        console.warn('Background freshness check failed, keeping server-rendered comments.', e);
-      }
-
-      return; 
-    }
-
-    // 2. STANDARD FETCH
     try {
       const endpoints = getApiEndpoints();
-      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=0`);
+      // Fetch all so we can safely paginate from memory without worrying about backend bugs
+      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=500&offset=0`);
       const data = await response.json();
 
       if (data.success) {
         totalComments = data.total || data.comments.length;
-        allFetchedComments = data.comments; // Store everything API returns
+        allFetchedComments = data.comments || []; 
 
-        // Slice to ensure only 10 load initially, regardless of API behavior
+        // Strictly enforce 10-item cap on initial load and overwrite any SSR dump
         allLoadedComments = allFetchedComments.slice(0, commentsPerPage);
         currentOffset = allLoadedComments.length;
 
@@ -1503,7 +1466,7 @@
     viewMoreBtn.textContent = 'Loading...';
     
     try {
-      // Check if backend already sent us the remaining comments in memory
+      // Prioritize serving the rest of the comments from our memory cache
       if (allFetchedComments.length > currentOffset) {
         const nextBatch = allFetchedComments.slice(currentOffset, currentOffset + commentsPerPage);
         allLoadedComments = [...allLoadedComments, ...nextBatch];
@@ -1512,7 +1475,7 @@
         displayComments();
         updateViewMoreButton();
       } else {
-        // Fallback to API if the backend actually uses pagination properly
+        // Fallback to API if we legitimately need more
         const endpoints = getApiEndpoints();
         const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
         const data = await response.json();
