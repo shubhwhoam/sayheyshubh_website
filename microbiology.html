@@ -36,13 +36,16 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- HIGHLY OPTIMIZED SEO META TAGS -->
     <title>
       BSc Microbiology Notes PDF Download for DU | Semester-wise Study Material
@@ -65,7 +68,7 @@
       name="keywords"
       content="bsc microbiology notes pdf download for du, DU microbiology notes, bsc microbiology 1st year notes pdf, bsc microbiology 2nd year notes, delhi university microbiology syllabus, microbiology PYQs DU, best microbiology notes, BSc microbiology practical manuals, DU exam preparation"
     />
-    
+
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -161,6 +164,33 @@
         --card-border: #e2e8f0;
       }
 
+      /* Breadcrumb Styling */
+      .breadcrumb-trail {
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: #64748b;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        background: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      }
+
+      .breadcrumb-trail a {
+        color: #6366f1;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .breadcrumb-trail a:hover {
+        color: #4f46e5;
+      }
+
       .channel-header {
         display: flex;
         flex-direction: column;
@@ -199,7 +229,7 @@
         z-index: 1;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
-      
+
       .channel-avatar:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
@@ -1261,7 +1291,16 @@
     </header>
 
     <div class="youtube-container">
-      
+
+      <!-- Interactive Pill Breadcrumbs -->
+      <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+        <a href="index"><i class="fa-solid fa-house" style="font-size:0.8rem; margin-right:4px;"></i> Home</a> 
+        <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
+        <a href="notes">Notes</a>
+        <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
+        <span style="color: #0f172a;">Microbiology</span>
+      </nav>
+
       <div class="channel-header">
         <img
           src="attached_assets/microbiology-avatar.jpg"
@@ -1317,7 +1356,7 @@
             <div class="feature-icon-wrapper" style="background: #dcfce7; color: #10b981;">
               📥
             </div>
-            <h3>Complete PDF Downloads</h3>
+            <h3>Free PDF Downloads</h3>
             <p>Get instant bsc microbiology notes pdf download for du directly to your device. Completely free for DU students.</p>
           </div>
           <div class="feature-card">
@@ -1433,7 +1472,7 @@
 
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFAQ(this)">
-              <span>Where can I find the best BSc Microbiology Hons notes for Delhi University?</span>
+              <span>Where can I find BSc Microbiology Hons notes for Delhi University?</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
@@ -1442,7 +1481,7 @@
               </p>
             </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -1462,10 +1501,10 @@
       <!-- Live Verified Student Testimonial Grid -->
       <div class="content-section">
         <h2 class="section-title">
-          ❤️ Trusted by Delhi University Students
+          ❤️ Trusted by DU Microbiology Students
         </h2>
         <div class="testimonials-grid">
-          
+
           <!-- Comment 1 -->
           <div class="comment-item" style="border-left: 4px solid #f59e0b;">
             <div class="comment-header">
@@ -2417,7 +2456,7 @@
       // Load user profile
       loadUserProfile();
     }
-    
+
     // Load user profile from localStorage
     function loadUserProfile() {
       const userName = localStorage.getItem('userName');
@@ -2475,13 +2514,13 @@
         setTimeout(() => {
           showAuthPopup();
         }, 500); // Small delay to ensure page is fully loaded
-        
+
         // Clean up URL by removing the parameter
         const url = new URL(window.location);
         url.searchParams.delete('showLogin');
         window.history.replaceState({}, document.title, url.pathname);
       }
-      
+
       // Load user profile from localStorage on page load
       loadUserProfile();
     });
