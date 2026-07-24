@@ -44,50 +44,50 @@
   
   <script type="application/ld+json">
     {
-     "@context": "https://schema.org",
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "What subjects are included in BSc Microbiology 2nd semester DU?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "The second semester of BSc Microbiology at Delhi University includes Bacterial Diversity and Systematics, Principles of Biochemistry-II, and Food and Dairy Microbiology."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Are these notes based on the Delhi University syllabus?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Yes. These notes are structured exactly according to the latest Delhi University BSc Microbiology (Hons.) syllabus and include unit-wise explanations, structures, and important questions."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Do the notes include biochemical pathways and structures?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Yes. For subjects like Principles of Biochemistry-II, the notes include important structures like purines, pyrimidines, DNA, and RNA types, which are commonly asked in university exams."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Do these notes include practical files?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Yes! Complete handwritten practical files are available for download."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Do these notes include previous year questions?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Yes! Important previous year questions (PYQs) from past Delhi University Microbiology exams are integrated into the units for download."
-       }
-      }
-     ]
+       "@context": "https://schema.org",
+       "@type": "FAQPage",
+       "mainEntity": [
+        {
+         "@type": "Question",
+         "name": "What subjects are included in BSc Microbiology 2nd semester DU?",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "The second semester of BSc Microbiology at Delhi University includes Bacterial Diversity and Systematics, Principles of Biochemistry-II, and Food and Dairy Microbiology."
+         }
+        },
+        {
+         "@type": "Question",
+         "name": "Are these notes based on the Delhi University syllabus?",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "Yes. These notes are structured exactly according to the latest Delhi University BSc Microbiology (Hons.) syllabus and include unit-wise explanations, structures, and important questions."
+         }
+        },
+        {
+         "@type": "Question",
+         "name": "Do the notes include biochemical pathways and structures?",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "Yes. For subjects like Principles of Biochemistry-II, the notes include important structures like purines, pyrimidines, DNA, and RNA types, which are commonly asked in university exams."
+         }
+        },
+        {
+         "@type": "Question",
+         "name": "Do these notes include practical files?",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "Yes! Complete handwritten practical files are available for download."
+         }
+        },
+        {
+         "@type": "Question",
+         "name": "Do these notes include previous year questions?",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "Yes! Important previous year questions (PYQs) from past Delhi University Microbiology exams are integrated into the units for download."
+         }
+        }
+       ]
     }
   </script>
 
@@ -698,7 +698,7 @@
               <h3 class="unit-title">Unit 4: Diversity of Eubacteria</h3>
               <div class="unit-buttons">
                 <!-- Locked Unit -->
-                <button onclick="handleViewNotes('unit4-microb-dsc201', 'Unit 4: Diversity of Eubacteria')" class="download-btn premium-note-btn"><i class="fas fa-lock"></i> Unlock Notes</button>
+                <button onclick="handleViewNotes('unit4-microb-dsc201', 'Unit 4: Diversity of Eubacteria')" class="download-btn"><i class="fas fa-unlock-alt"></i> Access Notes</button>
               </div>
             </div>
             <p class="unit-desc"><strong>Topics Covered:</strong> Deeply Branching Bacteria (Thermotoga, Deinococcus), Proteobacteria, Firmicutes, Tenericute, Mycobacterium, and Streptomyces.</p>
@@ -748,7 +748,7 @@
               <h3 class="unit-title">Unit 2: Composition of Proteins</h3>
               <div class="unit-buttons">
                 <!-- Locked Unit -->
-                <button onclick="handleViewNotes('unit2-microb-dsc202', 'Unit 2: Composition of Proteins')" class="download-btn premium-note-btn"><i class="fas fa-lock"></i> Unlock Notes</button>
+                <button onclick="handleViewNotes('unit2-microb-dsc202', 'Unit 2: Composition of Proteins')" class="download-btn"><i class="fas fa-unlock-alt"></i> Access Notes</button>
               </div>
             </div>
             <p class="unit-desc"><strong>Topics Covered:</strong> Structures and properties of standard amino acids. Zwitterion, titration curves of amino acids, and determination of pKa and pI.</p>
@@ -834,7 +834,7 @@
               <h3 class="unit-title">Unit 3: Fermented dairy and non-dairy foods</h3>
               <div class="unit-buttons">
                 <!-- Locked Unit -->
-                <button onclick="handleViewNotes('unit3-microb-dsc203', 'Unit 3: Fermented dairy foods')" class="download-btn premium-note-btn"><i class="fas fa-lock"></i> Unlock Notes</button>
+                <button onclick="handleViewNotes('unit3-microb-dsc203', 'Unit 3: Fermented dairy foods')" class="download-btn"><i class="fas fa-unlock-alt"></i> Access Notes</button>
               </div>
             </div>
             <p class="unit-desc"><strong>Topics Covered:</strong> Fermented dairy and non-dairy foods: Starter cultures. Fermented foods: yogurt, acidophilus milk, kumiss, kefir, cheese, dosa, kanji, etc. Probiotics and synbiotics.</p>
@@ -1167,10 +1167,8 @@
         if (user) {
           trackSubjectLogin(user, 'microbiology'); // Tracks under microbiology subject
           loadPurchasedNotesAndUpdateButtons();
-        } else {
-          // If not logged in, just update UI to locked mode
-          updateButtonStates([]);
         }
+        // Removed the else { updateButtonStates([]) } to match Zoology perfectly
       });
 
       document.querySelectorAll('.price-option').forEach(option => {
@@ -1211,7 +1209,11 @@
       }
     }
 
-    function updateButtonStates(purchasedIds) {
+    function updateButtonStates(serverPurchasedIds) {
+      // Merging localStorage fixes the UI lag bug so purchases are always green instantly
+      const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+      const purchasedIds = [...new Set([...serverPurchasedIds, ...localPurchases])];
+      
       console.log('Purchased Note IDs:', purchasedIds);
       const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
       
@@ -1221,7 +1223,7 @@
         
         const noteId = match[1];
 
-        // Bypass lock visual for Free Units (Unit 1)
+        // Bypass lock visual for Free Units (if any still exist with data-free)
         if (button.dataset.free === "true") {
            button.innerHTML = '<i class="fas fa-unlock-alt"></i> Access Notes';
            button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
@@ -1370,7 +1372,7 @@
                     purchasedNotes.push(currentNoteId);
                     localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
                   }
-                  updateButtonStates(purchasedNotes);
+                  updateButtonStates(purchasedNotes); // Local merge handles UI update
                   alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
                 }, 1500);
               } else {
