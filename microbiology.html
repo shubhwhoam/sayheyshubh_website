@@ -950,6 +950,174 @@
         color: white;
       }
 
+      /* Cookie Banner Styling */
+      .cookie-banner {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ffffff;
+        color: #333;
+        padding: 14px 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        font-size: 14px;
+        max-width: 600px;
+        width: 90%;
+        z-index: 1000;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .cookie-banner a {
+        color: #6366f1;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .cookie-buttons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .accept-btn {
+        background: #6366f1;
+        color: white;
+        padding: 6px 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background 0.3s ease;
+      }
+      .accept-btn:hover {
+        background: #4f46e5;
+      }
+      .close-btn {
+        font-size: 20px;
+        cursor: pointer;
+        color: #777;
+        transition: color 0.3s ease;
+      }
+      .close-btn:hover {
+        color: #333;
+      }
+      .cookie-banner.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Auth Modal Styles */
+      .auth-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+      }
+      .auth-modal.show {
+        display: flex;
+      }
+      .auth-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.3s ease;
+        position: relative;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .auth-header h2 {
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+      }
+      .auth-header p {
+        color: #718096;
+        font-size: 0.9rem;
+      }
+      .auth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .auth-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        background: white;
+        color: #2d3748;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .auth-btn:hover {
+        border-color: #6366f1;
+        background: #f8fafc;
+        transform: translateY(-2px);
+      }
+      .google-btn {
+        border-color: #4285f4;
+        color: #4285f4;
+      }
+      .google-btn:hover {
+        background: #4285f4;
+        color: white;
+      }
+      .close-auth {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #718096;
+        z-index: 10001;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+      .close-auth:hover {
+        background: rgba(113, 128, 150, 0.1);
+        color: #2d3748;
+      }
+      .loading {
+        display: none;
+        text-align: center;
+        color: #6366f1;
+        margin-top: 1rem;
+      }
+
       /* Adjusted Media Queries to Fix Mobile Overflow & Scaling */
       @media (max-width: 768px) {
         .youtube-container {
@@ -972,7 +1140,7 @@
 
         .action-buttons {
           flex-direction: column;
-          align-items: center; /* Correctly centers the buttons */
+          align-items: center; 
           width: 100%;
           margin: 1.5rem auto 0 auto;
         }
@@ -980,7 +1148,7 @@
         .youtube-btn,
         .notes-btn {
           width: 100%;
-          max-width: 320px; /* Restricts button width so it doesn't stretch weirdly */
+          max-width: 320px; 
           justify-content: center;
           text-align: center;
           box-sizing: border-box;
@@ -990,7 +1158,6 @@
           grid-template-columns: 1fr;
         }
 
-        /* Fixed the Overflowing Stat Grid */
         .stats-section {
           padding: 2rem 1.2rem;
         }
@@ -1266,7 +1433,7 @@
 
           <div class="faq-item">
             <button class="faq-question" onclick="toggleFAQ(this)">
-              <span>Where can I find BSc Microbiology Hons notes for Delhi University?</span>
+              <span>Where can I find the best BSc Microbiology Hons notes for Delhi University?</span>
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
@@ -1295,7 +1462,7 @@
       <!-- Live Verified Student Testimonial Grid -->
       <div class="content-section">
         <h2 class="section-title">
-          ❤️ Trusted by DU Microbiology Students
+          ❤️ Trusted by Delhi University Students
         </h2>
         <div class="testimonials-grid">
           
