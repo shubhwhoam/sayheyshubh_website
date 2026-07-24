@@ -1370,15 +1370,12 @@
 
               if (verifyResult.success) {
                 document.getElementById('paymentLoading').innerHTML = '<div style="color:#10b981; font-weight:700;">🎉 Unlocked!</div>';
-                setTimeout(() => {
+                setTimeout(async () => {
                   hidePaymentPopup();
-                  const purchasedNotes = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
-                  if (!purchasedNotes.includes(currentNoteId)) {
-                    purchasedNotes.push(currentNoteId);
-                    localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
-                  }
-                  updateButtonStates(purchasedNotes); // Local merge handles UI update
                   alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
+                  // The foolproof fix: Fetch the verified truth directly from the server 
+                  // to update the UI seamlessly, completely bypassing local storage desyncs.
+                  await loadPurchasedNotesAndUpdateButtons();
                 }, 1500);
               } else {
                  throw new Error('Verification failed');
