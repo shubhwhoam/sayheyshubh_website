@@ -87,7 +87,7 @@
     // already be signed in. No redirect, no forced login popup.
     auth.onAuthStateChanged(function(user) {
         if (user) {
-            trackSubjectLogin(user.uid, 'zoology');
+            trackSubjectLogin(user, 'zoology');
         }
     });
   </script>

@@ -1147,7 +1147,7 @@
     function initializePaymentSystem() {
       auth.onAuthStateChanged(user => {
         if (user) {
-          trackSubjectLogin(user.uid, 'zoology');
+          trackSubjectLogin(user, 'zoology');
           loadPurchasedNotesAndUpdateButtons();
         }
       });

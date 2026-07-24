@@ -52,13 +52,15 @@ function maskCredential(credential) {
 // session. Safe to call on every page load / every auth state
 // change — it no-ops after the first successful write per subject
 // per tab session, so it will never spam Firestore.
-function trackSubjectLogin(uid, subject) {
-    if (!uid || !subject) return;
+function trackSubjectLogin(user, subject) {
+    if (!user || !user.uid || !subject) return;
     const sessionKey = 'loggedSubject_' + subject;
     if (sessionStorage.getItem(sessionKey)) return; // already logged this session
 
     db.collection('loginEvents').add({
-        uid: uid,
+        uid: user.uid,
+        name: user.displayName || null,
+        email: user.email || user.phoneNumber || null,
         subject: subject,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
