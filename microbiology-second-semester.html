@@ -1190,14 +1190,19 @@
     async function loadPurchasedNotesAndUpdateButtons() {
       const user = auth.currentUser;
       if (!user) return;
-
       try {
         const idToken = await user.getIdToken();
-        const response = await fetch('/.netlify/functions/check-purchases', {
+        // Added a timestamp query parameter to bust the cache
+        const response = await fetch(`/.netlify/functions/check-purchases?t=${new Date().getTime()}`, {
           method: 'GET',
-          headers: { 'Authorization': `Bearer ${idToken}` }
+          headers: { 
+            'Authorization': `Bearer ${idToken}`,
+            // Added strict cache-control headers
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+          }
         });
-
         if (response.ok) {
           const data = await response.json();
           const purchasedNotes = data.purchasedNotes || [];
@@ -1250,8 +1255,8 @@
         showAuthPopup();
         return;
       }
-
-      const btn = event.currentTarget || event.target;
+      
+      const btn = event.target.closest('button') || event.currentTarget || event.target;
       const originalHTML = btn.innerHTML;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
 
