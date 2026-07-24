@@ -1197,6 +1197,7 @@
     function initializePaymentSystem() {
       auth.onAuthStateChanged(user => {
         if (user) {
+          trackSubjectLogin(user.uid, 'zoology');
           loadPurchasedNotesAndUpdateButtons();
         }
       });
@@ -1340,7 +1341,7 @@
         const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
-          body: JSON.stringify({ amount: amountInPaise, noteTitle: currentNoteTitle, noteUrl: currentNoteId })
+          body: JSON.stringify({ amount: amountInPaise, noteTitle: currentNoteTitle, noteUrl: currentNoteId, subject: 'zoology' })
         });
 
         const orderData = await orderResponse.json();

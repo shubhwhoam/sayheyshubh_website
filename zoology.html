@@ -1777,6 +1777,7 @@
             const data = doc.data();
             const devices = data.devices || {};
             if (devices[deviceId]) {
+              trackSubjectLogin(user.uid, 'zoology');
               updateUIForLoggedInUser(user, data);
               return;
             }

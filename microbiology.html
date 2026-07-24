@@ -2318,6 +2318,7 @@
               if (devices[deviceId]) {
                 // User is authenticated - update buttons and UI
                 console.log("User is authenticated - updating UI");
+                trackSubjectLogin(user.uid, 'microbiology');
                 updateUIForLoggedInUser(user, data);
                 return;
               }

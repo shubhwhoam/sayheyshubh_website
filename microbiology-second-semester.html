@@ -1048,6 +1048,7 @@
       // Check auth state on load
       auth.onAuthStateChanged(user => {
         if (user) {
+          trackSubjectLogin(user.uid, 'microbiology');
           localStorage.setItem('isLoggedIn', 'true');
           updateButtonStates();
         } else {

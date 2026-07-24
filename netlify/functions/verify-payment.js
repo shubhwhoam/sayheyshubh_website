@@ -40,7 +40,7 @@ async function verifyFirebaseToken(authHeader) {
 }
 
 // Helper function to unlock note for user (idempotent - uses deterministic doc ID)
-async function unlockNoteForUser(userId, paymentId, orderId, noteUrl) {
+async function unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject) {
   // Use paymentId as document ID for true idempotency (Firestore prevents duplicates)
   const transactionRef = db.collection('transactions').doc(paymentId);
   
@@ -51,6 +51,7 @@ async function unlockNoteForUser(userId, paymentId, orderId, noteUrl) {
       paymentId: paymentId,
       orderId: orderId,
       noteUrl: noteUrl, 
+      subject: subject || 'unknown',
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
       status: 'completed',
       verified: true
@@ -172,9 +173,10 @@ exports.handler = async (event, context) => {
         const orderData = orderDoc.data();
         const userId = orderData.userId;
         const noteUrl = orderData.noteUrl;
+        const subject = orderData.subject;
 
         // Unlock the note for the user
-        await unlockNoteForUser(userId, paymentId, orderId, noteUrl);
+        await unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject);
 
         console.log('Webhook processed successfully for user:', userId);
         return {
@@ -289,10 +291,11 @@ exports.handler = async (event, context) => {
     }
 
     const noteUrl = orderData.noteUrl;
+    const subject = orderData.subject;
 
-    // Unlock the note for the user (using server-validated noteUrl)
+    // Unlock the note for the user (using server-validated noteUrl/subject)
     try {
-      await unlockNoteForUser(authenticatedUserId, paymentId, orderId, noteUrl);
+      await unlockNoteForUser(authenticatedUserId, paymentId, orderId, noteUrl, subject);
     } catch (firestoreError) {
       console.error('Error unlocking note:', firestoreError);
       return {

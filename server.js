@@ -76,6 +76,7 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
     const authenticatedUserId = decodedToken.uid;
     
     const { amount, noteTitle, noteUrl } = req.body;
+    const subject = req.body.subject || 'unknown';
     
     // Basic validation
     if (!amount || !noteTitle || !noteUrl) {
@@ -101,6 +102,7 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
       notes: {
         noteTitle: sanitizedNoteTitle,
         userId: authenticatedUserId,
+        subject: subject,
         timestamp: new Date().toISOString()
       }
     };
@@ -113,6 +115,7 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
       userId: authenticatedUserId,
       noteUrl: noteUrl,
       noteTitle: sanitizedNoteTitle,
+      subject: subject,
       amount: amount,
       currency: 'INR',
       status: 'created',
@@ -140,7 +143,7 @@ app.post('/.netlify/functions/create-order', async (req, res) => {
 });
 
 // Helper function for idempotent note unlocking (shared with webhook)
-async function unlockNoteForUser(userId, paymentId, orderId, noteUrl) {
+async function unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject) {
   const transactionRef = db.collection('transactions').doc(paymentId);
   
   try {
@@ -150,6 +153,7 @@ async function unlockNoteForUser(userId, paymentId, orderId, noteUrl) {
       paymentId: paymentId,
       orderId: orderId,
       noteUrl: noteUrl,
+      subject: subject || 'unknown',
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
       status: 'completed',
       verified: true
@@ -250,10 +254,11 @@ app.post('/.netlify/functions/verify-payment', async (req, res) => {
     }
 
     const noteUrl = orderData.noteUrl;
+    const subject = orderData.subject;
 
-    // Unlock the note for the user (using server-validated noteUrl)
+    // Unlock the note for the user (using server-validated noteUrl/subject)
     try {
-      await unlockNoteForUser(authenticatedUserId, paymentId, orderId, noteUrl);
+      await unlockNoteForUser(authenticatedUserId, paymentId, orderId, noteUrl, subject);
     } catch (firestoreError) {
       console.error('Error unlocking note:', firestoreError);
       return res.status(500).json({

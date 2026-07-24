@@ -43,6 +43,32 @@ function maskCredential(credential) {
     }
 }
 
+// =================================================================
+// SUBJECT LOGIN TRACKING (new — additive only, does not touch
+// the existing `users` collection or any auth/purchase logic)
+// =================================================================
+// Writes one document to a new `loginEvents` collection the first
+// time a logged-in user is seen on a given subject in this browser
+// session. Safe to call on every page load / every auth state
+// change — it no-ops after the first successful write per subject
+// per tab session, so it will never spam Firestore.
+function trackSubjectLogin(uid, subject) {
+    if (!uid || !subject) return;
+    const sessionKey = 'loggedSubject_' + subject;
+    if (sessionStorage.getItem(sessionKey)) return; // already logged this session
+
+    db.collection('loginEvents').add({
+        uid: uid,
+        subject: subject,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        sessionStorage.setItem(sessionKey, '1');
+    }).catch((error) => {
+        // Never let tracking failures affect login/purchase flows
+        console.warn('Login tracking skipped:', error.message);
+    });
+}
+
 // Sign out function
 function handleSignOut() {
     auth.signOut().then(() => {

@@ -74,7 +74,8 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
     
-    let { amount, noteTitle, noteUrl } = JSON.parse(event.body);
+    let { amount, noteTitle, noteUrl, subject } = JSON.parse(event.body);
+    subject = subject || 'unknown';
 
     // If noteUrl is a secure ID (like unit-1-dsc-1), get the real URL
     if (notesData[noteUrl]) {
@@ -110,6 +111,7 @@ exports.handler = async (event, context) => {
       notes: {
         noteTitle: sanitizedNoteTitle,
         userId: authenticatedUserId,
+        subject: subject,
         timestamp: new Date().toISOString()
       }
     };
@@ -123,6 +125,7 @@ exports.handler = async (event, context) => {
       userId: authenticatedUserId,
       noteUrl: noteUrl,
       noteTitle: sanitizedNoteTitle,
+      subject: subject,
       amount: amount,
       currency: 'INR',
       status: 'created',

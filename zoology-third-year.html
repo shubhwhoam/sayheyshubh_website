@@ -82,7 +82,15 @@
 
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
-  <script src="page-protection.js"></script>
+  <script>
+    // Non-gating: just log a subject login if the visitor happens to
+    // already be signed in. No redirect, no forced login popup.
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            trackSubjectLogin(user.uid, 'zoology');
+        }
+    });
+  </script>
   
   <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">
     💬

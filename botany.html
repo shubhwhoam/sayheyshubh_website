@@ -185,6 +185,7 @@
 
     auth.onAuthStateChanged((user) => {
       if (user) {
+        trackSubjectLogin(user.uid, 'botany');
         // User is logged in
         document.getElementById('userProfile').style.display = 'flex';
         // Change button to "Access" and redirect to Botany Years
