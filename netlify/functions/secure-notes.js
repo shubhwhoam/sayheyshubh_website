@@ -1,6 +1,11 @@
 const admin = require('firebase-admin');
-// We use relative path to go up two levels to root
-const notesData = require('../../notes-data.json'); 
+
+// Import both JSON files (adjust path if needed)
+const zoologyNotes = require('../../notes-data.json'); 
+const microbiologyNotes = require('../../microbiology-notes-data.json');
+
+// Combine them into one master list
+const notesData = { ...zoologyNotes, ...microbiologyNotes };
 
 if (!admin.apps.length) {
   if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {
@@ -20,7 +25,7 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 exports.handler = async (event, context) => {
-  // Extract ID from path (e.g., /secure-notes/unit-1-dsc-1)
+  // Extract ID from path (e.g., /secure-notes/unit1-microb-dsc201)
   const pathParts = event.path.split('/');
   const noteId = pathParts[pathParts.length - 1];
 
@@ -40,9 +45,22 @@ exports.handler = async (event, context) => {
       return { statusCode: 404, body: JSON.stringify({ success: false, error: 'Note not found' }) };
     }
 
-    // 3. Extract File ID for DB check
-    const fileIdMatch = realUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-    const fileId = fileIdMatch ? fileIdMatch[1] : null;
+    // 3. Extract File ID for DB check (Handles both Drive and Short.gy links)
+    let fileId = null;
+    let previewUrl = '';
+
+    if (realUrl.includes('drive.google.com')) {
+      const fileIdMatch = realUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+      fileId = fileIdMatch ? fileIdMatch[1] : null;
+      previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+    } else if (realUrl.includes('short.gy')) {
+      const shortMatch = realUrl.match(/short\.gy\/([a-zA-Z0-9-_]+)/);
+      fileId = shortMatch ? shortMatch[1] : null;
+      previewUrl = realUrl; // Short links automatically redirect to the file
+    } else {
+      fileId = noteId; // Fallback
+      previewUrl = realUrl;
+    }
 
     if (!fileId) {
         return { statusCode: 500, body: JSON.stringify({ error: 'Invalid config' }) };
@@ -61,7 +79,7 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       body: JSON.stringify({ 
         success: true, 
-        previewUrl: `https://drive.google.com/file/d/${fileId}/preview` 
+        previewUrl: previewUrl 
       })
     };
 

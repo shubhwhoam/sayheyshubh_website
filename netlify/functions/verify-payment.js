@@ -1,3 +1,9 @@
+const zoologyNotes = require('../../notes-data.json');
+const microbiologyNotes = require('../../microbiology-notes-data.json');
+
+// Combine both datasets into one master list
+const notesData = { ...zoologyNotes, ...microbiologyNotes };
+
 const admin = require('firebase-admin');
 const crypto = require('crypto');
 
@@ -43,7 +49,7 @@ async function verifyFirebaseToken(authHeader) {
 async function unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject) {
   // Use paymentId as document ID for true idempotency (Firestore prevents duplicates)
   const transactionRef = db.collection('transactions').doc(paymentId);
-  
+
   try {
     // Use set with merge:false to create only if doesn't exist (atomic)
     await transactionRef.create({ 
@@ -56,7 +62,7 @@ async function unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject) {
       status: 'completed',
       verified: true
     });
-    
+
     console.log('New transaction created for payment:', paymentId);
   } catch (error) {
     if (error.code === 6) { // ALREADY_EXISTS error code
@@ -66,12 +72,17 @@ async function unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject) {
     throw error; // Re-throw other errors
   }
 
-  // 2. Mark note as unlocked in user's document (for backward compatibility)
+  // 2. Mark note as unlocked in user's document
   const userRef = db.collection('users').doc(userId);
   let noteSlug;
-  if (noteUrl.includes('drive.google.com/file/d/')) {
+
+  // CRITICAL FIX: Handle both Google Drive and short.gy links to match secure-notes.js
+  if (noteUrl.includes('drive.google.com')) {
     const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
     noteSlug = fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
+  } else if (noteUrl.includes('short.gy')) {
+    const shortMatch = noteUrl.match(/short\.gy\/([a-zA-Z0-9-_]+)/);
+    noteSlug = shortMatch ? shortMatch[1] : noteUrl.split('/').pop();
   } else {
     noteSlug = noteUrl.split('/').pop();
   }
@@ -125,13 +136,13 @@ exports.handler = async (event, context) => {
 
   // Determine if this is a webhook from Razorpay or a frontend request
   const isWebhook = event.headers['x-razorpay-signature'] || event.headers['X-Razorpay-Signature'];
-  
+
   if (isWebhook) {
     // WEBHOOK HANDLER - From Razorpay servers
     try {
       const webhookSignature = event.headers['x-razorpay-signature'] || event.headers['X-Razorpay-Signature'];
       const webhookBody = event.body;
-      
+
       // Verify webhook signature
       const expectedSignature = crypto
         .createHmac('sha256', process.env.RAZORPAY_WEBHOOK_SECRET || process.env.RAZORPAY_KEY_SECRET)
@@ -275,7 +286,7 @@ exports.handler = async (event, context) => {
     }
 
     const orderData = orderDoc.data();
-    
+
     // Verify the authenticated user matches the order's user
     if (orderData.userId !== authenticatedUserId) {
       console.error('User mismatch for order:', orderId);

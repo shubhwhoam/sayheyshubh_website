@@ -1,4 +1,8 @@
-const notesData = require('../../notes-data.json');
+const zoologyNotes = require('../../notes-data.json');
+const microbiologyNotes = require('../../microbiology-notes-data.json');
+
+// Combine both datasets into one master list
+const notesData = { ...zoologyNotes, ...microbiologyNotes };
 
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
@@ -33,7 +37,7 @@ async function verifyFirebaseToken(authHeader) {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new Error('Missing or invalid authorization header');
   }
-  
+
   const idToken = authHeader.substring(7);
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
@@ -73,16 +77,16 @@ exports.handler = async (event, context) => {
     // Verify authentication
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
-    
+
     let { amount, noteTitle, noteUrl, subject } = JSON.parse(event.body);
     subject = subject || 'unknown';
 
-    // If noteUrl is a secure ID (like unit-1-dsc-1), get the real URL
+    // If noteUrl is a secure ID (like unit-1-dsc-1 or unit1-microb-dsc201), get the real URL
     if (notesData[noteUrl]) {
         console.log(`Resolving secure ID ${noteUrl} to real URL`);
         noteUrl = notesData[noteUrl];
     }
-    
+
     // Basic validation
     if (!amount || !noteTitle || !noteUrl) {
       return {
@@ -91,7 +95,7 @@ exports.handler = async (event, context) => {
         body: JSON.stringify({ success: false, error: 'Missing required parameters' })
       };
     }
-    
+
     if (!amount || amount < 1000 || amount > 5000) {
       return {
         statusCode: 400,
@@ -117,7 +121,7 @@ exports.handler = async (event, context) => {
     };
 
     const order = await razorpay.orders.create(options);
-    
+
     // Store order details in Firebase for webhook processing (use orderId as doc ID for uniqueness)
     const db = admin.firestore();
     await db.collection('orders').doc(order.id).set({
@@ -131,7 +135,7 @@ exports.handler = async (event, context) => {
       status: 'created',
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     });
-    
+
     return {
       statusCode: 200,
       headers,
