@@ -1,4 +1,6 @@
-const notesData = require('../../notes-data.json');
+const zoologyNotes = require('../../notes-data.json');
+const microbiologyNotes = require('../../microbiology-notes-data.json');
+ const notesData = { ...zoologyNotes, ...microbiologyNotes };
 
 const admin = require('firebase-admin');
 
