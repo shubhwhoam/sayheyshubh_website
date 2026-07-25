@@ -13,6 +13,15 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
+// Mask an email before it ever leaves the server (matches the masking used
+// in microbiology-odb.js / zoology-odb.js for the pre-rendered pages)
+function maskEmail(email) {
+  if (!email || !email.includes('@')) return '';
+  const [user, domain] = email.split('@');
+  if (user.length <= 2) return email[0] + '***@' + domain;
+  return user.slice(0, 2) + '***@' + domain;
+}
+
 exports.handler = async (event) => {
   // CORS headers
   const headers = {
@@ -40,7 +49,7 @@ exports.handler = async (event) => {
     const page = params.page || 'youtube';
     const limit = parseInt(params.limit) || 10;
     const offset = parseInt(params.offset) || 0;
-    
+
     // Get top-level comments from Firestore
     const commentsRef = db.collection('comments')
       .where('page', '==', page)
@@ -48,9 +57,9 @@ exports.handler = async (event) => {
       .orderBy('createdAt', 'desc')
       .limit(limit)
       .offset(offset);
-    
+
     const snapshot = await commentsRef.get();
-    
+
     // Convert Firestore docs to array
     const topComments = [];
     snapshot.forEach(doc => {
@@ -58,36 +67,36 @@ exports.handler = async (event) => {
         id: doc.id,
         user_id: doc.data().userId,
         name: doc.data().userName,
-        email: doc.data().userEmail,
+        email: maskEmail(doc.data().userEmail),
         comment: doc.data().comment,
         rating: doc.data().rating ?? null,
         created_at: doc.data().createdAt?.toDate?.() || new Date(),
         parent_id: doc.data().parentId
       });
     });
-    
+
     // Get all replies for these comments
     // Firestore 'in' operator has a limit of 10 values, so batch the queries
     const commentIds = topComments.map(comment => comment.id);
     let replies = [];
-    
+
     if (commentIds.length > 0) {
       // Split comment IDs into chunks of 10 (Firestore limit)
       const chunkSize = 10;
       for (let i = 0; i < commentIds.length; i += chunkSize) {
         const chunk = commentIds.slice(i, i + chunkSize);
-        
+
         const repliesRef = db.collection('comments')
           .where('parentId', 'in', chunk)
           .orderBy('createdAt', 'asc');
-        
+
         const repliesSnapshot = await repliesRef.get();
         repliesSnapshot.forEach(doc => {
           replies.push({
             id: doc.id,
             user_id: doc.data().userId,
             name: doc.data().userName,
-            email: doc.data().userEmail,
+            email: maskEmail(doc.data().userEmail),
             comment: doc.data().comment,
             created_at: doc.data().createdAt?.toDate?.() || new Date(),
             parent_id: doc.data().parentId
@@ -95,13 +104,13 @@ exports.handler = async (event) => {
         });
       }
     }
-    
+
     // Organize replies under their parent comments
     const commentsWithReplies = topComments.map(comment => ({
       ...comment,
       replies: replies.filter(reply => reply.parent_id === comment.id)
     }));
-    
+
     // Get total count of top-level comments
     const countSnapshot = await db.collection('comments')
       .where('page', '==', page)
@@ -127,7 +136,7 @@ exports.handler = async (event) => {
       average: ratingCount > 0 ? Math.round((ratingSum / ratingCount) * 10) / 10 : null,
       count: ratingCount
     };
-    
+
     return {
       statusCode: 200,
       headers,
