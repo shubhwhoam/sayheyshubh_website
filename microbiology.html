@@ -313,6 +313,35 @@
         margin-bottom: 2.5rem;
       }
 
+      /* Author credit card */
+      .author-card {
+        background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+      }
+      .author-avatar { 
+        width: 130px; height: 130px; border-radius: 50%; object-fit: cover; 
+        border: 5px solid #ecfdf5; box-shadow: 0 10px 20px rgba(223, 210, 52, 0.17); flex-shrink: 0; 
+      }
+      .author-info { flex: 1; min-width: 240px; }
+      .author-role { 
+        display: inline-block; background: #e7e9c8; color: #7c8d2a; 
+        padding: 0.35rem 1rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem; margin-bottom: 0.8rem; 
+      }
+      .author-info h3 { font-size: 1.6rem; color: #0f172a; margin: 0 0 0.6rem 0; }
+      .author-info p { color: #475569; line-height: 1.7; margin: 0 0 1rem 0; }
+      .author-links { display: flex; gap: 0.8rem; }
+      .author-links a {
+        width: 40px; height: 40px; border-radius: 50%; background: #f1f5f9; color: #475569;
+        display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease;
+      }
+      .author-links a:hover { background: #10b981; color: white; }
+
+      /* Mobile responsiveness for the author card */
+      @media (max-width: 768px) {
+        .author-card { flex-direction: column; text-align: center; }
+        .author-links { justify-content: center; }
+      }
+      
       /* Features Grid */
       .features-grid {
         display: grid;
@@ -1396,6 +1425,25 @@
           >
             <span class="stat-number">🌟</span>
             <div class="stat-label">Academic Tips</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Author Credit -->
+      <div class="content-section" style="margin-top:5rem;">
+        <h2 class="section-title">Notes Prepared By</h2>
+        
+        <div class="author-card">
+          <img src="attached_assets/aditi.jpg" alt="Aditi Singh BSc Microbiology Lead at SayHeyShubh" class="author-avatar">
+          <div class="author-info">
+            <span class="author-role">Microbiology Lead 🦠</span>
+            <h3>Aditi Singh</h3>
+            <p>Aditi is a 2nd-year BSc Microbiology student at Gargi College and leads the Microbiology section at SayHeyShubh. She creates semester-wise notes, practical files, and study resources, making microbiology concepts easier to understand through clear, well-structured, and exam-focused content.</p>
+            <div class="author-links">
+              <a href="https://www.linkedin.com/in/aditi-singh-914889379" target="_blank" aria-label="Aditi Singh on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="mailto:adeetee2012@gmail.com" aria-label="Email Aditi Singh"><i class="fa-solid fa-envelope"></i></a>
+              <a href="community" aria-label="View SayHeyShubh Community"><i class="fa-solid fa-users"></i></a>
+            </div>
           </div>
         </div>
       </div>
