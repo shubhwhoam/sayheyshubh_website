@@ -8,14 +8,27 @@
     gtag('js', new Date());
     gtag('config', 'G-01VF0W2CD1');
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985"
-     crossorigin="anonymous"></script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BSc Microbiology First Semester Notes | SayHeyShubh</title>
-  <meta name="description" content="BSc Microbiology First Semester notes for Delhi University (DU) — covering Introduction to the Microbial World, Basic Bacteriology, and Principles of Biochemistry-I." />
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>BSc Microbiology 1st Semester Notes PDF | Delhi University (DU) – SayHeyShubh</title>
+  <meta name="description" content="Download detailed BSc Microbiology First Semester notes for Delhi University (DU). Covers Introduction to the Microbial World, Basic Bacteriology, and Principles of Biochemistry-I with PYQs and practical files." />
+  <meta name="keywords" content="bsc microbiology 1st semester notes pdf, du microbiology notes, basic bacteriology notes, microbiology notes bsc 1st year, biochemistry notes, delhi university exam prep, bsc microbiology semester 1 syllabus">
+
+  <meta property="og:title" content="BSc Microbiology 1st Semester Notes PDF | DU" />
+  <meta property="og:description" content="Download unit-wise notes, PYQs, Most important questions & Complete practical files for BSc Microbiology Honours Semester 1 – Delhi University." />
+  <meta property="og:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png" />
+  <meta property="og:url" content="https://sayheyshubh.netlify.app/microbiology-first-semester" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
   <link rel="canonical" href="https://sayheyshubh.netlify.app/microbiology-first-semester">
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,84 +44,314 @@
 
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    html { scroll-behavior: smooth; }
-    body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; overflow-x: hidden; }
-    main { flex: 1; width: 100%; max-width: 1000px; margin: 0 auto; padding: 2rem; }
-    footer { width: 100%; margin-top: auto; }
-
-    .seo-header {
-      text-align: center;
-      margin: 1.5rem auto 2.5rem auto;
-      padding: 3rem 2rem;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      border-radius: 20px;
+    /* --- MODERN ED-TECH STYLING & MARGIN FIXES --- */
+    *, *::before, *::after {
+      box-sizing: border-box; 
     }
-    .seo-header h1 { font-size: 2.2rem; color: #2d3748; margin-bottom: 1rem; }
-    .seo-header p { color: #4a5568; max-width: 700px; margin: 0 auto; line-height: 1.7; }
 
-    .syllabus-card {
-      background: white;
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: #fcfcfd;
+      font-family: 'Inter', sans-serif;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden; 
+    }
+
+    main { flex: 1; width: 100%; }
+    footer { width: 100%; margin-top: auto; }
+    
+    .microbiology-container { 
+      width: 100%;
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 0 1.5rem 4rem 1.5rem; 
+      position: relative; 
+    }
+
+    /* Breadcrumbs */
+    .visual-breadcrumb {
+      padding: 3.5rem 0 0 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
       margin-bottom: 2rem;
     }
-    .syllabus-card h3 { color: #0369a1; font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; }
-    .syllabus-text-list div {
-      border-left: 4px solid #6366f1;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.8rem;
-      background: #f8fafc;
-      border-radius: 0 8px 8px 0;
+    .visual-breadcrumb a { color: #6366f1; text-decoration: none; transition: color 0.2s ease; }
+    .visual-breadcrumb a:hover { color: #4f46e5; text-decoration: underline; }
+    .visual-breadcrumb span { margin: 0 0.4rem; color: #cbd5e1; }
+
+    /* SEO-Friendly Header UI */
+    .seo-header {
+      text-align: center;
+      margin: 0 0 3rem 0;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e2e8f0;
+    }
+    
+    .seo-header h1 {
+      font-size: 2.5rem;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    
+    .seo-header p {
+      font-size: 1.15rem;
+      color: #475569;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Syllabus Card */
+    .syllabus-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      margin-bottom: 3rem;
+      border: 1px solid #e2e8f0;
+      border-top: 5px solid #0ea5e9;
+    }
+    
+    .syllabus-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .syllabus-header-row h3 {
+      color: #0f172a;
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .syllabus-download-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+      transition: all 0.3s ease;
+    }
+    .syllabus-download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .syllabus-text-list {
       color: #334155;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .syllabus-text-list div {
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      border-left: 4px solid #e2e8f0;
+    }
+
+    /* Subject Dropdowns (Accordion Style) */
+    .subject-dropdown {
+      margin-bottom: 2rem;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+
+    .subject-dropdown:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .subject-header {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1.5rem 2rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .subject-color-2 .subject-header { background: linear-gradient(135deg, #10b981, #059669); }
+    .subject-color-3 .subject-header { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+    .unit-item {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.3s ease;
+    }
+    .unit-item:last-child { border-bottom: none; }
+    .unit-item:hover { background: #f8fafc; }
+
+    .unit-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .unit-title {
+      font-weight: 700;
+      color: #1e293b;
+      font-size: 1.15rem;
+      margin: 0;
+      flex: 1;
+    }
+
+    .unit-desc {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-top: 0.5rem;
       line-height: 1.6;
     }
 
-    .paper-card {
-      background: white;
-      border-radius: 15px;
-      padding: 1.8rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border-left: 6px solid #10b981;
-    }
-    .paper-card h4 { color: #1a202c; font-size: 1.15rem; margin: 0 0 0.6rem; }
-    .coming-soon-note {
-      display: inline-block;
-      background: #f0fdf4;
-      color: #059669;
-      border: 1px dashed #059669;
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-top: 0.5rem;
+    /* Action Buttons inside Units */
+    .unit-buttons {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
     }
 
-    .bottom-nav-links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
-    .nav-pill {
-      padding: 0.7rem 1.4rem;
+    .ques-btn, .watch-btn, .download-btn {
+      padding: 0.6rem 1.2rem;
       border-radius: 50px;
-      background: #f1f5f9;
-      color: #334155;
-      text-decoration: none;
-      font-weight: 600;
       font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: none;
+      cursor: pointer;
     }
-    .nav-pill.primary { background: #6366f1; color: white; }
+
+    .ques-btn { background: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; }
+    .ques-btn:hover { background: #e0e7ff; }
+
+    .watch-btn { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+    .watch-btn:hover { background: #fee2e2; }
+
+    .download-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .download-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+    
+    .locked-btn {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      cursor: not-allowed;
+    }
+    .locked-btn:hover { transform: none; box-shadow: none; }
+
+    .coming-soon {
+      background: #fef3c7; color: #b45309; padding: 0.6rem 1.2rem; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 700; border: 1px solid #fde68a;
+    }
+
+    /* Bottom Navigation Pills */
+    .bottom-nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    
+    .nav-pill {
+      background: #f1f5f9; color: #475569; padding: 1rem 2rem; border-radius: 50px;
+      text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s ease;
+    }
+    .nav-pill:hover { background: #e2e8f0; color: #1e293b; transform: translateY(-2px); }
+    .nav-pill.primary { background: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; }
+    .nav-pill.primary:hover { background: #e0e7ff; }
+
+    /* User Profile Styles */
+    .user-profile {
+      position: absolute; top: 1.5rem; right: 1.5rem; background: white; padding: 0.6rem 1rem;
+      border-radius: 50px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0;
+      display: none; align-items: center; gap: 0.8rem; font-size: 0.9rem; z-index: 100;
+    }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #4f46e5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 700; color: #1e293b; }
+    .user-contact { font-size: 0.75rem; color: #64748b; }
+    .logout-btn { background: #fef2f2; color: #dc2626; border: none; padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+    .logout-btn:hover { background: #fee2e2; }
+
+    @media (max-width: 768px) {
+      .microbiology-container { padding: 0 1rem 2rem 1rem; }
+      .seo-header { padding: 3rem 1.5rem; margin-top: 0; }
+      .seo-header h1 { font-size: 2rem; }
+      .user-profile { position: relative; top: 0; right: 0; width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; justify-content: space-between; }
+      .unit-header-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .unit-buttons { width: 100%; }
+      .ques-btn, .watch-btn, .download-btn { flex: 1; justify-content: center; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .ques-btn, .watch-btn, .download-btn { font-size: 0.8rem; padding: 0.6rem 0.8rem; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
+  
   <header>
     <div class="container nav-flex">
       <div class="logo-section">
         <a href="index" class="logo-link">
-          <div class="logo"><img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh Microbiology Notes"></div>
+          <div class="logo">
+            <img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh Microbiology Notes">
+          </div>
         </a>
       </div>
-      <div class="nav-toggle"><span></span><span></span><span></span></div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <nav>
         <ul>
           <li><a href="notes" class="active">Notes</a></li>
@@ -121,42 +364,285 @@
     </div>
   </header>
 
-  <main>
-    <div class="seo-header">
-      <h1>📖 BSc Microbiology First Semester Notes (DU)</h1>
-      <p>Notes for the first semester of <strong>BSc Microbiology (Hons.)</strong> at Delhi University, covering Introduction to the Microbial World, Basic Bacteriology, and Principles of Biochemistry-I.</p>
+  <main class="microbiology-container">
+    
+    <!-- User Profile -->
+    <div id="userProfile" class="user-profile">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <div class="user-avatar" id="userAvatar">S</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">User</div>
+          <div class="user-contact" id="userContact">***</div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
 
-    <div class="syllabus-card">
-      <h3>📋 BSc Microbiology (Hons.) Semester 1 Syllabus Overview</h3>
-      <p style="color:#475569; margin-bottom:1rem;">The first semester introduces the foundations of microbiology and biochemistry. The core papers are:</p>
-      <div class="syllabus-text-list">
-        <div><strong>🔬 (MICROB-DSC101) Introduction to Microbial World:</strong> History and scope of microbiology, and an overview of the microbial world.</div>
-        <div><strong>🦠 (MICROB-DSC102) Basic Bacteriology:</strong> Bacterial structure, growth, and fundamental bacteriology concepts.</div>
-        <div><strong>🧬 (MICROB-DSC103) Principles of Biochemistry-I:</strong> Foundational biochemistry concepts for microbiology students.</div>
+    <!-- Visual Breadcrumb -->
+    <nav class="visual-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span>/</span> <a href="notes">Notes</a> <span>/</span> <a href="microbiology">Microbiology</a> <span>/</span> Sem 1
+    </nav>
+
+    <!-- Header -->
+    <div class="seo-header">
+      <h1>📖 BSc Microbiology 1st Semester Notes PDF</h1>
+      <p>
+        Master your BSc Microbiology Honours first semester at Delhi University (DU). Download complete unit-wise theory PDFs, fully solved <strong>previous year questions (PYQs)</strong>, and detailed practical files.
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <a href="microbiology-first-year" style="color: #6366f1; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;"><i class="fas fa-arrow-left"></i> Back to First Year</a>
       </div>
     </div>
 
-    <div class="paper-card">
-      <h4>🔬 (MICROB-DSC101) Introduction to Microbial World</h4>
-      <p style="color:#64748b; margin:0;">Unit-wise notes for this paper are being prepared.</p>
-      <span class="coming-soon-note">🚧 Detailed unit notes coming soon</span>
+    <!-- Syllabus Overview -->
+    <div class="syllabus-card">
+      <div class="syllabus-header-row">
+        <h3>📋 BSc Microbiology Semester 1 Syllabus Overview</h3>
+        <a href="https://drive.google.com/file/d/1t3RCWcHj_3v70gFUWUlSafGCs_nQXcR9/view?usp=sharing" target="_blank" class="syllabus-download-btn">
+          <i class="fas fa-file-pdf"></i> Official DU Syllabus
+        </a>
+      </div>
+      <p style="color: #475569; margin-top: 1rem; line-height: 1.6; font-size: 1.05rem;">
+        The first semester introduces the foundations of microbiology and biochemistry. The core papers include:
+      </p>
+      <div class="syllabus-text-list">
+        <div style="border-left-color: #6366f1;"><strong>🔬 (MICROB-DSC101) The Evolution of Microbiology as a Discipline of Science, Classification Systems, Acellular microorganisms and protista, Fungi and The scope of microbiology: an overview.</div>
+        <div style="border-left-color: #10b981;"><strong>🦠 (MICROB-DSC102) Basic Bacteriology:</strong> Structure and organization of the bacterial cell wall and appendages, Cytoplasmic organelles, Bacteriological techniques and Bacterial growth and reproduction. </div>
+        <div style="border-left-color: #8b5cf6;"><strong>🧬 (MICROB-DSC103) Principles of Biochemistry-I:</strong> Bioenergetics and thermodynamics, Carbohydrates, Storage Lipids and Structural Lipids</div>
+      </div>
     </div>
 
-    <div class="paper-card">
-      <h4>🦠 (MICROB-DSC102) Basic Bacteriology</h4>
-      <p style="color:#64748b; margin:0;">Unit-wise notes for this paper are being prepared.</p>
-      <span class="coming-soon-note">🚧 Detailed unit notes coming soon</span>
+    <div class="tap-hint" style="margin-bottom: 2rem; text-align: center; color: #64748b; font-weight: 600;">
+      👇 Select a unit below to access notes, cheat sheets, and previous years question banks.
+    </div>
+    
+    <div style="display: grid; gap: 1.5rem;">
+
+      <!-- DSC101 -->
+      <div class="subject-dropdown subject-color-1">
+        <div class="subject-header">
+          <span>(MICROB-DSC101): Introduction to the Microbial World</span>
+        </div>
+        <div class="units-content" id="intro-microbial-world-notes">
+          
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 1: The Evolution of Microbiology as a Discipline of Science</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 2: Classification Systems</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 3: Acellular microorganisms and protista</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 4: Fungi</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 5: The scope of microbiology: an overview</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">📋 <b>Complete Practical File</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div> 
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DSC102 -->
+      <div class="subject-dropdown subject-color-2">
+        <div class="subject-header">
+          <span>(MICROB-DSC102): Basic Bacteriology</span>
+        </div>
+        <div class="units-content">
+          
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 1: Structure and organization of the bacterial cell wall and appendages</h3>
+              <div class="unit-buttons">
+                <button class="download-btn locked-btn"><i class="fas fa-lock"></i> Locked</button>
+              </div>
+            </div>
+            <p class="unit-desc"><strong>Topics Covered:</strong> Shapes, sizes and arrangements of bacterial cells. Cell wall and cell membrane organization: Structure of cell wall in Eubacteria and Archaea, difference between cell wall structure and composition of Gram positive versus Gram-negative bacterial, structure of outer membrane, difference between eubacterial and archaeal cell membranes. Bacteria lacking cell walls, action of antibiotics and enzymes on bacterial cell wall, formation of protoplasts, spheroplasts and L forms. Cell envelope layers outside the cell wall: capsule, slime layer, glycocalyx, S-layers. External appendages: flagella, fimbriae and pili.</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 2: Cytoplasmic organelles</h3>
+              <div class="unit-buttons">
+                <button class="download-btn locked-btn"><i class="fas fa-lock"></i> Locked</button>
+              </div>
+            </div>
+            <p class="unit-desc"><strong>Topics Covered:</strong> Ribosomes, mesosomes, nucleoid, chromosome and plasmids, intracytoplasmic membranes, inclusions (storage inclusions: PHB, polyphosphate granules, sulfur globules, cyanophycin granules; micro-compartments: Carboxysome; other inclusions: magnetosome, gas vacuole).</p>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 3: Bacteriological techniques</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 4: Bacterial growth and reproduction</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b></span>
+              <div class="unit-buttons"> 
+                <a href="https://drive.google.com/file/d/12WzB0NqGiToN8zk5_E-94gJVIzhgYKU7/view?usp=sharing" target="_blank" class="ques-btn"><i class="fas fa-download"></i> Download</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">📋 <b>Complete Practical File</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div> 
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DSC103 -->
+      <div class="subject-dropdown subject-color-3">
+        <div class="subject-header">
+          <span>(MICROB-DSC103): Principles of Biochemistry-I</span>
+        </div>
+        <div class="units-content">
+          
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 1: Bioenergetics and thermodynamics</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 2: Carbohydrates</h3>
+              <div class="unit-buttons">
+              <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 3: Storage Lipids</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <h3 class="unit-title">Unit 4: Structural Lipids</h3>
+              <div class="unit-buttons">
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">🧠 <b>Cheat sheet</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">📝 <b>Previous year questions</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-item">
+            <div class="unit-header-row">
+              <span class="unit-title">📋 <b>Complete Practical File</b></span>
+              <div class="unit-buttons"> 
+                <span class="coming-soon">Coming Soon</span>
+              </div> 
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
-    <div class="paper-card">
-      <h4>🧬 (MICROB-DSC103) Principles of Biochemistry-I</h4>
-      <p style="color:#64748b; margin:0;">Unit-wise notes for this paper are being prepared.</p>
-      <span class="coming-soon-note">🚧 Detailed unit notes coming soon</span>
-    </div>
-
-    <div style="margin-bottom: 2rem; text-align: center; padding: 2.5rem 2rem; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-      <h2 style="font-size: 1.4rem; color: #2d3748; margin-bottom: 1.5rem;">🔍 Explore Other Microbiology Notes</h2>
+    <div style="margin-bottom: 2rem; margin-top: 3rem; text-align: center; padding: 2.5rem 2rem; background: white; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+      <h2 style="font-size: 1.5rem; color: #0f172a; margin-bottom: 1.5rem; font-weight: 800;">🔍 Explore Other Microbiology Notes</h2>
       <div class="bottom-nav-links">
         <a href="microbiology-second-semester" class="nav-pill">BSc Microbiology 2nd Sem</a>
         <a href="microbiology-first-year" class="nav-pill">← Back to First Year</a>
