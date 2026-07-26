@@ -436,6 +436,75 @@
         border-color: #cbd5e1;
       }
 
+      /* Semester Quick Links (scoped classes so they don't clash with .stat-item above) */
+      .sem-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .sem-card {
+        background: white;
+        padding: 2.5rem 1.5rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .sem-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(99, 102, 241, 0.1);
+        border-color: #c7d2fe;
+      }
+
+      .sem-card.disabled {
+        cursor: default;
+        opacity: 0.8;
+        background: #f8fafc;
+      }
+
+      .sem-card.disabled:hover {
+        transform: none;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        border-color: #e2e8f0;
+      }
+
+      .sem-tag-soon {
+        background: #e2e8f0;
+        color: #475569;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        text-transform: uppercase;
+        margin-bottom: 0.8rem;
+      }
+
+      .sem-icon {
+        font-size: 2.5rem;
+        color: #6366f1;
+        margin-bottom: 1rem;
+      }
+
+      .sem-label {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+      }
+
+      .sem-desc {
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
       /* FAQ Section Styles */
       .faq-section {
         background: white;
@@ -1369,6 +1438,35 @@
         <p style="font-weight: 700; color: #0f172a; margin-top: 1rem; font-size: 1.1rem;">Bas Mauj Masti Nahi Rukni Chahiye!!</p>
       </div>
 
+      <!-- SEMESTER QUICK LINKS FOR SEO & NAVIGATION -->
+      <div class="content-section">
+        <h2 class="section-title">Select Your Semester</h2>
+        <div class="sem-grid">
+          <div class="sem-card" onclick="window.location.href='microbiology-first-semester'">
+            <i class="fas fa-microscope sem-icon"></i>
+            <div class="sem-label">1st Semester Notes</div>
+            <div class="sem-desc">Introduction to the Microbial World, Basic Bacteriology & Biochemistry-I fundamentals.</div>
+          </div>
+          <div class="sem-card" onclick="window.location.href='microbiology-second-semester'">
+            <i class="fas fa-bacterium sem-icon"></i>
+            <div class="sem-label">2nd Semester Notes</div>
+            <div class="sem-desc">Bacterial Diversity, Biochemistry-II, and Food & Dairy Microbiology, exam-ready.</div>
+          </div>
+          <div class="sem-card disabled">
+            <i class="fas fa-virus sem-icon" style="color:#94a3b8;"></i>
+            <div class="sem-tag-soon">Coming Soon</div>
+            <div class="sem-label">3rd Semester Notes</div>
+            <div class="sem-desc" style="color:#94a3b8;">Currently being prepared for upload.</div>
+          </div>
+          <div class="sem-card disabled">
+            <i class="fas fa-dna sem-icon" style="color:#94a3b8;"></i>
+            <div class="sem-tag-soon">Coming Soon</div>
+            <div class="sem-label">4th Semester Notes</div>
+            <div class="sem-desc" style="color:#94a3b8;">Will be available once ready.</div>
+          </div>
+        </div>
+      </div>
+
       <!-- Features Section -->
       <div class="content-section">
         <h2 class="section-title">Why Choose Our DU Microbiology Study Material?</h2>
@@ -1706,6 +1804,7 @@
       let allLoadedComments = [];
       let currentUserAuth = null;
       let activeReplyForm = null;
+      let pageRatingSummary = { average: null, count: 0 }; // Populated from API, used to embed aggregateRating in Review microdata
 
       // Detect API endpoints based on environment
       function getApiEndpoints() {
@@ -2076,6 +2175,7 @@
             const freshData = await freshResponse.json();
             if (freshData.success && freshData.total > totalComments) {
               console.log("Newer comments found — refreshing from live data.");
+              if (freshData.ratingSummary) pageRatingSummary = freshData.ratingSummary;
               currentOffset = freshData.comments.length;
               totalComments = freshData.total;
               allLoadedComments = freshData.comments;
@@ -2100,6 +2200,7 @@
 
           if (data.success) {
             totalComments = data.total;
+            if (data.ratingSummary) pageRatingSummary = data.ratingSummary;
 
             // If it's a "Load More" action, append. Otherwise, replace.
             if (currentOffset > 0) {
@@ -2143,6 +2244,7 @@
           const data = await response.json();
 
           if (data.success && data.comments.length > 0) {
+            if (data.ratingSummary) pageRatingSummary = data.ratingSummary;
             allLoadedComments = [...allLoadedComments, ...data.comments];
             currentOffset += data.comments.length;
 
@@ -2241,11 +2343,22 @@
 
             const hasRating = comment.rating && comment.rating >= 1 && comment.rating <= 5;
             const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
+            // Uses span + meta tags (instead of a hidden div) so Google reliably reads the properties,
+            // and explicitly declares itemReviewed with its own aggregateRating to satisfy Review snippet requirements.
+            const aggregateRatingHtml = (pageRatingSummary && pageRatingSummary.average && pageRatingSummary.count > 0) ? `
+              <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                <meta itemprop="ratingValue" content="${pageRatingSummary.average}">
+                <meta itemprop="reviewCount" content="${pageRatingSummary.count}">
+                <meta itemprop="bestRating" content="5">
+              </span>` : '';
             const reviewRatingHtml = hasRating ? `
-              <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+              <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
                 <meta itemprop="ratingValue" content="${comment.rating}">
                 <meta itemprop="bestRating" content="5">
-              </div>
+              </span>
+              <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
+                <meta itemprop="name" content="BSc Microbiology Honours Notes">${aggregateRatingHtml}
+              </span>
             ` : '';
             const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
 

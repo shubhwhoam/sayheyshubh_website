@@ -29,7 +29,6 @@
   <meta name="twitter:title" content="BSc Botany Hons Notes PDF (DU) | SayHeyShubh">
   <meta name="twitter:description" content="Download BSc Botany Hons notes for Delhi University, prepared by Raina Malik.">
   <meta name="twitter:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
-  <meta name="description" content="Download BSc Botany Hons notes for Delhi University. Semester-wise PDF notes, previous year question papers, and exam resources." />
 
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
@@ -75,6 +74,26 @@
         "@type": "Question",
         "name": "Is BSc Botany content available for all three years?",
         "acceptedAnswer": { "@type": "Answer", "text": "We are actively building out the Botany section year by year. Check the Botany notes page regularly, as new semester-wise notes are added as they are finished." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I find the latest DU Botany (Hons) syllabus?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The latest FYUP/NEP syllabus can be found on the official Delhi University website under the academic section, but we also provide a direct PDF download link inside our semester-wise study material sections for your convenience." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are practical files really that important in Botany?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, practicals carry significant weightage in DU. Well-maintained files with clear, labeled diagrams and proper spotted specimen descriptions are crucial for scoring high internal and practical marks." }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I study for diagram-heavy papers like Plant Anatomy?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Practice drawing clear, well-labeled diagrams regularly. In botany exams, a good diagram can often explain the concept better than paragraphs of text and will fetch you maximum marks. Use our Diagram Bank for reference." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the most scoring papers in BSc Botany 1st year?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Papers like Phycology and Microbiology are highly scoring if you memorize the key characteristics, economic importance, and life cycles. Make sure to use our cheat sheets for quick revisions." }
       }
     ]
   }
@@ -146,25 +165,30 @@
 
     /* Content sections */
     .content-section { margin-bottom: 5rem; }
-    .section-title { font-size: 2.2rem; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 1.8rem; }
+    .section-title { font-size: 2.2rem; font-weight: 800; color: #0f172a; text-align: center; margin-bottom: 1.5rem; }
     .section-subtitle { text-align: center; color: #64748b; font-size: 1.1rem; max-width: 750px; margin: 0 auto 2.5rem auto; line-height: 1.6; }
 
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
     .stat-item {
-      background: white; padding: 2rem 1.5rem; border-radius: 16px; text-align: center;
+      background: white; padding: 2.5rem 1.5rem; border-radius: 16px; 
       box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; transition: all 0.3s ease;
+      display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: flex-start;
     }
     .stat-item:hover { transform: translateY(-6px); box-shadow: 0 15px 30px rgba(16, 185, 129, 0.1); border-color: #a7f3d0; }
-    .stat-icon { font-size: 2.2rem; color: #10b981; margin-bottom: 1rem; display: block; }
-    .stat-number { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .stat-label { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 0.6rem; }
-    .stat-desc { color: #64748b; font-size: 0.95rem; line-height: 1.6; }
+    .stat-icon { font-size: 2.5rem; color: #10b981; margin-bottom: 1.2rem; }
+    .stat-label { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 2rem; }
+    .stat-desc { color: #64748b; font-size: 0.95rem; line-height: 1.6; margin: 0; }
 
     /* Syllabus roadmap */
     .seo-roadmap-section { background: white; border-radius: 20px; padding: 3.5rem 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; }
     .syllabus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
-    .syllabus-box { background: #f8fafc; padding: 2rem; border-radius: 16px; border-left: 4px solid #10b981; }
-    .syllabus-box h3 { font-size: 1.3rem; color: #1e293b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .syllabus-box { 
+      background: white; padding: 2.5rem 2rem; border-radius: 16px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;
+      border-top: 5px solid #10b981; transition: transform 0.3s ease;
+    }
+    .syllabus-box:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(16,185,129,0.1); }
+    .syllabus-box h3 { font-size: 1.3rem; color: #1e293b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
     .syllabus-box p { color: #475569; line-height: 1.7; font-size: 0.98rem; margin: 0; }
 
     /* Author credit card */
@@ -219,6 +243,160 @@
     .auth-btn { width: 100%; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 12px; background: white; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; font-weight: 600; font-size: 1rem; transition: all 0.2s ease; }
     .auth-btn:hover { border-color: #cbd5e1; background: #f8fafc; }
 
+    /* Comments Section Styles */
+    .comments-section {
+      background: #ffffff;
+      padding: 4rem 2rem;
+      border-radius: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      margin: 4rem 0;
+    }
+
+    .comment-form-container {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .comment-form-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .comment-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; position: relative; }
+    .form-group label { font-weight: 600; color: #475569; font-size: 0.9rem; }
+    .form-group input,
+    .form-group textarea {
+      padding: 1rem; border: 2px solid #e2e8f0; border-radius: 10px;
+      font-size: 1rem; font-family: inherit; transition: all 0.3s ease; background: white;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { outline: none; border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    /* Star Rating Picker */
+    .star-picker { display: flex; gap: 0.3rem; font-size: 2rem; cursor: pointer; }
+    .star-picker .star { color: #cbd5e1; transition: color 0.15s ease, transform 0.1s ease; }
+    .star-picker .star.filled { color: #f59e0b; }
+    .star-picker .star:hover { transform: scale(1.15); }
+
+    /* Star Rating Display (read-only) */
+    .star-display { color: #f59e0b; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 0.5rem; }
+    .star-display .empty { color: #e2e8f0; }
+
+    .char-count { position: absolute; bottom: -1.5rem; right: 0; font-size: 0.8rem; color: #94a3b8; }
+
+    .submit-comment-btn {
+      padding: 1rem 2rem; background: linear-gradient(45deg, #10b981, #059669); color: white;
+      border: none; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); margin-top: 1rem;
+    }
+    .submit-comment-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
+    .submit-comment-btn:disabled { background: #cbd5e1; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .auth-required-message {
+      text-align: center; padding: 2rem; background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 1px solid #fde68a; border-radius: 16px; margin-bottom: 1.5rem;
+    }
+    .auth-required-message button {
+      margin-top: 1rem; padding: 0.8rem 2rem; background: linear-gradient(45deg, #10b981, #059669); color: white;
+      border: none; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+    }
+    .auth-required-message button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
+
+    .comments-display { max-width: 900px; margin: 0 auto; }
+    .comments-title { font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 2rem; text-align: center; }
+    .comments-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .comment-item {
+      background: white; padding: 1.5rem; border-radius: 16px; border: 1px solid #e2e8f0;
+      border-left: 4px solid #10b981; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); transition: all 0.3s ease;
+    }
+    .comment-item:hover { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); transform: translateX(4px); border-color: #cbd5e1; }
+
+    .comment-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; gap: 1rem; }
+    .comment-author-info { flex: 1; }
+    .comment-author { font-weight: 700; color: #0f172a; font-size: 1.05rem; display: block; }
+    .comment-email { font-size: 0.85rem; color: #64748b; display: block; margin-top: 0.2rem; }
+    .comment-date { font-size: 0.85rem; color: #94a3b8; white-space: nowrap; }
+    .comment-text { color: #334155; line-height: 1.7; font-size: 1rem; margin: 0 0 1rem 0; }
+    .comment-actions { display: flex; gap: 1rem; margin-top: 0.5rem; }
+
+    .reply-btn {
+      background: #f1f5f9; border: none; color: #059669; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; padding: 0.5rem 1rem; border-radius: 50px; transition: all 0.3s ease;
+    }
+    .reply-btn:hover { background: #dcfce7; color: #166534; }
+
+    .replies-container {
+      margin-top: 1.2rem; padding-left: 2rem; border-left: 2px solid #e2e8f0;
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .replies-container.show { max-height: 9999px; }
+
+    .view-replies-btn {
+      background: none; border: none; color: #10b981; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; padding: 0.5rem 1rem; border-radius: 50px; transition: all 0.3s ease;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .view-replies-btn:hover { background: #f8fafc; }
+    .view-replies-btn .arrow { transition: transform 0.3s ease; display: inline-block; }
+    .view-replies-btn.active .arrow { transform: rotate(180deg); }
+
+    .reply-item { background: #f8fafc; padding: 1.2rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid #e2e8f0; }
+
+    .reply-form { margin-top: 1rem; padding: 1.5rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .reply-form textarea {
+      width: 100%; padding: 1rem; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 1rem;
+      font-family: inherit; resize: vertical; min-height: 80px; margin-bottom: 1rem; box-sizing: border-box;
+    }
+    .reply-form textarea:focus { outline: none; border-color: #10b981; }
+    .reply-form-actions { display: flex; gap: 1rem; }
+    .reply-submit-btn, .reply-cancel-btn {
+      padding: 0.6rem 1.5rem; border: none; border-radius: 50px; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .reply-submit-btn { background: linear-gradient(45deg, #10b981, #059669); color: white; }
+    .reply-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+    .reply-cancel-btn { background: white; color: #475569; border: 1px solid #cbd5e1; }
+    .reply-cancel-btn:hover { background: #f1f5f9; color: #0f172a; }
+
+    .view-more-btn {
+      display: block; margin: 3rem auto 0; padding: 1rem 3rem; background: white; color: #10b981;
+      border: 2px solid #10b981; border-radius: 50px; font-size: 1.1rem; font-weight: 700;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .view-more-btn:hover { background: #10b981; color: white; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
+
+    .success-message {
+      background: #dcfce7; color: #166534; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;
+      text-align: center; font-weight: 600; border: 1px solid #bbf7d0;
+    }
+    .error-message {
+      background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;
+      text-align: center; font-weight: 600; border: 1px solid #fecaca;
+    }
+    
+    .bottom-nav-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .nav-pill { background: #f1f5f9; color: #475569; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s ease; }
+    .nav-pill:hover { background: #e2e8f0; color: #1e293b; transform: translateY(-2px); }
+    .nav-pill.primary { background: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; }
+    .nav-pill.primary:hover { background: #e0e7ff; }
+
+    @media (max-width: 768px) {
+      .comments-section { padding: 2.5rem 1.5rem; }
+      .comment-form-container { padding: 1.5rem; }
+    }
+
     @media (max-width: 768px) {
       .channel-header { padding: 2.5rem 1.5rem; }
       .channel-name { font-size: 2.1rem; }
@@ -227,6 +405,8 @@
       .author-card { flex-direction: column; text-align: center; }
       .author-links { justify-content: center; }
       .user-profile { position: relative; top: 0; right: 0; width: 100%; max-width: 100%; margin-top: 1rem; margin-bottom: 1.5rem; justify-content: space-between; }
+      .action-buttons { flex-direction: column; align-items: center; }
+      .notes-btn, .youtube-btn { width: 100%; justify-content: center; box-sizing: border-box; }
     }
   </style>
 </head>
@@ -305,7 +485,7 @@
         <div class="stat-item">
           <i class="fas fa-leaf stat-icon"></i>
           <div class="stat-label">Diagram Bank</div>
-          <div class="stat-desc">Clean, exam-ready plant diagrams — the highest-scoring part of any Botany answer.</div>
+          <div class="stat-desc">Clean, exam-ready plant diagrams, which are the highest-scoring part of any Botany answer.</div>
         </div>
       </div>
     </div>
@@ -322,11 +502,11 @@
         </div>
         <div class="syllabus-box">
           <h3><i class="fas fa-dna" style="color:#10b981;"></i> 2nd Year Core Papers</h3>
-          <p>The second year shifts to <strong>Plant Anatomy</strong>, <strong>Plant Systematics</strong>, <strong>Cell Biology</strong>, and <strong>Plant Physiology & Metabolism</strong> — the highest-weightage and most diagram-heavy papers of the entire degree.</p>
+          <p>The second year shifts to <strong>Plant Anatomy</strong>, <strong>Plant Systematics</strong>, <strong>Cell Biology</strong>, and <strong>Plant Physiology & Metabolism</strong>, which are the highest-weightage and most diagram-heavy papers of the entire degree.</p>
         </div>
         <div class="syllabus-box">
           <h3><i class="fas fa-microscope" style="color:#10b981;"></i> 3rd Year Advanced Applications</h3>
-          <p>Final year studies turn applied, covering <strong>Plant Ecology</strong>, <strong>Genetics & Plant Breeding</strong>, <strong>Economic Botany & Biotechnology</strong>, and elective papers — designed to help you translate theory into strong exam answers.</p>
+          <p>Final year studies turn applied, covering <strong>Plant Ecology</strong>, <strong>Genetics & Plant Breeding</strong>, <strong>Economic Botany & Biotechnology</strong>, and elective papers, designed to help you translate theory into strong exam answers.</p>
         </div>
       </div>
     </div>
@@ -350,6 +530,28 @@
       </div>
     </div>
 
+    <!-- Comments/Feedback Section -->
+    <div class="content-section comments-section" id="comments-section">
+      <h2 class="section-title">💬 Leave Your Review & Feedback</h2>
+      <p style="text-align: center; color: #64748b; margin-bottom: 3rem; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+        These reviews are shared by Delhi University students who used the notes and study material from this page. Share your experience too and help other students in their exam preparation journey!
+      </p>
+
+      <!-- Comment Form -->
+      <div class="comment-form-container" id="commentFormContainer">
+        <!-- Will be populated dynamically based on auth state -->
+      </div>
+
+      <!-- Comments Display -->
+      <div class="comments-display" id="commentsDisplay">
+        <h3 class="comments-title" id="commentsTitle">Loading comments...</h3>
+        <div class="comments-list" id="commentsList">
+          <!-- Comments will be loaded here -->
+        </div>
+        <button class="view-more-btn" id="viewMoreBtn" style="display: none">View More Comments</button>
+      </div>
+    </div>
+
     <!-- FAQ Section -->
     <div class="faq-section">
       <h2 class="section-title">Frequently Asked Questions</h2>
@@ -359,7 +561,7 @@
             <span>Who prepares the BSc Botany notes on SayHeyShubh?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer"><p>The Botany notes are prepared and curated by Raina Malik, the Botany Lead at SayHeyShubh, along with contributions from fellow Delhi University Botany Hons students.</p></div>
+          <div class="faq-answer"><p>The Botany notes are prepared and curated by Raina Malik, the Botany Lead at SayHeyShubh.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFAQ(this)">
@@ -375,6 +577,44 @@
           </button>
           <div class="faq-answer"><p>We are actively building out the Botany section year by year. Check back on this page regularly, as new semester-wise notes are added as they're finished.</p></div>
         </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Where can I find the latest DU Botany (Hons) syllabus?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>The latest FYUP/NEP syllabus can be found on the direct PDF download link inside our semester-wise study material sections for your convenience.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>Are practical files really that important in Botany?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Yes, practicals carry significant weightage in DU. Well-maintained files with clear, labeled diagrams and proper spotted specimen descriptions are crucial for scoring high internal and practical marks.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>How should I study for diagram-heavy papers like Plant Anatomy?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Practice drawing clear, well-labeled diagrams regularly. In botany exams, a good diagram can often explain the concept better than paragraphs of text and will fetch you maximum marks. Use our Diagram Bank for reference.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            <span>What are the most scoring papers in BSc Botany 1st year?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Papers like Phycology and Microbiology are highly scoring if you memorize the key characteristics, economic importance, and life cycles. Make sure to use our cheat sheets for quick revisions.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explore More Section -->
+    <div style="margin-bottom: 2rem; margin-top: 3rem; text-align: center; padding: 2.5rem 2rem; background: white; border-radius: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+      <h2 style="font-size: 1.5rem; color: #0f172a; margin-bottom: 1.5rem; font-weight: 800;">🌿 Explore Other DU Notes</h2>
+      <div class="bottom-nav-links">
+        <a href="zoology" class="nav-pill">BSc Zoology Notes</a>
+        <a href="microbiology" class="nav-pill">BSc Microbiology Notes</a>
+        <a href="notes" class="nav-pill primary">View All Notes &rarr;</a>
       </div>
     </div>
 
@@ -395,10 +635,13 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 SayHeyShubh • Botany notes curated by Raina Malik</p>
+      <p>© 2026 SayHeyShubh | Botany notes curated by Raina Malik</p>
       <p><a href="privacy-policy">Privacy Policy</a></p>
     </div>
   </footer>
+
+  <a href="https://t.me/shubhiphilia" class="doubts-btn" id="doubts-btn">💬</a>
+  <div class="doubts-bubble" id="doubts-bubble">Got a question?</div>
 
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
@@ -420,6 +663,418 @@
     function showAuthPopup() { document.getElementById('authModal').classList.add('show'); }
     function hideAuthPopup() { document.getElementById('authModal').classList.remove('show'); }
 
+    // --- COMMENTS SYSTEM ---
+    let currentOffset = 0;
+    const commentsPerPage = 10;
+    let totalComments = 0;
+    let allLoadedComments = [];
+    let currentUserAuth = null;
+    let activeReplyForm = null;
+    let pageRatingSummary = { average: null, count: 0 };
+
+    function getApiEndpoints() {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname.includes('repl');
+      if (isLocal) {
+        return { postComment: '/api/comments', getComments: '/api/comments/botany' };
+      }
+      return { postComment: '/.netlify/functions/post-comment', getComments: '/.netlify/functions/get-comments' };
+    }
+
+    function maskEmail(email) {
+      if (!email || !email.includes('@')) return '***@***.com';
+      const [user, domain] = email.split('@');
+      if (user.length <= 2) return email;
+      return user.slice(0, 2) + '***@' + domain;
+    }
+
+    function renderStarsHtml(rating) {
+      if (!rating || rating < 1 || rating > 5) return '';
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        stars += i <= rating ? '★' : '<span class="empty">★</span>';
+      }
+      return `<div class="star-display" aria-label="${rating} out of 5 stars">${stars}</div>`;
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    async function renderCommentForm(isAuthenticated) {
+      const container = document.getElementById('commentFormContainer');
+      if (isAuthenticated) {
+        container.innerHTML = `
+          <h3 class="comment-form-title">Rate & Share Your Experience</h3>
+          <form id="commentForm" class="comment-form">
+            <div class="form-group">
+              <label>How would you rate these notes? *</label>
+              <div class="star-picker" id="starPicker" role="radiogroup" aria-label="Star rating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+              </div>
+              <input type="hidden" id="selectedRating" value="0">
+            </div>
+            <div class="form-group">
+              <label for="commentText">Want to add written feedback? (optional)</label>
+              <textarea id="commentText" name="comment" placeholder="Share your experience with our Botany study materials..." maxlength="1000"></textarea>
+              <span class="char-count" id="charCount">0/1000</span>
+            </div>
+            <button type="submit" class="submit-comment-btn" id="submitCommentBtn">Post Rating</button>
+          </form>
+        `;
+
+        const starPicker = document.getElementById('starPicker');
+        const selectedRatingInput = document.getElementById('selectedRating');
+        const stars = starPicker.querySelectorAll('.star');
+        stars.forEach(star => {
+          star.addEventListener('click', function () {
+            const value = parseInt(this.dataset.value, 10);
+            selectedRatingInput.value = value;
+            stars.forEach(s => s.classList.toggle('filled', parseInt(s.dataset.value, 10) <= value));
+          });
+        });
+
+        const commentTextarea = document.getElementById('commentText');
+        const charCount = document.getElementById('charCount');
+        if (commentTextarea && charCount) {
+          commentTextarea.addEventListener('input', function () {
+            const count = this.value.length;
+            charCount.textContent = `${count}/1000`;
+            charCount.style.color = count > 900 ? '#dc2626' : '#94a3b8';
+          });
+        }
+
+        const commentForm = document.getElementById('commentForm');
+        if (commentForm) commentForm.addEventListener('submit', handleCommentSubmit);
+      } else {
+        container.innerHTML = `
+          <div class="auth-required-message">
+            <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: #92400e; font-size: 1.1rem;">🔒 Please log in to share your feedback</p>
+            <p style="margin: 0 0 0.8rem 0; color: #b45309; font-size: 0.95rem;">Join our community and help other DU students!</p>
+            <button type="button" onclick="showAuthPopup()">Log In to Comment</button>
+          </div>
+        `;
+      }
+    }
+
+    async function handleCommentSubmit(e) {
+      e.preventDefault();
+      if (!currentUserAuth) { showAuthPopup(); return; }
+
+      const submitBtn = document.getElementById('submitCommentBtn');
+      const commentInput = document.getElementById('commentText');
+      const ratingInput = document.getElementById('selectedRating');
+      const formContainer = document.getElementById('commentFormContainer');
+
+      const existingMsg = formContainer.querySelector('.success-message, .error-message');
+      if (existingMsg) existingMsg.remove();
+
+      const selectedRating = parseInt(ratingInput.value, 10);
+      if (!selectedRating || selectedRating < 1 || selectedRating > 5) {
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        errorMsg.textContent = '⭐ Please select a star rating before posting.';
+        formContainer.insertBefore(errorMsg, formContainer.firstChild);
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Posting...';
+
+      try {
+        const idToken = await currentUserAuth.getIdToken();
+        const endpoints = getApiEndpoints();
+        const response = await fetch(endpoints.postComment, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${idToken}` },
+          body: JSON.stringify({ comment: commentInput.value, rating: selectedRating, page: 'botany' })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          const successMsg = document.createElement('div');
+          successMsg.className = 'success-message';
+          successMsg.textContent = '✅ Thank you! Your feedback has been posted successfully.';
+          formContainer.insertBefore(successMsg, formContainer.firstChild);
+
+          commentInput.value = '';
+          document.getElementById('charCount').textContent = '0/1000';
+          ratingInput.value = '0';
+          document.querySelectorAll('#starPicker .star').forEach(s => s.classList.remove('filled'));
+
+          currentOffset = 0;
+          allLoadedComments = [];
+          await loadComments();
+
+          document.getElementById('commentsList').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          setTimeout(() => successMsg.remove(), 5000);
+        } else {
+          throw new Error(data.error || 'Failed to post comment');
+        }
+      } catch (error) {
+        console.error('Error submitting comment:', error);
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        errorMsg.textContent = error.message.includes('authentication')
+          ? 'Please log in to post a comment.'
+          : 'Failed to post comment. Please try again.';
+        formContainer.insertBefore(errorMsg, formContainer.firstChild);
+        setTimeout(() => errorMsg.remove(), 5000);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Post Rating';
+      }
+    }
+
+    async function handleReplySubmit(parentId, replyText) {
+      if (!currentUserAuth) { showAuthPopup(); return; }
+      try {
+        const idToken = await currentUserAuth.getIdToken();
+        const endpoints = getApiEndpoints();
+        const response = await fetch(endpoints.postComment, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${idToken}` },
+          body: JSON.stringify({ comment: replyText, page: 'botany', parentId: parentId })
+        });
+        const data = await response.json();
+        if (data.success) {
+          currentOffset = 0;
+          allLoadedComments = [];
+          await loadComments();
+        } else {
+          alert(data.error || 'Failed to post reply');
+        }
+      } catch (error) {
+        console.error('Error submitting reply:', error);
+        alert('Failed to post reply. Please try again.');
+      }
+    }
+
+    function showReplyForm(commentId) {
+      if (!currentUserAuth) { showAuthPopup(); return; }
+      if (activeReplyForm) {
+        const existing = document.getElementById(`reply-form-${activeReplyForm}`);
+        if (existing) existing.remove();
+      }
+      if (activeReplyForm === commentId) { activeReplyForm = null; return; }
+
+      activeReplyForm = commentId;
+      const commentEl = document.querySelector(`[data-comment-id="${commentId}"]`);
+      const actionsEl = commentEl.querySelector('.comment-actions');
+
+      const replyForm = document.createElement('div');
+      replyForm.className = 'reply-form';
+      replyForm.id = `reply-form-${commentId}`;
+      replyForm.innerHTML = `
+        <textarea placeholder="Write your reply..." maxlength="500" id="reply-text-${commentId}"></textarea>
+        <div class="reply-form-actions">
+          <button class="reply-submit-btn" onclick="submitReply('${commentId}')">Post Reply</button>
+          <button class="reply-cancel-btn" onclick="cancelReply('${commentId}')">Cancel</button>
+        </div>
+      `;
+      actionsEl.insertAdjacentElement('afterend', replyForm);
+      document.getElementById(`reply-text-${commentId}`).focus();
+    }
+
+    function cancelReply(commentId) {
+      const form = document.getElementById(`reply-form-${commentId}`);
+      if (form) form.remove();
+      activeReplyForm = null;
+    }
+
+    async function submitReply(commentId) {
+      const textarea = document.getElementById(`reply-text-${commentId}`);
+      const replyText = textarea.value.trim();
+      if (replyText.length < 3) { alert('Reply must be at least 3 characters.'); return; }
+      await handleReplySubmit(commentId, replyText);
+      cancelReply(commentId);
+    }
+
+    function toggleReplies(event, commentId) {
+      const container = document.getElementById(`replies-${commentId}`);
+      const btn = event.currentTarget;
+      if (container) {
+        container.classList.toggle('show');
+        btn.classList.toggle('active');
+      }
+    }
+
+    function displayComments() {
+      const commentsList = document.getElementById('commentsList');
+      if (allLoadedComments.length === 0) {
+        commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 1.5rem;">No reviews yet. Be the first to share your feedback!</p>';
+        return;
+      }
+
+      commentsList.innerHTML = allLoadedComments.map(comment => {
+        const date = new Date(comment.created_at);
+        const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const repliesCount = comment.replies ? comment.replies.length : 0;
+
+        const viewRepliesBtn = repliesCount > 0 ? `
+          <button class="view-replies-btn" data-comment-id="${comment.id}" onclick="toggleReplies(event, '${comment.id}')">
+            <span class="replies-text">View ${repliesCount} ${repliesCount === 1 ? 'Reply' : 'Replies'}</span>
+            <span class="arrow">▼</span>
+          </button>` : '';
+
+        const repliesHTML = (comment.replies && comment.replies.length > 0) ? `
+          <div class="replies-container" id="replies-${comment.id}">
+            ${comment.replies.map(reply => {
+              const replyDate = new Date(reply.created_at);
+              const formattedReplyDate = replyDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+              return `
+                <div class="reply-item" itemscope itemtype="https://schema.org/CreativeWork">
+                  <div itemscope itemtype="https://schema.org/Comment" itemprop="comment">
+                    <div class="comment-header">
+                      <div class="comment-author-info">
+                        <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                          <span itemprop="name">${escapeHtml(reply.name)}</span>
+                        </span>
+                        <span class="comment-email">${maskEmail(reply.email)}</span>
+                      </div>
+                      <time class="comment-date" datetime="${reply.created_at}" itemprop="datePublished">${formattedReplyDate}</time>
+                    </div>
+                    <div class="comment-text" itemprop="text">${escapeHtml(reply.comment)}</div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        ` : '';
+
+        const hasRating = comment.rating && comment.rating >= 1 && comment.rating <= 5;
+        const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
+
+        const aggregateRatingHtml = (pageRatingSummary && pageRatingSummary.average && pageRatingSummary.count > 0) ? `
+          <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <meta itemprop="ratingValue" content="${pageRatingSummary.average}">
+            <meta itemprop="reviewCount" content="${pageRatingSummary.count}">
+            <meta itemprop="bestRating" content="5">
+          </span>` : '';
+        const reviewRatingHtml = hasRating ? `
+          <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+            <meta itemprop="ratingValue" content="${comment.rating}">
+            <meta itemprop="bestRating" content="5">
+          </span>
+          <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
+            <meta itemprop="name" content="BSc Botany Honours Notes">${aggregateRatingHtml}
+          </span>
+        ` : '';
+
+        const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
+
+        return `
+          <div class="comment-item" data-comment-id="${comment.id}" itemscope itemtype="https://schema.org/CreativeWork">
+            <div itemscope itemtype="${itemType}" itemprop="comment">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">${escapeHtml(comment.name)}</span>
+                  </span>
+                  <span class="comment-email">${maskEmail(comment.email)}</span>
+                </div>
+                <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
+              </div>
+              ${renderStarsHtml(comment.rating)}
+              ${reviewRatingHtml}
+              ${commentTextHtml}
+              <div class="comment-actions">
+                <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>
+                ${viewRepliesBtn}
+              </div>
+              ${repliesHTML}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateCommentsTitle() {
+      const commentsTitle = document.getElementById('commentsTitle');
+      if (totalComments === 0) {
+        commentsTitle.textContent = 'Student Feedback & Reviews';
+      } else if (totalComments === 1) {
+        commentsTitle.textContent = '1 Student Review';
+      } else {
+        commentsTitle.textContent = `${totalComments} Student Reviews`;
+      }
+    }
+
+    function updateViewMoreButton() {
+      const viewMoreBtn = document.getElementById('viewMoreBtn');
+      if (currentOffset < totalComments) {
+        viewMoreBtn.style.display = 'block';
+      } else {
+        viewMoreBtn.style.display = 'none';
+      }
+    }
+
+    async function loadComments() {
+      const commentsList = document.getElementById('commentsList');
+      try {
+        const endpoints = getApiEndpoints();
+        const response = await fetch(`${endpoints.getComments}?page=botany&limit=500&offset=0`);
+        const data = await response.json();
+
+        if (data.success) {
+          totalComments = data.total || data.comments.length;
+          if (data.ratingSummary) pageRatingSummary = data.ratingSummary;
+          allLoadedComments = (data.comments || []).slice(0, commentsPerPage);
+          currentOffset = allLoadedComments.length;
+
+          displayComments();
+          updateViewMoreButton();
+          updateCommentsTitle();
+        }
+      } catch (error) {
+        console.error('Error loading comments:', error);
+        if (commentsList.children.length === 0) {
+          document.getElementById('commentsTitle').textContent = 'Comments';
+          commentsList.innerHTML = '<p style="text-align: center; color: #94a3b8;">Unable to load comments. Please try again later.</p>';
+        }
+      }
+    }
+
+    async function loadMoreComments() {
+      const viewMoreBtn = document.getElementById('viewMoreBtn');
+      viewMoreBtn.disabled = true;
+      viewMoreBtn.textContent = 'Loading...';
+      try {
+        const endpoints = getApiEndpoints();
+        const response = await fetch(`${endpoints.getComments}?page=botany&limit=500&offset=0`);
+        const data = await response.json();
+        if (data.success) {
+          if (data.ratingSummary) pageRatingSummary = data.ratingSummary;
+          const nextBatch = (data.comments || []).slice(currentOffset, currentOffset + commentsPerPage);
+          allLoadedComments = [...allLoadedComments, ...nextBatch];
+          currentOffset = allLoadedComments.length;
+          displayComments();
+          updateViewMoreButton();
+        }
+      } catch (error) {
+        console.error('Error loading more comments:', error);
+      } finally {
+        viewMoreBtn.disabled = false;
+        viewMoreBtn.textContent = 'View More Reviews';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const bubble = document.getElementById('doubts-bubble');
+      if (bubble) {
+        setTimeout(() => bubble.classList.add('show'), 800);
+        setTimeout(() => bubble.classList.remove('show'), 3800);
+      }
+      const viewMoreBtn = document.getElementById('viewMoreBtn');
+      if (viewMoreBtn) viewMoreBtn.addEventListener('click', loadMoreComments);
+    });
+
     function loadUserProfile() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
@@ -428,8 +1083,10 @@
         document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
         document.getElementById('userProfile').classList.add('show');
         const btn = document.getElementById('mainCta');
-        btn.innerHTML = '<i class="fas fa-arrow-right"></i> Go to Botany Notes';
-        btn.onclick = function() { window.location.href = 'botany-years'; };
+        if(btn) {
+            btn.innerHTML = '<i class="fas fa-arrow-right"></i> Go to Botany Notes';
+            btn.onclick = function() { window.location.href = 'botany-years'; };
+        }
       }
     }
 
@@ -458,11 +1115,17 @@
       }
     }
 
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user) {
-        trackSubjectLogin(user, 'botany');
+        if(typeof trackSubjectLogin === 'function') trackSubjectLogin(user, 'botany');
+        currentUserAuth = user;
+        await renderCommentForm(true);
+      } else {
+        currentUserAuth = null;
+        await renderCommentForm(false);
       }
       loadUserProfile();
+      loadComments();
     });
 
     document.getElementById('authModal').addEventListener('click', (e) => {

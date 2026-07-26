@@ -1103,6 +1103,7 @@
   let allFetchedComments = []; // Ensures slicing targets memory cache
   let currentUserAuth = null;
   let activeReplyForm = null;
+  let pageRatingSummary = { average: null, count: 0 }; // Populated from API, used to embed aggregateRating in Review microdata
 
   // Detect API endpoints based on environment
   function getApiEndpoints() {
@@ -1440,6 +1441,7 @@
       if (data.success) {
         totalComments = data.total || data.comments.length;
         allFetchedComments = data.comments || []; 
+        if (data.ratingSummary) pageRatingSummary = data.ratingSummary;
 
         // Strictly enforce 10-item cap on initial load and overwrite any SSR dump
         allLoadedComments = allFetchedComments.slice(0, commentsPerPage);
@@ -1563,13 +1565,19 @@
       const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
       
       // FIXED SCHEMA HERE -> Uses span and meta tags to prevent Google from ignoring hidden divs
+      const aggregateRatingHtml = (pageRatingSummary && pageRatingSummary.average && pageRatingSummary.count > 0) ? `
+        <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+          <meta itemprop="ratingValue" content="${pageRatingSummary.average}">
+          <meta itemprop="reviewCount" content="${pageRatingSummary.count}">
+          <meta itemprop="bestRating" content="5">
+        </span>` : '';
       const reviewRatingHtml = hasRating ? `
         <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
           <meta itemprop="ratingValue" content="${comment.rating}">
           <meta itemprop="bestRating" content="5">
         </span>
         <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
-          <meta itemprop="name" content="BSc Zoology Honours Notes">
+          <meta itemprop="name" content="BSc Zoology Honours Notes">${aggregateRatingHtml}
         </span>
       ` : '';
       

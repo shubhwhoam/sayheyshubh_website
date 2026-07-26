@@ -10,7 +10,7 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["firebase-admin", "razorpay"]
-  included_files = ["zoology.html", "microbiology.html"]
+  included_files = ["zoology.html", "microbiology.html", "botany.html"]
 
 # ============================================================
 # 1. SPECIAL FUNCTION REDIRECTS
@@ -286,7 +286,7 @@
 # --- BOTANY ---
 [[redirects]]
   from = "/botany"
-  to = "/botany.html"
+  to = "/.netlify/builders/botany-odb"
   status = 200
   force = true
 [[redirects]]
