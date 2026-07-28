@@ -654,5 +654,60 @@
       window.location.reload(); 
     }
   </script>
+<!-- Cookie Consent Banner Banner Component -->
+<div id="cookie-banner" class="cookie-banner">
+<p>This website utilizes analytical cookies to monitor workflow health and optimize speed. <a href="/privacy-policy" target="_blank">Learn more</a></p>
+<div class="cookie-buttons">
+<button id="accept-cookies" class="accept-btn">Accept</button>
+<span id="close-cookies" class="close-btn">&times;</span>
+</div>
+</div>
+<style>
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #333;
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  font-size: 14px;
+  max-width: 600px;
+  width: 90%;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+}
+.cookie-banner a { color: #6366f1; text-decoration: none; font-weight: 500; }
+.cookie-buttons { display: flex; align-items: center; gap: 10px; }
+.accept-btn { background: #6366f1; color: white; padding: 6px 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; transition: background 0.3s ease; }
+.accept-btn:hover { background: #4f46e5; }
+.close-btn { font-size: 20px; cursor: pointer; color: #777; transition: color 0.3s ease; }
+.close-btn:hover { color: #333; }
+.cookie-banner.hidden { opacity: 0; pointer-events: none; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("accept-cookies");
+  const closeBtn = document.getElementById("close-cookies");
+  if (localStorage.getItem("cookieConsent")) {
+    banner.classList.add("hidden");
+  }
+  acceptBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieConsent", "accepted");
+    banner.classList.add("hidden");
+  });
+  closeBtn.addEventListener("click", () => {
+    localStorage.setItem("cookieConsent", "declined");
+    banner.classList.add("hidden");
+  });
+});
+</script>
 </body>
 </html>
