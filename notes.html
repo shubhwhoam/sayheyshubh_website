@@ -6,8 +6,8 @@
 <link rel="canonical" href="https://sayheyshubh.netlify.app/notes" />
 <!-- Primary SEO Meta Tags -->
 <title>Premium Study Notes & Materials | SayHeyShubh Subject Directory</title>
-<meta name="description" content="Download handwritten BSc Zoology, Botany, Microbiology, and Life Science notes for Delhi University students with semester-wise study material and previous year papers." />
-<meta name="keywords" content="DU BSc notes, BSc Zoology notes PDF, BSc Botany notes DU, BSc Microbiology notes DU, BSc Life Science notes DU, Delhi University study material, DU previous year question papers, FYUP NEP syllabus notes">
+<meta name="description" content="Download handwritten BSc Zoology, Botany, Microbiology, and Life Science notes for Delhi University. Plus, understand DU's NEP FYUP syllabus including SEC, VAC, AEC, and GE." />
+<meta name="keywords" content="DU BSc notes, BSc Zoology notes PDF, BSc Botany notes DU, BSc Microbiology notes DU, BSc Life Science notes DU, SEC VAC AEC DU explained, Generic Elective DU, Delhi University study material, FYUP NEP syllabus notes">
 <meta name="author" content="Shubham Kumar">
 <!-- Open Graph / Facebook / WhatsApp SEO -->
 <meta property="og:type" content="website">
@@ -54,8 +54,8 @@ gtag('config', 'G-01VF0W2CD1');
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "BSc Notes Directory",
-  "description": "Handwritten BSc notes, semester-wise study material, and previous year question papers for Zoology, Botany, Microbiology, and Life Science at Delhi University.",
+  "name": "BSc Notes Directory & DU FYUP Guide",
+  "description": "Handwritten BSc notes, semester-wise study material, and guides explaining Delhi University's GE, SEC, VAC, and AEC electives.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "SayHeyShubh",
@@ -71,23 +71,18 @@ gtag('config', 'G-01VF0W2CD1');
   "mainEntity": [
     {
       "@type": "Question",
+      "name": "What are SEC, VAC, AEC, and GE in Delhi University?",
+      "acceptedAnswer": { "@type": "Answer", "text": "These are electives under the DU NEP FYUP curriculum. GE expands interdisciplinary knowledge, SEC builds practical skills, VAC focuses on ethics and values, and AEC improves language abilities." }
+    },
+    {
+      "@type": "Question",
       "name": "Are these BSc notes free?",
       "acceptedAnswer": { "@type": "Answer", "text": "Some notes are free to preview, and full semester-wise notes and PYQ sets unlock after signing in. Pricing, where applicable, is kept student-friendly." }
     },
     {
       "@type": "Question",
       "name": "Which DU syllabus are these notes based on?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Notes are aligned with the current Delhi University FYUP/NEP syllabus for each subject (Zoology, Botany, Microbiology, Life Science), and are updated as the syllabus changes each academic year." }
-    },
-    {
-      "@type": "Question",
-      "name": "Are the notes handwritten or typed?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Most notes are handwritten by the student contributor who prepared them, then scanned into clean, readable PDFs." }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you cover previous year question papers?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes, Zoology, Microbiology, and Life Science include DU previous year question papers alongside the semester notes. Botany's PYQ database is currently expanding." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Notes are aligned with the current Delhi University FYUP/NEP syllabus for each subject (Zoology, Botany, Microbiology, Life Science)." }
     },
     {
       "@type": "Question",
@@ -349,6 +344,86 @@ body {
   background: #eef2ff;
   color: #4338ca;
 }
+
+/* =========================================
+   DU ELECTIVES (SEC, VAC, GE) SECTION
+   MOBILE-FIRST HORIZONTAL SWIPE CAROUSEL 
+   ========================================= */
+.electives-section {
+  background: white;
+  border-radius: 24px;
+  padding: 4rem 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--card-border);
+  margin-bottom: 5rem;
+}
+.electives-section h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
+}
+.electives-section > p {
+  color: #64748b;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 0 3rem 0;
+}
+.electives-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.elective-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.elective-card:hover {
+  background: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  border-color: #cbd5e1;
+  transform: translateY(-4px);
+}
+.el-badge {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+  align-self: flex-start;
+}
+.el-ge { background: #e0e7ff; color: #4338ca; }
+.el-sec { background: #dcfce7; color: #15803d; }
+.el-vac { background: #fef3c7; color: #b45309; }
+.el-aec { background: #fce7f3; color: #be185d; }
+.elective-card h3 {
+  font-size: 1.2rem;
+  color: #0f172a;
+  margin: 0 0 0.8rem 0;
+}
+.elective-card p {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.electives-disclaimer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 /* Process/Features Section */
 .how-made {
   margin: 5rem auto;
@@ -572,22 +647,32 @@ body {
 .pro-footer-col ul li {
   margin-bottom: 0.9rem;
 }
+
+/* Kills any global white box hover completely + Adds Swipe */
 .pro-footer-col ul li a {
+  display: inline-block;
   color: #94a3b8;
   text-decoration: none;
   font-size: 0.95rem;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  border: none !important;
 }
 .pro-footer-col ul li a:hover {
   color: #6366f1;
+  transform: translateX(4px);
+  background: transparent !important;
+  border: none !important;
 }
 
-/* Minimalist Inline Contact UI */
+/* Minimalist Inline Contact UI - Force Transparent Backgrounds */
 .footer-contact-row {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.2rem;
+  background: transparent !important;
+  border: none !important;
 }
 .footer-contact-icon {
   width: 36px;
@@ -607,13 +692,17 @@ body {
   color: white;
 }
 .footer-contact-link {
+  display: inline-block;
   color: #94a3b8;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  border: none !important;
 }
 .footer-contact-row:hover .footer-contact-link {
   color: #6366f1;
+  transform: translateX(4px);
 }
 
 /* Footer Bottom Copyright Bar */
@@ -643,17 +732,24 @@ body {
   gap: 1.5rem;
   flex-wrap: wrap;
 }
+/* Kill global box hover for legal links too */
 .pro-footer-legal-links a {
   color: #64748b;
   text-decoration: none;
   font-size: 0.9rem;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  border: none !important;
 }
 .pro-footer-legal-links a:hover {
-  color: #e2e8f0;
+  color: #6366f1;
+  background: transparent !important;
+  border: none !important;
 }
 
-/* Mobile Responsiveness */
+/* ==========================================================
+   MOBILE RESPONSIVENESS
+   ========================================================== */
 @media (max-width: 1024px) {
   .directory-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -662,7 +758,11 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
   }
+  .electives-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
 @media (max-width: 768px) {
   .page-wrapper {
     padding-top: 80px;
@@ -694,6 +794,44 @@ body {
     text-align: center;
     font-size: 1.8rem;
   }
+
+  /* MOBILE-FIRST HORIZONTAL SWIPE FOR ELECTIVES */
+  .electives-section {
+    padding: 3rem 1.5rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  .electives-section h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  .electives-section > p {
+    text-align: center;
+    font-size: 1rem;
+  }
+  .electives-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1.5rem;
+    -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+    gap: 1rem;
+  }
+  /* Hide scrollbar for a clean app-like look */
+  .electives-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .electives-wrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .elective-card {
+    flex: 0 0 280px; /* Fixed width for swipe cards */
+    scroll-snap-align: center; /* Snaps card to center of screen */
+    background: white;
+  }
+
   /* Mobile Banners */
   .social-banner {
     flex-direction: column-reverse;
@@ -713,7 +851,8 @@ body {
   .social-banner .btn-action {
     width: 100%;
   }
-  /* Mobile Footer */
+
+  /* Mobile Footer - Perfectly Centered */
   .pro-footer-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -861,6 +1000,44 @@ body {
 </div>
 </div>
 
+<!-- NEW: Decoding DU FYUP Electives (Mobile Swipe Carousel) -->
+<section class="electives-section">
+<h2>Decoding DU's FYUP Electives</h2>
+<p>Delhi University's NEP framework introduces multiple elective categories alongside your Core Science Papers (DSCs). If you're confused about what to pick, here is a quick breakdown to help you plan your semester.</p>
+
+<div class="electives-wrapper">
+  <!-- GE Card -->
+  <div class="elective-card">
+    <span class="el-badge el-ge">GE</span>
+    <h3>Generic Elective</h3>
+    <p>Subjects chosen from outside your main degree discipline (e.g., a Zoology student studying History, chemistry or Botany). It is designed to broaden your academic knowledge base.</p>
+  </div>
+  
+  <!-- SEC Card -->
+  <div class="elective-card">
+    <span class="el-badge el-sec">SEC</span>
+    <h3>Skill Enhancement</h3>
+    <p>Hands-on, highly practical courses designed to build employable, real-world skills. Common examples include Python Programming, Apiculture, or Advanced Communication.</p>
+  </div>
+
+  <!-- VAC Card -->
+  <div class="elective-card">
+    <span class="el-badge el-vac">VAC</span>
+    <h3>Value Addition</h3>
+    <p>Courses focusing on ethics, culture, technology and moral values to build holistic character. Examples include Digital Empowerment, Emotional Intelligence, Financial literacy, etc.</p>
+  </div>
+
+  <!-- AEC Card -->
+  <div class="elective-card">
+    <span class="el-badge el-aec">AEC</span>
+    <h3>Ability Enhancement</h3>
+    <p>Mandatory courses focused primarily on language, environment and communication abilities. You will typically choose between Environmental science, English proficiency papers, Hindi.</p>
+  </div>
+</div>
+
+
+</section>
+
 <!-- Value Addition 1: Smart Revision Strategy -->
 <section class="how-made">
 <h2 class="section-title">Smart Revision Strategy</h2>
@@ -877,7 +1054,7 @@ body {
 <i class="fa-solid fa-file-circle-check"></i>
 </div>
 <h4>2. PYQ Integration</h4>
-<p>Don't wait until the end. Review the Previous Year Questions (PYQs) attached to each subject immediately after reading the notes to spot exam patterns.</p>
+<p>Don't wait until the end. Review the Previous Year Questions (PYQs) attached to each unit immediately after reading the notes to spot exam patterns.</p>
 </div>
 <div class="feature-box">
 <div class="feature-icon-wrapper" style="background:#ffedd5; color:#f59e0b;">
@@ -892,7 +1069,7 @@ body {
 <!-- Value Addition 2: DU Exam Answer Writing Tips -->
 <section class="how-made" style="margin: 5rem auto; max-width: 1000px;">
 <h2 class="section-title" style="text-align: center;">Mastering DU Semester Exams</h2>
-<p style="text-align:center; color:#475569; margin-bottom: 2.5rem; font-size: 1.05rem;">Proven answer-writing strategies to help you consistently secure an 9+ SGPA in your science subjects.</p>
+<p style="text-align:center; color:#475569; margin-bottom: 2.5rem; font-size: 1.05rem;">Proven answer-writing strategies to help you consistently secure an 8+ SGPA in your science subjects.</p>
 <div class="columns">
 <div class="feature-box">
 <div class="feature-icon-wrapper" style="background:#fdf4ff; color:#a855f7;">
@@ -906,7 +1083,7 @@ body {
 <i class="fa-solid fa-pencil"></i>
 </div>
 <h4>Diagrams Win Marks</h4>
-<p>In all the science subjects, a well-labeled diagram can compensate for a lack of words. Always draw neat diagrams to visually explain your theoretical points.</p>
+<p>In subjects like Zoology and Botany, a well-labeled diagram can compensate for a lack of words. Always draw neat diagrams to visually explain your theoretical points.</p>
 </div>
 <div class="feature-box">
 <div class="feature-icon-wrapper" style="background:#fff7ed; color:#ea580c;">
@@ -949,6 +1126,7 @@ body {
 <!-- Enhanced FAQ Section -->
 <section class="notes-faq">
 <h2 class="section-title" style="text-align: center;">Frequently Asked Questions</h2>
+
 <div class="faq-item">
 <h3>Which DU syllabus are these notes based on?</h3>
 <p>Our notes are rigorously aligned with the current Delhi University FYUP/NEP Undergrad syllabus for each specific subject (Zoology, Botany, Microbiology, Life Science). We track syllabus changes actively every academic year.</p>
@@ -959,20 +1137,20 @@ body {
 </div>
 <div class="faq-item">
 <h3>Do you cover previous year question papers?</h3>
-<p>Absolutely. Zoology, Microbiology, botany and Life Science all theses include integrated DU previous year question papers (PYQs) alongside the semester notes.</p>
+<p>Absolutely. Zoology, Microbiology, botany and Life Science all include integrated DU previous year question papers (PYQs) alongside the semester notes. </p>
+</div>
+<div class="faq-item">
+<h3>Can I contribute notes for my subject?</h3>
+<p>Yes! SayHeyShubh thrives as a growing collective of active DU student contributors. If you make great notes, visit our <a href="community">Community page</a> to find out how to apply and join the network.</p>
 </div>
   <div class="faq-item">
-      <h3>How often are the notes updated?</h3>
-      <p>We regularly update our notes whenever the Delhi University syllabus changes or when better explanations, diagrams, or previous year questions become available.</p>
+      <h3>Why choose SayHeyShubh over other notes websites?</h3>
+      <p>Unlike generic note-sharing platforms, SayHeyShubh is built by Delhi University students for Delhi University students. Every resource is carefully organized semester-wise, reviewed for quality, and continuously improved based on exam trends and students feedback.</p>
   </div>
   <div class="faq-item">
       <h3>Are the notes available in PDF format?</h3>
       <p>Yes. All notes are provided as high-quality digital PDFs that can be viewed on your phone, tablet, or computer.</p>
   </div>
-<div class="faq-item">
-<h3>Can I contribute notes for my subject?</h3>
-<p>Yes! SayHeyShubh thrives as a growing collective of active DU student contributors. If you make great notes, visit our <a href="community">Community page</a> to find out how to apply and join the network.</p>
-</div>
   <div class="faq-item">
       <h3>Which universities are these notes suitable for?</h3>
       <p>These notes are primarily created according to the University of Delhi (DU) NEP/FYUP syllabus. However, students from other universities with similar syllabi may also find them useful.</p>
