@@ -6,20 +6,20 @@
 <link rel="canonical" href="https://sayheyshubh.netlify.app/notes" />
 <!-- Primary SEO Meta Tags -->
 <title>Premium Study Notes & Materials | SayHeyShubh Subject Directory</title>
-<meta name="description" content="Download handwritten BSc Zoology, Botany, and Microbiology notes for Delhi University students with semester-wise study material and previous year papers." />
-<meta name="keywords" content="DU BSc notes, BSc Zoology notes PDF, BSc Botany notes DU, BSc Microbiology notes DU, Delhi University study material, DU previous year question papers, FYUP NEP syllabus notes">
+<meta name="description" content="Download handwritten BSc Zoology, Botany, Microbiology, and Life Science notes for Delhi University students with semester-wise study material and previous year papers." />
+<meta name="keywords" content="DU BSc notes, BSc Zoology notes PDF, BSc Botany notes DU, BSc Microbiology notes DU, BSc Life Science notes DU, Delhi University study material, DU previous year question papers, FYUP NEP syllabus notes">
 <meta name="author" content="Shubham Kumar">
 <!-- Open Graph / Facebook / WhatsApp SEO -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sayheyshubh.netlify.app/notes">
 <meta property="og:title" content="BSc Study Notes & Materials | SayHeyShubh">
-<meta property="og:description" content="Access premium handwritten BSc Zoology, Botany, and Microbiology notes perfectly aligned with the DU FYUP/NEP syllabus.">
+<meta property="og:description" content="Access premium handwritten BSc Zoology, Botany, Microbiology, and Life Science notes perfectly aligned with the DU FYUP/NEP syllabus.">
 <meta property="og:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
 <!-- Twitter SEO Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://sayheyshubh.netlify.app/notes">
 <meta name="twitter:title" content="BSc Study Notes & Materials | SayHeyShubh">
-<meta name="twitter:description" content="Semester-wise handwritten notes and PYQs for Delhi University Science Undergrads.">
+<meta name="twitter:description" content="Semester-wise handwritten notes and PYQs for Delhi University Science Undergrads (Zoology, Botany, Microbiology, Life Science).">
 <meta name="twitter:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
 <!-- Google Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +55,7 @@ gtag('config', 'G-01VF0W2CD1');
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "BSc Notes Directory",
-  "description": "Handwritten BSc notes, semester-wise study material, and previous year question papers for Zoology, Botany, and Microbiology at Delhi University.",
+  "description": "Handwritten BSc notes, semester-wise study material, and previous year question papers for Zoology, Botany, Microbiology, and Life Science at Delhi University.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "SayHeyShubh",
@@ -77,7 +77,7 @@ gtag('config', 'G-01VF0W2CD1');
     {
       "@type": "Question",
       "name": "Which DU syllabus are these notes based on?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Notes are aligned with the current Delhi University FYUP/NEP syllabus for each subject, and are updated as the syllabus changes each academic year." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Notes are aligned with the current Delhi University FYUP/NEP syllabus for each subject (Zoology, Botany, Microbiology, Life Science), and are updated as the syllabus changes each academic year." }
     },
     {
       "@type": "Question",
@@ -87,7 +87,7 @@ gtag('config', 'G-01VF0W2CD1');
     {
       "@type": "Question",
       "name": "Do you cover previous year question papers?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes, Zoology and Microbiology both include DU previous year question papers alongside the semester notes. Botany's PYQ set is being prepared." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, Zoology, Microbiology, and Life Science include DU previous year question papers alongside the semester notes. Botany's PYQ database is currently expanding." }
     },
     {
       "@type": "Question",
@@ -115,13 +115,12 @@ body {
 }
 /* Page Wrapper Fixes Overlap */
 .page-wrapper {
-  padding-top: 45px; /* Pushes content down to clear the fixed header */
+  padding-top: 45px;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-/* Expands content to match the home page width */
 .directory-container {
   max-width: 1350px;
   width: 100%;
@@ -196,10 +195,11 @@ body {
   position: relative;
   z-index: 1;
 }
-/* Subject Grid */
+
+/* Subject Grid - Hardcoded to exactly 3 columns to prevent stretching */
 .directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-bottom: 5rem;
 }
@@ -213,7 +213,7 @@ body {
   border: 1px solid var(--card-border);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
 }
@@ -249,21 +249,39 @@ body {
   background: #dcfce7;
   color: #16a34a;
 }
-.status-tag.prep {
-  background: #fef3c7;
-  color: #d97706;
+.status-tag.collab {
+  background: #f1f5f9;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+}
+/* Wrapper to keep title and text spacing identical across all cards */
+.subject-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 2.5rem;
 }
 .subject-card h2 {
   color: #0f172a;
   margin: 0 0 1rem 0;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
 }
 .subject-card p {
   color: #64748b;
-  margin: 0 0 2.5rem 0;
+  margin: 0;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 0.95rem;
+}
+/* Collaboration / Coming Soon Card */
+.subject-card.card-collab {
+  border: 2px dashed #cbd5e1;
+  background: #f8fafc;
+}
+.subject-card.card-collab:hover {
+  border-color: #6366f1;
+  background: white;
 }
 /* Premium Buttons */
 .btn-action {
@@ -279,6 +297,7 @@ body {
   transition: all 0.3s ease;
   width: 100%;
   box-sizing: border-box;
+  margin-top: auto;
 }
 .btn-action:hover {
   transform: translateY(-2px);
@@ -309,6 +328,26 @@ body {
 .btn-microbiology:hover {
   background: linear-gradient(135deg, #7c3aed, #6d28d9);
   box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+.btn-lifescience {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: white;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+}
+.btn-lifescience:hover {
+  background: linear-gradient(135deg, #0369a1, #075985);
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+}
+.btn-collab {
+  background: white;
+  color: #4f46e5;
+  border: 2px solid #e2e8f0;
+  box-shadow: none;
+}
+.btn-collab:hover {
+  border-color: #6366f1;
+  background: #eef2ff;
+  color: #4338ca;
 }
 /* Process/Features Section */
 .how-made {
@@ -390,7 +429,7 @@ body {
 /* Slim, Sleek Social Banners */
 .social-banners-container {
   margin: 5rem auto 2rem auto;
-  max-width: 900px; /* Kept narrow so they don't dominate the page */
+  max-width: 900px;
 }
 .social-banner {
   display: flex;
@@ -431,8 +470,8 @@ body {
 .social-banner .btn-action {
   padding: 0.6rem 1.2rem;
   font-size: 0.9rem;
-  width: auto; /* Overrides global 100% */
-  border-radius: 8px; /* Slightly squarer for secondary buttons */
+  width: auto;
+  border-radius: 8px;
 }
 /* Specific Banner Themes */
 .banner-yt {
@@ -456,7 +495,174 @@ body {
 .banner-community .social-banner-content h3 { color: #4338ca; }
 .banner-community .social-banner-content p { color: #312e81; }
 .banner-community .social-banner-icon { color: #4f46e5; }
+
+/* ==========================================================
+   PROFESSIONAL EDTECH FOOTER STYLES
+   ========================================================== */
+.pro-footer {
+  background-color: #0b0f19;
+  color: #94a3b8;
+  padding: 5rem 0 0 0;
+  border-top: 1px solid #1e293b;
+  font-family: 'Inter', sans-serif;
+  margin-top: auto;
+}
+.pro-footer-container {
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.pro-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1.3fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+/* Brand Column */
+.pro-footer-brand .footer-logo-img {
+  max-width: 250px;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.pro-footer-brand p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 0 1.8rem 0;
+  max-width: 360px;
+}
+.pro-footer-socials {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.footer-social-pill {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+.footer-social-pill:hover {
+  background: #6366f1;
+  color: white;
+  transform: translateY(-3px);
+}
+/* Navigation & Contact Columns */
+.pro-footer-col h3 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.5px;
+}
+.pro-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pro-footer-col ul li {
+  margin-bottom: 0.9rem;
+}
+.pro-footer-col ul li a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+.pro-footer-col ul li a:hover {
+  color: #6366f1;
+}
+
+/* Minimalist Inline Contact UI */
+.footer-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.footer-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+.footer-contact-row:hover .footer-contact-icon {
+  background: #6366f1;
+  color: white;
+}
+.footer-contact-link {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-contact-row:hover .footer-contact-link {
+  color: #6366f1;
+}
+
+/* Footer Bottom Copyright Bar */
+.pro-footer-bottom {
+  border-top: 1px solid #1e293b;
+  padding: 1.8rem 0;
+}
+.pro-footer-bottom-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.pro-footer-bottom p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+.pro-footer-legal-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.pro-footer-legal-links a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+.pro-footer-legal-links a:hover {
+  color: #e2e8f0;
+}
+
 /* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .directory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pro-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
 @media (max-width: 768px) {
   .page-wrapper {
     padding-top: 80px;
@@ -507,6 +713,38 @@ body {
   .social-banner .btn-action {
     width: 100%;
   }
+  /* Mobile Footer */
+  .pro-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  .pro-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pro-footer-brand .footer-logo-img {
+    margin: 0 auto 1.5rem auto;
+  }
+  .pro-footer-brand p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pro-footer-socials {
+    justify-content: center;
+  }
+  .footer-contact-row {
+    justify-content: center;
+  }
+  .pro-footer-bottom-flex {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  .pro-footer-legal-links {
+    justify-content: center;
+  }
 }
 </style>
 </head>
@@ -555,7 +793,7 @@ body {
 <p>Access handwritten <strong>BSc notes PDF</strong> files, full semester-wise study guides, and fully solved <strong>DU previous year question papers (PYQs)</strong>. Perfectly aligned with the latest <strong>DU FYUP/NEP syllabus</strong> and peer-reviewed by Delhi University scholars.</p>
 </div>
 
-<!-- Enhanced Subject Grid -->
+<!-- Enhanced Subject Grid (Hardcoded to 3 columns to stop vertical stretching) -->
 <div class="directory-grid">
 <!-- Zoology -->
 <div class="subject-card">
@@ -563,35 +801,63 @@ body {
 <span class="subject-icon" style="color: #ef4444; background: #fee2e2;"><i class="fa-solid fa-dna"></i></span>
 <span class="status-tag live">Active Modules</span>
 </div>
-<div>
+<div class="subject-content">
 <h2>BSc Zoology (Hons)</h2>
 <p>Semester-wise handwritten notes, structured morphology charts, DU PYQs, and high-yield exam-focused study material.</p>
 </div>
 <a href="zoology" class="btn-action btn-zoology">Explore Zoology Directory</a>
 </div>
+
 <!-- Botany -->
 <div class="subject-card">
 <div class="subject-header-row">
 <span class="subject-icon" style="color: #10b981; background: #d1fae5;"><i class="fa-solid fa-seedling"></i></span>
-<span class="status-tag prep">In Preparation</span>
+<span class="status-tag live">Active Modules</span>
 </div>
-<div>
+<div class="subject-content">
 <h2>BSc Botany (Hons)</h2>
-<p>Comprehensive semester modules, core physiology diagrams, and practical files. Currently scaling via community contributors.</p>
+<p>Comprehensive semester modules, core physiology diagrams, and practical files. Aligned with the latest DU NEP curriculum.</p>
 </div>
 <a href="botany" class="btn-action btn-botany">Explore Botany Directory</a>
 </div>
+
 <!-- Microbiology -->
 <div class="subject-card">
 <div class="subject-header-row">
 <span class="subject-icon" style="color: #8b5cf6; background: #ede9fe;"><i class="fa-solid fa-virus"></i></span>
 <span class="status-tag live">Active Modules</span>
 </div>
-<div>
+<div class="subject-content">
 <h2>BSc Microbiology (Hons)</h2>
 <p>Verified semester notes, biochemistry flowcharts, previous year question banks, and specialized lab manuals for DU students.</p>
 </div>
 <a href="microbiology" class="btn-action btn-microbiology">Explore Microbiology Directory</a>
+</div>
+
+<!-- Life Science -->
+<div class="subject-card">
+<div class="subject-header-row">
+<span class="subject-icon" style="color: #0284c7; background: #e0f2fe;"><i class="fa-solid fa-flask"></i></span>
+<span class="status-tag live">Active Modules</span>
+</div>
+<div class="subject-content">
+<h2>BSc Life Science (Prog.)</h2>
+<p>Integrated interdisciplinary notes covering Chemistry, Zoology, and Botany disciplines. Simplified PYQs and semester guides.</p>
+</div>
+<a href="lifescience" class="btn-action btn-lifescience">Explore Life Science Directory</a>
+</div>
+
+<!-- Collaboration / Coming Soon Card -->
+<div class="subject-card card-collab">
+<div class="subject-header-row">
+<span class="subject-icon" style="color: #4f46e5; background: #eef2ff;"><i class="fa-solid fa-layer-group"></i></span>
+<span class="status-tag collab">Coming Soon</span>
+</div>
+<div class="subject-content">
+<h2>More Subjects Coming Soon</h2>
+<p>Don't see your course listed? SayHeyShubh is a student-first initiative. Become a contributor for your subject and help thousands of juniors across DU.</p>
+</div>
+<a href="community" class="btn-action btn-collab"><i class="fa-solid fa-user-plus"></i> Become a Collaborator</a>
 </div>
 </div>
 
@@ -611,7 +877,7 @@ body {
 <i class="fa-solid fa-file-circle-check"></i>
 </div>
 <h4>2. PYQ Integration</h4>
-<p>Don't wait until the end. Review the Previous Year Questions (PYQs) attached to each unit immediately after reading the notes to spot exam patterns.</p>
+<p>Don't wait until the end. Review the Previous Year Questions (PYQs) attached to each subject immediately after reading the notes to spot exam patterns.</p>
 </div>
 <div class="feature-box">
 <div class="feature-icon-wrapper" style="background:#ffedd5; color:#f59e0b;">
@@ -626,7 +892,7 @@ body {
 <!-- Value Addition 2: DU Exam Answer Writing Tips -->
 <section class="how-made" style="margin: 5rem auto; max-width: 1000px;">
 <h2 class="section-title" style="text-align: center;">Mastering DU Semester Exams</h2>
-<p style="text-align:center; color:#475569; margin-bottom: 2.5rem; font-size: 1.05rem;">Proven answer-writing strategies to help you consistently secure an 8+ SGPA in your science subjects.</p>
+<p style="text-align:center; color:#475569; margin-bottom: 2.5rem; font-size: 1.05rem;">Proven answer-writing strategies to help you consistently secure an 9+ SGPA in your science subjects.</p>
 <div class="columns">
 <div class="feature-box">
 <div class="feature-icon-wrapper" style="background:#fdf4ff; color:#a855f7;">
@@ -640,7 +906,7 @@ body {
 <i class="fa-solid fa-pencil"></i>
 </div>
 <h4>Diagrams Win Marks</h4>
-<p>In subjects like Zoology and Botany, a well-labeled diagram can compensate for a lack of words. Always draw neat diagrams to visually explain your theoretical points.</p>
+<p>In all the science subjects, a well-labeled diagram can compensate for a lack of words. Always draw neat diagrams to visually explain your theoretical points.</p>
 </div>
 <div class="feature-box">
 <div class="feature-icon-wrapper" style="background:#fff7ed; color:#ea580c;">
@@ -684,12 +950,8 @@ body {
 <section class="notes-faq">
 <h2 class="section-title" style="text-align: center;">Frequently Asked Questions</h2>
 <div class="faq-item">
-<h3>Are these BSc notes free?</h3>
-<p>Some modules and previews are completely free. Full semester-wise verified notes and complete PYQ sets unlock after signing in. Any pricing, where applicable to support the platform hosting, is kept strictly student-friendly.</p>
-</div>
-<div class="faq-item">
 <h3>Which DU syllabus are these notes based on?</h3>
-<p>Our notes are rigorously aligned with the current Delhi University FYUP/NEP Undergrad syllabus for each specific subject. We track syllabus changes actively every academic year.</p>
+<p>Our notes are rigorously aligned with the current Delhi University FYUP/NEP Undergrad syllabus for each specific subject (Zoology, Botany, Microbiology, Life Science). We track syllabus changes actively every academic year.</p>
 </div>
 <div class="faq-item">
 <h3>Are the notes handwritten or typed?</h3>
@@ -697,12 +959,24 @@ body {
 </div>
 <div class="faq-item">
 <h3>Do you cover previous year question papers?</h3>
-<p>Absolutely. Both Zoology and Microbiology include integrated DU previous year question papers (PYQs) alongside the semester notes. Botany's PYQ database is currently under active preparation.</p>
+<p>Absolutely. Zoology, Microbiology, botany and Life Science all theses include integrated DU previous year question papers (PYQs) alongside the semester notes.</p>
 </div>
+  <div class="faq-item">
+      <h3>How often are the notes updated?</h3>
+      <p>We regularly update our notes whenever the Delhi University syllabus changes or when better explanations, diagrams, or previous year questions become available.</p>
+  </div>
+  <div class="faq-item">
+      <h3>Are the notes available in PDF format?</h3>
+      <p>Yes. All notes are provided as high-quality digital PDFs that can be viewed on your phone, tablet, or computer.</p>
+  </div>
 <div class="faq-item">
 <h3>Can I contribute notes for my subject?</h3>
 <p>Yes! SayHeyShubh thrives as a growing collective of active DU student contributors. If you make great notes, visit our <a href="community">Community page</a> to find out how to apply and join the network.</p>
 </div>
+  <div class="faq-item">
+      <h3>Which universities are these notes suitable for?</h3>
+      <p>These notes are primarily created according to the University of Delhi (DU) NEP/FYUP syllabus. However, students from other universities with similar syllabi may also find them useful.</p>
+  </div>
 </section>
 
 <!-- NEW: Slim & Sleek Social & Community Banners -->
@@ -745,11 +1019,76 @@ body {
 </div>
 </main>
 
-<!-- Clean Minimalist Footer Component -->
-<footer>
-<div class="container" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding: 2rem 0; color: #64748b; font-size: 0.95rem;">
-<p>&copy; 2026 SayHeyShubh. Crafted for Student Impact & Creative Growth.</p>
-<p><a href="privacy-policy" style="color:#6366f1; text-decoration:none; font-weight:500;">Privacy Policy & Safety Framework</a></p>
+<!-- PROFESSIONAL EDTECH FOOTER COMPONENT -->
+<footer class="pro-footer">
+<div class="pro-footer-container">
+<div class="pro-footer-grid">
+<!-- Col 1: Brand & Intro -->
+<div class="pro-footer-brand">
+<a href="index">
+<img src="attached_assets/sayheyshubh_footer_logo.png" alt="SayHeyShubh Logo" class="footer-logo-img">
+</a>
+<p>Built in the classrooms of Delhi University, SayHeyShubh is a student-driven academic ecosystem. We consolidate semester-wise notes, practical files, cheat sheets of most important questions and previous year question databases into one accessible learning hub.</p>
+<div class="pro-footer-socials">
+<a href="https://youtube.com/@ShubhiPhilia" target="_blank" aria-label="YouTube" class="footer-social-pill"><i class="fa-brands fa-youtube"></i></a>
+<a href="https://t.me/sayheyshubh" target="_blank" aria-label="Telegram" class="footer-social-pill"><i class="fa-brands fa-telegram"></i></a>
+<a href="https://linkedin.com/in/sayheyshubh" target="_blank" aria-label="LinkedIn" class="footer-social-pill"><i class="fa-brands fa-linkedin-in"></i></a>
+<a href="https://instagram.com/sayheyshubh" target="_blank" aria-label="Instagram" class="footer-social-pill"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+
+<!-- Col 2: Quick Links -->
+<div class="pro-footer-col">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="index">Home</a></li>
+<li><a href="portfolio">Portfolio</a></li>
+<li><a href="community">Community</a></li>
+<li><a href="blogs">Creator Journal</a></li>
+<li><a href="about">About Founder</a></li>
+</ul>
+</div>
+
+<!-- Col 3: Subject Directories -->
+<div class="pro-footer-col">
+<h3>Subject Directories</h3>
+<ul>
+<li><a href="zoology">BSc Zoology (Hons)</a></li>
+<li><a href="botany">BSc Botany (Hons)</a></li>
+<li><a href="microbiology">BSc Microbiology (Hons)</a></li>
+<li><a href="lifescience">BSc Life Science (Prog.)</a></li>
+</ul>
+</div>
+
+<!-- Col 4: Help & Contact (Minimal Inline Text) -->
+<div class="pro-footer-col">
+<h3>Help & Contact</h3>
+<div class="footer-contact-row">
+<i class="fa-solid fa-envelope footer-contact-icon"></i>
+<a href="mailto:shubhamkmr.work@gmail.com" class="footer-contact-link">shubhamkmr.work@gmail.com</a>
+</div>
+<div class="footer-contact-row">
+<i class="fa-brands fa-telegram footer-contact-icon"></i>
+<a href="https://t.me/sayheyshubh" target="_blank" class="footer-contact-link">Join Telegram Group</a>
+</div>
+<div class="footer-contact-row">
+<i class="fa-brands fa-instagram footer-contact-icon"></i>
+<a href="https://instagram.com/sayheyshubh" target="_blank" class="footer-contact-link">Follow @sayheyshubh</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bottom Copyright & Legal Links -->
+<div class="pro-footer-bottom">
+<div class="pro-footer-bottom-flex">
+<p>&copy; 2026 SayHeyShubh. Built by students, for students. All rights reserved.</p>
+<div class="pro-footer-legal-links">
+<a href="privacy-policy">Privacy Policy</a>
+<a href="privacy-policy">Terms of Use</a>
+<a href="privacy-policy">Cookie Policy</a>
+</div>
+</div>
 </div>
 </footer>
 
