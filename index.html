@@ -6,14 +6,14 @@
 <link rel="canonical" href="https://sayheyshubh.netlify.app/" />
 <!-- Primary SEO Meta Tags -->
 <title>SayHeyShubh | DU Students' Premium Notes & Learning Community</title>
-<meta name="description" content="India's ultimate student-driven learning platform for Delhi University students. Download handwritten BSc Zoology Hons notes PDF, Botany, and Microbiology study material with solved DU previous year question papers (PYQs)." />
-<meta name="keywords" content="DU students learning community, BSc Zoology Hons notes PDF download, DU BSc Zoology previous year question papers, BSc Botany notes DU, BSc Microbiology notes DU, Delhi University notes community, handwritten notes, semester wise notes, student contributors DU, DU FYUP NEP syllabus notes">
+<meta name="description" content="India's ultimate student-driven learning platform for Delhi University students. Download handwritten BSc Zoology, Botany, Microbiology, and Life Science study material with solved DU previous year question papers (PYQs)." />
+<meta name="keywords" content="DU BSc notes, BSc Zoology Hons notes PDF download, DU BSc Zoology previous year question papers, BSc Botany notes DU, BSc Microbiology notes DU, BSc Life Science notes DU, Delhi University study material, handwritten notes, semester wise notes, FYUP NEP syllabus notes">
 <meta name="author" content="Shubham Kumar">
 <!-- Open Graph / Facebook / WhatsApp SEO -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sayheyshubh.netlify.app/">
 <meta property="og:title" content="SayHeyShubh | DU Students' Notes & Learning Community">
-<meta property="og:description" content="Access premium handwritten BSc Zoology, Botany, and Microbiology notes aligned perfectly with the DU FYUP/NEP syllabus. Built by students, for students.">
+<meta property="og:description" content="Access premium handwritten BSc Zoology, Botany, Microbiology, and Life Science notes perfectly aligned with the DU FYUP/NEP syllabus. Built by students, for students.">
 <meta property="og:image" content="https://sayheyshubh.netlify.app/attached_assets/mainlogo_1753383095126.png">
 <!-- Twitter SEO Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -24,7 +24,7 @@
 <!-- Google Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="style.css" />
 <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
@@ -97,7 +97,7 @@ gtag('config', 'G-01VF0W2CD1');
     {
       "@type": "Question",
       "name": "What is SayHeyShubh?",
-      "acceptedAnswer": { "@type": "Answer", "text": "SayHeyShubh is a peer-to-peer student-driven learning community for Delhi University students, offering semester-wise handwritten notes, practical files, and previous year papers for BSc Zoology, Botany, and Microbiology." }
+      "acceptedAnswer": { "@type": "Answer", "text": "SayHeyShubh is a peer-to-peer student-driven learning community for Delhi University students, offering semester-wise handwritten notes, practical files, and previous year papers for BSc Zoology, Botany, Microbiology, and Life Science." }
     },
     {
       "@type": "Question",
@@ -106,13 +106,23 @@ gtag('config', 'G-01VF0W2CD1');
     },
     {
       "@type": "Question",
-      "name": "Which subjects are currently covered on the platform?",
-      "acceptedAnswer": { "@type": "Answer", "text": "BSc Zoology and BSc Microbiology notes are fully live with semester modules and question banks. BSc Botany notes are dynamically being prepared and added by active community contributors." }
+      "name": "Which semesters are currently optimized live?",
+      "acceptedAnswer": { "@type": "Answer", "text": "BSc Zoology, Microbiology, and Life Science streams are fully live across core foundational semesters with DU PYQs. Botany modules are updated actively by community contributors." }
     },
     {
       "@type": "Question",
-      "name": "How can I become a student notes contributor?",
-      "acceptedAnswer": { "@type": "Answer", "text": "If you are a Delhi University student taking well-structured notes, you can apply directly through our Community page to become an active contributor." }
+      "name": "Are the practical files and lab manuals verified?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. All practical files and spotting manuals are cross-checked by top-performing students who have already passed those specific internal and external DU exams." }
+    },
+    {
+      "@type": "Question",
+      "name": "How often are the PYQs (Previous Year Questions) updated?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We actively update our database after every DU semester examination cycle, ensuring you always have the most recent exam trends and question formats." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to pay to access the study material?",
+      "acceptedAnswer": { "@type": "Answer", "text": "SayHeyShubh offers free previews and cheat sheets. Full, verified semester packs and complete PYQ solutions are available at extremely student-friendly micro-pricing to support platform maintenance." }
     }
   ]
 }
@@ -122,7 +132,7 @@ gtag('config', 'G-01VF0W2CD1');
 :root {
   --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   --dark-text: #1e293b;
-  --body-light: #f8fafc;
+  --body-light: #fcfcfd;
   --card-border: #e2e8f0;
 }
 body {
@@ -132,42 +142,116 @@ body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 /* Hero Section Fixes for Full Desktop Width & Edge Alignment */
 .hero {
   width: 100%;
-  max-width: 100% !important; /* Forces background to stretch full width of screen */
+  max-width: 100% !important;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background: linear-gradient(to bottom, #ffffff, transparent);
 }
 .hero-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 3rem;
-  padding: 5rem 2rem;
-  max-width: 1350px; /* Increased to push content towards the edges */
+  padding: 3rem 2rem 4rem 2rem; 
+  max-width: 1350px;
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
 }
 .hero-text {
-  max-width: 620px; /* Constrains text width so the gap actually separates text & photo */
+  max-width: 650px;
+}
+/* Trust Badge */
+.trust-badge-container {
+  display: inline-flex;
+  align-items: center;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+}
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #10b981;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.trust-badge-text {
+  color: #065f46;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
 }
 .hero-text h1 {
-  font-size: 3.4rem;
+  font-size: 3.6rem;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.15;
   color: #0f172a;
   margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+.hero-text h1 span {
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-right: 0.1em;
 }
 .hero-text p {
   font-size: 1.15rem;
   line-height: 1.7;
   color: #475569;
-  margin: 1.5rem 0 2rem 0;
+  margin: 0 0 2.5rem 0;
 }
+/* Quick Jump Mobile Menu */
+.quick-jump-nav {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.quick-jump-nav::-webkit-scrollbar { display: none; }
+.qj-pill {
+  white-space: nowrap;
+  padding: 0.6rem 1.2rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+@media (hover: hover) {
+  .qj-pill:hover {
+    background: #f8fafc;
+    color: #0f172a;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+  }
+}
+
 /* Interactive Hover Group for Image & Badge */
 .hero-image-wrapper {
   display: flex;
@@ -175,25 +259,27 @@ body {
   align-items: center;
   gap: 1.2rem;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Pointer removed so it doesn't look like a link */
   cursor: default;
+  position: relative;
 }
-/* Subtle lift effect on hover */
-.hero-image-wrapper:hover {
-  transform: translateY(-5px);
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(99,102,241,0) 70%);
+  border-radius: 50%;
+  z-index: -1;
 }
 .hero-image-wrapper img {
-  width: 290px;
-  height: 290px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-  border: 6px solid white;
+  border: 8px solid white;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-/* Soft shadow boost on hover */
-.hero-image-wrapper:hover img {
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 .founder-badge {
   background: white;
@@ -209,67 +295,523 @@ body {
   font-size: 0.95rem;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* Badge reacts to the wrapper hover */
-.hero-image-wrapper:hover .founder-badge {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+@media (hover: hover) {
+  .hero-image-wrapper:hover { transform: translateY(-5px); }
+  .hero-image-wrapper:hover img { box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+  .hero-image-wrapper:hover .founder-badge { box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
 }
+
 /* Utility Component Optimization for Buttons */
 .btn-action {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.9rem 2rem;
+  padding: 1rem 2.2rem;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.05rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
-.btn-action.primary {
-  background: var(--primary-gradient);
-  color: white;
+.btn-action.primary { background: var(--primary-gradient); color: white; }
+.btn-action.secondary { background: white; color: #4f46e5; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+
+@media (hover: hover) {
+  .btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  }
 }
-.btn-action.secondary {
-  background: white;
+
+/* =========================================
+   PROOF OF QUALITY SECTION (UI MOCKUP)
+   ========================================= */
+.proof-section {
+  max-width: 1200px;
+  margin: 5rem auto 7rem auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+.proof-text {
+  flex: 1;
+}
+.proof-text h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+.proof-text p {
+  color: #475569;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.proof-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.proof-feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.proof-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: #eef2ff;
   color: #4f46e5;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
 }
-.btn-action:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+.proof-feature-list h4 { margin: 0 0 0.3rem 0; color: #1e293b; font-size: 1.1rem; }
+.proof-feature-list p { margin: 0; font-size: 0.95rem; color: #64748b; }
+
+/* The 3D CSS overlapping note cards */
+.proof-visuals {
+  flex: 1;
+  position: relative;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
 }
+.pdf-mock-card {
+  position: absolute;
+  width: 290px;
+  height: 380px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  border: 1px solid #cbd5e1;
+  padding: 2.5rem 1.8rem;
+  /* Genuine lined paper effect */
+  background-image: repeating-linear-gradient(transparent, transparent 27px, #e2e8f0 28px);
+  background-attachment: local;
+  background-size: 100% 28px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Card 1: Placed behind */
+.mock-1 { transform: rotate(-6deg) translateX(-50px) translateZ(-40px); z-index: 1; }
+/* Card 2: Placed in front */
+.mock-2 { transform: rotate(5deg) translateX(40px) translateY(20px) translateZ(0); z-index: 2; }
+
+@media (hover: hover) {
+  /* Hover effect to spread them out */
+  .proof-visuals:hover .mock-1 { transform: rotate(-10deg) translateX(-80px) translateZ(-40px); }
+  .proof-visuals:hover .mock-2 { transform: rotate(8deg) translateX(60px) translateY(10px) translateZ(30px); }
+  
+  /* Enhancing Feature Boxes (Micro-interactions) */
+  .feature-icon-wrapper { transition: all 0.3s ease; }
+  .feature-box:hover .feature-icon-wrapper { transform: scale(1.1) rotate(-5deg); }
+}
+
+/* Simulated Note Content */
+.mock-hw-title {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  border-bottom: 2px solid #ef4444;
+  display: inline-block;
+}
+.mock-line {
+  height: 12px;
+  background: #cbd5e1;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.mock-line.short { width: 65%; }
+.mock-line.medium { width: 85%; }
+.mock-line.highlight {
+  background: #fef08a; /* Yellow highlighter */
+  opacity: 1;
+  width: 90%;
+  border-radius: 4px;
+}
+.mock-diagram-box {
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  height: 110px;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  position: relative;
+}
+.mock-diagram-box i {
+  font-size: 2.5rem;
+  color: #64748b;
+}
+.mock-pyq-stamp {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #ef4444;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transform: rotate(10deg);
+  border: 1.5px solid #ef4444;
+  padding: 2px 8px;
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+/* =========================================
+   NEW SMART STUDY FUNNEL UI 
+   ========================================= */
+.funnel-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+@media (hover: hover) {
+  .funnel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  }
+}
+.funnel-card.border-blue { border-left: 5px solid #6366f1; }
+.funnel-card.border-green { border-left: 5px solid #10b981; }
+.funnel-card.border-orange { border-left: 5px solid #f59e0b; }
+
+.funnel-icon-pill {
+  width: 100%;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+.funnel-icon-pill.bg-blue { background: #e0e7ff; color: #4f46e5; }
+.funnel-icon-pill.bg-green { background: #dcfce7; color: #16a34a; }
+.funnel-icon-pill.bg-orange { background: #ffedd5; color: #ea580c; }
+
+.funnel-card h3 {
+  font-size: 1.25rem;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+.funnel-card p {
+  color: #475569;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* =========================================
+   YOUTUBE SECTION UI ENHANCEMENT
+   ========================================= */
+.channel-preview {
+  padding: 0 0 0 1.5rem; 
+  border-left: 4px solid #ef4444; 
+  margin-bottom: 3rem;
+}
+.channel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.yt-video-card {
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+.yt-thumbnail-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.yt-thumbnail-wrapper img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.yt-play-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.yt-play-overlay i {
+  color: white; font-size: 3rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+@media (hover: hover) {
+  .yt-video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+    border-color: #cbd5e1;
+  }
+  .yt-video-card:hover .yt-play-overlay { opacity: 1; }
+  .yt-video-card:hover .yt-thumbnail-wrapper img { transform: scale(1.05); }
+}
+
 /* Core Mobile-First Flex & Grid Refinement */
+@media (max-width: 1024px) {
+  .proof-section { flex-direction: column; text-align: center; }
+  .proof-feature-list li { text-align: left; }
+  .proof-visuals { margin-top: 2rem; width: 100%; }
+}
+
 @media (max-width: 768px) {
   .hero-inner {
     flex-direction: column-reverse;
     padding: 3rem 1.2rem;
     text-align: center;
   }
-  .hero-text {
-    max-width: 100%; /* Resets constraint so it spans properly on phones */
+  .hero-text { max-width: 100%; }
+  .trust-badge-container { margin: 0 auto 1.5rem auto; }
+  .hero-text h1 { font-size: 2.5rem; }
+  .hero-text p { font-size: 1rem; }
+  .hero-ctas { justify-content: center; }
+  .hero-image-wrapper img { width: 250px; height: 250px; }
+  .hero-image-wrapper::before { width: 280px; height: 280px; }
+  .btn-action { width: 100%; justify-content: center; box-sizing: border-box; }
+  .quick-jump-nav { justify-content: flex-start; padding-bottom: 1rem; }
+  .columns, .content-grid { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
+  .proof-text h2 { font-size: 2rem; }
+  
+  /* Fixing Proof Section Overlap on Mobile explicitly */
+  .proof-visuals {
+    min-height: 450px; /* Guarantees the cards won't spill out */
+    height: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
-  .hero-text h1 {
-    font-size: 2.2rem;
+  .mock-1 { transform: rotate(-4deg) translateX(-30px); }
+  .mock-2 { transform: rotate(4deg) translateX(30px) translateY(10px); }
+}
+
+/* ==========================================================
+   PROFESSIONAL EDTECH FOOTER STYLES
+   ========================================================== */
+.pro-footer {
+  background-color: #0b0f19;
+  color: #94a3b8;
+  padding: 5rem 0 0 0;
+  border-top: 1px solid #1e293b;
+  font-family: 'Inter', sans-serif;
+  margin-top: auto;
+}
+.pro-footer-container {
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.pro-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1.3fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+/* Brand Column */
+.pro-footer-brand .footer-logo-img {
+  max-width: 250px;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+.pro-footer-brand p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 0 1.8rem 0;
+  max-width: 360px;
+}
+.pro-footer-socials {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.footer-social-pill {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+@media (hover: hover) {
+  .footer-social-pill:hover { background: #6366f1; color: white; transform: translateY(-3px); }
+}
+
+/* Navigation & Contact Columns */
+.pro-footer-col h3 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.5px;
+}
+.pro-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pro-footer-col ul li {
+  margin-bottom: 0.9rem;
+}
+
+/* Kills any global white box hover completely + Adds Swipe */
+.pro-footer-col ul li a {
+  display: inline-block;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Minimalist Inline Contact UI - Force Transparent Backgrounds */
+.footer-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  background: transparent !important;
+  border: none !important;
+}
+.footer-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+.footer-contact-link {
+  display: inline-block;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  border: none !important;
+}
+
+@media (hover: hover) {
+  .pro-footer-col ul li a:hover { color: #6366f1; transform: translateX(4px); background: transparent !important; border: none !important; }
+  .footer-contact-row:hover .footer-contact-icon { background: #6366f1; color: white; }
+  .footer-contact-row:hover .footer-contact-link { color: #6366f1; transform: translateX(4px); }
+}
+
+/* Footer Bottom Copyright Bar */
+.pro-footer-bottom {
+  border-top: 1px solid #1e293b;
+  padding: 1.8rem 0;
+}
+.pro-footer-bottom-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+.pro-footer-bottom p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+.pro-footer-legal-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.pro-footer-legal-links a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: transparent !important;
+  border: none !important;
+}
+@media (hover: hover) {
+  .pro-footer-legal-links a:hover { color: #6366f1; background: transparent !important; border: none !important; }
+}
+
+/* Mobile Responsiveness for Footer */
+@media (max-width: 1024px) {
+  .pro-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
   }
-  .hero-text p {
-    font-size: 1rem;
+}
+@media (max-width: 768px) {
+  .pro-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
   }
-  .hero-ctas {
+  .pro-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pro-footer-brand .footer-logo-img {
+    margin: 0 auto 1.5rem auto;
+  }
+  .pro-footer-brand p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pro-footer-socials {
     justify-content: center;
   }
-  .hero-image-wrapper:hover {
-    transform: none; /* Disable hover shift on mobile touch */
-  }
-  .btn-action {
-    width: 100%;
+  .footer-contact-row {
     justify-content: center;
-    box-sizing: border-box;
   }
-  .columns, .content-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.2rem !important;
+  .pro-footer-bottom-flex {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  .pro-footer-legal-links {
+    justify-content: center;
   }
 }
 </style>
@@ -306,6 +848,12 @@ body {
 <section class="hero">
 <div class="hero-inner">
 <div class="hero-text">
+<!-- NEW: Trust Badge -->
+<div class="trust-badge-container">
+  <span class="pulse-dot"></span>
+  <span class="trust-badge-text">100% Updated for Latest DU NEP/FYUP Curriculum</span>
+</div>
+
 <h1>India's Leading Student-Driven<br>
 <span style="background: linear-gradient(45deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-right: 0.1em;">DU Learning Community</span>
 </h1>
@@ -314,37 +862,112 @@ body {
 <a href="notes" class="btn-action primary"><i class="fa-solid fa-book-open"></i> Explore Notes</a>
 <a href="community" class="btn-action secondary"><i class="fa-solid fa-users"></i> Meet the Community</a>
 </div>
+
+<!-- NEW: Mobile Quick Jump Menu -->
+<div class="quick-jump-nav">
+  <a href="#subjects" class="qj-pill">🧬 Zoology</a>
+  <a href="#subjects" class="qj-pill">🌿 Botany</a>
+  <a href="#subjects" class="qj-pill">🦠 Microbiology</a>
+  <a href="#subjects" class="qj-pill">🧪 Life Science</a>
+</div>
+
 </div>
 <!-- Wrapped Photo & Badge for unified hover interaction -->
 <div class="hero-image-wrapper">
 <img src="attached_assets/shubham_1753383095126.jpg" alt="Shubham Kumar - Founder of SayHeyShubh">
 <div class="founder-badge">
-<i class="fa-solid fa-check-circle"></i> Shubham Kumar • Founder
+<i class="fa-solid fa-check-circle" style="color: #10b981;"></i> Shubham Kumar • Founder
 </div>
 </div>
 </div>
 </section>
 
-<hr class="section-divider" style="border:0; height:1px; background:#e2e8f0; max-width:1100px; margin:2rem auto;">
+<!-- NEW: Authentic Proof of Quality (Deck of Cards UI) -->
+<section class="proof-section">
+  <div class="proof-text">
+    <h2>Stop Studying from Cluttered Textbooks</h2>
+    <p>Our notes aren't just blocks of text. They are engineered specifically for Delhi University exam formats to help you write structured answers that score 9+ CGPA.</p>
+    <ul class="proof-feature-list">
+      <li>
+        <div class="proof-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <div>
+          <h4>Clean, Clear Handwriting</h4>
+          <p>Scanned in high-resolution directly from the notebooks of DU toppers. No illegible scribbles.</p>
+        </div>
+      </li>
+      <li>
+        <div class="proof-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <div>
+          <h4>Flowcharts & Labeled Diagrams</h4>
+          <p>Complex biological processes broken down into visual flowcharts that examiners love to see.</p>
+        </div>
+      </li>
+      <li>
+        <div class="proof-icon"><i class="fa-solid fa-bullseye" style="color: #ea580c;"></i></div>
+        <div>
+          <h4>PYQ Highlights</h4>
+          <p>Topics that appeared in past DU exams are explicitly tagged so you know exactly what to prioritize.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="proof-visuals">
+    <!-- Card 1: Background Note -->
+    <div class="pdf-mock-card mock-1">
+      <h3 class="mock-hw-title">Non Chordates</h3>
+      <div class="mock-line medium"></div>
+      <div class="mock-line"></div>
+      <div class="mock-line short"></div>
+      
+      <div class="mock-diagram-box">
+        <i class="fa-solid fa-dna"></i>
+      </div>
+      
+      <div class="mock-line highlight"></div>
+      <div class="mock-line"></div>
+    </div>
+    
+    <!-- Card 2: Foreground Note with PYQ stamp -->
+    <div class="pdf-mock-card mock-2">
+      <div class="mock-pyq-stamp">PYQ <i class="fa-solid fa-arrow-turn-down" style="font-size: 0.9rem; margin-left: 2px;"></i></div>
+      <h3 class="mock-hw-title" style="border-bottom-color: #3b82f6;">Biochemistry</h3>
+      <div class="mock-line highlight"></div>
+      <div class="mock-line medium"></div>
+      <div class="mock-line"></div>
+      <div class="mock-line short"></div>
+      
+      <div class="mock-diagram-box">
+        <i class="fa-solid fa-sitemap"></i>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Step-by-Step Interactive Workflow Feature Block -->
 <section class="how-it-works" style="max-width:1100px; margin:3rem auto; padding:0 1.5rem;">
 <h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:2.5rem;">Your Smart Study Funnel</h2>
+
 <div class="columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-<div style="background:white; padding:2rem; border-radius:16px; border:1px solid var(--card-border); box-shadow:0 4px 6px rgba(0,0,0,0.01);">
-<div style="width:40px; height:40px; background:#e0e7ff; color:#4f46e5; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:1rem;">1</div>
-<h3 style="font-size:1.2rem; margin:0 0 0.5rem 0;">Filter By Subject</h3>
-<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Locate your designated pathway instantly inside Zoology, Botany, or Microbiology configurations.</p>
+<div class="funnel-card border-blue">
+<div class="funnel-icon-pill bg-blue">
+  <b>1. Filter By Subject </b>
 </div>
-<div style="background:white; padding:2rem; border-radius:16px; border:1px solid var(--card-border); box-shadow:0 4px 6px rgba(0,0,0,0.01);">
-<div style="width:40px; height:40px; background:#dcfce7; color:#16a34a; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:1rem;">2</div>
-<h3 style="font-size:1.2rem; margin:0 0 0.5rem 0;">Secure Sign In</h3>
-<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Authenticate securely with Google Auth to instantly register your active mobile device profile.</p>
+<p>Locate your designated pathway instantly inside Zoology, Botany, Microbiology, or Life Science configurations.</p>
 </div>
-<div style="background:white; padding:2rem; border-radius:16px; border:1px solid var(--card-border); box-shadow:0 4px 6px rgba(0,0,0,0.01);">
-<div style="width:40px; height:40px; background:#ffedd5; color:#ea580c; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:1rem;">3</div>
-<h3 style="font-size:1.2rem; margin:0 0 0.5rem 0;">Excel in Exams</h3>
-<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Utilize verified, highly accurate, high-yielding question blocks to scale your college grades.</p>
+
+<div class="funnel-card border-green">
+<div class="funnel-icon-pill bg-green">
+  <b>2. Secure Sign In</b>
+</div>
+<p>Authenticate securely with Google Auth to instantly register your active mobile device profile.</p>
+</div>
+
+<div class="funnel-card border-orange">
+<div class="funnel-icon-pill bg-orange">
+ <b> 3. Excel in Exams</b>
+</div>
+<p>Utilize verified, highly accurate, high-yielding question blocks to rapidly scale your college grades.</p>
 </div>
 </div>
 </section>
@@ -353,15 +976,15 @@ body {
 <section class="why-us" style="max-width:1100px; margin:4rem auto; padding:0 1.5rem;">
 <h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:2.5rem;">Engineered for Delhi University Science Students</h2>
 <div class="columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-<div>
+<div class="feature-box">
 <h4 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#4f46e5;"><i class="fa-solid fa-graduation-cap"></i> Syllabus Accuracy Guarantee</h4>
 <p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">Every singular note file matches the precise parameters of the DU FYUP/NEP roadmap. Zero fluff, absolute compliance.</p>
 </div>
-<div>
+<div class="feature-box">
 <h4 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#10b981;"><i class="fa-solid fa-square-check"></i> Peer-Reviewed Ecosystems</h4>
-<p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">Our materials are structured and verified by fellow DU students who have faced the exact exam halls. No external random agencies.</p>
+<p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">Our materials are structured and verified by fellow DU students who have faced the exact exam halls.</p>
 </div>
-<div>
+<div class="feature-box">
 <h4 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#f59e0b;"><i class="fa-solid fa-network-wired"></i> Hyper-Relatable Growth</h4>
 <p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">We merge premium education with mental health awareness, digital workflows, and deep community support systems.</p>
 </div>
@@ -369,59 +992,82 @@ body {
 </section>
 
 <!-- Premium Educational Subject Modules Navigation Framework -->
-<section class="subjects" style="max-width:1100px; margin:4rem auto; padding:0 1.5rem;">
+<section id="subjects" class="subjects" style="max-width:1100px; margin:6rem auto 4rem auto; padding:0 1.5rem;">
 <h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:0.5rem;">Explore Subject Material Matrices</h2>
 <p style="text-align:center; color:#64748b; max-width:650px; margin:0 auto 3rem auto; line-height:1.6;">Access our premium repository of handwritten notes files, internal evaluation files, and fully solved previous year paper files.</p>
-<div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
-<div class="content-card" onclick="window.location.href='zoology'" style="background:white; padding:2.5rem; border-radius:20px; border:1px solid var(--card-border); cursor:pointer; transition:all 0.3s ease; text-align:center;">
-<div class="content-icon" style="font-size:3rem; margin-bottom:1rem; color:#ef4444;"><i class="fa-solid fa-dna"></i></div>
-<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0;">BSc Zoology (Hons)</h3>
+<div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+<div class="content-card feature-box" onclick="window.location.href='zoology'" style="cursor:pointer; text-align:center;">
+<div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #fee2e2; color: #ef4444; width: 70px; height: 70px; font-size: 2.5rem;">
+  <i class="fa-solid fa-dna"></i>
+</div>
+<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Zoology (Hons)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Full handwritten chapter solutions, detailed structural morphology charts, and solved DU term question logs.</p>
 </div>
-<div class="content-card" onclick="window.location.href='botany'" style="background:white; padding:2.5rem; border-radius:20px; border:1px solid var(--card-border); cursor:pointer; transition:all 0.3s ease; text-align:center;">
-<div class="content-icon" style="font-size:3rem; margin-bottom:1rem; color:#10b981;"><i class="fa-solid fa-seedling"></i></div>
-<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0;">BSc Botany (Hons)</h3>
+<div class="content-card feature-box" onclick="window.location.href='botany'" style="cursor:pointer; text-align:center;">
+<div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #d1fae5; color: #10b981; width: 70px; height: 70px; font-size: 2.5rem;">
+  <i class="fa-solid fa-seedling"></i>
+</div>
+<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Botany (Hons)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Comprehensive physiology diagrams, taxonomic structural breakdowns, and upcoming semester modules.</p>
 </div>
-<div class="content-card" onclick="window.location.href='microbiology'" style="background:white; padding:2.5rem; border-radius:20px; border:1px solid var(--card-border); cursor:pointer; transition:all 0.3s ease; text-align:center;">
-<div class="content-icon" style="font-size:3rem; margin-bottom:1rem; color:#8b5cf6;"><i class="fa-solid fa-virus"></i></div>
-<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0;">BSc Microbiology (Hons)</h3>
+<div class="content-card feature-box" onclick="window.location.href='microbiology'" style="cursor:pointer; text-align:center;">
+<div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #ede9fe; color: #8b5cf6; width: 70px; height: 70px; font-size: 2.5rem;">
+  <i class="fa-solid fa-virus"></i>
+</div>
+<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Microbiology (Hons)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Premium biochemistry flowcharts, structural logic vectors, and verified lab files managed by Aditi.</p>
+</div>
+<div class="content-card feature-box" onclick="window.location.href='lifescience'" style="cursor:pointer; text-align:center;">
+<div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #e0f2fe; color: #0284c7; width: 70px; height: 70px; font-size: 2.5rem;">
+  <i class="fa-solid fa-flask"></i>
+</div>
+<h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Life Science (Prog.)</h3>
+<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Integrated interdisciplinary notes covering Chemistry, Zoology, and Botany disciplines. Simplified PYQs.</p>
 </div>
 </div>
 </section>
 
 <!-- YouTube Video Integration Layer (ShubhiPhilia companion engine) -->
-<section class="youtube-preview" style="background:#f1f5f9; padding:4rem 1.5rem;">
+<section class="youtube-preview" style="background:#f1f5f9; padding:5rem 1.5rem;">
 <div style="max-width:1100px; margin:0 auto;">
-<div class="channel-preview" style="background:white; padding:2rem; border-radius:20px; border:1px solid var(--card-border); margin-bottom:2.5rem;">
-<div class="channel-info" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
-<img src="attached_assets/shubhiphilia.jpg" alt="ShubhiPhilia YouTube Digital Science Channel Avatar" class="channel-thumb" style="width:70px; height:70px; border-radius:50%;">
+<div class="channel-preview">
+<div class="channel-info">
+<img src="attached_assets/shubhiphilia.jpg" alt="ShubhiPhilia YouTube Digital Science Channel Avatar" style="width:75px; height:75px; border-radius:50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
 <div class="channel-details">
-<h3 style="margin:0 0 0.3rem 0; font-size:1.4rem;">Visual Mastery with ShubhiPhilia</h3>
-<p style="margin:0; color:#64748b; font-size:0.95rem; line-height:1.6;">Complement your technical note review files with detailed video lectures, rapid college revision sprints, and raw student life maps on YouTube.</p>
+<h3 style="margin:0 0 0.5rem 0; font-size:1.8rem; color:#0f172a; font-weight:800;">Visual Mastery with ShubhiPhilia</h3>
+<p style="margin:0; color:#475569; font-size:1.05rem; line-height:1.6;">Complement your technical note review files with detailed video lectures, rapid college revision sprints, and raw student life maps on YouTube.</p>
 </div>
 </div>
 </div>
+
 <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-<a href="watch-ecology" class="content-card" style="text-decoration:none; color:inherit; background:white; padding:1rem; border-radius:16px; border:1px solid var(--card-border); display:block;">
-<img src="https://i.ytimg.com/vi/0QyVX0lVcMM/hqdefault.jpg" alt="Introduction to Ecology Video Lesson Thumbnail" style="width:100%; border-radius:12px; margin-bottom:1rem;">
-<h4 style="margin:0 0 0.5rem 0; font-size:1.1rem;">Introduction to Ecology</h4>
-<p style="margin:0; color:#64748b; font-size:0.85rem;">BSc Zoology Honours Semester 1 Modules</p>
+<a href="watch-ecology" class="yt-video-card">
+  <div class="yt-thumbnail-wrapper">
+    <img src="https://i.ytimg.com/vi/0QyVX0lVcMM/hqdefault.jpg" alt="Introduction to Ecology Video Lesson Thumbnail">
+    <div class="yt-play-overlay"><i class="fa-solid fa-circle-play"></i></div>
+  </div>
+  <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:#0f172a;">Introduction to Ecology</h4>
+  <p style="margin:0; color:#64748b; font-size:0.85rem;">BSc Zoology Honours Semester 1 Modules</p>
 </a>
-<a href="watch-survival-guide" class="content-card" style="text-decoration:none; color:inherit; background:white; padding:1rem; border-radius:16px; border:1px solid var(--card-border); display:block;">
-<img src="https://i.ytimg.com/vi/wewhZlQ0IlI/hqdefault.jpg" alt="BSc Zoology First Year Survival Blueprint Thumbnail" style="width:100%; border-radius:12px; margin-bottom:1rem;">
-<h4 style="margin:0 0 0.5rem 0; font-size:1.1rem;">First Year Survival Blueprint</h4>
-<p style="margin:0; color:#64748b; font-size:0.85rem;">Exam strategies & survival architectures for DU freshers</p>
+<a href="watch-survival-guide" class="yt-video-card">
+  <div class="yt-thumbnail-wrapper">
+    <img src="https://i.ytimg.com/vi/wewhZlQ0IlI/hqdefault.jpg" alt="BSc Zoology First Year Survival Blueprint Thumbnail">
+    <div class="yt-play-overlay"><i class="fa-solid fa-circle-play"></i></div>
+  </div>
+  <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:#0f172a;">First Year Survival Blueprint</h4>
+  <p style="margin:0; color:#64748b; font-size:0.85rem;">Exam strategies & survival architectures for DU freshers</p>
 </a>
-<a href="watch-non-chordates" class="content-card" style="text-decoration:none; color:inherit; background:white; padding:1rem; border-radius:16px; border:1px solid var(--card-border); display:block;">
-<img src="https://i.ytimg.com/vi/FMTwnbzEWAg/hqdefault.jpg" alt="Classification of Non-Chordates Video Class Thumbnail" style="width:100%; border-radius:12px; margin-bottom:1rem;">
-<h4 style="margin:0 0 0.5rem 0; font-size:1.1rem;">Introduction to Non-Chordates</h4>
-<p style="margin:0; color:#64748b; font-size:0.85rem;">Phylum-wise taxonomic classification masterclasses</p>
+<a href="watch-non-chordates" class="yt-video-card">
+  <div class="yt-thumbnail-wrapper">
+    <img src="https://i.ytimg.com/vi/FMTwnbzEWAg/hqdefault.jpg" alt="Classification of Non-Chordates Video Class Thumbnail">
+    <div class="yt-play-overlay"><i class="fa-solid fa-circle-play"></i></div>
+  </div>
+  <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:#0f172a;">Introduction to Non-Chordates</h4>
+  <p style="margin:0; color:#64748b; font-size:0.85rem;">Phylum-wise taxonomic classification masterclasses</p>
 </a>
 </div>
-<div style="text-align:center; margin-top:2.5rem;">
-<a href="https://www.youtube.com/@ShubhiPhilia" class="btn-action primary" target="_blank" style="background:#ff0000;"><i class="fa-brands fa-youtube"></i> Visit YouTube Channel</a>
+<div style="text-align:center; margin-top:3.5rem;">
+<a href="https://www.youtube.com/@ShubhiPhilia" class="btn-action primary" target="_blank" style="background:#ef4444;"><i class="fa-brands fa-youtube"></i> Subscribe on YouTube</a>
 </div>
 </div>
 </section>
@@ -430,15 +1076,15 @@ body {
 <section class="testimonials" style="max-width:1100px; margin:5rem auto; padding:0 1.5rem;">
 <h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:3rem;"><i class="fa-solid fa-heart" style="color:#ef4444;"></i> Trusted by Thousands of DU Freshers</h2>
 <div class="columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-<div style="background:white; border-radius:20px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.02); border:1px solid var(--card-border);">
+<div class="feature-box" style="text-align:left;">
 <p style="color:#4a5568; line-height:1.7; font-style:italic; margin:0 0 1.5rem 0;">"It won't be wrong to say that this site has been everything that I needed. Being a fresher who was tensed regarding the course and syllabus, this platform brought an end to all my worries."</p>
 <p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><i class="fa-solid fa-circle-user" style="color:#6366f1;"></i> Roshni Kumari</p>
 </div>
-<div style="background:white; border-radius:20px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.02); border:1px solid var(--card-border);">
+<div class="feature-box" style="text-align:left;">
 <p style="color:#4a5568; line-height:1.7; font-style:italic; margin:0 0 1.5rem 0;">"Thank you so much for being a lifesaver in my 1st year of college! Your notes and study materials were super helpful, and I really appreciate the immense effort."</p>
 <p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><i class="fa-solid fa-circle-user" style="color:#10b981;"></i> Kajal Kheria</p>
 </div>
-<div style="background:white; border-radius:20px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.02); border:1px solid var(--card-border);">
+<div class="feature-box" style="text-align:left;">
 <p style="color:#4a5568; line-height:1.7; font-style:italic; margin:0 0 1.5rem 0;">"Honestly, these notes are a masterpiece! The way everything is organized and explained makes studying so much easier. Truly some of the best notes I've ever found."</p>
 <p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><i class="fa-solid fa-circle-user" style="color:#8b5cf6;"></i> Saniya Kain</p>
 </div>
@@ -458,8 +1104,17 @@ body {
 </div>
 <div class="faq-item" style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e2e8f0;">
 <h3 style="color:#0f172a; font-size:1.15rem; margin:0 0 0.5rem 0;">Which semesters are currently optimized live?</h3>
-<p style="color:#475569; line-height:1.6; margin:0; font-size:0.95rem;">BSc Zoology and Microbiology streams are live across core foundational semesters. Botany modules are updated weekly by active content contributors.</p>
+<p style="color:#475569; line-height:1.6; margin:0; font-size:0.95rem;">BSc Zoology, Microbiology, Botany and Life Science streams are fully live across core foundational semesters with DU PYQs. </p>
 </div>
+<div class="faq-item" style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e2e8f0;">
+<h3 style="color:#0f172a; font-size:1.15rem; margin:0 0 0.5rem 0;">Are the practical files and lab manuals verified?</h3>
+<p style="color:#475569; line-height:1.6; margin:0; font-size:0.95rem;">Yes. All practical files and spotting manuals are cross-checked by top-performing students who have already passed those specific internal and external DU exams.</p>
+</div>
+<div class="faq-item" style="margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e2e8f0;">
+<h3 style="color:#0f172a; font-size:1.15rem; margin:0 0 0.5rem 0;">How often are the PYQs (Previous Year Questions) updated?</h3>
+<p style="color:#475569; line-height:1.6; margin:0; font-size:0.95rem;">We actively update our database after every DU semester examination cycle, ensuring you always have the most recent exam trends and question formats.</p>
+</div>
+
 </section>
 
 <!-- Community Expansion Action Teaser -->
@@ -469,11 +1124,76 @@ body {
 <a href="community" class="btn-action secondary" style="color:#4f46e5; font-weight:700;">Join the Student Network</a>
 </section>
 
-<!-- Clean Minimalist Footer Component -->
-<footer>
-<div class="container" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding: 2rem 0; color: #64748b; font-size: 0.95rem;">
-<p>&copy; 2026 SayHeyShubh. Crafted for Student Impact & Creative Growth.</p>
-<p><a href="privacy-policy" style="color:#6366f1; text-decoration:none; font-weight:500;">Privacy Policy & Safety Framework</a></p>
+<!-- PROFESSIONAL EDTECH FOOTER COMPONENT -->
+<footer class="pro-footer">
+<div class="pro-footer-container">
+<div class="pro-footer-grid">
+<!-- Col 1: Brand & Intro -->
+<div class="pro-footer-brand">
+<a href="index">
+<img src="attached_assets/sayheyshubh_footer_logo.png" alt="SayHeyShubh Logo" class="footer-logo-img">
+</a>
+<p>Built in the classrooms of Delhi University, SayHeyShubh is a student-driven academic ecosystem. We consolidate semester-wise notes, practical files, cheat sheets of most important questions and previous year question databases into one accessible learning hub.</p>
+<div class="pro-footer-socials">
+<a href="https://youtube.com/@ShubhiPhilia" target="_blank" aria-label="YouTube" class="footer-social-pill"><i class="fa-brands fa-youtube"></i></a>
+<a href="https://t.me/sayheyshubh" target="_blank" aria-label="Telegram" class="footer-social-pill"><i class="fa-brands fa-telegram"></i></a>
+<a href="https://linkedin.com/in/sayheyshubh" target="_blank" aria-label="LinkedIn" class="footer-social-pill"><i class="fa-brands fa-linkedin-in"></i></a>
+<a href="https://instagram.com/sayheyshubh" target="_blank" aria-label="Instagram" class="footer-social-pill"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+
+<!-- Col 2: Quick Links -->
+<div class="pro-footer-col">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="notes">Study Notes</a></li>
+<li><a href="portfolio">Portfolio</a></li>
+<li><a href="community">Community</a></li>
+<li><a href="blogs">Creator Journal</a></li>
+<li><a href="about">About Founder</a></li>
+</ul>
+</div>
+
+<!-- Col 3: Subject Directories -->
+<div class="pro-footer-col">
+<h3>Subject Directories</h3>
+<ul>
+<li><a href="zoology">BSc Zoology (Hons)</a></li>
+<li><a href="botany">BSc Botany (Hons)</a></li>
+<li><a href="microbiology">BSc Microbiology (Hons)</a></li>
+<li><a href="lifescience">BSc Life Science (Prog.)</a></li>
+</ul>
+</div>
+
+<!-- Col 4: Help & Contact (Minimal Inline Text) -->
+<div class="pro-footer-col">
+<h3>Help & Contact</h3>
+<div class="footer-contact-row">
+<i class="fa-solid fa-envelope footer-contact-icon"></i>
+<a href="mailto:shubhamkmr.work@gmail.com" class="footer-contact-link">shubhamkmr.work@gmail.com</a>
+</div>
+<div class="footer-contact-row">
+<i class="fa-brands fa-telegram footer-contact-icon"></i>
+<a href="https://t.me/sayheyshubh" target="_blank" class="footer-contact-link">Join Telegram Group</a>
+</div>
+<div class="footer-contact-row">
+<i class="fa-brands fa-instagram footer-contact-icon"></i>
+<a href="https://instagram.com/sayheyshubh" target="_blank" class="footer-contact-link">Follow @sayheyshubh</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Bottom Copyright & Legal Links -->
+<div class="pro-footer-bottom">
+<div class="pro-footer-bottom-flex">
+<p>&copy; 2026 SayHeyShubh. Built by students, for students. All rights reserved.</p>
+<div class="pro-footer-legal-links">
+<a href="privacy-policy">Privacy Policy</a>
+<a href="privacy-policy">Terms of Use</a>
+<a href="privacy-policy">Cookie Policy</a>
+</div>
+</div>
 </div>
 </footer>
 
@@ -509,9 +1229,9 @@ body {
 .cookie-banner a { color: #6366f1; text-decoration: none; font-weight: 500; }
 .cookie-buttons { display: flex; align-items: center; gap: 10px; }
 .accept-btn { background: #6366f1; color: white; padding: 6px 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; transition: background 0.3s ease; }
-.accept-btn:hover { background: #4f46e5; }
+@media (hover: hover) { .accept-btn:hover { background: #4f46e5; } }
 .close-btn { font-size: 20px; cursor: pointer; color: #777; transition: color 0.3s ease; }
-.close-btn:hover { color: #333; }
+@media (hover: hover) { .close-btn:hover { color: #333; } }
 .cookie-banner.hidden { opacity: 0; pointer-events: none; }
 </style>
 <script>
