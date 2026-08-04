@@ -1033,37 +1033,66 @@
               const replyDate = new Date(reply.created_at);
               const formattedReplyDate = replyDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
               return `
-                <div class="reply-item">
-                  <div class="comment-header">
-                    <div class="comment-author-info">
-                      <span class="comment-author">${escapeHtml(reply.name)}</span>
-                      <span class="comment-email">${maskEmail(reply.email)}</span>
+                <div class="reply-item" itemscope itemtype="https://schema.org/CreativeWork">
+                  <div itemscope itemtype="https://schema.org/Comment" itemprop="comment">
+                    <div class="comment-header">
+                      <div class="comment-author-info">
+                        <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                          <span itemprop="name">${escapeHtml(reply.name)}</span>
+                        </span>
+                        <span class="comment-email">${maskEmail(reply.email)}</span>
+                      </div>
+                      <time class="comment-date" datetime="${reply.created_at}" itemprop="datePublished">${formattedReplyDate}</time>
                     </div>
-                    <time class="comment-date">${formattedReplyDate}</time>
+                    <div class="comment-text" itemprop="text">${escapeHtml(reply.comment)}</div>
                   </div>
-                  <div class="comment-text">${escapeHtml(reply.comment)}</div>
                 </div>
               `;
             }).join('')}
           </div>
         ` : '';
 
+        const hasRating = comment.rating && comment.rating >= 1 && comment.rating <= 5;
+        const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
+
+        const aggregateRatingHtml = (pageRatingSummary && pageRatingSummary.average && pageRatingSummary.count > 0) ? `
+          <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            <meta itemprop="ratingValue" content="${pageRatingSummary.average}">
+            <meta itemprop="reviewCount" content="${pageRatingSummary.count}">
+            <meta itemprop="bestRating" content="5">
+          </span>` : '';
+        const reviewRatingHtml = hasRating ? `
+          <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+            <meta itemprop="ratingValue" content="${comment.rating}">
+            <meta itemprop="bestRating" content="5">
+          </span>
+          <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
+            <meta itemprop="name" content="BSc Life Science Notes">${aggregateRatingHtml}
+          </span>
+        ` : '';
+        const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
+
         return `
-          <div class="comment-item" data-comment-id="${comment.id}">
-            <div class="comment-header">
-              <div class="comment-author-info">
-                <span class="comment-author">${escapeHtml(comment.name)}</span>
-                <span class="comment-email">${maskEmail(comment.email)}</span>
+          <div class="comment-item" data-comment-id="${comment.id}" itemscope itemtype="https://schema.org/CreativeWork">
+            <div itemscope itemtype="${itemType}" itemprop="comment">
+              <div class="comment-header">
+                <div class="comment-author-info">
+                  <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">${escapeHtml(comment.name)}</span>
+                  </span>
+                  <span class="comment-email">${maskEmail(comment.email)}</span>
+                </div>
+                <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
               </div>
-              <time class="comment-date">${formattedDate}</time>
+              ${renderStarsHtml(comment.rating)}
+              ${reviewRatingHtml}
+              ${commentTextHtml}
+              <div class="comment-actions">
+                <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>
+                ${viewRepliesBtn}
+              </div>
+              ${repliesHTML}
             </div>
-            ${renderStarsHtml(comment.rating)}
-            ${comment.comment ? `<div class="comment-text">${escapeHtml(comment.comment)}</div>` : ''}
-            <div class="comment-actions">
-              <button class="reply-btn" onclick="showReplyForm('${comment.id}')">💬 Reply</button>
-              ${viewRepliesBtn}
-            </div>
-            ${repliesHTML}
           </div>
         `;
       }).join('');
