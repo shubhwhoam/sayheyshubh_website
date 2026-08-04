@@ -705,6 +705,10 @@
   <!-- Scripts -->
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
+
+  <a href="https://t.me/sayheyshubh" class="doubts-btn" id="doubts-btn">💬</a>
+  <div class="doubts-bubble" id="doubts-bubble">Got a question?</div>
+
   <script>
     // FAQ Toggle
     function toggleFAQ(button) {
@@ -1174,6 +1178,14 @@
       }
       loadUserProfile();
       loadComments();
+    });
+
+    // Doubts bubble — show 0.8s after load, hide 3s after that
+    document.addEventListener("DOMContentLoaded", function() {
+      const bubble = document.getElementById("doubts-bubble");
+      if (!bubble) return;
+      setTimeout(() => { bubble.classList.add("show"); }, 800);
+      setTimeout(() => { bubble.classList.remove("show"); }, 3800);
     });
 
   </script>
