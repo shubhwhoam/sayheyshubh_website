@@ -44,7 +44,7 @@ function renderStarsHtml(rating) {
   return `<div class="star-display" aria-label="${rating} out of 5 stars">${stars}</div>`;
 }
 
-function renderCommentHtml(comment) {
+function renderCommentHtml(comment, ratingSummary) {
   const date = new Date(comment.created_at);
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric',
@@ -66,7 +66,7 @@ function renderCommentHtml(comment) {
                   <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">${escapeHtml(reply.name)}</span></span>
                   <span class="comment-email">${maskEmail(reply.email)}</span>
                 </div>
-                <time class="comment-date" datetime="${reply.created_at}" itemprop="datePublished">${formattedReplyDate}</time>
+                <time class="comment-date" datetime="${new Date(reply.created_at).toISOString()}" itemprop="datePublished">${formattedReplyDate}</time>
               </div>
               <div class="comment-text" itemprop="text">${escapeHtml(reply.comment)}</div>
             </div>
@@ -83,11 +83,25 @@ function renderCommentHtml(comment) {
 
   const hasRating = comment.rating && comment.rating >= 1 && comment.rating <= 5;
   const itemType = hasRating ? 'https://schema.org/Review' : 'https://schema.org/Comment';
+
+  // Only attach aggregateRating to itemReviewed when we actually have real ratings to report
+  const aggregateRatingHtml = (ratingSummary && ratingSummary.average && ratingSummary.count > 0) ? `
+      <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+        <meta itemprop="ratingValue" content="${ratingSummary.average}">
+        <meta itemprop="reviewCount" content="${ratingSummary.count}">
+        <meta itemprop="bestRating" content="5">
+      </span>` : '';
+
+  // Uses span + meta tags (instead of a hidden div) so Google reliably reads the properties,
+  // and explicitly declares itemReviewed with its own aggregateRating to satisfy Review snippet requirements.
   const reviewRatingHtml = hasRating ? `
-    <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display:none;">
+    <span itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
       <meta itemprop="ratingValue" content="${comment.rating}">
       <meta itemprop="bestRating" content="5">
-    </div>` : '';
+    </span>
+    <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
+      <meta itemprop="name" content="BSc Microbiology Honours Notes">${aggregateRatingHtml}
+    </span>` : '';
   const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
 
   return `
@@ -98,7 +112,7 @@ function renderCommentHtml(comment) {
             <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">${escapeHtml(comment.name)}</span></span>
             <span class="comment-email">${maskEmail(comment.email)}</span>
           </div>
-          <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
+          <time class="comment-date" datetime="${new Date(comment.created_at).toISOString()}" itemprop="datePublished">${formattedDate}</time>
         </div>
         ${renderStarsHtml(comment.rating)}
         ${reviewRatingHtml}
@@ -180,8 +194,25 @@ async function handler(event, context) {
       });
     }
 
+    // Compute a REAL aggregate rating from all rated comments (no fabricated numbers)
+    // Done BEFORE rendering comments so each Review's itemReviewed can embed the same aggregateRating.
+    const allForPage = await db.collection('comments').where('page', '==', 'microbiology').where('parentId', '==', null).get();
+    let ratingSum = 0;
+    let ratingCount = 0;
+    allForPage.forEach(doc => {
+      const r = doc.data().rating;
+      if (typeof r === 'number' && r >= 1 && r <= 5) {
+        ratingSum += r;
+        ratingCount += 1;
+      }
+    });
+    const ratingSummary = {
+      average: ratingCount > 0 ? Math.round((ratingSum / ratingCount) * 10) / 10 : null,
+      count: ratingCount
+    };
+
     // Inject HTML
-    const commentsHtml = topComments.map(renderCommentHtml).join('');
+    const commentsHtml = topComments.map(c => renderCommentHtml(c, ratingSummary)).join('');
     const countSnapshot = await db.collection('comments').where('page', '==', 'microbiology').where('parentId', '==', null).count().get();
     const titleText = `${countSnapshot.data().count} Student Reviews`;
 
@@ -195,21 +226,9 @@ async function handler(event, context) {
       html = html.replace('id="commentsList">', `id="commentsList">${commentsHtml}`);
     }
 
-    // Compute a REAL aggregate rating from all rated comments (no fabricated numbers)
-    const allForPage = await db.collection('comments').where('page', '==', 'microbiology').where('parentId', '==', null).get();
-    let ratingSum = 0;
-    let ratingCount = 0;
-    allForPage.forEach(doc => {
-      const r = doc.data().rating;
-      if (typeof r === 'number' && r >= 1 && r <= 5) {
-        ratingSum += r;
-        ratingCount += 1;
-      }
-    });
-
-    // Only inject AggregateRating if there's at least one real rating — never fabricate a placeholder
+    // Only inject the page-level AggregateRating JSON-LD if there's at least one real rating — never fabricate a placeholder
     if (ratingCount > 0) {
-      const avgRating = Math.round((ratingSum / ratingCount) * 10) / 10;
+      const avgRating = ratingSummary.average;
       const aggregateRatingBlock = `"aggregateRating": {\n      "@type": "AggregateRating",\n      "ratingValue": "${avgRating}",\n      "reviewCount": "${ratingCount}",\n      "bestRating": "5"\n    },`;
       // Insert right after the EducationalOrganization's "sameAs" array closes
       html = html.replace(

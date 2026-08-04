@@ -66,7 +66,7 @@ function renderCommentHtml(comment, ratingSummary) {
                   <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">${escapeHtml(reply.name)}</span></span>
                   <span class="comment-email">${maskEmail(reply.email)}</span>
                 </div>
-                <time class="comment-date" datetime="${reply.created_at}" itemprop="datePublished">${formattedReplyDate}</time>
+                <time class="comment-date" datetime="${new Date(reply.created_at).toISOString()}" itemprop="datePublished">${formattedReplyDate}</time>
               </div>
               <div class="comment-text" itemprop="text">${escapeHtml(reply.comment)}</div>
             </div>
@@ -100,7 +100,7 @@ function renderCommentHtml(comment, ratingSummary) {
       <meta itemprop="bestRating" content="5">
     </span>
     <span itemprop="itemReviewed" itemscope itemtype="https://schema.org/Course">
-      <meta itemprop="name" content="BSc Zoology Honours Notes">${aggregateRatingHtml}
+      <meta itemprop="name" content="BSc Life Science Notes">${aggregateRatingHtml}
     </span>` : '';
   const commentTextHtml = comment.comment ? `<div class="comment-text" itemprop="${hasRating ? 'reviewBody' : 'text'}">${escapeHtml(comment.comment)}</div>` : '';
 
@@ -112,7 +112,7 @@ function renderCommentHtml(comment, ratingSummary) {
             <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">${escapeHtml(comment.name)}</span></span>
             <span class="comment-email">${maskEmail(comment.email)}</span>
           </div>
-          <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
+          <time class="comment-date" datetime="${new Date(comment.created_at).toISOString()}" itemprop="datePublished">${formattedDate}</time>
         </div>
         ${renderStarsHtml(comment.rating)}
         ${reviewRatingHtml}
@@ -130,10 +130,10 @@ function renderCommentHtml(comment, ratingSummary) {
 async function handler(event, context) {
   // Use Robust Path Finding
   const possiblePaths = [
-    path.resolve(__dirname, '../../zoology.html'),
-    path.resolve(__dirname, '../zoology.html'),
-    path.resolve('zoology.html'),
-    path.resolve('./zoology.html')
+    path.resolve(__dirname, '../../lifescience.html'),
+    path.resolve(__dirname, '../lifescience.html'),
+    path.resolve('lifescience.html'),
+    path.resolve('./lifescience.html')
   ];
   let templatePath = possiblePaths.find(p => fs.existsSync(p));
 
@@ -154,7 +154,7 @@ async function handler(event, context) {
 
     // Fetch Data
     const commentsRef = db.collection('comments')
-      .where('page', '==', 'youtube')
+      .where('page', '==', 'lifescience')
       .where('parentId', '==', null)
       .orderBy('createdAt', 'desc')
       .limit(20);
@@ -196,7 +196,7 @@ async function handler(event, context) {
 
     // Compute a REAL aggregate rating from all rated comments (no fabricated numbers)
     // Done BEFORE rendering comments so each Review's itemReviewed can embed the same aggregateRating.
-    const allForPage = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).get();
+    const allForPage = await db.collection('comments').where('page', '==', 'lifescience').where('parentId', '==', null).get();
     let ratingSum = 0;
     let ratingCount = 0;
     allForPage.forEach(doc => {
@@ -213,7 +213,7 @@ async function handler(event, context) {
 
     // Inject HTML
     const commentsHtml = topComments.map(c => renderCommentHtml(c, ratingSummary)).join('');
-    const countSnapshot = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).count().get();
+    const countSnapshot = await db.collection('comments').where('page', '==', 'lifescience').where('parentId', '==', null).count().get();
     const titleText = `${countSnapshot.data().count} Student Reviews`;
 
     html = html.replace(/<h3[^>]*id="commentsTitle"[^>]*>.*?<\/h3>/s, 

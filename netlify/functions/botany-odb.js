@@ -66,7 +66,7 @@ function renderCommentHtml(comment, ratingSummary) {
                   <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">${escapeHtml(reply.name)}</span></span>
                   <span class="comment-email">${maskEmail(reply.email)}</span>
                 </div>
-                <time class="comment-date" datetime="${reply.created_at}" itemprop="datePublished">${formattedReplyDate}</time>
+                <time class="comment-date" datetime="${new Date(reply.created_at).toISOString()}" itemprop="datePublished">${formattedReplyDate}</time>
               </div>
               <div class="comment-text" itemprop="text">${escapeHtml(reply.comment)}</div>
             </div>
@@ -112,7 +112,7 @@ function renderCommentHtml(comment, ratingSummary) {
             <span class="comment-author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">${escapeHtml(comment.name)}</span></span>
             <span class="comment-email">${maskEmail(comment.email)}</span>
           </div>
-          <time class="comment-date" datetime="${comment.created_at}" itemprop="datePublished">${formattedDate}</time>
+          <time class="comment-date" datetime="${new Date(comment.created_at).toISOString()}" itemprop="datePublished">${formattedDate}</time>
         </div>
         ${renderStarsHtml(comment.rating)}
         ${reviewRatingHtml}
