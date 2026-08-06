@@ -342,6 +342,17 @@
   force = true
 
 [[redirects]]
+  from = "/lifescience-years"
+  to = "/lifescience-years.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/lifescience-years.html"
+  to = "/lifescience-years"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/microbiology-first-year"
   to = "/microbiology-first-year.html"
   status = 200
