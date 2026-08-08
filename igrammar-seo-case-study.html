@@ -11,8 +11,8 @@
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex, follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shubham Kumar's digital marketing skills and applied work — social media strategy, SEO, and content marketing, including real SEO work on SayHeyShubh." />
-  <title>Digital Marketing Projects | SayHeyShubh</title>
+  <meta name="description" content="A comprehensive technical SEO audit and growth strategy for iGrammar.app, executed by Shubham Kumar." />
+  <title>iGrammar SEO Case Study | SayHeyShubh</title>
   
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
@@ -46,7 +46,8 @@
 
     main { flex: 1; width: 100%; }
     
-    .portfolio-container {
+    /* Widened container to 1200px to match portfolio pages */
+    .case-study-container {
       max-width: 1200px;
       width: 100%;
       margin: 0 auto 5rem auto;
@@ -61,7 +62,7 @@
       gap: 0.6rem;
       font-size: 0.9rem;
       color: #64748b;
-      margin-top: 2rem;
+      margin-top: 3rem;
       margin-bottom: 2rem;
       font-weight: 600;
       background: white;
@@ -79,19 +80,25 @@
       color: #4f46e5;
     }
 
-    /* Page Header */
-    .portfolio-hero {
-      text-align: center;
+    /* Hero Section */
+    .cs-hero {
+      text-align: left;
       margin-bottom: 4rem;
-      padding: 5rem 2rem;
+      padding: 4rem 3rem;
       background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
       border-radius: 24px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
       border: 1px solid var(--card-border);
       position: relative;
       overflow: hidden;
     }
-    
+    .cs-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 6px; height: 100%;
+      background: var(--primary-gradient);
+    }
     .hero-badge {
       display: inline-block;
       background: #eef2ff;
@@ -102,254 +109,204 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 1.5rem;
-      border: 1px solid #c7d2fe;
+      margin-bottom: 0; 
     }
-
-    .portfolio-hero h1 {
+    .hero-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .cs-date {
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .cs-hero h1 {
       font-size: 2.8rem;
-      font-weight: 800;
       color: #0f172a;
       margin-top: 0;
       margin-bottom: 1rem;
+      font-weight: 800;
       line-height: 1.2;
     }
-
-    .portfolio-hero p.lead-text {
+    .cs-hero p {
       font-size: 1.15rem;
       color: #475569;
-      max-width: 700px;
-      margin: 0 auto 0 auto;
       line-height: 1.7;
+      max-width: 800px;
+      margin: 0;
     }
 
-    /* WIDE HORIZONTAL SHOWCASE CARD */
-    .featured-project-card {
-      display: flex;
-      flex-direction: row;
+    /* Content Sections with Subtle Hover Lift */
+    .cs-section {
       background: #ffffff;
-      border-radius: 24px;
+      border-radius: 20px;
+      padding: 3rem 4rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
       border: 1px solid var(--card-border);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-      overflow: hidden;
-      margin-bottom: 5rem;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 3rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
-    .featured-project-card:hover {
-      box-shadow: 0 20px 50px rgba(99, 102, 241, 0.1);
-      transform: translateY(-5px);
-      border-color: #cbd5e1;
+    .cs-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.04);
     }
 
-    .fpc-visual {
-      width: 35%;
-      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-right: 1px solid var(--card-border);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .fpc-visual::before {
-      content: '';
-      position: absolute;
-      top: -50px; left: -50px;
-      width: 150px; height: 150px;
-      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(99,102,241,0) 70%);
-      border-radius: 50%;
-    }
-
-    .fpc-visual i {
-      font-size: 6rem;
-      color: #4f46e5;
-      filter: drop-shadow(0 10px 15px rgba(79, 70, 229, 0.2));
-      transition: transform 0.3s ease;
-    }
-    .featured-project-card:hover .fpc-visual i {
-      transform: scale(1.05);
-    }
-
-    .fpc-content {
-      width: 65%;
-      padding: 3.5rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .fpc-content h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0f172a;
-      margin: 0 0 1rem 0;
-      line-height: 1.2;
-    }
-
-    .fpc-content p {
-      font-size: 1.1rem;
-      color: #475569;
-      line-height: 1.7;
-      margin: 0 0 2rem 0;
-    }
-
-    .skill-tags {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-
-    .skill-tag {
-      background: #f8fafc;
-      color: #334155;
-      padding: 0.4rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .btn-read-case {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      padding: 1.2rem 2.5rem;
-      background: var(--primary-gradient);
-      color: white;
-      border-radius: 50px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-      transition: all 0.3s ease;
-      align-self: flex-start;
-    }
-    .btn-read-case:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-    }
-
-    /* Core Competencies Section */
-    .competencies-section {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
-    .competencies-section h3 {
+    .cs-section h2 {
       font-size: 1.8rem;
-      font-weight: 800;
       color: #0f172a;
-      margin-bottom: 2.5rem;
+      font-weight: 800;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
     }
-    .comp-grid {
+    .cs-section h2 i { color: #6366f1; }
+    
+    .cs-text {
+      font-size: 1.05rem;
+      color: #334155;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Upgraded Info Boxes */
+    .info-box {
+      background: linear-gradient(to right, #f0fdf4, #ffffff);
+      border-left: 4px solid #10b981;
+      padding: 1.5rem 2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 2rem 0;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.05);
+    }
+    .info-box p { margin: 0; color: #334155; line-height: 1.6; font-size: 1.05rem; }
+    .info-box strong { color: #0f172a; }
+
+    /* Discoveries Grid */
+    .discovery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
+      margin-top: 2.5rem;
     }
-    .comp-box {
-      background: white;
+    .discovery-card {
+      background: #f8fafc;
       padding: 2.5rem 2rem;
-      border-radius: 20px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
     }
-    .comp-box i {
-      font-size: 2.5rem;
-      color: #6366f1;
+    .discovery-card:hover { 
+      transform: translateY(-5px); 
+      border-color: #cbd5e1; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+    .discovery-card i {
+      font-size: 2.2rem;
+      color: #ef4444;
       margin-bottom: 1.2rem;
     }
-    .comp-box h4 {
-      font-size: 1.2rem;
+    .discovery-card.fix i { color: #10b981; }
+    .discovery-card.strat i { color: #f59e0b; }
+    
+    .discovery-card h3 {
+      font-size: 1.3rem;
       color: #0f172a;
-      margin: 0 0 0.8rem 0;
+      margin: 0 0 1rem 0;
       font-weight: 700;
     }
-    .comp-box p {
-      color: #64748b;
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .discovery-card p {
+      font-size: 1rem;
+      color: #475569;
       margin: 0;
+      line-height: 1.6;
     }
 
-    /* Live Showcase Bottom Banner */
-    .live-showcase-banner {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border-radius: 24px;
-      padding: 4rem 3rem;
+    /* Deliverables Downloads */
+    .deliverables-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .dl-card {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 3rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      position: relative;
-      overflow: hidden;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
-    .live-showcase-banner::before {
-      content: '\f121'; /* code icon */
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      right: -20px;
-      bottom: -40px;
-      font-size: 15rem;
-      color: rgba(255, 255, 255, 0.03);
-      pointer-events: none;
+    .dl-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      border-color: #cbd5e1;
     }
-    .lsb-content {
-      position: relative;
-      z-index: 1;
-      color: white;
+    .dl-icon {
+      font-size: 2.5rem;
+      color: #ef4444; /* PDF Red */
+      margin-bottom: 1.2rem;
     }
-    .lsb-content h3 {
-      font-size: 2rem;
+    .dl-card.excel .dl-icon { color: #10b981; /* Excel Green */ }
+    .dl-card.pdf-alt .dl-icon { color: #6366f1; /* Roadmap Blue */ }
+    
+    .dl-title {
       font-weight: 800;
-      margin: 0 0 1rem 0;
+      color: #0f172a;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
     }
-    .lsb-content p {
-      font-size: 1.1rem;
-      color: #cbd5e1;
-      line-height: 1.7;
-      margin: 0;
-      max-width: 600px;
+    .dl-desc {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
     }
+
+    /* Interactive Buttons for Deliverables */
+    .btn-dl {
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    
+    .btn-pdf { background: #fee2e2; color: #dc2626; }
+    .btn-pdf:hover { background: #ef4444; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+    
+    .btn-excel { background: #dcfce7; color: #166534; }
+    .btn-excel:hover { background: #10b981; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
+    
+    .btn-roadmap { background: #e0e7ff; color: #3730a3; }
+    .btn-roadmap:hover { background: #6366f1; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2); }
 
     /* Mobile Responsiveness */
-    @media (max-width: 900px) {
-      .featured-project-card {
-        flex-direction: column;
-      }
-      .fpc-visual {
-        width: 100%;
-        padding: 4rem 0;
-        border-right: none;
-        border-bottom: 1px solid var(--card-border);
-      }
-      .fpc-content {
-        width: 100%;
-        padding: 2.5rem 2rem;
-        align-items: center;
-        text-align: center;
-      }
-      .btn-read-case {
-        align-self: center;
-        width: 100%;
-      }
-      .skill-tags {
-        justify-content: center;
-      }
+    @media (max-width: 1024px) {
+      .cs-section { padding: 3rem 2rem; }
+    }
+    @media (max-width: 768px) {
+      .cs-hero { padding: 3rem 1.5rem; }
+      .cs-hero h1 { font-size: 2.2rem; }
+      .cs-section { padding: 2.5rem 1.5rem; }
+      .discovery-grid { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 768px) {
-      .portfolio-container { padding: 0 1.5rem; }
-      .portfolio-hero { padding: 3rem 1.5rem; }
-      .portfolio-hero h1 { font-size: 2.2rem; }
-      .live-showcase-banner { flex-direction: column; text-align: center; padding: 3rem 2rem; }
-    }
-  
     /* ==========================================================
        PROFESSIONAL EDTECH FOOTER STYLES
        ========================================================== */
@@ -406,7 +363,7 @@
     </div>
   </header>
 
-  <main class="portfolio-container">
+  <main class="case-study-container">
     
     <!-- Interactive Pill Breadcrumbs -->
     <nav class="breadcrumb-trail" aria-label="Breadcrumb">
@@ -414,74 +371,94 @@
       <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
       <a href="portfolio">Portfolio</a>
       <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
-      <span style="color: #0f172a;">Digital Marketing</span>
+      <a href="digital-marketing-projects">Digital Marketing</a>
+      <span aria-hidden="true"><i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#94a3b8;"></i></span> 
+      <span style="color: #0f172a;">iGrammar Case Study</span>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="portfolio-hero">
-      <div class="hero-badge">Growth & Strategy</div>
-      <h1>Digital Marketing Projects</h1>
-      <p class="lead-text">A showcase of my applied work in technical SEO, audience targeting, and content marketing strategy. Converting complex analytics into actionable growth.</p>
+    <!-- Hero -->
+    <div class="cs-hero">
+      <div class="hero-meta-row">
+        <div class="hero-badge">Technical SEO & Growth Strategy</div>
+        <div class="cs-date"><i class="far fa-calendar-alt"></i> August 8, 2026</div>
+      </div>
+      <h1>iGrammar.app SEO Audit & Execution Roadmap</h1>
+      <p>A comprehensive technical audit, issue tracker, and strategic growth plan executed within a 48-hour deadline as part of an Intern SEO & ASO Specialist evaluation for New Age.</p>
     </div>
 
-    <!-- MAIN FEATURED CASE STUDY (Wide Horizontal Layout) -->
-    <div class="featured-project-card">
-      <div class="fpc-visual">
-        <i class="fa-solid fa-magnifying-glass-chart"></i>
+    <!-- The Brief Section -->
+    <section class="cs-section">
+      <h2><i class="fas fa-clipboard-list"></i> The Objective & The Brief</h2>
+      <p class="cs-text">
+        The task was to conduct a comprehensive SEO audit of the AI writing tool <strong>iGrammar.app</strong>. The objective was to identify the highest-impact opportunities to improve organic visibility, crawlability, page experience, and conversions, and translate those findings into a prioritized, actionable roadmap.
+      </p>
+      <div class="info-box">
+        <p><strong>The Constraints:</strong> The entire audit, including a full technical teardown and an Excel issue tracker, had to be compiled and delivered within a strict <strong>48-hour timeline</strong>.</p>
       </div>
-      <div class="fpc-content">
-        <h2>Technical SEO Audit & Strategy</h2>
-        <p>A comprehensive technical, content, and UX audit conducted for <strong>iGrammar.app</strong>. Completed under a strict 48-hour deadline, this project features a prioritized issue tracker and a sequenced 90-day growth execution roadmap designed to recover lost organic traffic.</p>
+    </section>
+
+    <!-- Discoveries Section -->
+    <section class="cs-section">
+      <h2><i class="fas fa-search-chart"></i> Critical Discoveries</h2>
+      <p class="cs-text">
+        While the site had a decent technical foundation, I discovered several high-impact, immediate bottlenecks holding back organic traffic and conversions:
+      </p>
+      <div class="discovery-grid">
+        <div class="discovery-card">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>The Conversion Killer</h3>
+          <p>The core pricing page (<code>/plans/</code>) was live and indexable but running an unrelated fitness-app template with fake "Diet Menu" pricing tiers, actively damaging brand trust.</p>
+        </div>
+        <div class="discovery-card strat">
+          <i class="fas fa-random"></i>
+          <h3>Content Cannibalization</h3>
+          <p>Identified identical articles competing against each other for "writing tone" and "real-time grammar" queries, splitting ranking signals unnecessarily.</p>
+        </div>
+        <div class="discovery-card fix">
+          <i class="fas fa-tachometer-alt"></i>
+          <h3>Mobile Speed Bottleneck</h3>
+          <p>Diagnosed a 4.6s mobile Largest Contentful Paint (LCP) caused by excessive render-blocking CSS, severely impacting Core Web Vitals.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deliverables Downloads Section -->
+    <section class="cs-section" style="background: transparent; box-shadow: none; border: none; padding: 0; margin-bottom: 2rem;">
+      <h2><i class="fas fa-download"></i> Project Deliverables</h2>
+      <p class="cs-text">Explore the raw, unedited files submitted for this task to see the data, tracking, and strategies in detail.</p>
+      
+      <div class="deliverables-wrapper">
         
-        <div class="skill-tags">
-          <span class="skill-tag">Technical SEO</span>
-          <span class="skill-tag">Content Architecture</span>
-          <span class="skill-tag">Core Web Vitals</span>
-          <span class="skill-tag">Keyword Strategy</span>
-          <span class="skill-tag">Competitor Analysis</span>
-          <span class="skill-tag">Growth Roadmapping</span>
-          <span class="skill-tag">Data Analytics</span>
+        <!-- Audit Report -->
+        <div class="dl-card">
+          <i class="fas fa-file-pdf dl-icon"></i>
+          <h3 class="dl-title">Full SEO Audit Report</h3>
+          <p class="dl-desc">10-page deep-dive PDF analysis</p>
+          <a href="https://drive.google.com/file/d/1jIpMpUSJm43e1GJ_azNyP_615zMp7WYk/view?usp=sharing" target="_blank" class="btn-dl btn-pdf">View Report <i class="fas fa-arrow-right"></i></a>
         </div>
 
-        <a href="igrammar-seo-case-study" class="btn-read-case">View Full Case Study <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
+        <!-- Issue Tracker -->
+        <div class="dl-card excel">
+          <i class="fas fa-file-excel dl-icon"></i>
+          <h3 class="dl-title">SEO Issue Tracker</h3>
+          <p class="dl-desc">Excel sheet mapping 38 tasks</p>
+          <a href="https://docs.google.com/spreadsheets/d/1g1HTzHXaj6iS43YDSZJuipw6F3ja_Uj2/edit?usp=sharing&ouid=111182415011814919003&rtpof=true&sd=true" target="_blank" class="btn-dl btn-excel">View Tracker <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <!-- Roadmap PDF -->
+        <div class="dl-card pdf-alt">
+          <i class="fas fa-map dl-icon"></i>
+          <h3 class="dl-title">90-Day Strategy Roadmap</h3>
+          <p class="dl-desc">Phased execution plan PDF</p>
+          <a href="https://drive.google.com/file/d/140SORYmwWMBQoVaZrc43h0d2OZDDRwZY/view?usp=sharing" target="_blank" class="btn-dl btn-roadmap">View Roadmap <i class="fas fa-arrow-right"></i></a>
+        </div>
 
-    <!-- Core Competencies Section to fill out the page -->
-    <div class="competencies-section">
-      <h3>Core Marketing Competencies</h3>
-      <div class="comp-grid">
-        <div class="comp-box">
-          <i class="fa-solid fa-chart-line"></i>
-          <h4>SEO Optimization</h4>
-          <p>Keyword targeting, meta optimization, schema markup, and site-architecture planning for sustained organic growth.</p>
-        </div>
-        <div class="comp-box">
-          <i class="fa-solid fa-bullhorn"></i>
-          <h4>Content Strategy</h4>
-          <p>Building top-of-funnel content architectures that capture intent, educate the user, and drive conversions seamlessly.</p>
-        </div>
-        <div class="comp-box">
-          <i class="fa-solid fa-users-viewfinder"></i>
-          <h4>Audience Targeting</h4>
-          <p>Deep psychological research into user pain points to craft messaging and ad campaigns that genuinely resonate.</p>
-        </div>
       </div>
-    </div>
-
-    <!-- Live Showcase Banner at the Bottom -->
-    <div class="live-showcase-banner">
-      <div class="lsb-content">
-        <h3>The Ultimate Live Project</h3>
-        <p>This entire platform, <strong>SayHeyShubh</strong>, operates as an active digital marketing project. From mobile responsiveness and Core Web Vitals to content marketing funnels, it demonstrates hands-on, end-to-end digital strategy.</p>
-      </div>
-      <div>
-        <a href="about" class="btn-read-case" style="background: white; color: #0f172a; box-shadow: none;">Behind the Platform</a>
-      </div>
-    </div>
+    </section>
 
   </main>
 
+  <!-- Clean Minimalist Footer Component -->
   <footer class="pro-footer">
     <div class="pro-footer-container">
     <div class="pro-footer-grid">
@@ -550,6 +527,5 @@
     </div>
   </footer>
   <script src="script.js"></script>
-  
 </body>
 </html>
