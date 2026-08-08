@@ -596,6 +596,212 @@
     @media (max-width: 480px) {
       .ques-btn, .watch-btn, .download-btn { font-size: 0.8rem; padding: 0.6rem 0.8rem; white-space: nowrap; }
     }
+  
+    /* ==========================================================
+       PROFESSIONAL EDTECH FOOTER STYLES
+       ========================================================== */
+    .pro-footer {
+      background-color: #0b0f19;
+      color: #94a3b8;
+      padding: 5rem 0 0 0;
+      border-top: 1px solid #1e293b;
+      font-family: 'Inter', sans-serif;
+      margin-top: auto;
+    }
+    .pro-footer-container {
+      max-width: 1350px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    .pro-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.2fr 1.3fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+    }
+    /* Brand Column */
+    .pro-footer-brand .footer-logo-img {
+      max-width: 250px;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .pro-footer-brand p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 0 0 1.8rem 0;
+      max-width: 360px;
+    }
+    .pro-footer-socials {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .footer-social-pill {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    @media (hover: hover) {
+      .footer-social-pill:hover { background: #6366f1; color: white; transform: translateY(-3px); }
+    }
+    
+    /* Navigation & Contact Columns */
+    .pro-footer-col h3 {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: 0.5px;
+    }
+    .pro-footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .pro-footer-col ul li {
+      margin-bottom: 0.9rem;
+    }
+    
+    /* Kills any global white box hover completely + Adds Swipe */
+    .pro-footer-col ul li a {
+      display: inline-block;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    /* Minimalist Inline Contact UI - Force Transparent Backgrounds */
+    .footer-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      background: transparent !important;
+      border: none !important;
+    }
+    .footer-contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .footer-contact-link {
+      display: inline-block;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    @media (hover: hover) {
+      .pro-footer-col ul li a:hover { color: #6366f1; transform: translateX(4px); background: transparent !important; border: none !important; }
+      .footer-contact-row:hover .footer-contact-icon { background: #6366f1; color: white; }
+      .footer-contact-row:hover .footer-contact-link { color: #6366f1; transform: translateX(4px); }
+    }
+    
+    /* Footer Bottom Copyright Bar */
+    .pro-footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding: 1.8rem 0;
+    }
+    .pro-footer-bottom-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 1350px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    .pro-footer-bottom p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .pro-footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .pro-footer-legal-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    @media (hover: hover) {
+      .pro-footer-legal-links a:hover { color: #6366f1; background: transparent !important; border: none !important; }
+    }
+    
+    /* Mobile Responsiveness for Footer */
+    @media (max-width: 1024px) {
+      .pro-footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .pro-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .pro-footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .pro-footer-brand .footer-logo-img {
+        margin: 0 auto 1.5rem auto;
+      }
+      .pro-footer-brand p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pro-footer-socials {
+        justify-content: center;
+      }
+      .footer-contact-row {
+        justify-content: center;
+      }
+      .pro-footer-bottom-flex {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .pro-footer-legal-links {
+        justify-content: center;
+      }
+    }
+    
   </style>
 </head>
 <body>
@@ -1104,10 +1310,71 @@
 
   </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 SayHeyShubh • Zoology Fourth Semester Study Materials</p>
-       <p> <a href="privacy-policy">Privacy Policy</a></p>
+  <footer class="pro-footer">
+    <div class="pro-footer-container">
+    <div class="pro-footer-grid">
+    <div class="pro-footer-brand">
+    <a href="index">
+    <img src="attached_assets/sayheyshubh_footer_logo.png" alt="SayHeyShubh Logo" class="footer-logo-img">
+    </a>
+    <p>Built in the classrooms of Delhi University, SayHeyShubh is a student-driven academic ecosystem. We consolidate semester-wise notes, practical files, cheat sheets of most important questions and previous year question databases into one accessible learning hub.</p>
+    <div class="pro-footer-socials">
+    <a href="https://youtube.com/@ShubhiPhilia" target="_blank" aria-label="YouTube" class="footer-social-pill"><i class="fa-brands fa-youtube fa-fw"></i></a>
+    <a href="https://t.me/sayheyshubh" target="_blank" aria-label="Telegram" class="footer-social-pill"><i class="fa-brands fa-telegram fa-fw"></i></a>
+    <a href="https://linkedin.com/in/sayheyshubh" target="_blank" aria-label="LinkedIn" class="footer-social-pill"><i class="fa-brands fa-linkedin-in fa-fw"></i></a>
+    <a href="https://instagram.com/sayheyshubh" target="_blank" aria-label="Instagram" class="footer-social-pill"><i class="fa-brands fa-instagram fa-fw"></i></a>
+    </div>
+    </div>
+
+    <div class="pro-footer-col">
+    <h3>Quick Links</h3>
+    <ul>
+    <li><a href="index">Home</a></li>
+    <li><a href="notes">Study Notes</a></li>
+    <li><a href="portfolio">Portfolio</a></li>
+    <li><a href="community">Community</a></li>
+    <li><a href="blogs">Creator Journal</a></li>
+    <li><a href="about">About Founder</a></li>
+    </ul>
+    </div>
+
+    <div class="pro-footer-col">
+    <h3>Subject Directories</h3>
+    <ul>
+    <li><a href="zoology">BSc Zoology (Hons)</a></li>
+    <li><a href="botany">BSc Botany (Hons)</a></li>
+    <li><a href="microbiology">BSc Microbiology (Hons)</a></li>
+    <li><a href="lifescience">BSc Life Science (Prog.)</a></li>
+    </ul>
+    </div>
+
+    <div class="pro-footer-col">
+    <h3>Help & Contact</h3>
+    <div class="footer-contact-row">
+    <i class="fa-solid fa-envelope footer-contact-icon fa-fw"></i>
+    <a href="mailto:shubhamkmr.work@gmail.com" class="footer-contact-link">shubhamkmr.work@gmail.com</a>
+    </div>
+    <div class="footer-contact-row">
+    <i class="fa-brands fa-telegram footer-contact-icon fa-fw"></i>
+    <a href="https://t.me/sayheyshubh" target="_blank" class="footer-contact-link">Join Telegram Group</a>
+    </div>
+    <div class="footer-contact-row">
+    <i class="fa-brands fa-instagram footer-contact-icon fa-fw"></i>
+    <a href="https://instagram.com/sayheyshubh" target="_blank" class="footer-contact-link">Follow @sayheyshubh</a>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="pro-footer-bottom">
+    <div class="pro-footer-bottom-flex">
+    <p>&copy; 2026 SayHeyShubh. Built by students, for students. All rights reserved.</p>
+    <div class="pro-footer-legal-links">
+    <a href="privacy-policy">Privacy Policy</a>
+    <a href="privacy-policy">Terms of Use</a>
+    <a href="privacy-policy">Cookie Policy</a>
+    </div>
+    </div>
     </div>
   </footer>
 

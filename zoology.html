@@ -752,6 +752,212 @@
       .user-profile { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); margin: 0; width: calc(100% - 2rem); max-width: 320px; z-index: 1001; }
       .stats-grid, .video-grid { grid-template-columns: 1fr; }
     }
+  
+    /* ==========================================================
+       PROFESSIONAL EDTECH FOOTER STYLES
+       ========================================================== */
+    .pro-footer {
+      background-color: #0b0f19;
+      color: #94a3b8;
+      padding: 5rem 0 0 0;
+      border-top: 1px solid #1e293b;
+      font-family: 'Inter', sans-serif;
+      margin-top: auto;
+    }
+    .pro-footer-container {
+      max-width: 1350px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    .pro-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.2fr 1.3fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+    }
+    /* Brand Column */
+    .pro-footer-brand .footer-logo-img {
+      max-width: 250px;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .pro-footer-brand p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 0 0 1.8rem 0;
+      max-width: 360px;
+    }
+    .pro-footer-socials {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .footer-social-pill {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    @media (hover: hover) {
+      .footer-social-pill:hover { background: #6366f1; color: white; transform: translateY(-3px); }
+    }
+    
+    /* Navigation & Contact Columns */
+    .pro-footer-col h3 {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: 0.5px;
+    }
+    .pro-footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .pro-footer-col ul li {
+      margin-bottom: 0.9rem;
+    }
+    
+    /* Kills any global white box hover completely + Adds Swipe */
+    .pro-footer-col ul li a {
+      display: inline-block;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    /* Minimalist Inline Contact UI - Force Transparent Backgrounds */
+    .footer-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      background: transparent !important;
+      border: none !important;
+    }
+    .footer-contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .footer-contact-link {
+      display: inline-block;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    @media (hover: hover) {
+      .pro-footer-col ul li a:hover { color: #6366f1; transform: translateX(4px); background: transparent !important; border: none !important; }
+      .footer-contact-row:hover .footer-contact-icon { background: #6366f1; color: white; }
+      .footer-contact-row:hover .footer-contact-link { color: #6366f1; transform: translateX(4px); }
+    }
+    
+    /* Footer Bottom Copyright Bar */
+    .pro-footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding: 1.8rem 0;
+    }
+    .pro-footer-bottom-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 1350px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    .pro-footer-bottom p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .pro-footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .pro-footer-legal-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    @media (hover: hover) {
+      .pro-footer-legal-links a:hover { color: #6366f1; background: transparent !important; border: none !important; }
+    }
+    
+    /* Mobile Responsiveness for Footer */
+    @media (max-width: 1024px) {
+      .pro-footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .pro-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .pro-footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .pro-footer-brand .footer-logo-img {
+        margin: 0 auto 1.5rem auto;
+      }
+      .pro-footer-brand p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pro-footer-socials {
+        justify-content: center;
+      }
+      .footer-contact-row {
+        justify-content: center;
+      }
+      .pro-footer-bottom-flex {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .pro-footer-legal-links {
+        justify-content: center;
+      }
+    }
+    
   </style>
 </head>
 <body>
