@@ -516,7 +516,9 @@
     .payment-modal.show, .auth-modal.show { display: flex; }
 
     .payment-container, .auth-container {
-      background: white; max-width: 450px; width: 90%; border-radius: 24px; overflow: hidden;
+      background: white; max-width: 450px; width: 90%; border-radius: 24px; 
+      overflow-y: auto; /* Changed from hidden to auto to allow scrolling */
+      max-height: 90vh; /* Added to limit height to screen size and force scrolling */
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative; animation: slideUp 0.3s ease;
     }
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -1391,7 +1393,7 @@
 
         <div class="payment-actions">
           <button class="payment-btn cancel-btn" onclick="hidePaymentPopup()">Cancel</button>
-          <button class="payment-btn preview-btn" onclick="previewNote()">Preview</button>
+          
           <button class="payment-btn pay-btn" onclick="proceedToPayment()">Pay Now</button>
         </div>
 
@@ -1631,9 +1633,6 @@
       document.getElementById('paymentLoading').classList.remove('show');
     }
 
-    function previewNote() {
-      alert(`📖 Preview of ${currentNoteTitle}:\n\n✅ Comprehensive handwritten notes\n✅ Key topics covered\n✅ High-quality PDF\n\nPay ₹${selectedPrice} to unlock full access!`);
-    }
 
     async function proceedToPayment() {
       if (typeof Razorpay === 'undefined') {
