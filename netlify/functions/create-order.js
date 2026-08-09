@@ -32,6 +32,11 @@ const razorpay = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
+// --- Cart constraints ---
+const MIN_PRICE_RUPEES = 10;   // per-unit floor
+const MAX_PRICE_RUPEES = 100;  // per-unit ceiling
+const MAX_ITEMS_PER_ORDER = 20; // sanity cap so one order can't balloon indefinitely
+
 // Authentication helper
 async function verifyFirebaseToken(authHeader) {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -78,59 +83,94 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
 
-    let { amount, noteTitle, noteUrl, subject } = JSON.parse(event.body);
+    let { items, subject } = JSON.parse(event.body);
     subject = subject || 'unknown';
 
-    // If noteUrl is a secure ID (like unit-1-dsc-1 or unit1-microb-dsc201), get the real URL
-    if (notesData[noteUrl]) {
-        console.log(`Resolving secure ID ${noteUrl} to real URL`);
-        noteUrl = notesData[noteUrl];
-    }
-
-    // Basic validation
-    if (!amount || !noteTitle || !noteUrl) {
+    // --- Validate the cart shape ---
+    if (!Array.isArray(items) || items.length === 0) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Missing required parameters' })
+        body: JSON.stringify({ success: false, error: 'Cart is empty' })
       };
     }
 
-    if (!amount || amount < 1000 || amount > 5000) {
+    if (items.length > MAX_ITEMS_PER_ORDER) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ success: false, error: 'Invalid amount. Must be between ₹10 and ₹50' })
+        body: JSON.stringify({ success: false, error: `You can unlock at most ${MAX_ITEMS_PER_ORDER} units in one order` })
       };
     }
 
-    // Sanitize note title for security
-    const sanitizedNoteTitle = noteTitle.substring(0, 100);
+    // De-duplicate by noteId (last price wins if sent twice)
+    const dedupedById = new Map();
+    for (const raw of items) {
+      const noteId = raw && raw.noteId;
+      const priceRupees = raw && Number(raw.price);
+      const noteTitle = (raw && raw.noteTitle) || 'BSc Notes';
 
-    // Create Razorpay order
+      if (!noteId || typeof noteId !== 'string') {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: 'Invalid item in cart' })
+        };
+      }
+
+      if (!Number.isFinite(priceRupees) || priceRupees < MIN_PRICE_RUPEES || priceRupees > MAX_PRICE_RUPEES) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: `Price for ${noteTitle} must be between ₹${MIN_PRICE_RUPEES} and ₹${MAX_PRICE_RUPEES}` })
+        };
+      }
+
+      // Resolve the secure ID to the real note URL — never trust a client-sent URL
+      const realUrl = notesData[noteId];
+      if (!realUrl) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: `Unknown note: ${noteId}` })
+        };
+      }
+
+      dedupedById.set(noteId, {
+        noteId,
+        noteUrl: realUrl,
+        noteTitle: String(noteTitle).substring(0, 100),
+        price: priceRupees
+      });
+    }
+
+    const resolvedItems = Array.from(dedupedById.values());
+    const totalAmountPaise = resolvedItems.reduce((sum, it) => sum + it.price * 100, 0);
+
+    // Create Razorpay order — Razorpay's `notes` field is small, so we keep it to a summary
+    // and store the full cart in Firestore for verify-payment to read back.
     const options = {
-      amount: amount, // amount in smallest currency unit (paise)
+      amount: totalAmountPaise, // in paise
       currency: 'INR',
       receipt: `r_${Date.now().toString().slice(-8)}`,
       notes: {
-        noteTitle: sanitizedNoteTitle,
         userId: authenticatedUserId,
         subject: subject,
+        itemCount: String(resolvedItems.length),
         timestamp: new Date().toISOString()
       }
     };
 
     const order = await razorpay.orders.create(options);
 
-    // Store order details in Firebase for webhook processing (use orderId as doc ID for uniqueness)
+    // Store full order + cart details in Firebase for verify-payment / webhook processing
     const db = admin.firestore();
     await db.collection('orders').doc(order.id).set({
       orderId: order.id,
       userId: authenticatedUserId,
-      noteUrl: noteUrl,
-      noteTitle: sanitizedNoteTitle,
+      items: resolvedItems, // [{ noteId, noteUrl, noteTitle, price }]
       subject: subject,
-      amount: amount,
+      amount: totalAmountPaise,
       currency: 'INR',
       status: 'created',
       createdAt: admin.firestore.FieldValue.serverTimestamp()
@@ -144,7 +184,8 @@ exports.handler = async (event, context) => {
         orderId: order.id,
         amount: order.amount,
         currency: order.currency,
-        key: process.env.RAZORPAY_KEY_ID
+        key: process.env.RAZORPAY_KEY_ID,
+        itemCount: resolvedItems.length
       })
     };
   } catch (error) {
@@ -152,9 +193,9 @@ exports.handler = async (event, context) => {
     return {
       statusCode: error.message && error.message.includes('authentication') ? 401 : 400,
       headers,
-      body: JSON.stringify({ 
-        success: false, 
-        error: error.message || 'Failed to create order' 
+      body: JSON.stringify({
+        success: false,
+        error: error.message || 'Failed to create order'
       })
     };
   }

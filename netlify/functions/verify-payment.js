@@ -1,9 +1,3 @@
-const zoologyNotes = require('../../notes-data.json');
-const microbiologyNotes = require('../../microbiology-notes-data.json');
-
-// Combine both datasets into one master list
-const notesData = { ...zoologyNotes, ...microbiologyNotes };
-
 const admin = require('firebase-admin');
 const crypto = require('crypto');
 
@@ -45,55 +39,64 @@ async function verifyFirebaseToken(authHeader) {
   }
 }
 
-// Helper function to unlock note for user (idempotent - uses deterministic doc ID)
-async function unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject) {
-  // Use paymentId as document ID for true idempotency (Firestore prevents duplicates)
-  const transactionRef = db.collection('transactions').doc(paymentId);
-
-  try {
-    // Use set with merge:false to create only if doesn't exist (atomic)
-    await transactionRef.create({ 
-      userId: userId,
-      paymentId: paymentId,
-      orderId: orderId,
-      noteUrl: noteUrl, 
-      subject: subject || 'unknown',
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
-      status: 'completed',
-      verified: true
-    });
-
-    console.log('New transaction created for payment:', paymentId);
-  } catch (error) {
-    if (error.code === 6) { // ALREADY_EXISTS error code
-      console.log('Transaction already exists for payment:', paymentId);
-      return; // Already processed by webhook or frontend, skip
-    }
-    throw error; // Re-throw other errors
-  }
-
-  // 2. Mark note as unlocked in user's document
-  const userRef = db.collection('users').doc(userId);
-  let noteSlug;
-
-  // CRITICAL FIX: Handle both Google Drive and short.gy links to match secure-notes.js
+// Given a note's real URL, derive the same "slug" secure-notes.js checks against
+function slugFromNoteUrl(noteUrl) {
   if (noteUrl.includes('drive.google.com')) {
     const fileIdMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-    noteSlug = fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
+    return fileIdMatch ? fileIdMatch[1] : noteUrl.split('/').pop();
   } else if (noteUrl.includes('short.gy')) {
     const shortMatch = noteUrl.match(/short\.gy\/([a-zA-Z0-9-_]+)/);
-    noteSlug = shortMatch ? shortMatch[1] : noteUrl.split('/').pop();
-  } else {
-    noteSlug = noteUrl.split('/').pop();
+    return shortMatch ? shortMatch[1] : noteUrl.split('/').pop();
+  }
+  return noteUrl.split('/').pop();
+}
+
+// Unlocks every item in the cart for a user, from a single verified payment.
+// Idempotent per item: re-running this for the same paymentId+item is a no-op.
+async function unlockCartForUser(userId, paymentId, orderId, items, subject) {
+  const unlockedSlugs = {};
+
+  // Create one transaction doc per item (deterministic ID -> idempotent per item).
+  // These are independent writes on purpose: if one item was already recorded by
+  // a prior partial run (e.g. webhook + frontend both firing), the others must
+  // still go through rather than the whole batch failing.
+  for (const item of items) {
+    const noteSlug = slugFromNoteUrl(item.noteUrl);
+    const transactionRef = db.collection('transactions').doc(`${paymentId}_${noteSlug}`);
+
+    try {
+      await transactionRef.create({
+        userId: userId,
+        paymentId: paymentId,
+        orderId: orderId,
+        noteUrl: item.noteUrl,
+        noteId: item.noteId,
+        noteTitle: item.noteTitle,
+        price: item.price,
+        subject: subject || 'unknown',
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        status: 'completed',
+        verified: true
+      });
+      console.log('New transaction created:', paymentId, noteSlug);
+    } catch (error) {
+      if (error.code === 6) { // ALREADY_EXISTS
+        console.log('Transaction already exists, skipping:', paymentId, noteSlug);
+      } else {
+        throw error;
+      }
+    }
+
+    unlockedSlugs[noteSlug] = true;
   }
 
+  // Single atomic merge write unlocking every note in the cart at once.
+  const userRef = db.collection('users').doc(userId);
   await userRef.set({
-    unlockedNotes: {
-      [noteSlug]: true
-    }
+    unlockedNotes: unlockedSlugs
   }, { merge: true });
 
-  console.log('Note unlocked permanently for user:', userId, 'noteSlug:', noteSlug);
+  console.log('Notes unlocked for user:', userId, 'slugs:', Object.keys(unlockedSlugs));
 }
 
 exports.handler = async (event, context) => {
@@ -127,9 +130,9 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        success: false, 
-        error: 'Payment system not configured' 
+      body: JSON.stringify({
+        success: false,
+        error: 'Payment system not configured'
       })
     };
   }
@@ -167,9 +170,8 @@ exports.handler = async (event, context) => {
         const paymentEntity = payload.payload.payment.entity;
         const paymentId = paymentEntity.id;
         const orderId = paymentEntity.order_id;
-        const amount = paymentEntity.amount;
 
-        // Get order details from our database to find userId and noteUrl
+        // Get order details from our database to find userId and the cart
         const orderDoc = await db.collection('orders').doc(orderId).get();
 
         if (!orderDoc.exists) {
@@ -183,11 +185,11 @@ exports.handler = async (event, context) => {
 
         const orderData = orderDoc.data();
         const userId = orderData.userId;
-        const noteUrl = orderData.noteUrl;
+        const items = orderData.items || [];
         const subject = orderData.subject;
 
-        // Unlock the note for the user
-        await unlockNoteForUser(userId, paymentId, orderId, noteUrl, subject);
+        // Unlock every note in the cart for the user
+        await unlockCartForUser(userId, paymentId, orderId, items, subject);
 
         console.log('Webhook processed successfully for user:', userId);
         return {
@@ -222,28 +224,14 @@ exports.handler = async (event, context) => {
 
     const { paymentId, orderId, signature } = JSON.parse(event.body);
 
-    // Check if Razorpay credentials are properly configured
-    if (!process.env.RAZORPAY_KEY_SECRET || !process.env.RAZORPAY_KEY_ID) {
-      console.error('Razorpay credentials not configured. Payment verification failed.');
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ 
-          success: false, 
-          verified: false,
-          error: 'Payment system not configured properly' 
-        })
-      };
-    }
-
     if (!paymentId || !orderId || !signature) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          success: false, 
+        body: JSON.stringify({
+          success: false,
           verified: false,
-          error: 'Missing required parameters' 
+          error: 'Missing required parameters'
         })
       };
     }
@@ -261,15 +249,15 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ 
-          success: false, 
+        body: JSON.stringify({
+          success: false,
           verified: false,
-          error: 'Payment verification failed' 
+          error: 'Payment verification failed'
         })
       };
     }
 
-    // SECURITY: Fetch order details from database instead of trusting client
+    // SECURITY: Fetch order details (and the cart) from database instead of trusting client
     const orderDoc = await db.collection('orders').doc(orderId).get();
 
     if (!orderDoc.exists) {
@@ -277,10 +265,10 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 404,
         headers,
-        body: JSON.stringify({ 
-          success: false, 
+        body: JSON.stringify({
+          success: false,
           verified: true,
-          error: 'Order not found' 
+          error: 'Order not found'
         })
       };
     }
@@ -293,22 +281,22 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 403,
         headers,
-        body: JSON.stringify({ 
-          success: false, 
+        body: JSON.stringify({
+          success: false,
           verified: true,
-          error: 'Unauthorized: Order does not belong to this user' 
+          error: 'Unauthorized: Order does not belong to this user'
         })
       };
     }
 
-    const noteUrl = orderData.noteUrl;
+    const items = orderData.items || [];
     const subject = orderData.subject;
 
-    // Unlock the note for the user (using server-validated noteUrl/subject)
+    // Unlock every note in the cart (using server-validated items)
     try {
-      await unlockNoteForUser(authenticatedUserId, paymentId, orderId, noteUrl, subject);
+      await unlockCartForUser(authenticatedUserId, paymentId, orderId, items, subject);
     } catch (firestoreError) {
-      console.error('Error unlocking note:', firestoreError);
+      console.error('Error unlocking notes:', firestoreError);
       return {
         statusCode: 500,
         headers,
@@ -327,6 +315,8 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({
         success: true,
         verified: true,
+        unlockedCount: items.length,
+        unlockedNoteIds: items.map(it => it.noteId),
         message: 'Payment verified successfully'
       })
     };
