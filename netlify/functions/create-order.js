@@ -37,6 +37,24 @@ const MIN_PRICE_RUPEES = 10;   // per-unit floor
 const MAX_PRICE_RUPEES = 100;  // per-unit ceiling
 const MAX_ITEMS_PER_ORDER = 20; // sanity cap so one order can't balloon indefinitely
 
+// --- Payment gateway fee pass-through ---
+// Razorpay deducts a transaction fee, then GST on top of that fee, before settling
+// to the bank. To make sure the creator actually nets the price shown on the site
+// (e.g. a ₹20 unit settles as ₹20, not ₹19.52), we gross up what the buyer pays by
+// exactly enough to cover that deduction. Rates below are based on this account's
+// observed UPI settlement (2% fee + 18% GST on the fee ≈ 2.36% effective) — if
+// Razorpay's pricing for this account changes, update RZP_FEE_RATE here.
+const RZP_FEE_RATE = 0.02;
+const GST_ON_FEE_RATE = 0.18;
+const EFFECTIVE_DEDUCTION_RATE = RZP_FEE_RATE * (1 + GST_ON_FEE_RATE); // ≈ 0.0236
+
+// Given what the creator should net (in paise), returns what the buyer must pay
+// (in paise) so that after Razorpay's cut, the creator still nets that amount.
+// Always rounds up, so the creator is never shorted by a paisa of rounding.
+function computeGrossPaise(netPaise) {
+  return Math.ceil(netPaise / (1 - EFFECTIVE_DEDUCTION_RATE));
+}
+
 // Authentication helper
 async function verifyFirebaseToken(authHeader) {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -145,12 +163,14 @@ exports.handler = async (event, context) => {
     }
 
     const resolvedItems = Array.from(dedupedById.values());
-    const totalAmountPaise = resolvedItems.reduce((sum, it) => sum + it.price * 100, 0);
+    const notesTotalPaise = resolvedItems.reduce((sum, it) => sum + it.price * 100, 0);
+    const grossAmountPaise = computeGrossPaise(notesTotalPaise);
+    const platformFeePaise = grossAmountPaise - notesTotalPaise;
 
     // Create Razorpay order — Razorpay's `notes` field is small, so we keep it to a summary
     // and store the full cart in Firestore for verify-payment to read back.
     const options = {
-      amount: totalAmountPaise, // in paise
+      amount: grossAmountPaise, // in paise — already grossed up to cover Razorpay's fee + GST
       currency: 'INR',
       receipt: `r_${Date.now().toString().slice(-8)}`,
       notes: {
@@ -168,9 +188,11 @@ exports.handler = async (event, context) => {
     await db.collection('orders').doc(order.id).set({
       orderId: order.id,
       userId: authenticatedUserId,
-      items: resolvedItems, // [{ noteId, noteUrl, noteTitle, price }]
+      items: resolvedItems, // [{ noteId, noteUrl, noteTitle, price }] — price is the note price, not what was charged
       subject: subject,
-      amount: totalAmountPaise,
+      notesTotal: notesTotalPaise,
+      platformFee: platformFeePaise,
+      amount: grossAmountPaise,
       currency: 'INR',
       status: 'created',
       createdAt: admin.firestore.FieldValue.serverTimestamp()
@@ -183,6 +205,8 @@ exports.handler = async (event, context) => {
         success: true,
         orderId: order.id,
         amount: order.amount,
+        notesTotal: notesTotalPaise,
+        platformFee: platformFeePaise,
         currency: order.currency,
         key: process.env.RAZORPAY_KEY_ID,
         itemCount: resolvedItems.length

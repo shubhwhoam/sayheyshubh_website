@@ -597,6 +597,9 @@
     .cart-review-total-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 2px dashed #e2e8f0; font-weight: 800; color: #0f172a; font-size: 1.1rem; margin-bottom: 1rem; }
     .cart-review-empty { text-align: center; color: #64748b; font-weight: 600; padding: 2rem 1rem; }
 
+    .success-item { display: flex; align-items: center; gap: 0.7rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; font-weight: 700; color: #166534; font-size: 0.92rem; }
+    .success-item i { color: #10b981; font-size: 1.05rem; flex-shrink: 0; }
+
     @media (max-width: 768px) {
       .zoology-container { padding: 0 1rem 2rem 1rem; }
       .seo-header { padding: 3rem 1.5rem; margin-top: 0; }
@@ -1405,8 +1408,8 @@
     <div class="payment-container">
       <div class="payment-header">
         <button class="close-payment" onclick="hidePaymentPopup()"><i class="fas fa-times"></i></button>
-        <h2>🛒 Your Cart</h2>
-        <p>Review your selected units before checkout</p>
+        <h2 id="paymentHeaderTitle">🛒 Your Cart</h2>
+        <p id="paymentHeaderSubtitle">Review your selected units before checkout</p>
       </div>
 
       <div class="payment-body">
@@ -1414,18 +1417,32 @@
           <!-- populated by JS from the cart state -->
         </div>
 
-        <div class="cart-review-total-row">
-          <span>Total</span>
-          <span id="cartReviewTotal">₹0</span>
+        <div id="cartFeeBreakdown">
+          <div class="cart-review-total-row" style="border-top: 1px solid #e2e8f0; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
+            <span>Notes total</span>
+            <span id="cartNotesTotal">₹0</span>
+          </div>
+          <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
+            <span>Payment processing fee</span>
+            <span id="cartPlatformFee">₹0</span>
+          </div>
+          <div class="cart-review-total-row">
+            <span>Total payable</span>
+            <span id="cartReviewTotal">₹0</span>
+          </div>
         </div>
 
-        <div class="payment-actions">
+        <div class="payment-actions" id="cartPaymentActions">
           <button class="payment-btn cancel-btn" onclick="hidePaymentPopup()">Cancel</button>
           <button class="payment-btn pay-btn" id="cartPayBtn" onclick="proceedToPayment()">Pay Now</button>
         </div>
 
         <div class="payment-loading" id="paymentLoading">
           Processing payment...
+        </div>
+
+        <div id="successView" style="display:none;">
+          <button class="payment-btn pay-btn" style="width:100%;" onclick="closeSuccessView()">Done</button>
         </div>
       </div>
     </div>
@@ -1521,6 +1538,16 @@
     const PRICE_CHIPS = [20, 25, 30, 35, 50];
     const RECOMMENDED_PRICE = 25;
     const CART_SESSION_KEY = 'sayheyshubh_cart_v1';
+
+    // Mirrors the same constants in netlify/functions/create-order.js so the preview
+    // shown here matches exactly what the server actually charges. The server always
+    // has the final say on the real amount — this is just for a live preview.
+    const RZP_FEE_RATE = 0.02;
+    const GST_ON_FEE_RATE = 0.18;
+    const EFFECTIVE_DEDUCTION_RATE = RZP_FEE_RATE * (1 + GST_ON_FEE_RATE);
+    function computeGrossPaise(netPaise) {
+      return Math.ceil(netPaise / (1 - EFFECTIVE_DEDUCTION_RATE));
+    }
 
     let RAZORPAY_KEY_ID = null;
     let cart = {}; // { [noteId]: { noteId, noteTitle, price } }
@@ -1759,9 +1786,13 @@
     function renderCartBar() {
       const items = Object.values(cart);
       const bar = document.getElementById('cartBar');
+      const doubtsBtn = document.getElementById('doubts-btn');
+      const doubtsBubble = document.getElementById('doubts-bubble');
 
       if (items.length === 0) {
         bar.classList.remove('show');
+        if (doubtsBtn) doubtsBtn.classList.remove('shifted-up');
+        if (doubtsBubble) doubtsBubble.classList.remove('shifted-up');
         return;
       }
 
@@ -1769,16 +1800,20 @@
         `${items.length} unit${items.length > 1 ? 's' : ''} selected`;
       document.getElementById('cartBarTotal').textContent = `₹${cartTotal()}`;
       bar.classList.add('show');
+      if (doubtsBtn) doubtsBtn.classList.add('shifted-up');
+      if (doubtsBubble) doubtsBubble.classList.add('shifted-up');
     }
 
     // --- Cart review modal ---
     function showCartReview() {
       const items = Object.values(cart);
       const listEl = document.getElementById('cartReviewList');
+      const feeBreakdown = document.getElementById('cartFeeBreakdown');
 
       if (items.length === 0) {
         listEl.innerHTML = '<div class="cart-review-empty">Your cart is empty. Select a few units first.</div>';
         document.getElementById('cartPayBtn').disabled = true;
+        feeBreakdown.style.display = 'none';
       } else {
         listEl.innerHTML = items.map(item => `
           <div class="cart-review-item" data-note-id="${item.noteId}">
@@ -1792,9 +1827,16 @@
           </div>
         `).join('');
         document.getElementById('cartPayBtn').disabled = false;
+        feeBreakdown.style.display = '';
       }
 
-      document.getElementById('cartReviewTotal').textContent = `₹${cartTotal()}`;
+      const notesTotalPaise = cartTotal() * 100;
+      const grossPaise = computeGrossPaise(notesTotalPaise);
+      const platformFeePaise = grossPaise - notesTotalPaise;
+
+      document.getElementById('cartNotesTotal').textContent = `₹${(notesTotalPaise / 100).toFixed(2)}`;
+      document.getElementById('cartPlatformFee').textContent = `₹${(platformFeePaise / 100).toFixed(2)}`;
+      document.getElementById('cartReviewTotal').textContent = `₹${(grossPaise / 100).toFixed(2)}`;
       document.getElementById('paymentModal').classList.add('show');
     }
 
@@ -1830,6 +1872,38 @@
     function hidePaymentPopup() {
       document.getElementById('paymentModal').classList.remove('show');
       document.getElementById('paymentLoading').classList.remove('show');
+      resetModalToCartMode();
+    }
+
+    function resetModalToCartMode() {
+      document.getElementById('paymentHeaderTitle').textContent = '🛒 Your Cart';
+      document.getElementById('paymentHeaderSubtitle').textContent = 'Review your selected units before checkout';
+      document.getElementById('cartReviewList').style.display = '';
+      document.getElementById('cartFeeBreakdown').style.display = '';
+      document.getElementById('cartPaymentActions').style.display = '';
+      document.getElementById('successView').style.display = 'none';
+    }
+
+    function showUnlockSuccess(unlockedTitles) {
+      document.getElementById('paymentHeaderTitle').textContent = '🎉 Unlocked!';
+      document.getElementById('paymentHeaderSubtitle').textContent = `${unlockedTitles.length} unit${unlockedTitles.length > 1 ? 's' : ''} ready to view`;
+
+      document.getElementById('cartReviewList').style.display = 'none';
+      document.getElementById('cartFeeBreakdown').style.display = 'none';
+      document.getElementById('cartPaymentActions').style.display = 'none';
+      document.getElementById('paymentLoading').classList.remove('show');
+
+      const successView = document.getElementById('successView');
+      successView.innerHTML = unlockedTitles.map(title => `
+        <div class="success-item"><i class="fas fa-check-circle"></i> ${title}</div>
+      `).join('') + '<button class="payment-btn pay-btn" style="width:100%; margin-top:0.5rem;" onclick="closeSuccessView()">Done</button>';
+      successView.style.display = 'block';
+    }
+
+    async function closeSuccessView() {
+      document.getElementById('paymentModal').classList.remove('show');
+      resetModalToCartMode();
+      await loadPurchasedNotesAndUpdateButtons();
     }
 
     async function proceedToPayment() {
@@ -1867,6 +1941,9 @@
         const orderData = await orderResponse.json();
         if (!orderData.success) throw new Error(orderData.error || 'Failed to create order');
 
+        // Keep titles around for the success screen — the cart gets cleared before we need them
+        const unlockedTitles = items.map(it => it.noteTitle);
+
         const options = {
           key: RAZORPAY_KEY_ID || orderData.key,
           amount: orderData.amount,
@@ -1891,15 +1968,9 @@
               const verifyResult = await verifyResponse.json();
 
               if (verifyResult.success) {
-                document.getElementById('paymentLoading').innerHTML = '<div style="color:#10b981; font-weight:700;">🎉 Unlocked!</div>';
-                const unlockedCount = verifyResult.unlockedCount || items.length;
-                setTimeout(async () => {
-                  cart = {};
-                  saveCartToSession();
-                  hidePaymentPopup();
-                  await loadPurchasedNotesAndUpdateButtons();
-                  alert(`🎉 Success! ${unlockedCount} unit${unlockedCount > 1 ? 's' : ''} unlocked.`);
-                }, 1200);
+                cart = {};
+                saveCartToSession();
+                showUnlockSuccess(unlockedTitles);
               } else {
                 throw new Error('Verification failed');
               }

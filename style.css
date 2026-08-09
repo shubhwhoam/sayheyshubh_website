@@ -1668,6 +1668,12 @@ li a:hover {
   text-decoration: none;
   animation: btnEnter 0.6s ease-out forwards;
   animation-delay: 0.3s;
+  transition: bottom 0.3s cubic-bezier(.22,1,.36,1);
+}
+
+/* Pushed up so it clears the floating cart bar instead of sitting on top of it */
+.doubts-btn.shifted-up {
+  bottom: 96px;
 }
 
 /* Entrance animation */
@@ -1691,8 +1697,13 @@ li a:hover {
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease, bottom 0.3s cubic-bezier(.22,1,.36,1);
   z-index: 9998;
+}
+
+/* Pushed up so it clears the floating cart bar instead of sitting on top of it */
+.doubts-bubble.shifted-up {
+  bottom: 161px;
 }
 
 /* Bubble visible */
@@ -1717,10 +1728,16 @@ li a:hover {
     bottom: 15px;
     right: 15px;
   }
+  .doubts-btn.shifted-up {
+    bottom: 86px;
+  }
   .doubts-bubble {
     bottom: 70px;
     right: 15px;
     font-size: 12px;
+  }
+  .doubts-bubble.shifted-up {
+    bottom: 141px;
   }
 }
 
