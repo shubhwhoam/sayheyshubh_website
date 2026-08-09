@@ -1,5 +1,7 @@
 const admin = require('firebase-admin');
 const crypto = require('crypto');
+const { appendRow } = require('./lib/google-sheets');
+const { notify } = require('./lib/telegram');
 
 // Initialize Firebase Admin with secure environment variables
 if (!admin.apps.length) {
@@ -99,6 +101,80 @@ async function unlockCartForUser(userId, paymentId, orderId, items, subject) {
   console.log('Notes unlocked for user:', userId, 'slugs:', Object.keys(unlockedSlugs));
 }
 
+// Records a tip + optional message for the admin page. One record per payment —
+// safe to call even if this payment had no tip (amount 0 and no message), in which
+// case it's a no-op.
+async function recordTipIfAny(userId, userName, userEmail, paymentId, orderId, subject, tipAmountPaise, tipMessage) {
+  if (!tipAmountPaise && !tipMessage) return;
+
+  const tipRef = db.collection('tips').doc(paymentId);
+  try {
+    await tipRef.create({
+      userId: userId,
+      userName: userName || '',
+      userEmail: userEmail || '',
+      amount: tipAmountPaise || 0,
+      message: tipMessage || '',
+      subject: subject || 'unknown',
+      orderId: orderId,
+      paymentId: paymentId,
+      timestamp: admin.firestore.FieldValue.serverTimestamp()
+    });
+    console.log('Tip recorded:', paymentId, tipAmountPaise);
+  } catch (error) {
+    if (error.code === 6) { // ALREADY_EXISTS
+      console.log('Tip already recorded, skipping:', paymentId);
+    } else {
+      throw error;
+    }
+  }
+}
+
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Logs a tip to your Google Sheet and pings you on Telegram — only when there's
+// an actual tip (amount and/or message). Plain unit purchases are visible on your
+// Razorpay dashboard already (with unit names, via the order notes/description),
+// so this never fires for those. Best-effort: wrapped in try/catch by the caller
+// so a Sheets/Telegram hiccup never blocks the actual payment verification.
+async function logOrderExternally(orderData, paymentId, orderId) {
+  const tipAmountPaise = orderData.tipAmount || 0;
+  const tipMessage = orderData.tipMessage || '';
+
+  if (!tipAmountPaise && !tipMessage) return; // no tip — nothing to log or notify
+
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+  const dateStr = new Date().toLocaleString('en-IN', {
+    day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit'
+  });
+  const buyerName = orderData.userName || 'Unknown';
+  const buyerEmail = orderData.userEmail || '';
+  const items = orderData.items || [];
+
+  // --- Google Sheet: one row in the Tips tab ---
+  if (sheetId) {
+    await appendRow(sheetId, 'Tips', [
+      dateStr, buyerName, buyerEmail, (tipAmountPaise / 100).toFixed(2), tipMessage, paymentId, orderId
+    ]);
+  }
+
+  // --- Telegram: ping you ---
+  const unitLines = items.map(it => `  • ${escapeHtml(it.noteTitle)} — ₹${it.price}`).join('\n');
+  let message = `☕ <b>New tip!</b>\n👤 ${escapeHtml(buyerName)} (${escapeHtml(buyerEmail)})\n💰 ₹${(tipAmountPaise / 100).toFixed(2)}`;
+  if (tipMessage) message += `\n💬 "${escapeHtml(tipMessage)}"`;
+  if (items.length > 0) {
+    message += `\n\n📚 Also unlocked ${items.length} unit${items.length > 1 ? 's' : ''} in ${escapeHtml(orderData.subject || 'unknown')}:\n${unitLines}`;
+  }
+  message += `\n🕒 ${dateStr}`;
+
+  await notify(message);
+}
+
 exports.handler = async (event, context) => {
   // CORS headers
   const headers = {
@@ -190,6 +266,16 @@ exports.handler = async (event, context) => {
 
         // Unlock every note in the cart for the user
         await unlockCartForUser(userId, paymentId, orderId, items, subject);
+
+        // Record the tip + message, if any
+        await recordTipIfAny(userId, orderData.userName, orderData.userEmail, paymentId, orderId, subject, orderData.tipAmount, orderData.tipMessage);
+
+        // Log to Sheet + Telegram — best-effort, never fails the webhook
+        try {
+          await logOrderExternally(orderData, paymentId, orderId);
+        } catch (logError) {
+          console.error('Sheet/Telegram logging failed (non-fatal):', logError);
+        }
 
         console.log('Webhook processed successfully for user:', userId);
         return {
@@ -295,6 +381,7 @@ exports.handler = async (event, context) => {
     // Unlock every note in the cart (using server-validated items)
     try {
       await unlockCartForUser(authenticatedUserId, paymentId, orderId, items, subject);
+      await recordTipIfAny(authenticatedUserId, orderData.userName, orderData.userEmail, paymentId, orderId, subject, orderData.tipAmount, orderData.tipMessage);
     } catch (firestoreError) {
       console.error('Error unlocking notes:', firestoreError);
       return {
@@ -308,6 +395,13 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Log to Sheet + Telegram — best-effort, never fails the response to the buyer
+    try {
+      await logOrderExternally(orderData, paymentId, orderId);
+    } catch (logError) {
+      console.error('Sheet/Telegram logging failed (non-fatal):', logError);
+    }
+
     // Final Success Response
     return {
       statusCode: 200,
@@ -317,6 +411,7 @@ exports.handler = async (event, context) => {
         verified: true,
         unlockedCount: items.length,
         unlockedNoteIds: items.map(it => it.noteId),
+        tipAmount: orderData.tipAmount || 0,
         message: 'Payment verified successfully'
       })
     };

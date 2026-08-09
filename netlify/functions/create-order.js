@@ -37,6 +37,11 @@ const MIN_PRICE_RUPEES = 10;   // per-unit floor
 const MAX_PRICE_RUPEES = 100;  // per-unit ceiling
 const MAX_ITEMS_PER_ORDER = 20; // sanity cap so one order can't balloon indefinitely
 
+// --- Tip constraints ---
+const MIN_TIP_RUPEES = 5;
+const MAX_TIP_RUPEES = 500;
+const MAX_TIP_MESSAGE_LENGTH = 300;
+
 // --- Payment gateway fee pass-through ---
 // Razorpay deducts a transaction fee, then GST on top of that fee, before settling
 // to the bank. To make sure the creator actually nets the price shown on the site
@@ -101,7 +106,7 @@ exports.handler = async (event, context) => {
     const decodedToken = await verifyFirebaseToken(event.headers.authorization);
     const authenticatedUserId = decodedToken.uid;
 
-    let { items, subject } = JSON.parse(event.body);
+    let { items, subject, tip } = JSON.parse(event.body);
     subject = subject || 'unknown';
 
     // --- Validate the cart shape ---
@@ -119,6 +124,21 @@ exports.handler = async (event, context) => {
         headers,
         body: JSON.stringify({ success: false, error: `You can unlock at most ${MAX_ITEMS_PER_ORDER} units in one order` })
       };
+    }
+
+    // --- Validate the optional tip ---
+    let tipAmountRupees = 0;
+    let tipMessage = '';
+    if (tip && (Number(tip.amount) > 0 || (tip.message && String(tip.message).trim()))) {
+      tipAmountRupees = Number(tip.amount) || 0;
+      if (tipAmountRupees > 0 && (tipAmountRupees < MIN_TIP_RUPEES || tipAmountRupees > MAX_TIP_RUPEES)) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ success: false, error: `Tip must be between ₹${MIN_TIP_RUPEES} and ₹${MAX_TIP_RUPEES}` })
+        };
+      }
+      tipMessage = String(tip.message || '').trim().substring(0, MAX_TIP_MESSAGE_LENGTH);
     }
 
     // De-duplicate by noteId (last price wins if sent twice)
@@ -164,11 +184,15 @@ exports.handler = async (event, context) => {
 
     const resolvedItems = Array.from(dedupedById.values());
     const notesTotalPaise = resolvedItems.reduce((sum, it) => sum + it.price * 100, 0);
-    const grossAmountPaise = computeGrossPaise(notesTotalPaise);
-    const platformFeePaise = grossAmountPaise - notesTotalPaise;
+    const tipAmountPaise = Math.round(tipAmountRupees * 100);
+    const netTargetPaise = notesTotalPaise + tipAmountPaise;
+    const grossAmountPaise = computeGrossPaise(netTargetPaise);
+    const platformFeePaise = grossAmountPaise - netTargetPaise;
 
-    // Create Razorpay order — Razorpay's `notes` field is small, so we keep it to a summary
-    // and store the full cart in Firestore for verify-payment to read back.
+    // Create Razorpay order — Razorpay's `notes` field shows on the dashboard's order
+    // details page, so we include the actual unit names there (truncated to Razorpay's
+    // ~256 char per-value limit) in addition to storing the full cart in Firestore.
+    const unitNamesJoined = resolvedItems.map(it => it.noteTitle).join(', ');
     const options = {
       amount: grossAmountPaise, // in paise — already grossed up to cover Razorpay's fee + GST
       currency: 'INR',
@@ -176,21 +200,27 @@ exports.handler = async (event, context) => {
       notes: {
         userId: authenticatedUserId,
         subject: subject,
+        units: unitNamesJoined.length <= 250 ? unitNamesJoined : unitNamesJoined.substring(0, 247) + '...',
         itemCount: String(resolvedItems.length),
+        hasTip: String(tipAmountPaise > 0),
         timestamp: new Date().toISOString()
       }
     };
 
     const order = await razorpay.orders.create(options);
 
-    // Store full order + cart details in Firebase for verify-payment / webhook processing
+    // Store full order + cart + tip details in Firebase for verify-payment / webhook processing
     const db = admin.firestore();
     await db.collection('orders').doc(order.id).set({
       orderId: order.id,
       userId: authenticatedUserId,
+      userName: decodedToken.name || '',
+      userEmail: decodedToken.email || '',
       items: resolvedItems, // [{ noteId, noteUrl, noteTitle, price }] — price is the note price, not what was charged
       subject: subject,
       notesTotal: notesTotalPaise,
+      tipAmount: tipAmountPaise,
+      tipMessage: tipMessage,
       platformFee: platformFeePaise,
       amount: grossAmountPaise,
       currency: 'INR',
@@ -206,6 +236,7 @@ exports.handler = async (event, context) => {
         orderId: order.id,
         amount: order.amount,
         notesTotal: notesTotalPaise,
+        tipAmount: tipAmountPaise,
         platformFee: platformFeePaise,
         currency: order.currency,
         key: process.env.RAZORPAY_KEY_ID,

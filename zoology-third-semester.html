@@ -600,6 +600,20 @@
     .success-item { display: flex; align-items: center; gap: 0.7rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; font-weight: 700; color: #166534; font-size: 0.92rem; }
     .success-item i { color: #10b981; font-size: 1.05rem; flex-shrink: 0; }
 
+    /* --- Coffee / tip section inside the cart review modal --- */
+    .tip-section { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1.25rem; }
+    .tip-section-title { font-weight: 800; color: #9a3412; font-size: 0.98rem; margin-bottom: 0.15rem; }
+    .tip-section-sub { font-size: 0.8rem; color: #b45309; margin-bottom: 0.9rem; }
+    .tip-chips-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.9rem; }
+    .tip-chip { background: white; border: 2px solid #fed7aa; border-radius: 10px; padding: 0.45rem 0.9rem; cursor: pointer; font-weight: 700; font-size: 0.88rem; color: #9a3412; transition: all 0.2s ease; }
+    .tip-chip:hover { border-color: #fdba74; }
+    .tip-chip.selected { background: #ffedd5; color: #c2410c; border-color: #f97316; }
+    .tip-custom-input { border: 2px solid #fed7aa; border-radius: 10px; padding: 0.45rem 0.7rem; width: 90px; font-weight: 700; color: #9a3412; font-size: 0.88rem; font-family: inherit; }
+    .tip-custom-input:focus { outline: none; border-color: #f97316; }
+    .tip-message-input { width: 100%; border: 2px solid #fed7aa; border-radius: 10px; padding: 0.7rem 0.85rem; font-family: inherit; font-size: 0.88rem; color: #1e293b; resize: vertical; min-height: 56px; }
+    .tip-message-input:focus { outline: none; border-color: #f97316; }
+    .tip-message-input::placeholder { color: #c2934f; }
+
     @media (max-width: 768px) {
       .zoology-container { padding: 0 1rem 2rem 1rem; }
       .seo-header { padding: 3rem 1.5rem; margin-top: 0; }
@@ -1417,19 +1431,21 @@
           <!-- populated by JS from the cart state -->
         </div>
 
+        <div id="tipSection" class="tip-section" style="display:none;">
+          <div class="tip-section-title">☕ Buy your senior a coffee?</div>
+          <div class="tip-section-sub">Totally optional — a little something for the person making these notes.</div>
+          <div class="tip-chips-row">
+            <div class="tip-chip" data-tip="5">₹5</div>
+            <div class="tip-chip" data-tip="10">₹10</div>
+            <div class="tip-chip" data-tip="15">₹15</div>
+            <div class="tip-chip" data-tip="20">₹20</div>
+            <input type="number" id="tipCustomInput" class="tip-custom-input" placeholder="Custom ₹" min="0" max="500" inputmode="numeric">
+          </div>
+          <textarea id="tipMessageInput" class="tip-message-input" maxlength="300" placeholder="Say something nice (optional)"></textarea>
+        </div>
+
         <div id="cartFeeBreakdown">
-          <div class="cart-review-total-row" style="border-top: 1px solid #e2e8f0; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
-            <span>Notes total</span>
-            <span id="cartNotesTotal">₹0</span>
-          </div>
-          <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
-            <span>Payment processing fee</span>
-            <span id="cartPlatformFee">₹0</span>
-          </div>
-          <div class="cart-review-total-row">
-            <span>Total payable</span>
-            <span id="cartReviewTotal">₹0</span>
-          </div>
+          <!-- fully rendered by renderFeeBreakdown() -->
         </div>
 
         <div class="payment-actions" id="cartPaymentActions">
@@ -1551,13 +1567,19 @@
 
     let RAZORPAY_KEY_ID = null;
     let cart = {}; // { [noteId]: { noteId, noteTitle, price } }
+    let tip = { amount: 0, message: '' };
+    const TIP_SESSION_KEY = 'sayheyshubh_tip_v1';
+    const TIP_CHIPS = [5, 10, 15, 20];
+    const MAX_TIP = 500;
 
     document.addEventListener('DOMContentLoaded', function() {
       loadUserProfile();
       loadCartFromSession();
+      loadTipFromSession();
       initializePaymentSystem();
       fetchRazorpayConfig();
       renderCartBar();
+      initializeTipUI();
     });
 
     async function fetchRazorpayConfig() {
@@ -1603,6 +1625,66 @@
 
     function saveCartToSession() {
       sessionStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
+    }
+
+    function loadTipFromSession() {
+      try {
+        const saved = sessionStorage.getItem(TIP_SESSION_KEY);
+        tip = saved ? JSON.parse(saved) : { amount: 0, message: '' };
+      } catch (error) {
+        tip = { amount: 0, message: '' };
+      }
+    }
+
+    function saveTipToSession() {
+      sessionStorage.setItem(TIP_SESSION_KEY, JSON.stringify(tip));
+    }
+
+    function clearTip() {
+      tip = { amount: 0, message: '' };
+      saveTipToSession();
+    }
+
+    // Wires up the tip chips, custom-amount input, and message box once on load.
+    function initializeTipUI() {
+      document.querySelectorAll('.tip-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const amount = parseInt(chip.dataset.tip, 10);
+          tip.amount = (tip.amount === amount) ? 0 : amount; // tap again to deselect
+          document.getElementById('tipCustomInput').value = '';
+          saveTipToSession();
+          syncTipUI();
+        });
+      });
+
+      const customInput = document.getElementById('tipCustomInput');
+      customInput.addEventListener('input', () => {
+        let val = parseInt(customInput.value, 10);
+        if (isNaN(val) || val < 0) val = 0;
+        if (val > MAX_TIP) val = MAX_TIP;
+        tip.amount = val;
+        saveTipToSession();
+        syncTipUI(true); // true = don't overwrite what they're typing
+      });
+
+      const messageInput = document.getElementById('tipMessageInput');
+      messageInput.addEventListener('input', () => {
+        tip.message = messageInput.value;
+        saveTipToSession();
+      });
+    }
+
+    // Reflects current tip state into the chip highlighting, custom input, and message box.
+    function syncTipUI(skipCustomInputValue) {
+      document.querySelectorAll('.tip-chip').forEach(chip => {
+        chip.classList.toggle('selected', parseInt(chip.dataset.tip, 10) === tip.amount);
+      });
+      if (!skipCustomInputValue) {
+        const customInput = document.getElementById('tipCustomInput');
+        const isPresetAmount = TIP_CHIPS.includes(tip.amount);
+        customInput.value = (tip.amount > 0 && !isPresetAmount) ? tip.amount : '';
+      }
+      document.getElementById('tipMessageInput').value = tip.message || '';
     }
 
     async function loadPurchasedNotesAndUpdateButtons() {
@@ -1783,6 +1865,15 @@
       return Object.values(cart).reduce((sum, item) => sum + item.price, 0);
     }
 
+    // Razorpay's description field shows up on your dashboard's payment details.
+    // List actual unit names instead of a generic count, truncated to stay under
+    // Razorpay's ~255 char limit for this field.
+    function buildRazorpayDescription(items) {
+      const full = items.map(it => it.noteTitle).join(', ');
+      if (full.length <= 250) return full;
+      return full.substring(0, 247) + '...';
+    }
+
     function renderCartBar() {
       const items = Object.values(cart);
       const bar = document.getElementById('cartBar');
@@ -1809,11 +1900,13 @@
       const items = Object.values(cart);
       const listEl = document.getElementById('cartReviewList');
       const feeBreakdown = document.getElementById('cartFeeBreakdown');
+      const tipSection = document.getElementById('tipSection');
 
       if (items.length === 0) {
         listEl.innerHTML = '<div class="cart-review-empty">Your cart is empty. Select a few units first.</div>';
         document.getElementById('cartPayBtn').disabled = true;
         feeBreakdown.style.display = 'none';
+        tipSection.style.display = 'none';
       } else {
         listEl.innerHTML = items.map(item => `
           <div class="cart-review-item" data-note-id="${item.noteId}">
@@ -1828,16 +1921,46 @@
         `).join('');
         document.getElementById('cartPayBtn').disabled = false;
         feeBreakdown.style.display = '';
+        tipSection.style.display = '';
+        syncTipUI();
       }
 
-      const notesTotalPaise = cartTotal() * 100;
-      const grossPaise = computeGrossPaise(notesTotalPaise);
-      const platformFeePaise = grossPaise - notesTotalPaise;
-
-      document.getElementById('cartNotesTotal').textContent = `₹${(notesTotalPaise / 100).toFixed(2)}`;
-      document.getElementById('cartPlatformFee').textContent = `₹${(platformFeePaise / 100).toFixed(2)}`;
-      document.getElementById('cartReviewTotal').textContent = `₹${(grossPaise / 100).toFixed(2)}`;
+      renderFeeBreakdown();
       document.getElementById('paymentModal').classList.add('show');
+    }
+
+    function renderFeeBreakdown() {
+      const notesTotalPaise = cartTotal() * 100;
+      const tipPaise = (tip.amount || 0) * 100;
+      const netTargetPaise = notesTotalPaise + tipPaise;
+      const grossPaise = computeGrossPaise(netTargetPaise);
+      const platformFeePaise = grossPaise - netTargetPaise;
+
+      let breakdownHtml = `
+        <div class="cart-review-total-row" style="border-top: 1px solid #e2e8f0; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
+          <span>Notes total</span>
+          <span>₹${(notesTotalPaise / 100).toFixed(2)}</span>
+        </div>`;
+
+      if (tipPaise > 0) {
+        breakdownHtml += `
+        <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #b45309; padding: 0.5rem 0; margin-bottom: 0;">
+          <span>☕ Coffee for Shubh</span>
+          <span>₹${(tipPaise / 100).toFixed(2)}</span>
+        </div>`;
+      }
+
+      breakdownHtml += `
+        <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
+          <span>Payment processing fee</span>
+          <span>₹${(platformFeePaise / 100).toFixed(2)}</span>
+        </div>
+        <div class="cart-review-total-row">
+          <span>Total payable</span>
+          <span>₹${(grossPaise / 100).toFixed(2)}</span>
+        </div>`;
+
+      document.getElementById('cartFeeBreakdown').innerHTML = breakdownHtml;
     }
 
     function setCartReviewPrice(noteId, price) {
@@ -1879,24 +2002,30 @@
       document.getElementById('paymentHeaderTitle').textContent = '🛒 Your Cart';
       document.getElementById('paymentHeaderSubtitle').textContent = 'Review your selected units before checkout';
       document.getElementById('cartReviewList').style.display = '';
+      document.getElementById('tipSection').style.display = '';
       document.getElementById('cartFeeBreakdown').style.display = '';
       document.getElementById('cartPaymentActions').style.display = '';
       document.getElementById('successView').style.display = 'none';
     }
 
-    function showUnlockSuccess(unlockedTitles) {
+    function showUnlockSuccess(unlockedTitles, tipAmountPaid) {
       document.getElementById('paymentHeaderTitle').textContent = '🎉 Unlocked!';
       document.getElementById('paymentHeaderSubtitle').textContent = `${unlockedTitles.length} unit${unlockedTitles.length > 1 ? 's' : ''} ready to view`;
 
       document.getElementById('cartReviewList').style.display = 'none';
+      document.getElementById('tipSection').style.display = 'none';
       document.getElementById('cartFeeBreakdown').style.display = 'none';
       document.getElementById('cartPaymentActions').style.display = 'none';
       document.getElementById('paymentLoading').classList.remove('show');
 
       const successView = document.getElementById('successView');
-      successView.innerHTML = unlockedTitles.map(title => `
+      let rows = unlockedTitles.map(title => `
         <div class="success-item"><i class="fas fa-check-circle"></i> ${title}</div>
-      `).join('') + '<button class="payment-btn pay-btn" style="width:100%; margin-top:0.5rem;" onclick="closeSuccessView()">Done</button>';
+      `).join('');
+      if (tipAmountPaid > 0) {
+        rows += `<div class="success-item" style="background:#fff7ed; border-color:#fed7aa; color:#9a3412;"><i class="fas fa-mug-hot" style="color:#f97316;"></i> Thanks for the ₹${tipAmountPaid} coffee!</div>`;
+      }
+      successView.innerHTML = rows + '<button class="payment-btn pay-btn" style="width:100%; margin-top:0.5rem;" onclick="closeSuccessView()">Done</button>';
       successView.style.display = 'block';
     }
 
@@ -1934,15 +2063,17 @@
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
           body: JSON.stringify({
             items: items.map(it => ({ noteId: it.noteId, noteTitle: it.noteTitle, price: it.price })),
-            subject: 'zoology'
+            subject: 'zoology',
+            tip: { amount: tip.amount || 0, message: (tip.message || '').trim() }
           })
         });
 
         const orderData = await orderResponse.json();
         if (!orderData.success) throw new Error(orderData.error || 'Failed to create order');
 
-        // Keep titles around for the success screen — the cart gets cleared before we need them
+        // Keep these around for the success screen — cart/tip state gets cleared before we need them
         const unlockedTitles = items.map(it => it.noteTitle);
+        const tipAmountPaid = tip.amount || 0;
 
         const options = {
           key: RAZORPAY_KEY_ID || orderData.key,
@@ -1950,7 +2081,7 @@
           currency: orderData.currency,
           order_id: orderData.orderId,
           name: 'SayHeyShubh - Notes',
-          description: `Unlock ${items.length} unit${items.length > 1 ? 's' : ''}`,
+          description: buildRazorpayDescription(items),
           handler: async function (response) {
             document.getElementById('paymentLoading').innerHTML = '<div style="color:#10b981; font-weight:700;">✅ Success! Unlocking...</div>';
 
@@ -1970,7 +2101,8 @@
               if (verifyResult.success) {
                 cart = {};
                 saveCartToSession();
-                showUnlockSuccess(unlockedTitles);
+                clearTip();
+                showUnlockSuccess(unlockedTitles, tipAmountPaid);
               } else {
                 throw new Error('Verification failed');
               }
