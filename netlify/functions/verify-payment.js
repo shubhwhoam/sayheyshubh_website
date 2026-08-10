@@ -101,11 +101,15 @@ async function unlockCartForUser(userId, paymentId, orderId, items, subject) {
   console.log('Notes unlocked for user:', userId, 'slugs:', Object.keys(unlockedSlugs));
 }
 
-// Records a tip + optional message for the admin page. One record per payment —
-// safe to call even if this payment had no tip (amount 0 and no message), in which
-// case it's a no-op.
+// Records a tip + optional message. One record per payment — Firestore's atomic
+// .create() is what actually enforces "only once", using paymentId as the doc ID.
+// Returns true only if this call was the one that created the record (i.e. this
+// payment's tip hasn't been processed before) — false if there's no tip, or if
+// it was already recorded by an earlier call (a webhook retry, or the webhook
+// and the frontend both firing for the same payment). Callers use this return
+// value to decide whether to send notifications, so a retry never double-sends.
 async function recordTipIfAny(userId, userName, userEmail, paymentId, orderId, subject, tipAmountPaise, tipMessage) {
-  if (!tipAmountPaise && !tipMessage) return;
+  if (!tipAmountPaise && !tipMessage) return false;
 
   const tipRef = db.collection('tips').doc(paymentId);
   try {
@@ -121,12 +125,13 @@ async function recordTipIfAny(userId, userName, userEmail, paymentId, orderId, s
       timestamp: admin.firestore.FieldValue.serverTimestamp()
     });
     console.log('Tip recorded:', paymentId, tipAmountPaise);
+    return true;
   } catch (error) {
     if (error.code === 6) { // ALREADY_EXISTS
       console.log('Tip already recorded, skipping:', paymentId);
-    } else {
-      throw error;
+      return false;
     }
+    throw error;
   }
 }
 
@@ -267,14 +272,18 @@ exports.handler = async (event, context) => {
         // Unlock every note in the cart for the user
         await unlockCartForUser(userId, paymentId, orderId, items, subject);
 
-        // Record the tip + message, if any
-        await recordTipIfAny(userId, orderData.userName, orderData.userEmail, paymentId, orderId, subject, orderData.tipAmount, orderData.tipMessage);
+        // Record the tip + message, if any — isNewTip is false on retries/duplicate
+        // deliveries, since the tip record already exists from the first call
+        const isNewTip = await recordTipIfAny(userId, orderData.userName, orderData.userEmail, paymentId, orderId, subject, orderData.tipAmount, orderData.tipMessage);
 
-        // Log to Sheet + Telegram — best-effort, never fails the webhook
-        try {
-          await logOrderExternally(orderData, paymentId, orderId);
-        } catch (logError) {
-          console.error('Sheet/Telegram logging failed (non-fatal):', logError);
+        // Log to Sheet + Telegram — only for the first time we see this tip, and
+        // best-effort so it never fails the webhook
+        if (isNewTip) {
+          try {
+            await logOrderExternally(orderData, paymentId, orderId);
+          } catch (logError) {
+            console.error('Sheet/Telegram logging failed (non-fatal):', logError);
+          }
         }
 
         console.log('Webhook processed successfully for user:', userId);
@@ -377,11 +386,12 @@ exports.handler = async (event, context) => {
 
     const items = orderData.items || [];
     const subject = orderData.subject;
+    let isNewTip = false;
 
     // Unlock every note in the cart (using server-validated items)
     try {
       await unlockCartForUser(authenticatedUserId, paymentId, orderId, items, subject);
-      await recordTipIfAny(authenticatedUserId, orderData.userName, orderData.userEmail, paymentId, orderId, subject, orderData.tipAmount, orderData.tipMessage);
+      isNewTip = await recordTipIfAny(authenticatedUserId, orderData.userName, orderData.userEmail, paymentId, orderId, subject, orderData.tipAmount, orderData.tipMessage);
     } catch (firestoreError) {
       console.error('Error unlocking notes:', firestoreError);
       return {
@@ -395,11 +405,14 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Log to Sheet + Telegram — best-effort, never fails the response to the buyer
-    try {
-      await logOrderExternally(orderData, paymentId, orderId);
-    } catch (logError) {
-      console.error('Sheet/Telegram logging failed (non-fatal):', logError);
+    // Log to Sheet + Telegram — only for the first time we see this tip (a webhook
+    // may have already handled it), and best-effort so it never fails the response
+    if (isNewTip) {
+      try {
+        await logOrderExternally(orderData, paymentId, orderId);
+      } catch (logError) {
+        console.error('Sheet/Telegram logging failed (non-fatal):', logError);
+      }
     }
 
     // Final Success Response

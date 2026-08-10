@@ -429,6 +429,60 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.03);
       border: 1px solid #e2e8f0;
     }
+
+    /* --- CGPA guide section --- */
+    .cgpa-guide-section {
+      background: white;
+      padding: 4rem 3rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+    }
+    .cgpa-guide-section h2 {
+      text-align: center;
+      color: #0f172a;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .cgpa-guide-intro {
+      text-align: center;
+      color: #64748b;
+      font-size: 1rem;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .cgpa-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .cgpa-step-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .cgpa-step-card:hover { border-color: #cbd5e1; transform: translateY(-2px); }
+    .cgpa-step-number {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.95rem; margin-bottom: 0.9rem;
+    }
+    .cgpa-step-card h3 { font-size: 1.05rem; font-weight: 700; color: #1e293b; margin: 0 0 0.5rem; }
+    .cgpa-step-card p { font-size: 0.9rem; color: #475569; line-height: 1.65; margin: 0; }
+    .cgpa-guide-note {
+      background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 14px;
+      padding: 1.25rem 1.5rem; font-size: 0.92rem; color: #3730a3; line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .cgpa-guide-section { padding: 2.5rem 1.5rem; }
+    }
     
     .faq-section h2 {
       text-align: center;
@@ -562,13 +616,26 @@
     .download-btn.in-cart { background: linear-gradient(135deg, #6366f1, #4f46e5) !important; color: white !important; }
 
     /* --- Cart: inline per-unit price strip (collapsed unless the unit is selected) --- */
-    .price-strip { display: none; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed #e2e8f0; }
+    .price-strip { display: none; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.9rem; padding-top: 1.5rem; border-top: 1px dashed #e2e8f0; }
     .price-strip.show { display: flex; animation: fadeSlideDown 0.25s ease; }
     .price-strip-label { width: 100%; font-size: 0.78rem; font-weight: 700; color: #64748b; margin-bottom: 0.2rem; }
-    .price-chip-mini { background: white; border: 2px solid #e2e8f0; border-radius: 10px; padding: 0.4rem 0.85rem; cursor: pointer; font-weight: 700; font-size: 0.85rem; color: #475569; transition: all 0.2s ease; }
+    .price-chip-mini { background: white; border: 2px solid #e2e8f0; border-radius: 10px; padding: 0.4rem 0.85rem; cursor: pointer; font-weight: 700; font-size: 0.85rem; color: #475569; transition: all 0.2s ease; position: relative; }
     .price-chip-mini:hover { border-color: #cbd5e1; background: #f8fafc; }
     .price-chip-mini.selected { background: #eef2ff; color: #4f46e5; border-color: #6366f1; }
     .price-chip-mini.recommended.selected { background: #ecfdf5; color: #059669; border-color: #10b981; }
+    .price-chip-mini.recommended::before {
+      content: 'Recommended';
+      position: absolute;
+      top: -1.15rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.58rem;
+      font-weight: 800;
+      color: #059669;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
     @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
     /* --- Cart: floating sticky bottom bar (mobile-first) --- */
@@ -593,7 +660,7 @@
     .cart-review-item-title { font-weight: 700; color: #1e293b; font-size: 0.92rem; flex: 1; }
     .cart-review-remove { background: #fef2f2; color: #dc2626; border: none; width: 26px; height: 26px; min-width: 26px; border-radius: 50%; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .cart-review-remove:hover { background: #fee2e2; }
-    .cart-review-price-row { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .cart-review-price-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1.15rem; }
     .cart-review-total-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 2px dashed #e2e8f0; font-weight: 800; color: #0f172a; font-size: 1.1rem; margin-bottom: 1rem; }
     .cart-review-empty { text-align: center; color: #64748b; font-weight: 600; padding: 2rem 1rem; }
 
@@ -604,6 +671,7 @@
     .tip-section { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1.25rem; }
     .tip-section-title { font-weight: 800; color: #9a3412; font-size: 0.98rem; margin-bottom: 0.15rem; }
     .tip-section-sub { font-size: 0.8rem; color: #b45309; margin-bottom: 0.9rem; }
+    .tip-field-label { font-size: 0.75rem; font-weight: 700; color: #b45309; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.45rem; }
     .tip-chips-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.9rem; }
     .tip-chip { background: white; border: 2px solid #fed7aa; border-radius: 10px; padding: 0.45rem 0.9rem; cursor: pointer; font-weight: 700; font-size: 0.88rem; color: #9a3412; transition: all 0.2s ease; }
     .tip-chip:hover { border-color: #fdba74; }
@@ -1257,6 +1325,90 @@
     </div>
 
     <!-- FAQ SECTION -->
+    <div class="cgpa-guide-section">
+      <h2>📈 How to Score 9+ CGPA in BSc Zoology Hons</h2>
+      <p class="cgpa-guide-intro">
+        Scoring a 9+ CGPA in BSc Zoology Hons at Delhi University isn't really about reading more.
+        It's about studying in the right order. Here's the method that actually works for
+        semester exams, based on how DU papers are usually set.
+      </p>
+
+      <div class="cgpa-steps">
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">1</div>
+          <h3>Start with the PYQs, not the notes</h3>
+          <p>
+            Before opening any unit, go through the previous year questions (PYQs) already
+            available on this page. This shows you exactly which topics get asked again and
+            again in the Zoology exam, so you know where to put your first round of effort
+            instead of studying every unit with equal priority.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">2</div>
+          <h3>Download the notes and study that topic properly</h3>
+          <p>
+            Once you know which topics matter most, download the unit-wise notes for that
+            topic and actually read through it instead of jumping straight to definitions.
+            Understanding a concept once makes it far easier to recall in the exam than
+            memorising it without context.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">3</div>
+          <h3>Practice every diagram and flowchart</h3>
+          <p>
+            Zoology answers carry real weightage for labelled diagrams and flowcharts,
+            things like life cycles, cell structures, and biochemical pathways. Sketch these
+            out by hand a few times rather than just looking at them. A clean, correctly
+            labelled diagram often earns marks even when the written explanation is average.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">4</div>
+          <h3>Go back to the PYQs and test yourself</h3>
+          <p>
+            After finishing a topic, return to the same previous year questions and try
+            answering them from memory, without your notes open. This is much closer to
+            actual exam conditions than passive revision, and it tells you honestly which
+            parts you still need to revisit.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">5</div>
+          <h3>Write full answers under a timer, at least once</h3>
+          <p>
+            For long-answer questions, practice writing a complete answer within a set time
+            limit before the actual exam. Knowing the content isn't the same as being able
+            to structure and finish it in time, so this step matters more than most students
+            expect.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">6</div>
+          <h3>Finish one topic fully before moving to the next</h3>
+          <p>
+            Repeat this PYQ, notes, diagram, and self-test cycle one topic at a time across
+            every unit rather than skimming all units once. It keeps each topic genuinely
+            exam-ready instead of leaving several topics half-prepared right before the
+            semester exam.
+          </p>
+        </div>
+      </div>
+
+      <div class="cgpa-guide-note">
+        💡 This same method works whether you're preparing for internals or the final semester
+        exam. Use the PYQs and notes on this page together instead of separately, and give
+        diagrams the same attention as written answers. That combination is usually what
+        separates a 9+ CGPA from an average one in BSc Zoology Hons.
+      </div>
+    </div>
+
     <div class="faq-section">
       <h2>❓ Frequently Asked Questions</h2>
       <div class="faq-container">
@@ -1432,8 +1584,9 @@
         </div>
 
         <div id="tipSection" class="tip-section" style="display:none;">
-          <div class="tip-section-title">☕ Buy your senior a coffee?</div>
-          <div class="tip-section-sub">Totally optional — a little something for the person making these notes.</div>
+          <div class="tip-section-title">☕ Add a tip or leave a message</div>
+          <div class="tip-section-sub">Both are optional and don't depend on each other. Even just a message means a lot.</div>
+          <div class="tip-field-label">Tip amount (optional)</div>
           <div class="tip-chips-row">
             <div class="tip-chip" data-tip="5">₹5</div>
             <div class="tip-chip" data-tip="10">₹10</div>
@@ -1441,7 +1594,8 @@
             <div class="tip-chip" data-tip="20">₹20</div>
             <input type="number" id="tipCustomInput" class="tip-custom-input" placeholder="Custom ₹" min="0" max="500" inputmode="numeric">
           </div>
-          <textarea id="tipMessageInput" class="tip-message-input" maxlength="300" placeholder="Say something nice (optional)"></textarea>
+          <div class="tip-field-label">Your message (optional)</div>
+          <textarea id="tipMessageInput" class="tip-message-input" maxlength="300" placeholder="Say hi, ask something, or just say thanks. No tip needed for this."></textarea>
         </div>
 
         <div id="cartFeeBreakdown">
@@ -1600,8 +1754,7 @@
           trackSubjectLogin(user, 'zoology');
           loadPurchasedNotesAndUpdateButtons();
         } else {
-          // Logged out: nothing is purchased yet, so just wire up the empty-state buttons
-          updateButtonStates([]);
+          showLoggedOutButtons();
         }
       });
 
@@ -1611,6 +1764,32 @@
       document.getElementById('authModal').addEventListener('click', (e) => {
         if (e.target.id === 'authModal') hideAuthPopup();
       });
+    }
+
+    // Logged-out state: every unit shows "Access Notes" in amber, and clicking any
+    // of them just opens the login popup — no cart interaction is possible until
+    // signed in. Also clears any in-progress cart/tip, since that flow requires
+    // being logged in and shouldn't linger in a stale state across a logout.
+    function showLoggedOutButtons() {
+      cart = {};
+      saveCartToSession();
+      clearTip();
+
+      const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
+      secureButtons.forEach(button => {
+        const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'\s*,\s*'([^']+)'\)/);
+        if (!match) return;
+        const noteId = match[1];
+
+        removePriceStrip(noteId);
+        button.classList.remove('in-cart');
+        button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+        button.style.color = 'white';
+        button.innerHTML = '<i class="fas fa-lock"></i> Access Notes';
+        button.onclick = (e) => { e.preventDefault(); showAuthPopup(); };
+      });
+
+      renderCartBar();
     }
 
     // --- Cart persistence (sessionStorage: cleared when the tab closes, unlike localStorage) ---
@@ -1654,6 +1833,7 @@
           document.getElementById('tipCustomInput').value = '';
           saveTipToSession();
           syncTipUI();
+          renderFeeBreakdown();
         });
       });
 
@@ -1665,6 +1845,7 @@
         tip.amount = val;
         saveTipToSession();
         syncTipUI(true); // true = don't overwrite what they're typing
+        renderFeeBreakdown();
       });
 
       const messageInput = document.getElementById('tipMessageInput');
@@ -1750,11 +1931,16 @@
     function renderUnitButtonState(button, noteId) {
       const inCart = !!cart[noteId];
       button.classList.toggle('in-cart', inCart);
-      button.style.background = '';
-      button.style.color = '';
-      button.innerHTML = inCart
-        ? '<i class="fas fa-check-circle"></i> Added to Cart'
-        : '<i class="fas fa-lock"></i> Unlock Notes';
+
+      if (inCart) {
+        button.style.background = '';
+        button.style.color = '';
+        button.innerHTML = '<i class="fas fa-check-circle"></i> Added to Cart';
+      } else {
+        button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+        button.style.color = 'white';
+        button.innerHTML = '<i class="fas fa-lock"></i> Unlock Notes';
+      }
 
       const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
       if (strip) strip.classList.toggle('show', inCart);
@@ -1950,6 +2136,14 @@
         </div>`;
       }
 
+      if ((tip.message || '').trim()) {
+        breakdownHtml += `
+        <div class="cart-review-total-row" style="border-top: none; font-size: 0.85rem; font-weight: 600; color: #b45309; padding: 0.35rem 0; margin-bottom: 0;">
+          <span>💌 Your message will be sent</span>
+          <span></span>
+        </div>`;
+      }
+
       breakdownHtml += `
         <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
           <span>Payment processing fee</span>
@@ -2008,7 +2202,7 @@
       document.getElementById('successView').style.display = 'none';
     }
 
-    function showUnlockSuccess(unlockedTitles, tipAmountPaid) {
+    function showUnlockSuccess(unlockedTitles, tipAmountPaid, messageWasSent) {
       document.getElementById('paymentHeaderTitle').textContent = '🎉 Unlocked!';
       document.getElementById('paymentHeaderSubtitle').textContent = `${unlockedTitles.length} unit${unlockedTitles.length > 1 ? 's' : ''} ready to view`;
 
@@ -2024,6 +2218,8 @@
       `).join('');
       if (tipAmountPaid > 0) {
         rows += `<div class="success-item" style="background:#fff7ed; border-color:#fed7aa; color:#9a3412;"><i class="fas fa-mug-hot" style="color:#f97316;"></i> Thanks for the ₹${tipAmountPaid} coffee!</div>`;
+      } else if (messageWasSent) {
+        rows += `<div class="success-item" style="background:#fff7ed; border-color:#fed7aa; color:#9a3412;"><i class="fas fa-envelope" style="color:#f97316;"></i> Your message has been sent!</div>`;
       }
       successView.innerHTML = rows + '<button class="payment-btn pay-btn" style="width:100%; margin-top:0.5rem;" onclick="closeSuccessView()">Done</button>';
       successView.style.display = 'block';
@@ -2074,6 +2270,7 @@
         // Keep these around for the success screen — cart/tip state gets cleared before we need them
         const unlockedTitles = items.map(it => it.noteTitle);
         const tipAmountPaid = tip.amount || 0;
+        const messageWasSent = !!(tip.message || '').trim();
 
         const options = {
           key: RAZORPAY_KEY_ID || orderData.key,
@@ -2102,7 +2299,7 @@
                 cart = {};
                 saveCartToSession();
                 clearTip();
-                showUnlockSuccess(unlockedTitles, tipAmountPaid);
+                showUnlockSuccess(unlockedTitles, tipAmountPaid, messageWasSent);
               } else {
                 throw new Error('Verification failed');
               }
