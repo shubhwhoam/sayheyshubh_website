@@ -2244,10 +2244,28 @@
       successView.style.display = 'block';
     }
 
-    async function closeSuccessView() {
+    function closeSuccessView() {
       document.getElementById('paymentModal').classList.remove('show');
       resetModalToCartMode();
-      await loadPurchasedNotesAndUpdateButtons();
+      // Buttons are already updated optimistically the moment payment verified (see
+      // optimisticallyUnlock above) — this just reconciles with the server quietly in
+      // the background, without making the user wait for it.
+      loadPurchasedNotesAndUpdateButtons();
+    }
+
+    // Instantly reflects a just-completed purchase in the UI: merges the newly bought
+    // noteIds into the cached purchased list and repaints buttons/cart bar right away,
+    // instead of waiting on a fresh check-purchases network round trip.
+    function optimisticallyUnlock(newlyPurchasedIds) {
+      let cachedPurchased = [];
+      try {
+        cachedPurchased = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+      } catch (error) {
+        cachedPurchased = [];
+      }
+      const merged = Array.from(new Set([...cachedPurchased, ...newlyPurchasedIds]));
+      localStorage.setItem('purchasedNotes', JSON.stringify(merged));
+      updateButtonStates(merged); // also calls renderCartBar(), hiding the bar immediately
     }
 
     async function proceedToPayment() {
@@ -2288,6 +2306,7 @@
 
         // Keep these around for the success screen — cart/tip state gets cleared before we need them
         const unlockedTitles = items.map(it => it.noteTitle);
+        const unlockedIds = items.map(it => it.noteId);
         const tipAmountPaid = tip.amount || 0;
         const messageWasSent = !!(tip.message || '').trim();
 
@@ -2318,6 +2337,11 @@
                 cart = {};
                 saveCartToSession();
                 clearTip();
+                // Update buttons + hide the cart bar right now using what we already know was
+                // bought — don't make the user wait on a fresh check-purchases round trip just
+                // to see the cart disappear. The background reconciliation in closeSuccessView
+                // still runs to catch anything unexpected.
+                optimisticallyUnlock(unlockedIds);
                 showUnlockSuccess(unlockedTitles, tipAmountPaid, messageWasSent);
               } else {
                 throw new Error('Verification failed');
