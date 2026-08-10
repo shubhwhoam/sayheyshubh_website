@@ -11,8 +11,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
 
   <meta charset="UTF-8" />
@@ -671,7 +669,6 @@
     .tip-section { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1.25rem; }
     .tip-section-title { font-weight: 800; color: #9a3412; font-size: 0.98rem; margin-bottom: 0.15rem; }
     .tip-section-sub { font-size: 0.8rem; color: #b45309; margin-bottom: 0.9rem; }
-    .tip-field-label { font-size: 0.75rem; font-weight: 700; color: #b45309; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.45rem; }
     .tip-chips-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.9rem; }
     .tip-chip { background: white; border: 2px solid #fed7aa; border-radius: 10px; padding: 0.45rem 0.9rem; cursor: pointer; font-weight: 700; font-size: 0.88rem; color: #9a3412; transition: all 0.2s ease; }
     .tip-chip:hover { border-color: #fdba74; }
@@ -1584,9 +1581,8 @@
         </div>
 
         <div id="tipSection" class="tip-section" style="display:none;">
-          <div class="tip-section-title">☕ Add a tip or leave a message</div>
-          <div class="tip-section-sub">Both are optional and don't depend on each other. Even just a message means a lot.</div>
-          <div class="tip-field-label">Tip amount (optional)</div>
+          <div class="tip-section-title">☕ Buy your senior a coffee?</div>
+          <div class="tip-section-sub">Totally optional. A little something for the person making these notes.</div>
           <div class="tip-chips-row">
             <div class="tip-chip" data-tip="5">₹5</div>
             <div class="tip-chip" data-tip="10">₹10</div>
@@ -1594,8 +1590,7 @@
             <div class="tip-chip" data-tip="20">₹20</div>
             <input type="number" id="tipCustomInput" class="tip-custom-input" placeholder="Custom ₹" min="0" max="500" inputmode="numeric">
           </div>
-          <div class="tip-field-label">Your message (optional)</div>
-          <textarea id="tipMessageInput" class="tip-message-input" maxlength="300" placeholder="Say hi, ask something, or just say thanks. No tip needed for this."></textarea>
+          <textarea id="tipMessageInput" class="tip-message-input" maxlength="300" placeholder="Say something nice (optional)"></textarea>
         </div>
 
         <div id="cartFeeBreakdown">
@@ -1730,11 +1725,35 @@
       loadUserProfile();
       loadCartFromSession();
       loadTipFromSession();
+      applyOptimisticButtonState();
       initializePaymentSystem();
       fetchRazorpayConfig();
       renderCartBar();
       initializeTipUI();
     });
+
+    // Paints buttons instantly using cached login/purchase state, before Firebase
+    // auth or the check-purchases network call has resolved. The real listener in
+    // initializePaymentSystem() runs right after and corrects anything if the cache
+    // was stale — for the common case (returning user, nothing changed) this removes
+    // the visible delay between page load and buttons showing their real state.
+    function applyOptimisticButtonState() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      if (!isLoggedIn) {
+        showLoggedOutButtons();
+        return;
+      }
+
+      let cachedPurchased = [];
+      try {
+        cachedPurchased = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+      } catch (error) {
+        cachedPurchased = [];
+      }
+
+      updateButtonStates(cachedPurchased);
+    }
 
     async function fetchRazorpayConfig() {
       try {
