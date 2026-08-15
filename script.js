@@ -74,3 +74,100 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// ============================================================================
+// GLOBAL IN-APP PDF VIEWER (Works on all pages)
+// ============================================================================
+
+function openInAppViewer(pdfUrl, title) {
+  // 1. Create the overlay HTML
+  const viewerHtml = `
+    <div id="pdf-viewer-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#e2e8f0; display:flex; flex-direction:column; animation: slideUp 0.3s ease;">
+
+      <!-- Top Navigation Bar -->
+      <div style="padding: 15px 25px; background: #0f172a; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 10;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <h3 style="margin:0; font-size: 1.1rem; font-weight: 600;">${title}</h3>
+        </div>
+        <button onclick="document.getElementById('pdf-viewer-overlay').remove()" style="background: #ef4444; color: white; border: none; padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: all 0.2s ease;">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+
+      <!-- PDF Rendering Container -->
+      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:flex; flex-direction:column; align-items:center; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y pinch-zoom;">
+         <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem;">
+           <i class="fas fa-spinner fa-spin"></i> Loading High-Quality Notes...
+         </div>
+      </div>
+
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', viewerHtml);
+
+  // 2. Dynamically load the PDF.js library ONLY when needed
+  if (typeof pdfjsLib === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    script.onload = () => renderPDF(pdfUrl);
+    document.body.appendChild(script);
+  } else {
+    renderPDF(pdfUrl);
+  }
+
+  // 3. The actual rendering logic
+  function renderPDF(url) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(async function(pdf) {
+      const container = document.getElementById('pdf-render-container');
+      const loader = document.getElementById('pdf-loading');
+      if (loader) loader.remove();
+
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum);
+
+        // Scale to fit screen width
+        const containerWidth = container.clientWidth - 30; 
+        let unscaledViewport = page.getViewport({ scale: 1 });
+        let scale = containerWidth / unscaledViewport.width;
+        if (scale > 2.0) scale = 2.0; 
+
+        const viewport = page.getViewport({ scale: scale });
+
+        // HIGH-DPI FIX
+        const outputScale = window.devicePixelRatio || 1;
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = Math.floor(viewport.width * outputScale);
+        canvas.height = Math.floor(viewport.height * outputScale);
+        canvas.style.width = Math.floor(viewport.width) + "px";
+        canvas.style.height = Math.floor(viewport.height) + "px";
+
+        const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+
+        // Styling and Anti-Piracy
+        canvas.style.marginBottom = '20px';
+        canvas.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+        canvas.style.borderRadius = '8px';
+        canvas.style.maxWidth = '100%';
+        canvas.style.userSelect = 'none';
+        canvas.style.webkitUserSelect = 'none';
+        canvas.style.webkitTouchCallout = 'none';
+        canvas.oncontextmenu = () => false; 
+
+        container.appendChild(canvas);
+
+        const renderContext = { canvasContext: ctx, transform: transform, viewport: viewport };
+        await page.render(renderContext).promise;
+      }
+    }).catch(function(error) {
+      console.error('Error rendering PDF:', error);
+      const loader = document.getElementById('pdf-loading');
+      if (loader) loader.innerHTML = 'Error loading PDF. Please check your internet connection.';
+    });
+  }
+}
