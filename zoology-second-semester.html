@@ -14,7 +14,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
   
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BSc Zoology 2nd Semester Notes PDF | DU – SayHeyShubh</title>
   <meta name="description" content="Download detailed BSc Zoology Second Semester notes for Delhi University (DU). Covers Non-chordata: Coelomates, Fundamentals of Biomolecules, and Human Physiology with PYQs." />
   <meta name="keywords" content="bsc zoology 2nd semester notes pdf, du zoology notes, coelomates notes, biomolecules bsc 1st year, human physiology notes for bsc, zoology hons study material, delhi university exam prep, bsc zoology semester 2 syllabus">
@@ -1580,9 +1580,6 @@
     <button class="cart-bar-btn" onclick="showCartReview()"><i class="fas fa-shopping-cart"></i> Review &amp; Pay</button>
   </div>
 
-  <!-- Load Mozilla's PDF.js Engine -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
 
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
@@ -1657,8 +1654,10 @@
         
         hideAuthPopup();
         loadUserProfile();
-        // No reload — the onAuthStateChanged listener (registered once at page load)
-        // fires automatically here and calls loadPurchasedNotesAndUpdateButtons() for us.
+        
+        // FIX: Force the website to update the buttons immediately after login
+        await loadPurchasedNotesAndUpdateButtons();
+        
       } catch (error) {
         alert('Google sign-in failed: ' + error.message);
       }
@@ -1751,10 +1750,6 @@
       });
     }
 
-    // Logged-out state: every unit shows "Access Notes" in amber, and clicking any
-    // of them just opens the login popup — no cart interaction is possible until
-    // signed in. Also clears any in-progress cart/tip, since that flow requires
-    // being logged in and shouldn't linger in a stale state across a logout.
     function showLoggedOutButtons() {
       cart = {};
       saveCartToSession();
@@ -1765,13 +1760,23 @@
         const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'\s*,\s*'([^']+)'\)/);
         if (!match) return;
         const noteId = match[1];
+        const noteTitle = match[2];
 
         removePriceStrip(noteId);
         button.classList.remove('in-cart');
         button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
         button.style.color = 'white';
         button.innerHTML = '<i class="fas fa-lock"></i> Access Notes';
-        button.onclick = (e) => { e.preventDefault(); showAuthPopup(); };
+        
+        // FIX: Dynamically check auth state instead of hardcoding the popup
+        button.onclick = (e) => { 
+            e.preventDefault(); 
+            if (!auth.currentUser) {
+                showAuthPopup(); 
+            } else {
+                toggleCartItem(noteId, noteTitle, button);
+            }
+        };
       });
 
       renderCartBar();
@@ -1869,8 +1874,6 @@
           const purchasedNotes = data.purchasedNotes || [];
           localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
 
-          // If anything in the cart was purchased elsewhere (another tab, a previous
-          // session) drop it from the cart so we never try to re-sell it.
           let cartChanged = false;
           purchasedNotes.forEach(id => {
             if (cart[id]) { delete cart[id]; cartChanged = true; }
@@ -1878,9 +1881,15 @@
           if (cartChanged) saveCartToSession();
 
           updateButtonStates(purchasedNotes);
+        } else {
+          // FIX: If the server takes too long or fails, assume 0 notes owned 
+          // but STILL update the buttons so they aren't stuck on the login popup!
+          console.error("Backend error checking purchases. Status:", response.status);
+          updateButtonStates([]); 
         }
       } catch (error) {
         console.error('Error loading purchased notes:', error);
+        updateButtonStates([]); // Fallback to ensure buttons unlock
       }
     }
 
@@ -2033,8 +2042,6 @@
         btn.innerHTML = originalHTML;
       }
     }
-
- 
 
     // --- Floating cart bar ---
     function cartTotal() {
