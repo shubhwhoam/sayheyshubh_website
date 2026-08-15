@@ -76,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
-// GLOBAL IN-APP PDF VIEWER (High-DPI & Zoomable)
+// GLOBAL IN-APP PDF VIEWER (Zoom Fixed + Dynamic Watermarking)
 // ============================================================================
 
 function openInAppViewer(pdfUrl, title) {
-  // 1. Create the overlay HTML with Floating Zoom Buttons
+  // 1. Create the overlay HTML (Flexbox center bug fixed)
   const viewerHtml = `
     <div id="pdf-viewer-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#e2e8f0; display:flex; flex-direction:column; animation: slideUp 0.3s ease;">
 
@@ -104,9 +104,9 @@ function openInAppViewer(pdfUrl, title) {
         </button>
       </div>
 
-      <!-- PDF Rendering Container -->
-      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:flex; flex-direction:column; align-items:center; -webkit-overflow-scrolling: touch;">
-         <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem;">
+      <!-- PDF Rendering Container (Using block/text-center to fix left-margin scroll bug) -->
+      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:block; text-align:center; -webkit-overflow-scrolling: touch;">
+         <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem; display: inline-block;">
            <i class="fas fa-spinner fa-spin"></i> Loading High-Quality Notes...
          </div>
       </div>
@@ -146,9 +146,14 @@ function openInAppViewer(pdfUrl, title) {
     renderPDF(pdfUrl);
   }
 
-  // 4. The actual rendering logic
+  // 4. The actual rendering logic with Watermarks
   function renderPDF(url) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    // Get user details for the watermark
+    const userName = localStorage.getItem('userName') || 'Authorized Student';
+    const userEmail = localStorage.getItem('userEmail') || 'SayHeyShubh Viewer';
+    const watermarkText = `${userName} | ${userEmail}`;
 
     const loadingTask = pdfjsLib.getDocument(url);
     loadingTask.promise.then(async function(pdf) {
@@ -159,11 +164,10 @@ function openInAppViewer(pdfUrl, title) {
       for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
         const page = await pdf.getPage(pageNum);
 
-        // Calculate base scale to fit mobile screen width
         const containerWidth = container.clientWidth - 30; 
         let unscaledViewport = page.getViewport({ scale: 1 });
         let scale = containerWidth / unscaledViewport.width;
-        if (scale > 1.5) scale = 1.5; // Cap default size on desktop
+        if (scale > 1.5) scale = 1.5; 
 
         const viewport = page.getViewport({ scale: scale });
 
@@ -172,24 +176,23 @@ function openInAppViewer(pdfUrl, title) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Physical pixels for sharpness
         canvas.width = Math.floor(viewport.width * outputScale);
         canvas.height = Math.floor(viewport.height * outputScale);
 
-        // CSS pixels for sizing
         const baseCssWidth = Math.floor(viewport.width);
         canvas.dataset.baseWidth = baseCssWidth;
         canvas.style.width = baseCssWidth + "px";
-        canvas.style.height = "auto"; // Ensures height scales perfectly with width
+        canvas.style.height = "auto"; 
         canvas.classList.add('pdf-page-canvas');
 
         const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
 
-        // Styling and Anti-Piracy (Disables long-press context menus)
-        canvas.style.marginBottom = '20px';
+        // Styling and Anti-Piracy CSS
+        canvas.style.display = 'block';
+        canvas.style.margin = '0 auto 20px auto';
         canvas.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
         canvas.style.borderRadius = '8px';
-        canvas.style.maxWidth = 'none'; // Overrides default frameworks that restrict canvas size
+        canvas.style.maxWidth = 'none'; 
         canvas.style.userSelect = 'none';
         canvas.style.webkitUserSelect = 'none';
         canvas.style.webkitTouchCallout = 'none';
@@ -198,7 +201,31 @@ function openInAppViewer(pdfUrl, title) {
         container.appendChild(canvas);
 
         const renderContext = { canvasContext: ctx, transform: transform, viewport: viewport };
+
+        // Wait for the PDF page to physically draw onto the canvas
         await page.render(renderContext).promise;
+
+        // --- DRAW DYNAMIC WATERMARKS OVER THE PDF ---
+        ctx.save();
+        // Move origin to the exact center of the page
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        // Rotate it diagonally
+        ctx.rotate(-Math.PI / 4);
+
+        // Font styling (Responsive to high-DPI screens)
+        ctx.font = `bold ${Math.floor(30 * outputScale)}px Arial`;
+        ctx.fillStyle = "rgba(100, 116, 139, 0.20)"; // Subtle grayish-blue, 20% opacity
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // Stamp it in the center and in the corners to prevent easy cropping
+        ctx.fillText(watermarkText, 0, 0);
+        ctx.fillText(watermarkText, 0, -canvas.height / 2.5);
+        ctx.fillText(watermarkText, 0, canvas.height / 2.5);
+        ctx.fillText(watermarkText, -canvas.width / 2.5, 0);
+        ctx.fillText(watermarkText, canvas.width / 2.5, 0);
+
+        ctx.restore();
       }
     }).catch(function(error) {
       console.error('Error rendering PDF:', error);
