@@ -11,8 +11,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
 
   <meta charset="UTF-8" />
@@ -432,6 +430,60 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.03);
       border: 1px solid #e2e8f0;
     }
+
+    /* --- CGPA guide section --- */
+    .cgpa-guide-section {
+      background: white;
+      padding: 4rem 3rem;
+      border-radius: 20px;
+      margin: 3rem 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+    }
+    .cgpa-guide-section h2 {
+      text-align: center;
+      color: #0f172a;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .cgpa-guide-intro {
+      text-align: center;
+      color: #64748b;
+      font-size: 1rem;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .cgpa-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .cgpa-step-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .cgpa-step-card:hover { border-color: #cbd5e1; transform: translateY(-2px); }
+    .cgpa-step-number {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.95rem; margin-bottom: 0.9rem;
+    }
+    .cgpa-step-card h3 { font-size: 1.05rem; font-weight: 700; color: #1e293b; margin: 0 0 0.5rem; }
+    .cgpa-step-card p { font-size: 0.9rem; color: #475569; line-height: 1.65; margin: 0; }
+    .cgpa-guide-note {
+      background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 14px;
+      padding: 1.25rem 1.5rem; font-size: 0.92rem; color: #3730a3; line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .cgpa-guide-section { padding: 2.5rem 1.5rem; }
+    }
     
     .faq-section h2 {
       text-align: center;
@@ -548,14 +600,6 @@
     .payment-body { padding: 2rem; }
     .note-details { background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center; border: 1px solid #e2e8f0; }
     .note-title { font-weight: 700; color: #1e293b; margin-bottom: 0.5rem; font-size: 1.1rem; }
-    
-    .price-selection h3 { margin-bottom: 1rem; color: #475569; font-size: 1rem; text-align: center; }
-    .price-options { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
-    .price-option { background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 0.8rem 1.2rem; cursor: pointer; transition: all 0.2s ease; font-weight: 700; color: #475569; }
-    .price-option:hover { border-color: #cbd5e1; background: #f8fafc; }
-    .price-option.selected { background: #eef2ff; color: #4f46e5; border-color: #6366f1; }
-    .price-option.recommended { border-color: #10b981; color: #10b981; position: relative; }
-    .price-option.recommended.selected { background: #ecfdf5; color: #059669; border-color: #10b981; }
 
     .payment-actions { display: flex; gap: 1rem; justify-content: center; }
     .payment-btn { padding: 1rem 1.5rem; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-size: 1rem; flex: 1; }
@@ -568,6 +612,76 @@
 
     .payment-loading { display: none; text-align: center; padding: 1.5rem; background: #f8fafc; border-radius: 12px; margin-top: 1.5rem; font-weight: 600; color: #6366f1; border: 1px solid #e2e8f0; }
     .payment-loading.show { display: block; }
+
+    /* --- Cart: per-unit "in cart" button state --- */
+    .download-btn.in-cart { background: linear-gradient(135deg, #6366f1, #4f46e5) !important; color: white !important; }
+
+    /* --- Cart: inline per-unit price strip (collapsed unless the unit is selected) --- */
+    .price-strip { display: none; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.9rem; padding-top: 1.5rem; border-top: 1px dashed #e2e8f0; }
+    .price-strip.show { display: flex; animation: fadeSlideDown 0.25s ease; }
+    .price-strip-label { width: 100%; font-size: 0.78rem; font-weight: 700; color: #64748b; margin-bottom: 0.2rem; }
+    .price-chip-mini { background: white; border: 2px solid #e2e8f0; border-radius: 10px; padding: 0.4rem 0.85rem; cursor: pointer; font-weight: 700; font-size: 0.85rem; color: #475569; transition: all 0.2s ease; position: relative; }
+    .price-chip-mini:hover { border-color: #cbd5e1; background: #f8fafc; }
+    .price-chip-mini.selected { background: #eef2ff; color: #4f46e5; border-color: #6366f1; }
+    .price-chip-mini.recommended.selected { background: #ecfdf5; color: #059669; border-color: #10b981; }
+    .price-chip-mini.recommended::before {
+      content: 'Recommended';
+      position: absolute;
+      top: -1.15rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.58rem;
+      font-weight: 800;
+      color: #059669;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- Cart: floating sticky bottom bar (mobile-first) --- */
+    .cart-bar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998;
+      background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 -8px 30px rgba(15, 23, 42, 0.12);
+      padding: 0.9rem 1.5rem; padding-bottom: calc(0.9rem + env(safe-area-inset-bottom));
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      transform: translateY(120%); transition: transform 0.3s cubic-bezier(.22,1,.36,1);
+    }
+    .cart-bar.show { transform: translateY(0); }
+    .cart-bar-info { display: flex; flex-direction: column; line-height: 1.3; }
+    .cart-bar-count { font-size: 0.78rem; color: #64748b; font-weight: 600; }
+    .cart-bar-total { font-size: 1.2rem; color: #0f172a; font-weight: 800; }
+    .cart-bar-btn { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 0.85rem 1.4rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35); transition: all 0.2s ease; white-space: nowrap; }
+    .cart-bar-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.45); }
+
+    /* --- Cart review list (inside the payment modal) --- */
+    .cart-review-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; max-height: 42vh; overflow-y: auto; padding-right: 0.15rem; }
+    .cart-review-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 0.85rem 1rem; }
+    .cart-review-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; }
+    .cart-review-item-title { font-weight: 700; color: #1e293b; font-size: 0.92rem; flex: 1; }
+    .cart-review-remove { background: #fef2f2; color: #dc2626; border: none; width: 26px; height: 26px; min-width: 26px; border-radius: 50%; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cart-review-remove:hover { background: #fee2e2; }
+    .cart-review-price-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1.15rem; }
+    .cart-review-total-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 2px dashed #e2e8f0; font-weight: 800; color: #0f172a; font-size: 1.1rem; margin-bottom: 1rem; }
+    .cart-review-empty { text-align: center; color: #64748b; font-weight: 600; padding: 2rem 1rem; }
+
+    .success-item { display: flex; align-items: center; gap: 0.7rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; font-weight: 700; color: #166534; font-size: 0.92rem; }
+    .success-item i { color: #10b981; font-size: 1.05rem; flex-shrink: 0; }
+
+    /* --- Coffee / tip section inside the cart review modal --- */
+    .tip-section { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 1.25rem; }
+    .tip-section-title { font-weight: 800; color: #9a3412; font-size: 0.98rem; margin-bottom: 0.15rem; }
+    .tip-section-sub { font-size: 0.8rem; color: #b45309; margin-bottom: 0.9rem; }
+    .tip-chips-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.9rem; }
+    .tip-chip { background: white; border: 2px solid #fed7aa; border-radius: 10px; padding: 0.45rem 0.9rem; cursor: pointer; font-weight: 700; font-size: 0.88rem; color: #9a3412; transition: all 0.2s ease; }
+    .tip-chip:hover { border-color: #fdba74; }
+    .tip-chip.selected { background: #ffedd5; color: #c2410c; border-color: #f97316; }
+    .tip-custom-input { border: 2px solid #fed7aa; border-radius: 10px; padding: 0.45rem 0.7rem; width: 90px; font-weight: 700; color: #9a3412; font-size: 0.88rem; font-family: inherit; }
+    .tip-custom-input:focus { outline: none; border-color: #f97316; }
+    .tip-message-input { width: 100%; border: 2px solid #fed7aa; border-radius: 10px; padding: 0.7rem 0.85rem; font-family: inherit; font-size: 0.88rem; color: #1e293b; resize: vertical; min-height: 56px; }
+    .tip-message-input:focus { outline: none; border-color: #f97316; }
+    .tip-message-input::placeholder { color: #c2934f; }
+
 
     @media (max-width: 768px) {
       .microbiology-container { padding: 0 1rem 2rem 1rem; }
@@ -1133,6 +1247,90 @@
     </div>
 
     <!-- FAQ SECTION -->
+    <div class="cgpa-guide-section">
+      <h2>📈 How to Score 9+ CGPA in BSc Microbiology Hons</h2>
+      <p class="cgpa-guide-intro">
+        Scoring a 9+ CGPA in BSc Microbiology Hons at Delhi University isn't really about reading more.
+        It's about studying in the right order. Here's the method that actually works for
+        semester exams, based on how DU papers are usually set.
+      </p>
+
+      <div class="cgpa-steps">
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">1</div>
+          <h3>Start with the PYQs, not the notes</h3>
+          <p>
+            Before opening any unit, go through the previous year questions (PYQs) already
+            available on this page. This shows you exactly which topics get asked again and
+            again in the Microbiology exam, so you know where to put your first round of effort
+            instead of studying every unit with equal priority.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">2</div>
+          <h3>Download the notes and study that topic properly</h3>
+          <p>
+            Once you know which topics matter most, download the unit-wise notes for that
+            topic and actually read through it instead of jumping straight to definitions.
+            Understanding a concept once makes it far easier to recall in the exam than
+            memorising it without context.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">3</div>
+          <h3>Practice every diagram and flowchart</h3>
+          <p>
+            Microbiology answers carry real weightage for labelled diagrams and flowcharts,
+            things like microbial life cycles, cell structures, and staining or culturing techniques. Sketch these
+            out by hand a few times rather than just looking at them. A clean, correctly
+            labelled diagram often earns marks even when the written explanation is average.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">4</div>
+          <h3>Go back to the PYQs and test yourself</h3>
+          <p>
+            After finishing a topic, return to the same previous year questions and try
+            answering them from memory, without your notes open. This is much closer to
+            actual exam conditions than passive revision, and it tells you honestly which
+            parts you still need to revisit.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">5</div>
+          <h3>Write full answers under a timer, at least once</h3>
+          <p>
+            For long-answer questions, practice writing a complete answer within a set time
+            limit before the actual exam. Knowing the content isn't the same as being able
+            to structure and finish it in time, so this step matters more than most students
+            expect.
+          </p>
+        </div>
+
+        <div class="cgpa-step-card">
+          <div class="cgpa-step-number">6</div>
+          <h3>Finish one topic fully before moving to the next</h3>
+          <p>
+            Repeat this PYQ, notes, diagram, and self-test cycle one topic at a time across
+            every unit rather than skimming all units once. It keeps each topic genuinely
+            exam-ready instead of leaving several topics half-prepared right before the
+            semester exam.
+          </p>
+        </div>
+      </div>
+
+      <div class="cgpa-guide-note">
+        💡 This same method works whether you're preparing for internals or the final semester
+        exam. Use the PYQs and notes on this page together instead of separately, and give
+        diagrams the same attention as written answers. That combination is usually what
+        separates a 9+ CGPA from an average one in BSc Microbiology Hons.
+      </div>
+    </div>
+
     <div class="faq-section">
       <h2>❓ Frequently Asked Questions</h2>
       <div class="faq-container">
@@ -1307,39 +1505,57 @@
     <div class="payment-container">
       <div class="payment-header">
         <button class="close-payment" onclick="hidePaymentPopup()"><i class="fas fa-times"></i></button>
-        <h2>🌻 Unlock Study Notes</h2>
-        <p>Access premium BSc Microbiology notes and study materials</p>
+        <h2 id="paymentHeaderTitle">🛒 Your Cart</h2>
+        <p id="paymentHeaderSubtitle">Review your selected units before checkout</p>
       </div>
 
       <div class="payment-body">
-        <div class="note-details">
-          <div class="note-title" id="paymentNoteTitle">Loading note...</div>
-          <p style="color:#64748b; font-size:0.95rem; margin:0;">Get instant access to comprehensive handwritten notes and study materials</p>
+        <div id="cartReviewList" class="cart-review-list">
+          <!-- populated by JS from the cart state -->
         </div>
 
-        <div class="price-selection">
-          <h3>Choose your contribution amount:</h3>
-          <div class="price-options">
-            <div class="price-option" data-price="15">₹15</div>
-            <div class="price-option" data-price="20">₹20</div>
-            <div class="price-option recommended selected" data-price="25">₹25</div>
-            <div class="price-option" data-price="30">₹30</div>
-            <div class="price-option" data-price="50">₹50</div>
+        <div id="tipSection" class="tip-section" style="display:none;">
+          <div class="tip-section-title">☕ Buy your senior a coffee?</div>
+          <div class="tip-section-sub">Totally optional. A little something for the person making these notes.</div>
+          <div class="tip-chips-row">
+            <div class="tip-chip" data-tip="5">₹5</div>
+            <div class="tip-chip" data-tip="10">₹10</div>
+            <div class="tip-chip" data-tip="15">₹15</div>
+            <div class="tip-chip" data-tip="20">₹20</div>
+            <input type="number" id="tipCustomInput" class="tip-custom-input" placeholder="Custom ₹" min="0" max="500" inputmode="numeric">
           </div>
+          <textarea id="tipMessageInput" class="tip-message-input" maxlength="300" placeholder="Say something nice (optional)"></textarea>
         </div>
 
-        <div class="payment-actions">
+        <div id="cartFeeBreakdown">
+          <!-- fully rendered by renderFeeBreakdown() -->
+        </div>
+
+        <div class="payment-actions" id="cartPaymentActions">
           <button class="payment-btn cancel-btn" onclick="hidePaymentPopup()">Cancel</button>
-         
-          <button class="payment-btn pay-btn" onclick="proceedToPayment()">Pay Now</button>
+          <button class="payment-btn pay-btn" id="cartPayBtn" onclick="proceedToPayment()">Pay Now</button>
         </div>
 
         <div class="payment-loading" id="paymentLoading">
           Processing payment...
         </div>
+
+        <div id="successView" style="display:none;">
+          <button class="payment-btn pay-btn" style="width:100%;" onclick="closeSuccessView()">Done</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Floating cart bar: appears once 1+ units are selected, stays in thumb reach on mobile -->
+  <div id="cartBar" class="cart-bar">
+    <div class="cart-bar-info">
+      <span class="cart-bar-count" id="cartBarCount">0 units selected</span>
+      <span class="cart-bar-total" id="cartBarTotal">₹0</span>
+    </div>
+    <button class="cart-bar-btn" onclick="showCartReview()"><i class="fas fa-shopping-cart"></i> Review &amp; Pay</button>
+  </div>
+
 
   <script src="script.js"></script>
   <script src="firebase-config.js"></script>
@@ -1387,7 +1603,9 @@
       localStorage.removeItem('userId');
       localStorage.removeItem('userName');
       localStorage.removeItem('purchasedNotes'); // Clear purchased cache
-      window.location.reload(); 
+      document.getElementById('userProfile').classList.remove('show');
+      // No reload — the onAuthStateChanged listener (registered once at page load)
+      // fires automatically here and calls showLoggedOutButtons() for us.
     }
 
     // --- AUTHENTICATION SYSTEM ---
@@ -1411,23 +1629,70 @@
         localStorage.setItem('userEmail', user.email);
         
         hideAuthPopup();
-        window.location.reload(); 
+        loadUserProfile();
+        // No reload — the onAuthStateChanged listener (registered once at page load)
+        // fires automatically here and calls loadPurchasedNotesAndUpdateButtons() for us.
       } catch (error) {
         alert('Google sign-in failed: ' + error.message);
       }
     }
 
-    // --- PAYMENT & UNLOCK SYSTEM ---
+    // --- CART & PAYMENT SYSTEM ---
+    // Allowed price chips (recommended default first-shown is 25, matching the old single-note flow)
+    const PRICE_CHIPS = [15, 20, 25, 30, 50];
+    const RECOMMENDED_PRICE = 25;
+    const CART_SESSION_KEY = 'sayheyshubh_cart_v1';
+
+    // Mirrors the same constants in netlify/functions/create-order.js so the preview
+    // shown here matches exactly what the server actually charges. The server always
+    // has the final say on the real amount — this is just for a live preview.
+    const RZP_FEE_RATE = 0.02;
+    const GST_ON_FEE_RATE = 0.18;
+    const EFFECTIVE_DEDUCTION_RATE = RZP_FEE_RATE * (1 + GST_ON_FEE_RATE);
+    function computeGrossPaise(netPaise) {
+      return Math.ceil(netPaise / (1 - EFFECTIVE_DEDUCTION_RATE));
+    }
+
     let RAZORPAY_KEY_ID = null;
-    let currentNoteId = ''; 
-    let currentNoteTitle = '';
-    let selectedPrice = 25;
+    let cart = {}; // { [noteId]: { noteId, noteTitle, price } }
+    let tip = { amount: 0, message: '' };
+    const TIP_SESSION_KEY = 'sayheyshubh_tip_v1';
+    const TIP_CHIPS = [5, 10, 15, 20];
+    const MAX_TIP = 500;
 
     document.addEventListener('DOMContentLoaded', function() {
       loadUserProfile();
+      loadCartFromSession();
+      loadTipFromSession();
+      applyOptimisticButtonState();
       initializePaymentSystem();
       fetchRazorpayConfig();
+      renderCartBar();
+      initializeTipUI();
     });
+
+    // Paints buttons instantly using cached login/purchase state, before Firebase
+    // auth or the check-purchases network call has resolved. The real listener in
+    // initializePaymentSystem() runs right after and corrects anything if the cache
+    // was stale — for the common case (returning user, nothing changed) this removes
+    // the visible delay between page load and buttons showing their real state.
+    function applyOptimisticButtonState() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      if (!isLoggedIn) {
+        showLoggedOutButtons();
+        return;
+      }
+
+      let cachedPurchased = [];
+      try {
+        cachedPurchased = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+      } catch (error) {
+        cachedPurchased = [];
+      }
+
+      updateButtonStates(cachedPurchased);
+    }
 
     async function fetchRazorpayConfig() {
       try {
@@ -1444,17 +1709,11 @@
     function initializePaymentSystem() {
       auth.onAuthStateChanged(user => {
         if (user) {
-          trackSubjectLogin(user, 'microbiology'); // Tracks under microbiology subject
+          trackSubjectLogin(user, 'microbiology');
           loadPurchasedNotesAndUpdateButtons();
+        } else {
+          showLoggedOutButtons();
         }
-      });
-
-      document.querySelectorAll('.price-option').forEach(option => {
-        option.addEventListener('click', () => {
-          document.querySelectorAll('.price-option').forEach(opt => opt.classList.remove('selected'));
-          option.classList.add('selected');
-          selectedPrice = parseInt(option.dataset.price);
-        });
       });
 
       document.getElementById('paymentModal').addEventListener('click', (e) => {
@@ -1465,25 +1724,132 @@
       });
     }
 
+    // Logged-out state: every unit shows "Access Notes" in amber, and clicking any
+    // of them just opens the login popup — no cart interaction is possible until
+    // signed in. Also clears any in-progress cart/tip, since that flow requires
+    // being logged in and shouldn't linger in a stale state across a logout.
+    function showLoggedOutButtons() {
+      cart = {};
+      saveCartToSession();
+      clearTip();
+
+      const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
+      secureButtons.forEach(button => {
+        const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'\s*,\s*'([^']+)'\)/);
+        if (!match) return;
+        const noteId = match[1];
+
+        removePriceStrip(noteId);
+        button.classList.remove('in-cart');
+        button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+        button.style.color = 'white';
+        button.innerHTML = '<i class="fas fa-lock"></i> Access Notes';
+        button.onclick = (e) => { e.preventDefault(); showAuthPopup(); };
+      });
+
+      renderCartBar();
+    }
+
+    // --- Cart persistence (sessionStorage: cleared when the tab closes, unlike localStorage) ---
+    function loadCartFromSession() {
+      try {
+        const saved = sessionStorage.getItem(CART_SESSION_KEY);
+        cart = saved ? JSON.parse(saved) : {};
+      } catch (error) {
+        cart = {};
+      }
+    }
+
+    function saveCartToSession() {
+      sessionStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
+    }
+
+    function loadTipFromSession() {
+      try {
+        const saved = sessionStorage.getItem(TIP_SESSION_KEY);
+        tip = saved ? JSON.parse(saved) : { amount: 0, message: '' };
+      } catch (error) {
+        tip = { amount: 0, message: '' };
+      }
+    }
+
+    function saveTipToSession() {
+      sessionStorage.setItem(TIP_SESSION_KEY, JSON.stringify(tip));
+    }
+
+    function clearTip() {
+      tip = { amount: 0, message: '' };
+      saveTipToSession();
+    }
+
+    // Wires up the tip chips, custom-amount input, and message box once on load.
+    function initializeTipUI() {
+      document.querySelectorAll('.tip-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const amount = parseInt(chip.dataset.tip, 10);
+          tip.amount = (tip.amount === amount) ? 0 : amount; // tap again to deselect
+          document.getElementById('tipCustomInput').value = '';
+          saveTipToSession();
+          syncTipUI();
+          renderFeeBreakdown();
+        });
+      });
+
+      const customInput = document.getElementById('tipCustomInput');
+      customInput.addEventListener('input', () => {
+        let val = parseInt(customInput.value, 10);
+        if (isNaN(val) || val < 0) val = 0;
+        if (val > MAX_TIP) val = MAX_TIP;
+        tip.amount = val;
+        saveTipToSession();
+        syncTipUI(true); // true = don't overwrite what they're typing
+        renderFeeBreakdown();
+      });
+
+      const messageInput = document.getElementById('tipMessageInput');
+      messageInput.addEventListener('input', () => {
+        tip.message = messageInput.value;
+        saveTipToSession();
+      });
+    }
+
+    // Reflects current tip state into the chip highlighting, custom input, and message box.
+    function syncTipUI(skipCustomInputValue) {
+      document.querySelectorAll('.tip-chip').forEach(chip => {
+        chip.classList.toggle('selected', parseInt(chip.dataset.tip, 10) === tip.amount);
+      });
+      if (!skipCustomInputValue) {
+        const customInput = document.getElementById('tipCustomInput');
+        const isPresetAmount = TIP_CHIPS.includes(tip.amount);
+        customInput.value = (tip.amount > 0 && !isPresetAmount) ? tip.amount : '';
+      }
+      document.getElementById('tipMessageInput').value = tip.message || '';
+    }
+
     async function loadPurchasedNotesAndUpdateButtons() {
       const user = auth.currentUser;
       if (!user) return;
+
       try {
         const idToken = await user.getIdToken();
-        // Added a timestamp query parameter to bust the cache
-        const response = await fetch(`/.netlify/functions/check-purchases?t=${new Date().getTime()}`, {
+        const response = await fetch('/.netlify/functions/check-purchases', {
           method: 'GET',
-          headers: { 
-            'Authorization': `Bearer ${idToken}`,
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-          }
+          headers: { 'Authorization': `Bearer ${idToken}` }
         });
+
         if (response.ok) {
           const data = await response.json();
           const purchasedNotes = data.purchasedNotes || [];
           localStorage.setItem('purchasedNotes', JSON.stringify(purchasedNotes));
+
+          // If anything in the cart was purchased elsewhere (another tab, a previous
+          // session) drop it from the cart so we never try to re-sell it.
+          let cartChanged = false;
+          purchasedNotes.forEach(id => {
+            if (cart[id]) { delete cart[id]; cartChanged = true; }
+          });
+          if (cartChanged) saveCartToSession();
+
           updateButtonStates(purchasedNotes);
         }
       } catch (error) {
@@ -1491,49 +1857,125 @@
       }
     }
 
-    function updateButtonStates(serverPurchasedIds) {
-      const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
-      const purchasedIds = [...new Set([...serverPurchasedIds, ...localPurchases])];
-      
-      console.log('Purchased Note IDs:', purchasedIds);
+    // Wires up every unit button on the page: purchased units behave as a direct
+    // "View Notes" action (unchanged); everything else becomes an add-to-cart toggle.
+    function updateButtonStates(purchasedIds) {
       const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
-      
-      secureButtons.forEach(button => {
-        const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'/);
-        if (!match) return;
-        
-        const noteId = match[1];
 
-        if (button.dataset.free === "true") {
-           button.innerHTML = '<i class="fas fa-unlock-alt"></i> Access Notes';
-           button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-           button.style.color = 'white';
-           return;
-        }
+      secureButtons.forEach(button => {
+        const match = button.getAttribute('onclick').match(/handleViewNotes\('([^']+)'\s*,\s*'([^']+)'\)/);
+        if (!match) return;
+
+        const noteId = match[1];
+        const noteTitle = match[2];
 
         if (purchasedIds.includes(noteId)) {
+          button.onclick = (e) => { e.preventDefault(); handleViewNotes(noteId, noteTitle, button); };
           button.innerHTML = '<i class="fas fa-check-circle"></i> View Notes';
+          button.classList.remove('in-cart');
           button.style.background = '#10b981';
           button.style.color = 'white';
+          removePriceStrip(noteId);
         } else {
-          button.innerHTML = '<i class="fas fa-lock"></i> Unlock Notes';
-          button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
-          button.style.color = 'white';
+          ensurePriceStrip(button, noteId, noteTitle);
+          button.onclick = (e) => { e.preventDefault(); toggleCartItem(noteId, noteTitle, button); };
+          renderUnitButtonState(button, noteId);
         }
       });
+
+      renderCartBar();
     }
 
-    async function handleViewNotes(noteId, noteTitle) {
-      const user = auth.currentUser;
-      
-      if (!user) {
-        showAuthPopup();
-        return;
+    function renderUnitButtonState(button, noteId) {
+      const inCart = !!cart[noteId];
+      button.classList.toggle('in-cart', inCart);
+
+      if (inCart) {
+        button.style.background = '';
+        button.style.color = '';
+        button.innerHTML = '<i class="fas fa-check-circle"></i> Added to Cart';
+      } else {
+        button.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+        button.style.color = 'white';
+        button.innerHTML = '<i class="fas fa-lock"></i> Unlock Notes';
       }
-      
-      const btn = event.target.closest('button') || event.currentTarget || event.target;
+
+      const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
+      if (strip) strip.classList.toggle('show', inCart);
+    }
+
+    // Creates the collapsible per-unit price strip once, right after the unit's button row.
+    function ensurePriceStrip(button, noteId, noteTitle) {
+      const stripId = `price-strip-${cssSafe(noteId)}`;
+      if (document.getElementById(stripId)) return;
+
+      const unitItem = button.closest('.unit-item') || button.closest('.unit-header-row').parentElement;
+      const strip = document.createElement('div');
+      strip.className = 'price-strip';
+      strip.id = stripId;
+      strip.innerHTML = `<div class="price-strip-label">Your price for this unit:</div>` +
+        PRICE_CHIPS.map(p => {
+          const isRecommended = p === RECOMMENDED_PRICE;
+          return `<div class="price-chip-mini${isRecommended ? ' recommended' : ''}" data-price="${p}">₹${p}</div>`;
+        }).join('');
+
+      strip.querySelectorAll('.price-chip-mini').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const price = parseInt(chip.dataset.price, 10);
+          if (cart[noteId]) {
+            cart[noteId].price = price;
+            saveCartToSession();
+          }
+          strip.querySelectorAll('.price-chip-mini').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          renderCartBar();
+        });
+      });
+
+      unitItem.appendChild(strip);
+    }
+
+    function removePriceStrip(noteId) {
+      const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
+      if (strip) strip.remove();
+    }
+
+    function cssSafe(id) {
+      return id.replace(/[^a-zA-Z0-9-_]/g, '_');
+    }
+
+    // Adds/removes a unit from the cart. No network call here — check-purchases
+    // already told us this unit isn't owned, so selecting it is purely local state.
+    function toggleCartItem(noteId, noteTitle, button) {
+      const user = auth.currentUser;
+      if (!user) { showAuthPopup(); return; }
+
+      if (cart[noteId]) {
+        delete cart[noteId];
+      } else {
+        cart[noteId] = { noteId, noteTitle, price: RECOMMENDED_PRICE };
+      }
+      saveCartToSession();
+      renderUnitButtonState(button, noteId);
+
+      // Sync the price strip's selected chip to match cart state
+      const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
+      if (strip) {
+        strip.querySelectorAll('.price-chip-mini').forEach(c => {
+          c.classList.toggle('selected', cart[noteId] && parseInt(c.dataset.price, 10) === cart[noteId].price);
+        });
+      }
+
+      renderCartBar();
+    }
+
+    // Direct "View Notes" path for already-purchased units — unchanged from before.
+    async function handleViewNotes(noteId, noteTitle, btn) {
+      const user = auth.currentUser;
+      if (!user) { showAuthPopup(); return; }
+
       const originalHTML = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
       try {
         const token = await user.getIdToken();
@@ -1545,16 +1987,12 @@
         if (data.success && data.previewUrl) {
           window.open(data.previewUrl, '_blank');
           btn.innerHTML = '<i class="fas fa-check-circle"></i> View Notes';
-          btn.style.background = '#10b981';
-          
-          const localPurchases = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
-          if (!localPurchases.includes(noteId)) {
-             localPurchases.push(noteId);
-             localStorage.setItem('purchasedNotes', JSON.stringify(localPurchases));
-          }
         } else if (response.status === 403) {
+          // Fell out of sync with the server (rare) — treat it as unpurchased again
           btn.innerHTML = originalHTML;
-          showPaymentPopup(noteId, noteTitle);
+          delete cart[noteId];
+          await loadPurchasedNotesAndUpdateButtons();
+          toggleCartItem(noteId, noteTitle, btn);
         } else {
           alert('Error: ' + (data.error || 'Unknown error'));
           btn.innerHTML = originalHTML;
@@ -1566,27 +2004,213 @@
       }
     }
 
-    function showPaymentPopup(noteId, noteTitle) {
-      currentNoteId = noteId;
-      currentNoteTitle = noteTitle || 'BSc Microbiology Notes';
-      document.getElementById('paymentNoteTitle').textContent = currentNoteTitle;
+    // --- Floating cart bar ---
+    function cartTotal() {
+      return Object.values(cart).reduce((sum, item) => sum + item.price, 0);
+    }
+
+    // Razorpay's description field shows up on your dashboard's payment details.
+    // List actual unit names instead of a generic count, truncated to stay under
+    // Razorpay's ~255 char limit for this field.
+    function buildRazorpayDescription(items) {
+      const full = items.map(it => it.noteTitle).join(', ');
+      if (full.length <= 250) return full;
+      return full.substring(0, 247) + '...';
+    }
+
+    function renderCartBar() {
+      const items = Object.values(cart);
+      const bar = document.getElementById('cartBar');
+      const doubtsBtn = document.getElementById('doubts-btn');
+      const doubtsBubble = document.getElementById('doubts-bubble');
+
+      if (items.length === 0) {
+        bar.classList.remove('show');
+        if (doubtsBtn) doubtsBtn.classList.remove('shifted-up');
+        if (doubtsBubble) doubtsBubble.classList.remove('shifted-up');
+        return;
+      }
+
+      document.getElementById('cartBarCount').textContent =
+        `${items.length} unit${items.length > 1 ? 's' : ''} selected`;
+      document.getElementById('cartBarTotal').textContent = `₹${cartTotal()}`;
+      bar.classList.add('show');
+      if (doubtsBtn) doubtsBtn.classList.add('shifted-up');
+      if (doubtsBubble) doubtsBubble.classList.add('shifted-up');
+    }
+
+    // --- Cart review modal ---
+    function showCartReview() {
+      const items = Object.values(cart);
+      const listEl = document.getElementById('cartReviewList');
+      const feeBreakdown = document.getElementById('cartFeeBreakdown');
+      const tipSection = document.getElementById('tipSection');
+
+      if (items.length === 0) {
+        listEl.innerHTML = '<div class="cart-review-empty">Your cart is empty. Select a few units first.</div>';
+        document.getElementById('cartPayBtn').disabled = true;
+        feeBreakdown.style.display = 'none';
+        tipSection.style.display = 'none';
+      } else {
+        listEl.innerHTML = items.map(item => `
+          <div class="cart-review-item" data-note-id="${item.noteId}">
+            <div class="cart-review-item-top">
+              <div class="cart-review-item-title">${item.noteTitle}</div>
+              <button class="cart-review-remove" onclick="removeFromCartReview('${item.noteId}')" aria-label="Remove"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="cart-review-price-row">
+              ${PRICE_CHIPS.map(p => `<div class="price-chip-mini${p === RECOMMENDED_PRICE ? ' recommended' : ''}${item.price === p ? ' selected' : ''}" onclick="setCartReviewPrice('${item.noteId}', ${p})">₹${p}</div>`).join('')}
+            </div>
+          </div>
+        `).join('');
+        document.getElementById('cartPayBtn').disabled = false;
+        feeBreakdown.style.display = '';
+        tipSection.style.display = '';
+        syncTipUI();
+      }
+
+      renderFeeBreakdown();
       document.getElementById('paymentModal').classList.add('show');
-      
-      document.querySelectorAll('.price-option').forEach(option => {
-        option.classList.remove('selected');
-        if (option.dataset.price === '25') option.classList.add('selected');
-      });
-      selectedPrice = 25;
+    }
+
+    function renderFeeBreakdown() {
+      const notesTotalPaise = cartTotal() * 100;
+      const tipPaise = (tip.amount || 0) * 100;
+      const netTargetPaise = notesTotalPaise + tipPaise;
+      const grossPaise = computeGrossPaise(netTargetPaise);
+      const platformFeePaise = grossPaise - netTargetPaise;
+
+      let breakdownHtml = `
+        <div class="cart-review-total-row" style="border-top: 1px solid #e2e8f0; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
+          <span>Notes total</span>
+          <span>₹${(notesTotalPaise / 100).toFixed(2)}</span>
+        </div>`;
+
+      if (tipPaise > 0) {
+        breakdownHtml += `
+        <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #b45309; padding: 0.5rem 0; margin-bottom: 0;">
+          <span>☕ Coffee for Shubh</span>
+          <span>₹${(tipPaise / 100).toFixed(2)}</span>
+        </div>`;
+      }
+
+      if ((tip.message || '').trim()) {
+        breakdownHtml += `
+        <div class="cart-review-total-row" style="border-top: none; font-size: 0.85rem; font-weight: 600; color: #b45309; padding: 0.35rem 0; margin-bottom: 0;">
+          <span>💌 Your message will be sent</span>
+          <span></span>
+        </div>`;
+      }
+
+      breakdownHtml += `
+        <div class="cart-review-total-row" style="border-top: none; font-size: 0.92rem; font-weight: 600; color: #64748b; padding: 0.5rem 0; margin-bottom: 0;">
+          <span>Payment processing fee</span>
+          <span>₹${(platformFeePaise / 100).toFixed(2)}</span>
+        </div>
+        <div class="cart-review-total-row">
+          <span>Total payable</span>
+          <span>₹${(grossPaise / 100).toFixed(2)}</span>
+        </div>`;
+
+      document.getElementById('cartFeeBreakdown').innerHTML = breakdownHtml;
+    }
+
+    function setCartReviewPrice(noteId, price) {
+      if (!cart[noteId]) return;
+      cart[noteId].price = price;
+      saveCartToSession();
+
+      // Also keep the inline per-unit strip on the page in sync
+      const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
+      if (strip) {
+        strip.querySelectorAll('.price-chip-mini').forEach(c => {
+          c.classList.toggle('selected', parseInt(c.dataset.price, 10) === price);
+        });
+      }
+
+      showCartReview(); // cheap full re-render keeps chip highlighting + total in sync
+    }
+
+    function removeFromCartReview(noteId) {
+      delete cart[noteId];
+      saveCartToSession();
+
+      const btn = document.querySelector(`button[onclick*="handleViewNotes('${noteId}"]`);
+      if (btn) renderUnitButtonState(btn, noteId);
+      const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
+      if (strip) strip.classList.remove('show');
+
+      renderCartBar();
+      showCartReview();
     }
 
     function hidePaymentPopup() {
       document.getElementById('paymentModal').classList.remove('show');
       document.getElementById('paymentLoading').classList.remove('show');
+      resetModalToCartMode();
     }
 
-    
+    function resetModalToCartMode() {
+      document.getElementById('paymentHeaderTitle').textContent = '🛒 Your Cart';
+      document.getElementById('paymentHeaderSubtitle').textContent = 'Review your selected units before checkout';
+      document.getElementById('cartReviewList').style.display = '';
+      document.getElementById('tipSection').style.display = '';
+      document.getElementById('cartFeeBreakdown').style.display = '';
+      document.getElementById('cartPaymentActions').style.display = '';
+      document.getElementById('successView').style.display = 'none';
+    }
+
+    function showUnlockSuccess(unlockedTitles, tipAmountPaid, messageWasSent) {
+      document.getElementById('paymentHeaderTitle').textContent = '🎉 Unlocked!';
+      document.getElementById('paymentHeaderSubtitle').textContent = `${unlockedTitles.length} unit${unlockedTitles.length > 1 ? 's' : ''} ready to view`;
+
+      document.getElementById('cartReviewList').style.display = 'none';
+      document.getElementById('tipSection').style.display = 'none';
+      document.getElementById('cartFeeBreakdown').style.display = 'none';
+      document.getElementById('cartPaymentActions').style.display = 'none';
+      document.getElementById('paymentLoading').classList.remove('show');
+
+      const successView = document.getElementById('successView');
+      let rows = unlockedTitles.map(title => `
+        <div class="success-item"><i class="fas fa-check-circle"></i> ${title}</div>
+      `).join('');
+      if (tipAmountPaid > 0) {
+        rows += `<div class="success-item" style="background:#fff7ed; border-color:#fed7aa; color:#9a3412;"><i class="fas fa-mug-hot" style="color:#f97316;"></i> Thanks for the ₹${tipAmountPaid} coffee!</div>`;
+      } else if (messageWasSent) {
+        rows += `<div class="success-item" style="background:#fff7ed; border-color:#fed7aa; color:#9a3412;"><i class="fas fa-envelope" style="color:#f97316;"></i> Your message has been sent!</div>`;
+      }
+      successView.innerHTML = rows + '<button class="payment-btn pay-btn" style="width:100%; margin-top:0.5rem;" onclick="closeSuccessView()">Done</button>';
+      successView.style.display = 'block';
+    }
+
+    function closeSuccessView() {
+      document.getElementById('paymentModal').classList.remove('show');
+      resetModalToCartMode();
+      // Buttons are already updated optimistically the moment payment verified (see
+      // optimisticallyUnlock above) — this just reconciles with the server quietly in
+      // the background, without making the user wait for it.
+      loadPurchasedNotesAndUpdateButtons();
+    }
+
+    // Instantly reflects a just-completed purchase in the UI: merges the newly bought
+    // noteIds into the cached purchased list and repaints buttons/cart bar right away,
+    // instead of waiting on a fresh check-purchases network round trip.
+    function optimisticallyUnlock(newlyPurchasedIds) {
+      let cachedPurchased = [];
+      try {
+        cachedPurchased = JSON.parse(localStorage.getItem('purchasedNotes') || '[]');
+      } catch (error) {
+        cachedPurchased = [];
+      }
+      const merged = Array.from(new Set([...cachedPurchased, ...newlyPurchasedIds]));
+      localStorage.setItem('purchasedNotes', JSON.stringify(merged));
+      updateButtonStates(merged); // also calls renderCartBar(), hiding the bar immediately
+    }
 
     async function proceedToPayment() {
+      const items = Object.values(cart);
+      if (items.length === 0) return;
+
       if (typeof Razorpay === 'undefined') {
         await new Promise((resolve, reject) => {
           const script = document.createElement('script');
@@ -1596,7 +2220,7 @@
           document.body.appendChild(script);
         });
       }
-      
+
       const user = auth.currentUser;
       if (!user) { alert('Please log in first'); return; }
       if (typeof Razorpay === 'undefined') { alert('Payment system not loaded. Refresh and try again.'); return; }
@@ -1605,16 +2229,25 @@
 
       try {
         const idToken = await user.getIdToken();
-        const amountInPaise = selectedPrice * 100;
 
         const orderResponse = await fetch('/.netlify/functions/create-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
-          body: JSON.stringify({ amount: amountInPaise, noteTitle: currentNoteTitle, noteUrl: currentNoteId, subject: 'microbiology' })
+          body: JSON.stringify({
+            items: items.map(it => ({ noteId: it.noteId, noteTitle: it.noteTitle, price: it.price })),
+            subject: 'microbiology',
+            tip: { amount: tip.amount || 0, message: (tip.message || '').trim() }
+          })
         });
 
         const orderData = await orderResponse.json();
         if (!orderData.success) throw new Error(orderData.error || 'Failed to create order');
+
+        // Keep these around for the success screen — cart/tip state gets cleared before we need them
+        const unlockedTitles = items.map(it => it.noteTitle);
+        const unlockedIds = items.map(it => it.noteId);
+        const tipAmountPaid = tip.amount || 0;
+        const messageWasSent = !!(tip.message || '').trim();
 
         const options = {
           key: RAZORPAY_KEY_ID || orderData.key,
@@ -1622,7 +2255,7 @@
           currency: orderData.currency,
           order_id: orderData.orderId,
           name: 'SayHeyShubh - Notes',
-          description: `Unlock: ${currentNoteTitle}`,
+          description: buildRazorpayDescription(items),
           handler: async function (response) {
             document.getElementById('paymentLoading').innerHTML = '<div style="color:#10b981; font-weight:700;">✅ Success! Unlocking...</div>';
 
@@ -1633,22 +2266,24 @@
                 body: JSON.stringify({
                   paymentId: response.razorpay_payment_id,
                   orderId: response.razorpay_order_id,
-                  signature: response.razorpay_signature,
-                  noteUrl: currentNoteId 
+                  signature: response.razorpay_signature
                 })
               });
 
               const verifyResult = await verifyResponse.json();
 
               if (verifyResult.success) {
-                document.getElementById('paymentLoading').innerHTML = '<div style="color:#10b981; font-weight:700;">🎉 Unlocked!</div>';
-                setTimeout(async () => {
-                  hidePaymentPopup();
-                  alert(`🎉 Success! ${currentNoteTitle} unlocked.`);
-                  await loadPurchasedNotesAndUpdateButtons();
-                }, 1500);
+                cart = {};
+                saveCartToSession();
+                clearTip();
+                // Update buttons + hide the cart bar right now using what we already know was
+                // bought — don't make the user wait on a fresh check-purchases round trip just
+                // to see the cart disappear. The background reconciliation in closeSuccessView
+                // still runs to catch anything unexpected.
+                optimisticallyUnlock(unlockedIds);
+                showUnlockSuccess(unlockedTitles, tipAmountPaid, messageWasSent);
               } else {
-                 throw new Error('Verification failed');
+                throw new Error('Verification failed');
               }
             } catch (error) {
               console.error(error);
@@ -1657,8 +2292,8 @@
             }
           },
           prefill: {
-             name: localStorage.getItem('userName') || '',
-             email: localStorage.getItem('userEmail') || ''
+            name: localStorage.getItem('userName') || '',
+            email: localStorage.getItem('userEmail') || ''
           },
           theme: { color: '#6366f1' },
           modal: {

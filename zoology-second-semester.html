@@ -1993,7 +1993,7 @@
       renderCartBar();
     }
 
-    // Direct "View Notes" path for already-purchased units — unchanged from before.
+    // Direct "View Notes" path for already-purchased units — now uses In-App Viewer
     async function handleViewNotes(noteId, noteTitle, btn) {
       const user = auth.currentUser;
       if (!user) { showAuthPopup(); return; }
@@ -2009,8 +2009,11 @@
         const data = await response.json();
 
         if (data.success && data.previewUrl) {
-          window.open(data.previewUrl, '_blank');
+          
+          // INSTEAD of window.open, we call our new custom viewer overlay
+          openInAppViewer(data.previewUrl, noteTitle);
           btn.innerHTML = '<i class="fas fa-check-circle"></i> View Notes';
+          
         } else if (response.status === 403) {
           // Fell out of sync with the server (rare) — treat it as unpurchased again
           btn.innerHTML = originalHTML;
@@ -2026,6 +2029,33 @@
         alert('Network error. Please try again.');
         btn.innerHTML = originalHTML;
       }
+    }
+
+    // --- NEW: The Custom Download-Locked PDF Viewer ---
+    function openInAppViewer(pdfUrl, title) {
+      // Appending #toolbar=0 disables the native browser download and print buttons
+      const protectedUrl = pdfUrl + '#toolbar=0'; 
+
+      const viewerHtml = `
+        <div id="pdf-viewer-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#f8fafc; display:flex; flex-direction:column; animation: slideUp 0.3s ease;">
+          
+          <!-- Top Navigation Bar -->
+          <div style="padding: 15px 25px; background: #0f172a; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <h3 style="margin:0; font-size: 1.1rem; font-weight: 600;">${title}</h3>
+            </div>
+            <button onclick="document.getElementById('pdf-viewer-overlay').remove()" style="background: #ef4444; color: white; border: none; padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: all 0.2s ease;">
+              <i class="fas fa-times"></i> Close Notes
+            </button>
+          </div>
+
+          <!-- PDF iFrame (Right click disabled to prevent Save As) -->
+          <iframe src="${protectedUrl}" oncontextmenu="return false;" style="flex:1; width:100%; border:none; background: #e2e8f0;"></iframe>
+          
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', viewerHtml);
     }
 
     // --- Floating cart bar ---

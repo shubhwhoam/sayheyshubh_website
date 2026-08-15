@@ -1,10 +1,9 @@
 const admin = require('firebase-admin');
+const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
-// Import both JSON files (adjust path if needed)
 const zoologyNotes = require('../../notes-data.json'); 
-const microbiologyNotes = require('../../microbiology-notes-data.json');
-
-// Combine them into one master list
+const microbiologyNotes = require('../../microbiology-notes-data.json'); 
 const notesData = { ...zoologyNotes, ...microbiologyNotes };
 
 if (!admin.apps.length) {
@@ -24,13 +23,29 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
+// Robustly handle the endpoint format
+const endpoint = process.env.B2_ENDPOINT.startsWith('https://') 
+  ? process.env.B2_ENDPOINT 
+  : `https://${process.env.B2_ENDPOINT}`;
+
+// Automatically extract the region (e.g., 'eu-central-003') from the endpoint string
+const region = process.env.B2_ENDPOINT.split('.')[1];
+
+// Initialize Backblaze B2 Client using the S3 protocol
+const s3 = new S3Client({
+  region: region,
+  endpoint: endpoint,
+  credentials: {
+    accessKeyId: process.env.B2_KEY_ID,
+    secretAccessKey: process.env.B2_APPLICATION_KEY,
+  }
+});
+
 exports.handler = async (event, context) => {
-  // Extract ID from path (e.g., /secure-notes/unit1-microb-dsc201)
   const pathParts = event.path.split('/');
   const noteId = pathParts[pathParts.length - 1];
 
   try {
-    // 1. Verify User
     const authHeader = event.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return { statusCode: 401, body: JSON.stringify({ error: 'Missing token' }) };
@@ -39,50 +54,40 @@ exports.handler = async (event, context) => {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
     const userId = decodedToken.uid;
 
-    // 2. Resolve ID to URL
-    const realUrl = notesData[noteId];
-    if (!realUrl) {
+    const storagePath = notesData[noteId];
+    if (!storagePath) {
       return { statusCode: 404, body: JSON.stringify({ success: false, error: 'Note not found' }) };
     }
 
-    // 3. Extract File ID for DB check (Handles both Drive and Short.gy links)
-    let fileId = null;
-    let previewUrl = '';
+    // Security Check: Look for the exact purchase record in Firestore
+    const txSnapshot = await db.collection('transactions')
+      .where('userId', '==', userId)
+      .where('noteId', '==', noteId)
+      .where('status', '==', 'completed')
+      .where('verified', '==', true)
+      .limit(1)
+      .get();
 
-    if (realUrl.includes('drive.google.com')) {
-      const fileIdMatch = realUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
-      fileId = fileIdMatch ? fileIdMatch[1] : null;
-      previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-    } else if (realUrl.includes('short.gy')) {
-      const shortMatch = realUrl.match(/short\.gy\/([a-zA-Z0-9-_]+)/);
-      fileId = shortMatch ? shortMatch[1] : null;
-      previewUrl = realUrl; // Short links automatically redirect to the file
-    } else {
-      fileId = noteId; // Fallback
-      previewUrl = realUrl;
-    }
-
-    if (!fileId) {
-        return { statusCode: 500, body: JSON.stringify({ error: 'Invalid config' }) };
-    }
-
-    // 4. Check DB for access
-    const userDoc = await db.collection('users').doc(userId).get();
-    const userData = userDoc.data();
-
-    if (!userData?.unlockedNotes?.[fileId]) {
+    if (txSnapshot.empty) {
       return { statusCode: 403, body: JSON.stringify({ success: false, error: 'Note not purchased' }) };
     }
 
-    // 5. Success
+    // Generate a secure Backblaze B2 URL that expires in 3600 seconds (1 hour)
+    const command = new GetObjectCommand({
+      Bucket: 'sayheyshubh-notes', // Ensure this matches your exact bucket name
+      Key: storagePath,
+      ResponseContentDisposition: 'inline' // Forces browser to VIEW instead of download
+    });
+
+    const signedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
+
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        success: true, 
-        previewUrl: previewUrl 
-      })
+         success: true, 
+         previewUrl: signedUrl 
+       })
     };
-
   } catch (error) {
     console.error(error);
     return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
