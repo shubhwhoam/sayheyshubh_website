@@ -250,16 +250,19 @@ function openInAppViewer(pdfUrl, title) {
         ctx.translate(canvas.width / 2, canvas.height / 2);
         ctx.rotate(-Math.PI / 4);
 
-        ctx.font = `bold ${Math.floor(30 * outputScale)}px Arial`;
+        // Responsive Font Size: Checks if screen is mobile to shrink the font appropriately
+        const baseFontSize = window.innerWidth < 768 ? 14 : 26; 
+        ctx.font = `bold ${Math.floor(baseFontSize * outputScale)}px Arial`;
         ctx.fillStyle = "rgba(100, 116, 139, 0.20)"; 
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        ctx.fillText(watermarkText, 0, 0);
+        // Removed the center text! Now it only stamps in the 4 quadrants.
         ctx.fillText(watermarkText, 0, -canvas.height / 2.5);
         ctx.fillText(watermarkText, 0, canvas.height / 2.5);
         ctx.fillText(watermarkText, -canvas.width / 2.5, 0);
         ctx.fillText(watermarkText, canvas.width / 2.5, 0);
+
         ctx.restore();
       }
     }).catch(function(error) {
