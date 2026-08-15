@@ -76,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
-// GLOBAL IN-APP PDF VIEWER (Zoom Fixed + Dynamic Watermarking)
+// GLOBAL IN-APP PDF VIEWER (Zoom Fixed, Watermarks + Scroll Page Counter)
 // ============================================================================
 
 function openInAppViewer(pdfUrl, title) {
-  // 1. Create the overlay HTML (Flexbox center bug fixed)
+  // 1. Create the overlay HTML with Floating Controls
   const viewerHtml = `
     <div id="pdf-viewer-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#e2e8f0; display:flex; flex-direction:column; animation: slideUp 0.3s ease;">
 
@@ -94,7 +94,7 @@ function openInAppViewer(pdfUrl, title) {
         </button>
       </div>
 
-      <!-- Floating Zoom Controls -->
+      <!-- Floating Zoom Controls (Right) -->
       <div style="position: absolute; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 20;">
         <button id="zoom-in-btn" style="width: 50px; height: 50px; border-radius: 50%; background: #6366f1; color: white; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 1.2rem; cursor: pointer;">
           <i class="fas fa-search-plus"></i>
@@ -104,7 +104,12 @@ function openInAppViewer(pdfUrl, title) {
         </button>
       </div>
 
-      <!-- PDF Rendering Container (Using block/text-center to fix left-margin scroll bug) -->
+      <!-- Floating Page Indicator (Left) -->
+      <div id="page-indicator" style="position: absolute; bottom: 30px; left: 30px; background: rgba(15, 23, 42, 0.9); color: white; padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 1rem; z-index: 20; box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(4px); display: none;">
+        <i class="fas fa-file-pdf" style="margin-right: 5px; color: #cbd5e1;"></i> <span id="current-page">1</span> / <span id="total-pages">...</span>
+      </div>
+
+      <!-- PDF Rendering Container -->
       <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:block; text-align:center; -webkit-overflow-scrolling: touch;">
          <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem; display: inline-block;">
            <i class="fas fa-spinner fa-spin"></i> Loading High-Quality Notes...
@@ -136,7 +141,7 @@ function openInAppViewer(pdfUrl, title) {
     });
   }
 
-  // 3. Dynamically load the PDF.js library ONLY when needed
+  // 3. Dynamically load the PDF.js library
   if (typeof pdfjsLib === 'undefined') {
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
@@ -146,11 +151,10 @@ function openInAppViewer(pdfUrl, title) {
     renderPDF(pdfUrl);
   }
 
-  // 4. The actual rendering logic with Watermarks
+  // 4. The actual rendering logic with Watermarks & Observers
   function renderPDF(url) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    // Get user details for the watermark
     const userName = localStorage.getItem('userName') || 'Authorized Student';
     const userEmail = localStorage.getItem('userEmail') || 'SayHeyShubh Viewer';
     const watermarkText = `${userName} | ${userEmail}`;
@@ -161,6 +165,24 @@ function openInAppViewer(pdfUrl, title) {
       const loader = document.getElementById('pdf-loading');
       if (loader) loader.remove();
 
+      // Show Page Counter
+      document.getElementById('total-pages').textContent = pdf.numPages;
+      document.getElementById('page-indicator').style.display = 'block';
+
+      // Set up the Intersection Observer to track which page is on screen
+      const observerOptions = {
+        root: container,
+        rootMargin: '-30% 0px -30% 0px', // Triggers when page hits the middle 40% of the screen
+        threshold: 0
+      };
+      const pageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            document.getElementById('current-page').textContent = entry.target.dataset.pageNumber;
+          }
+        });
+      }, observerOptions);
+
       for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
         const page = await pdf.getPage(pageNum);
 
@@ -170,9 +192,8 @@ function openInAppViewer(pdfUrl, title) {
         if (scale > 1.5) scale = 1.5; 
 
         const viewport = page.getViewport({ scale: scale });
-
-        // HIGH-DPI FIX
         const outputScale = window.devicePixelRatio || 1;
+
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
@@ -181,13 +202,14 @@ function openInAppViewer(pdfUrl, title) {
 
         const baseCssWidth = Math.floor(viewport.width);
         canvas.dataset.baseWidth = baseCssWidth;
+        canvas.dataset.pageNumber = pageNum; // Attach page number to canvas
+
         canvas.style.width = baseCssWidth + "px";
         canvas.style.height = "auto"; 
         canvas.classList.add('pdf-page-canvas');
 
         const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
 
-        // Styling and Anti-Piracy CSS
         canvas.style.display = 'block';
         canvas.style.margin = '0 auto 20px auto';
         canvas.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
@@ -200,31 +222,27 @@ function openInAppViewer(pdfUrl, title) {
 
         container.appendChild(canvas);
 
-        const renderContext = { canvasContext: ctx, transform: transform, viewport: viewport };
+        // Tell the observer to watch this newly created page
+        pageObserver.observe(canvas);
 
-        // Wait for the PDF page to physically draw onto the canvas
+        const renderContext = { canvasContext: ctx, transform: transform, viewport: viewport };
         await page.render(renderContext).promise;
 
-        // --- DRAW DYNAMIC WATERMARKS OVER THE PDF ---
+        // Draw Watermarks
         ctx.save();
-        // Move origin to the exact center of the page
         ctx.translate(canvas.width / 2, canvas.height / 2);
-        // Rotate it diagonally
         ctx.rotate(-Math.PI / 4);
 
-        // Font styling (Responsive to high-DPI screens)
         ctx.font = `bold ${Math.floor(30 * outputScale)}px Arial`;
-        ctx.fillStyle = "rgba(100, 116, 139, 0.20)"; // Subtle grayish-blue, 20% opacity
+        ctx.fillStyle = "rgba(100, 116, 139, 0.20)"; 
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        // Stamp it in the center and in the corners to prevent easy cropping
         ctx.fillText(watermarkText, 0, 0);
         ctx.fillText(watermarkText, 0, -canvas.height / 2.5);
         ctx.fillText(watermarkText, 0, canvas.height / 2.5);
         ctx.fillText(watermarkText, -canvas.width / 2.5, 0);
         ctx.fillText(watermarkText, canvas.width / 2.5, 0);
-
         ctx.restore();
       }
     }).catch(function(error) {

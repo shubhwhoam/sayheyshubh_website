@@ -569,8 +569,8 @@
 
     .payment-container, .auth-container {
       background: white; max-width: 450px; width: 90%; border-radius: 24px; 
-      overflow-y: auto; /* Changed from hidden to auto to allow scrolling */
-      max-height: 90vh; /* Added to limit height to screen size and force scrolling */
+      overflow-y: auto; 
+      max-height: 90vh; 
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative; animation: slideUp 0.3s ease;
     }
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -1589,13 +1589,11 @@
       const answer = button.nextElementSibling;
       const isActive = button.classList.contains('active');
       
-      // Close all FAQs
       document.querySelectorAll('.faq-question').forEach(q => {
         q.classList.remove('active');
         q.nextElementSibling.classList.remove('active');
       });
       
-      // Open clicked FAQ if it wasn't active
       if (!isActive) {
         button.classList.add('active');
         answer.classList.add('active');
@@ -1626,10 +1624,8 @@
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('userId');
       localStorage.removeItem('userName');
-      localStorage.removeItem('purchasedNotes'); // Clear purchased cache
+      localStorage.removeItem('purchasedNotes'); 
       document.getElementById('userProfile').classList.remove('show');
-      // No reload — the onAuthStateChanged listener (registered once at page load)
-      // fires automatically here and calls showLoggedOutButtons() for us.
     }
 
     // --- AUTHENTICATION SYSTEM ---
@@ -1655,23 +1651,17 @@
         hideAuthPopup();
         loadUserProfile();
         
-        // FIX: Force the website to update the buttons immediately after login
         await loadPurchasedNotesAndUpdateButtons();
-        
       } catch (error) {
         alert('Google sign-in failed: ' + error.message);
       }
     }
 
     // --- CART & PAYMENT SYSTEM ---
-    // Allowed price chips (recommended default first-shown is 25, matching the old single-note flow)
     const PRICE_CHIPS = [15, 20, 25, 30, 50];
     const RECOMMENDED_PRICE = 25;
     const CART_SESSION_KEY = 'sayheyshubh_cart_v1';
 
-    // Mirrors the same constants in netlify/functions/create-order.js so the preview
-    // shown here matches exactly what the server actually charges. The server always
-    // has the final say on the real amount — this is just for a live preview.
     const RZP_FEE_RATE = 0.02;
     const GST_ON_FEE_RATE = 0.18;
     const EFFECTIVE_DEDUCTION_RATE = RZP_FEE_RATE * (1 + GST_ON_FEE_RATE);
@@ -1680,7 +1670,7 @@
     }
 
     let RAZORPAY_KEY_ID = null;
-    let cart = {}; // { [noteId]: { noteId, noteTitle, price } }
+    let cart = {}; 
     let tip = { amount: 0, message: '' };
     const TIP_SESSION_KEY = 'sayheyshubh_tip_v1';
     const TIP_CHIPS = [5, 10, 15, 20];
@@ -1697,11 +1687,17 @@
       initializeTipUI();
     });
 
-    // Paints buttons instantly using cached login/purchase state, before Firebase
-    // auth or the check-purchases network call has resolved. The real listener in
-    // initializePaymentSystem() runs right after and corrects anything if the cache
-    // was stale — for the common case (returning user, nothing changed) this removes
-    // the visible delay between page load and buttons showing their real state.
+    // Helper to safely wait for Auth State
+    function waitForUser() {
+      return new Promise((resolve) => {
+        if (auth.currentUser) return resolve(auth.currentUser);
+        const unsubscribe = auth.onAuthStateChanged(user => {
+          unsubscribe();
+          resolve(user);
+        });
+      });
+    }
+
     function applyOptimisticButtonState() {
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
@@ -1716,7 +1712,6 @@
       } catch (error) {
         cachedPurchased = [];
       }
-
       updateButtonStates(cachedPurchased);
     }
 
@@ -1735,7 +1730,6 @@
     function initializePaymentSystem() {
       auth.onAuthStateChanged(user => {
         if (user) {
-          trackSubjectLogin(user, 'zoology');
           loadPurchasedNotesAndUpdateButtons();
         } else {
           showLoggedOutButtons();
@@ -1768,10 +1762,10 @@
         button.style.color = 'white';
         button.innerHTML = '<i class="fas fa-lock"></i> Access Notes';
         
-        // FIX: Dynamically check auth state instead of hardcoding the popup
-        button.onclick = (e) => { 
+        button.onclick = async (e) => { 
             e.preventDefault(); 
-            if (!auth.currentUser) {
+            const user = await waitForUser(); // Bulletproof check
+            if (!user) {
                 showAuthPopup(); 
             } else {
                 toggleCartItem(noteId, noteTitle, button);
@@ -1782,14 +1776,11 @@
       renderCartBar();
     }
 
-    // --- Cart persistence (sessionStorage: cleared when the tab closes, unlike localStorage) ---
     function loadCartFromSession() {
       try {
         const saved = sessionStorage.getItem(CART_SESSION_KEY);
         cart = saved ? JSON.parse(saved) : {};
-      } catch (error) {
-        cart = {};
-      }
+      } catch (error) { cart = {}; }
     }
 
     function saveCartToSession() {
@@ -1800,9 +1791,7 @@
       try {
         const saved = sessionStorage.getItem(TIP_SESSION_KEY);
         tip = saved ? JSON.parse(saved) : { amount: 0, message: '' };
-      } catch (error) {
-        tip = { amount: 0, message: '' };
-      }
+      } catch (error) { tip = { amount: 0, message: '' }; }
     }
 
     function saveTipToSession() {
@@ -1814,12 +1803,11 @@
       saveTipToSession();
     }
 
-    // Wires up the tip chips, custom-amount input, and message box once on load.
     function initializeTipUI() {
       document.querySelectorAll('.tip-chip').forEach(chip => {
         chip.addEventListener('click', () => {
           const amount = parseInt(chip.dataset.tip, 10);
-          tip.amount = (tip.amount === amount) ? 0 : amount; // tap again to deselect
+          tip.amount = (tip.amount === amount) ? 0 : amount; 
           document.getElementById('tipCustomInput').value = '';
           saveTipToSession();
           syncTipUI();
@@ -1834,7 +1822,7 @@
         if (val > MAX_TIP) val = MAX_TIP;
         tip.amount = val;
         saveTipToSession();
-        syncTipUI(true); // true = don't overwrite what they're typing
+        syncTipUI(true); 
         renderFeeBreakdown();
       });
 
@@ -1845,7 +1833,6 @@
       });
     }
 
-    // Reflects current tip state into the chip highlighting, custom input, and message box.
     function syncTipUI(skipCustomInputValue) {
       document.querySelectorAll('.tip-chip').forEach(chip => {
         chip.classList.toggle('selected', parseInt(chip.dataset.tip, 10) === tip.amount);
@@ -1859,7 +1846,7 @@
     }
 
     async function loadPurchasedNotesAndUpdateButtons() {
-      const user = auth.currentUser;
+      const user = await waitForUser();
       if (!user) return;
 
       try {
@@ -1882,19 +1869,14 @@
 
           updateButtonStates(purchasedNotes);
         } else {
-          // FIX: If the server takes too long or fails, assume 0 notes owned 
-          // but STILL update the buttons so they aren't stuck on the login popup!
-          console.error("Backend error checking purchases. Status:", response.status);
           updateButtonStates([]); 
         }
       } catch (error) {
         console.error('Error loading purchased notes:', error);
-        updateButtonStates([]); // Fallback to ensure buttons unlock
+        updateButtonStates([]);
       }
     }
 
-    // Wires up every unit button on the page: purchased units behave as a direct
-    // "View Notes" action (unchanged); everything else becomes an add-to-cart toggle.
     function updateButtonStates(purchasedIds) {
       const secureButtons = document.querySelectorAll('button[onclick*="handleViewNotes"]');
 
@@ -1940,7 +1922,6 @@
       if (strip) strip.classList.toggle('show', inCart);
     }
 
-    // Creates the collapsible per-unit price strip once, right after the unit's button row.
     function ensurePriceStrip(button, noteId, noteTitle) {
       const stripId = `price-strip-${cssSafe(noteId)}`;
       if (document.getElementById(stripId)) return;
@@ -1980,10 +1961,8 @@
       return id.replace(/[^a-zA-Z0-9-_]/g, '_');
     }
 
-    // Adds/removes a unit from the cart. No network call here — check-purchases
-    // already told us this unit isn't owned, so selecting it is purely local state.
-    function toggleCartItem(noteId, noteTitle, button) {
-      const user = auth.currentUser;
+    async function toggleCartItem(noteId, noteTitle, button) {
+      const user = await waitForUser(); // Bulletproof check
       if (!user) { showAuthPopup(); return; }
 
       if (cart[noteId]) {
@@ -1994,7 +1973,6 @@
       saveCartToSession();
       renderUnitButtonState(button, noteId);
 
-      // Sync the price strip's selected chip to match cart state
       const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
       if (strip) {
         strip.querySelectorAll('.price-chip-mini').forEach(c => {
@@ -2005,13 +1983,16 @@
       renderCartBar();
     }
 
-    // Direct "View Notes" path for already-purchased units — now uses In-App Viewer
+    // THE BUG FREE VIEW NOTES HANDLER
     async function handleViewNotes(noteId, noteTitle, btn) {
-      const user = auth.currentUser;
+      const user = await waitForUser(); // Bulletproof check
       if (!user) { showAuthPopup(); return; }
+      
+      // Fallback just in case btn is missing
+      if (!btn) btn = document.querySelector(`button[onclick*="${noteId}"]`);
 
-      const originalHTML = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+      const originalHTML = btn ? btn.innerHTML : 'View Notes';
+      if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
       try {
         const token = await user.getIdToken();
@@ -2021,36 +2002,34 @@
         const data = await response.json();
 
         if (data.success && data.previewUrl) {
-          
-          // INSTEAD of window.open, we call our new custom viewer overlay
-          openInAppViewer(data.previewUrl, noteTitle);
-          btn.innerHTML = '<i class="fas fa-check-circle"></i> View Notes';
+          // Open PDF Viewer directly!
+          if (typeof openInAppViewer === 'function') {
+             openInAppViewer(data.previewUrl, noteTitle);
+          } else {
+             window.open(data.previewUrl, '_blank');
+          }
+          if (btn) btn.innerHTML = '<i class="fas fa-check-circle"></i> View Notes';
           
         } else if (response.status === 403) {
-          // Fell out of sync with the server (rare) — treat it as unpurchased again
-          btn.innerHTML = originalHTML;
+          if (btn) btn.innerHTML = originalHTML;
           delete cart[noteId];
           await loadPurchasedNotesAndUpdateButtons();
           toggleCartItem(noteId, noteTitle, btn);
         } else {
           alert('Error: ' + (data.error || 'Unknown error'));
-          btn.innerHTML = originalHTML;
+          if (btn) btn.innerHTML = originalHTML;
         }
       } catch (error) {
         console.error('Error viewing note:', error);
         alert('Network error. Please try again.');
-        btn.innerHTML = originalHTML;
+        if (btn) btn.innerHTML = originalHTML;
       }
     }
 
-    // --- Floating cart bar ---
     function cartTotal() {
       return Object.values(cart).reduce((sum, item) => sum + item.price, 0);
     }
 
-    // Razorpay's description field shows up on your dashboard's payment details.
-    // List actual unit names instead of a generic count, truncated to stay under
-    // Razorpay's ~255 char limit for this field.
     function buildRazorpayDescription(items) {
       const full = items.map(it => it.noteTitle).join(', ');
       if (full.length <= 250) return full;
@@ -2070,15 +2049,13 @@
         return;
       }
 
-      document.getElementById('cartBarCount').textContent =
-        `${items.length} unit${items.length > 1 ? 's' : ''} selected`;
+      document.getElementById('cartBarCount').textContent = `${items.length} unit${items.length > 1 ? 's' : ''} selected`;
       document.getElementById('cartBarTotal').textContent = `₹${cartTotal()}`;
       bar.classList.add('show');
       if (doubtsBtn) doubtsBtn.classList.add('shifted-up');
       if (doubtsBubble) doubtsBubble.classList.add('shifted-up');
     }
 
-    // --- Cart review modal ---
     function showCartReview() {
       const items = Object.values(cart);
       const listEl = document.getElementById('cartReviewList');
@@ -2159,7 +2136,6 @@
       cart[noteId].price = price;
       saveCartToSession();
 
-      // Also keep the inline per-unit strip on the page in sync
       const strip = document.getElementById(`price-strip-${cssSafe(noteId)}`);
       if (strip) {
         strip.querySelectorAll('.price-chip-mini').forEach(c => {
@@ -2167,7 +2143,7 @@
         });
       }
 
-      showCartReview(); // cheap full re-render keeps chip highlighting + total in sync
+      showCartReview(); 
     }
 
     function removeFromCartReview(noteId) {
@@ -2225,15 +2201,9 @@
     function closeSuccessView() {
       document.getElementById('paymentModal').classList.remove('show');
       resetModalToCartMode();
-      // Buttons are already updated optimistically the moment payment verified (see
-      // optimisticallyUnlock above) — this just reconciles with the server quietly in
-      // the background, without making the user wait for it.
       loadPurchasedNotesAndUpdateButtons();
     }
 
-    // Instantly reflects a just-completed purchase in the UI: merges the newly bought
-    // noteIds into the cached purchased list and repaints buttons/cart bar right away,
-    // instead of waiting on a fresh check-purchases network round trip.
     function optimisticallyUnlock(newlyPurchasedIds) {
       let cachedPurchased = [];
       try {
@@ -2243,7 +2213,7 @@
       }
       const merged = Array.from(new Set([...cachedPurchased, ...newlyPurchasedIds]));
       localStorage.setItem('purchasedNotes', JSON.stringify(merged));
-      updateButtonStates(merged); // also calls renderCartBar(), hiding the bar immediately
+      updateButtonStates(merged); 
     }
 
     async function proceedToPayment() {
@@ -2260,7 +2230,7 @@
         });
       }
 
-      const user = auth.currentUser;
+      const user = await waitForUser();
       if (!user) { alert('Please log in first'); return; }
       if (typeof Razorpay === 'undefined') { alert('Payment system not loaded. Refresh and try again.'); return; }
 
@@ -2282,7 +2252,6 @@
         const orderData = await orderResponse.json();
         if (!orderData.success) throw new Error(orderData.error || 'Failed to create order');
 
-        // Keep these around for the success screen — cart/tip state gets cleared before we need them
         const unlockedTitles = items.map(it => it.noteTitle);
         const unlockedIds = items.map(it => it.noteId);
         const tipAmountPaid = tip.amount || 0;
@@ -2315,10 +2284,6 @@
                 cart = {};
                 saveCartToSession();
                 clearTip();
-                // Update buttons + hide the cart bar right now using what we already know was
-                // bought — don't make the user wait on a fresh check-purchases round trip just
-                // to see the cart disappear. The background reconciliation in closeSuccessView
-                // still runs to catch anything unexpected.
                 optimisticallyUnlock(unlockedIds);
                 showUnlockSuccess(unlockedTitles, tipAmountPaid, messageWasSent);
               } else {
