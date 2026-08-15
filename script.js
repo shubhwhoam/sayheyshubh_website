@@ -76,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
-// GLOBAL IN-APP PDF VIEWER (Works on all pages)
+// GLOBAL IN-APP PDF VIEWER (High-DPI & Zoomable)
 // ============================================================================
 
 function openInAppViewer(pdfUrl, title) {
-  // 1. Create the overlay HTML
+  // 1. Create the overlay HTML with Floating Zoom Buttons
   const viewerHtml = `
     <div id="pdf-viewer-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#e2e8f0; display:flex; flex-direction:column; animation: slideUp 0.3s ease;">
 
@@ -94,8 +94,18 @@ function openInAppViewer(pdfUrl, title) {
         </button>
       </div>
 
+      <!-- Floating Zoom Controls -->
+      <div style="position: absolute; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 20;">
+        <button id="zoom-in-btn" style="width: 50px; height: 50px; border-radius: 50%; background: #6366f1; color: white; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 1.2rem; cursor: pointer;">
+          <i class="fas fa-search-plus"></i>
+        </button>
+        <button id="zoom-out-btn" style="width: 50px; height: 50px; border-radius: 50%; background: #6366f1; color: white; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 1.2rem; cursor: pointer;">
+          <i class="fas fa-search-minus"></i>
+        </button>
+      </div>
+
       <!-- PDF Rendering Container -->
-      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:flex; flex-direction:column; align-items:center; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y pinch-zoom;">
+      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:flex; flex-direction:column; align-items:center; -webkit-overflow-scrolling: touch;">
          <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem;">
            <i class="fas fa-spinner fa-spin"></i> Loading High-Quality Notes...
          </div>
@@ -106,7 +116,27 @@ function openInAppViewer(pdfUrl, title) {
 
   document.body.insertAdjacentHTML('beforeend', viewerHtml);
 
-  // 2. Dynamically load the PDF.js library ONLY when needed
+  // 2. Zoom State and Logic
+  let currentZoom = 1;
+
+  document.getElementById('zoom-in-btn').onclick = () => {
+    if (currentZoom < 3.0) currentZoom += 0.25;
+    applyZoom();
+  };
+
+  document.getElementById('zoom-out-btn').onclick = () => {
+    if (currentZoom > 0.75) currentZoom -= 0.25;
+    applyZoom();
+  };
+
+  function applyZoom() {
+    document.querySelectorAll('.pdf-page-canvas').forEach(canvas => {
+      const baseWidth = parseInt(canvas.dataset.baseWidth);
+      canvas.style.width = Math.floor(baseWidth * currentZoom) + 'px';
+    });
+  }
+
+  // 3. Dynamically load the PDF.js library ONLY when needed
   if (typeof pdfjsLib === 'undefined') {
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
@@ -116,7 +146,7 @@ function openInAppViewer(pdfUrl, title) {
     renderPDF(pdfUrl);
   }
 
-  // 3. The actual rendering logic
+  // 4. The actual rendering logic
   function renderPDF(url) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -129,11 +159,11 @@ function openInAppViewer(pdfUrl, title) {
       for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
         const page = await pdf.getPage(pageNum);
 
-        // Scale to fit screen width
+        // Calculate base scale to fit mobile screen width
         const containerWidth = container.clientWidth - 30; 
         let unscaledViewport = page.getViewport({ scale: 1 });
         let scale = containerWidth / unscaledViewport.width;
-        if (scale > 2.0) scale = 2.0; 
+        if (scale > 1.5) scale = 1.5; // Cap default size on desktop
 
         const viewport = page.getViewport({ scale: scale });
 
@@ -142,18 +172,24 @@ function openInAppViewer(pdfUrl, title) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
+        // Physical pixels for sharpness
         canvas.width = Math.floor(viewport.width * outputScale);
         canvas.height = Math.floor(viewport.height * outputScale);
-        canvas.style.width = Math.floor(viewport.width) + "px";
-        canvas.style.height = Math.floor(viewport.height) + "px";
+
+        // CSS pixels for sizing
+        const baseCssWidth = Math.floor(viewport.width);
+        canvas.dataset.baseWidth = baseCssWidth;
+        canvas.style.width = baseCssWidth + "px";
+        canvas.style.height = "auto"; // Ensures height scales perfectly with width
+        canvas.classList.add('pdf-page-canvas');
 
         const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
 
-        // Styling and Anti-Piracy
+        // Styling and Anti-Piracy (Disables long-press context menus)
         canvas.style.marginBottom = '20px';
         canvas.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
         canvas.style.borderRadius = '8px';
-        canvas.style.maxWidth = '100%';
+        canvas.style.maxWidth = 'none'; // Overrides default frameworks that restrict canvas size
         canvas.style.userSelect = 'none';
         canvas.style.webkitUserSelect = 'none';
         canvas.style.webkitTouchCallout = 'none';
