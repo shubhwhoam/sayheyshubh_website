@@ -76,20 +76,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
-// GLOBAL IN-APP PDF VIEWER (Zoom Fixed, Watermarks + Scroll Page Counter)
+// GLOBAL IN-APP PDF VIEWER (Zoom Fixed, Watermarks, Counter + PC Security)
 // ============================================================================
 
 function openInAppViewer(pdfUrl, title) {
-  // 1. Create the overlay HTML with Floating Controls
+  // 1. Create the overlay HTML with PC Security (oncontextmenu & user-select)
   const viewerHtml = `
-    <div id="pdf-viewer-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#e2e8f0; display:flex; flex-direction:column; animation: slideUp 0.3s ease;">
+    <div id="pdf-viewer-overlay" oncontextmenu="return false;" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#e2e8f0; display:flex; flex-direction:column; animation: slideUp 0.3s ease; user-select: none; -webkit-user-select: none;">
 
       <!-- Top Navigation Bar -->
       <div style="padding: 15px 25px; background: #0f172a; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 10;">
         <div style="display: flex; align-items: center; gap: 15px;">
           <h3 style="margin:0; font-size: 1.1rem; font-weight: 600;">${title}</h3>
         </div>
-        <button onclick="document.getElementById('pdf-viewer-overlay').remove()" style="background: #ef4444; color: white; border: none; padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: all 0.2s ease;">
+        <button onclick="closeInAppViewer()" style="background: #ef4444; color: white; border: none; padding: 8px 20px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: all 0.2s ease;">
           <i class="fas fa-times"></i> Close
         </button>
       </div>
@@ -120,6 +120,21 @@ function openInAppViewer(pdfUrl, title) {
   `;
 
   document.body.insertAdjacentHTML('beforeend', viewerHtml);
+
+  // 1.5 Security: Block PC Keyboard Shortcuts (Ctrl+S, Ctrl+P, Ctrl+C)
+  const blockShortcuts = (e) => {
+    if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'c', 'u'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+  };
+  document.addEventListener('keydown', blockShortcuts);
+
+  // Expose close function globally to clean up the keyboard listeners
+  window.closeInAppViewer = function() {
+    const overlay = document.getElementById('pdf-viewer-overlay');
+    if (overlay) overlay.remove();
+    document.removeEventListener('keydown', blockShortcuts);
+  };
 
   // 2. Zoom State and Logic
   let currentZoom = 1;
@@ -172,7 +187,7 @@ function openInAppViewer(pdfUrl, title) {
       // Set up the Intersection Observer to track which page is on screen
       const observerOptions = {
         root: container,
-        rootMargin: '-30% 0px -30% 0px', // Triggers when page hits the middle 40% of the screen
+        rootMargin: '-30% 0px -30% 0px',
         threshold: 0
       };
       const pageObserver = new IntersectionObserver((entries) => {
@@ -202,7 +217,7 @@ function openInAppViewer(pdfUrl, title) {
 
         const baseCssWidth = Math.floor(viewport.width);
         canvas.dataset.baseWidth = baseCssWidth;
-        canvas.dataset.pageNumber = pageNum; // Attach page number to canvas
+        canvas.dataset.pageNumber = pageNum; 
 
         canvas.style.width = baseCssWidth + "px";
         canvas.style.height = "auto"; 
@@ -215,14 +230,16 @@ function openInAppViewer(pdfUrl, title) {
         canvas.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
         canvas.style.borderRadius = '8px';
         canvas.style.maxWidth = 'none'; 
+
+        // PC & Mobile Security Properties
         canvas.style.userSelect = 'none';
         canvas.style.webkitUserSelect = 'none';
         canvas.style.webkitTouchCallout = 'none';
         canvas.oncontextmenu = () => false; 
+        canvas.ondragstart = () => false; // Stops users from dragging the image to desktop
 
         container.appendChild(canvas);
 
-        // Tell the observer to watch this newly created page
         pageObserver.observe(canvas);
 
         const renderContext = { canvasContext: ctx, transform: transform, viewport: viewport };
