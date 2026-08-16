@@ -2,8 +2,8 @@ const admin = require('firebase-admin');
 const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
-const zoologyNotes = require('../../notes-data.json'); 
-const microbiologyNotes = require('../../microbiology-notes-data.json'); 
+const zoologyNotes = require('./data/notes-data.json');
+const microbiologyNotes = require('./data/microbiology-notes-data.json');
 const notesData = { ...zoologyNotes, ...microbiologyNotes };
 
 if (!admin.apps.length) {
@@ -24,8 +24,8 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 // Robustly handle the endpoint format
-const endpoint = process.env.B2_ENDPOINT.startsWith('https://') 
-  ? process.env.B2_ENDPOINT 
+const endpoint = process.env.B2_ENDPOINT.startsWith('https://')
+  ? process.env.B2_ENDPOINT
   : `https://${process.env.B2_ENDPOINT}`;
 
 // Automatically extract the region (e.g., 'eu-central-003') from the endpoint string
@@ -41,6 +41,26 @@ const s3 = new S3Client({
   }
 });
 
+const B2_BUCKET = 'sayheyshubh-notes';
+
+// The signed URL only needs to live long enough for pdf.js to start fetching
+// the file right when the viewer opens — it's requested fresh on every open.
+// Keeping this short (instead of the old 1 hour) means that if someone grabs
+// the raw URL out of the browser's Network tab, it's only useful for a couple
+// of minutes rather than staying valid and downloadable for the rest of the hour.
+const SIGNED_URL_EXPIRY_SECONDS = 180;
+
+// A real B2 object key never looks like a URL. This catches notes that
+// haven't been migrated/uploaded to B2 yet (including leftover placeholder
+// text like "YOUR_DRIVE_LINK_HERE") and fails cleanly instead of generating
+// a signed URL that will just 404 against the bucket.
+function isValidB2Key(value) {
+  if (!value || typeof value !== 'string') return false;
+  if (value.startsWith('http://') || value.startsWith('https://')) return false;
+  if (value.includes('YOUR_DRIVE_LINK_HERE')) return false;
+  return true;
+}
+
 exports.handler = async (event, context) => {
   const pathParts = event.path.split('/');
   const noteId = pathParts[pathParts.length - 1];
@@ -48,18 +68,18 @@ exports.handler = async (event, context) => {
   try {
     const authHeader = event.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return { statusCode: 401, body: JSON.stringify({ error: 'Missing token' }) };
+      return { statusCode: 401, body: JSON.stringify({ success: false, error: 'Missing token' }) };
     }
     const idToken = authHeader.substring(7);
     const decodedToken = await admin.auth().verifyIdToken(idToken);
     const userId = decodedToken.uid;
 
     const storagePath = notesData[noteId];
-    if (!storagePath) {
-      return { statusCode: 404, body: JSON.stringify({ success: false, error: 'Note not found' }) };
+    if (!isValidB2Key(storagePath)) {
+      return { statusCode: 404, body: JSON.stringify({ success: false, error: 'This note isn\'t available yet. Please check back soon.' }) };
     }
 
-    // Security Check: Look for the exact purchase record in Firestore
+    // Security check: confirm the exact purchase record exists in Firestore
     const txSnapshot = await db.collection('transactions')
       .where('userId', '==', userId)
       .where('noteId', '==', noteId)
@@ -72,24 +92,26 @@ exports.handler = async (event, context) => {
       return { statusCode: 403, body: JSON.stringify({ success: false, error: 'Note not purchased' }) };
     }
 
-    // Generate a secure Backblaze B2 URL that expires in 3600 seconds (1 hour)
     const command = new GetObjectCommand({
-      Bucket: 'sayheyshubh-notes', // Ensure this matches your exact bucket name
+      Bucket: B2_BUCKET,
       Key: storagePath,
       ResponseContentDisposition: 'inline' // Forces browser to VIEW instead of download
     });
 
-    const signedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    const signedUrl = await getSignedUrl(s3, command, { expiresIn: SIGNED_URL_EXPIRY_SECONDS });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
-         success: true, 
-         previewUrl: signedUrl 
-       })
+      body: JSON.stringify({
+        success: true,
+        previewUrl: signedUrl
+      })
     };
   } catch (error) {
-    console.error(error);
-    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
+    console.error('secure-notes error:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ success: false, error: 'Something went wrong loading this note. Please try again.' })
+    };
   }
 };

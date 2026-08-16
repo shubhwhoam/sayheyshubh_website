@@ -1,5 +1,5 @@
-const zoologyNotes = require('../../notes-data.json');
-const microbiologyNotes = require('../../microbiology-notes-data.json');
+const zoologyNotes = require('./data/notes-data.json');
+const microbiologyNotes = require('./data/microbiology-notes-data.json');
 
 // Combine both datasets into one master list
 const notesData = { ...zoologyNotes, ...microbiologyNotes };
