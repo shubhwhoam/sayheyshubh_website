@@ -22,9 +22,12 @@ task = "shell.exec"
 args = """
 echo \"Serving HTML, open the Preview to see your output.
 To see changes you make, you can hit the refresh button in the preview, you do \u001B[1mnot\u001B[0m have to stop and run again.
-Console logs are available in the Preview devtools or your browser devtools.\" && static-web-server -w ./.config/static-web-server.toml > /dev/null 2>&1
+Console logs are available in the Preview devtools or your browser devtools.\" && static-web-server --host 0.0.0.0 --port 5000 --root .
 """
-waitForPort = 80
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [[workflows.workflow]]
 name = "Project"
