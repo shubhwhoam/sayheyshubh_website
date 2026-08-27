@@ -154,7 +154,7 @@ async function handler(event, context) {
 
     // Fetch Data
     const commentsRef = db.collection('comments')
-      .where('page', '==', 'youtube')
+      .where('page', '==', 'zoology')
       .where('parentId', '==', null)
       .orderBy('createdAt', 'desc')
       .limit(20);
@@ -196,7 +196,7 @@ async function handler(event, context) {
 
     // Compute a REAL aggregate rating from all rated comments (no fabricated numbers)
     // Done BEFORE rendering comments so each Review's itemReviewed can embed the same aggregateRating.
-    const allForPage = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).get();
+    const allForPage = await db.collection('comments').where('page', '==', 'zoology').where('parentId', '==', null).get();
     let ratingSum = 0;
     let ratingCount = 0;
     allForPage.forEach(doc => {
@@ -213,7 +213,7 @@ async function handler(event, context) {
 
     // Inject HTML
     const commentsHtml = topComments.map(c => renderCommentHtml(c, ratingSummary)).join('');
-    const countSnapshot = await db.collection('comments').where('page', '==', 'youtube').where('parentId', '==', null).count().get();
+    const countSnapshot = await db.collection('comments').where('page', '==', 'zoology').where('parentId', '==', null).count().get();
     const titleText = `${countSnapshot.data().count} Student Reviews`;
 
     html = html.replace(/<h3[^>]*id="commentsTitle"[^>]*>.*?<\/h3>/s, 
