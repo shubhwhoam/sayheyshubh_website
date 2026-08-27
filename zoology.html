@@ -26,10 +26,10 @@
   </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4872637676729985" crossorigin="anonymous"></script>
   
-  <!-- Firebase SDKs (deferred: not needed for first paint, order preserved by defer) -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -1093,59 +1093,39 @@
       <h2 class="section-title">Featured Zoology Tutorials</h2>
       <p class="section-subtitle">Visual learner? Watch our most popular crash courses for quick revision.</p>
       <div class="video-grid">
-        <div class="video-item yt-facade" data-yt-id="0QyVX0lVcMM">
-          <div class="yt-facade-thumb" style="position:relative;cursor:pointer;background:#000;">
-            <img src="https://i.ytimg.com/vi/0QyVX0lVcMM/hqdefault.jpg" loading="lazy" alt="Introduction to Ecology" style="width:100%;display:block;">
-            <span class="yt-play-btn" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:42px;background:rgba(0,0,0,0.75);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-              <span style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid #fff;margin-left:3px;"></span>
-            </span>
-          </div>
+        <div class="video-item">
+          <iframe 
+            src="https://www.youtube.com/embed/0QyVX0lVcMM" 
+            title="Introduction to Ecology" 
+            allowfullscreen>
+          </iframe>
           <div class="video-info">
             <div class="video-title">Introduction to Ecology | Semester 1 | Study Notes</div>
           </div>
         </div>
 
-        <div class="video-item yt-facade" data-yt-id="wewhZlQ0IlI">
-          <div class="yt-facade-thumb" style="position:relative;cursor:pointer;background:#000;">
-            <img src="https://i.ytimg.com/vi/wewhZlQ0IlI/hqdefault.jpg" loading="lazy" alt="BSc Zoology First Year Survival Guide" style="width:100%;display:block;">
-            <span class="yt-play-btn" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:42px;background:rgba(0,0,0,0.75);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-              <span style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid #fff;margin-left:3px;"></span>
-            </span>
-          </div>
+        <div class="video-item">
+          <iframe 
+            src="https://www.youtube.com/embed/wewhZlQ0IlI" 
+            title="BSc Zoology First Year Survival Guide" 
+            allowfullscreen>
+          </iframe>
           <div class="video-info">
             <div class="video-title">BSc Zoology First Year Survival Guide 🎓</div>
           </div>
         </div>
 
-        <div class="video-item yt-facade" data-yt-id="FMTwnbzEWAg">
-          <div class="yt-facade-thumb" style="position:relative;cursor:pointer;background:#000;">
-            <img src="https://i.ytimg.com/vi/FMTwnbzEWAg/hqdefault.jpg" loading="lazy" alt="Introduction to Non-Chordates" style="width:100%;display:block;">
-            <span class="yt-play-btn" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:42px;background:rgba(0,0,0,0.75);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-              <span style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid #fff;margin-left:3px;"></span>
-            </span>
-          </div>
+        <div class="video-item">
+          <iframe 
+            src="https://www.youtube.com/embed/FMTwnbzEWAg" 
+            title="Introduction to Non-Chordates" 
+            allowfullscreen>
+          </iframe>
           <div class="video-info">
             <div class="video-title">Introduction to Non-Chordates | Semester 1</div>
           </div>
         </div>
       </div>
-      <script>
-        // Click-to-load YouTube facades: no iframe/YT JS loads until the user clicks.
-        document.querySelectorAll('.yt-facade').forEach(function (item) {
-          item.querySelector('.yt-facade-thumb').addEventListener('click', function () {
-            const id = item.getAttribute('data-yt-id');
-            const iframe = document.createElement('iframe');
-            iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-            iframe.title = item.querySelector('.video-title').textContent;
-            iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-            iframe.allowFullscreen = true;
-            iframe.style.width = '100%';
-            iframe.style.aspectRatio = '16/9';
-            iframe.style.border = '0';
-            this.replaceWith(iframe);
-          });
-        });
-      </script>
     </div>
 
     <!-- FAQ Section -->
@@ -1354,8 +1334,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script defer src="script.js"></script>
-  <script defer src="firebase-config.js"></script>
+  <script src="script.js"></script>
+  <script src="firebase-config.js"></script>
 
   <a href="https://t.me/sayheyshubh" class="doubts-btn" id="doubts-btn">💬</a>
   <div class="doubts-bubble" id="doubts-bubble">Got a question?</div>
@@ -1396,7 +1376,7 @@
     if (isLocal) {
       return {
         postComment: '/api/comments',
-        getComments: '/api/comments/zoology'
+        getComments: '/api/comments/youtube'
       };
     } else {
       return {
@@ -1569,7 +1549,7 @@
         body: JSON.stringify({
           comment: commentInput.value,
           rating: selectedRating,
-          page: 'zoology'
+          page: 'youtube'
         })
       });
       
@@ -1633,7 +1613,7 @@
         },
         body: JSON.stringify({
           comment: replyText,
-          page: 'zoology',
+          page: 'youtube',
           parentId: parentId
         })
       });
@@ -1720,7 +1700,7 @@
     try {
       const endpoints = getApiEndpoints();
       // Fetch all so we can safely paginate from memory without worrying about backend bugs
-      const response = await fetch(`${endpoints.getComments}?page=zoology&limit=500&offset=0`);
+      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=500&offset=0`);
       const data = await response.json();
 
       if (data.success) {
@@ -1764,7 +1744,7 @@
       } else {
         // Fallback to API if we legitimately need more
         const endpoints = getApiEndpoints();
-        const response = await fetch(`${endpoints.getComments}?page=zoology&limit=${commentsPerPage}&offset=${currentOffset}`);
+        const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
         const data = await response.json();
         
         if (data.success && data.comments.length > 0) {
@@ -2084,7 +2064,25 @@
     });
 
     function updateUIForLoggedInUser(user, userData) {
-      // Welcome-back message removed per request — profile button alone is sufficient.
+      const actionButtons = document.querySelector('.action-buttons');
+      if (actionButtons && userData && !document.querySelector('.welcome-message')) {
+        const welcomeMsg = document.createElement('div');
+        welcomeMsg.className = 'welcome-message';
+        welcomeMsg.style.cssText = `
+          background: white;
+          color: #10b981;
+          padding: 0.8rem 1.5rem;
+          border-radius: 50px;
+          margin-top: 1.5rem;
+          border: 1px solid #a7f3d0;
+          font-weight: 700;
+          font-size: 0.95rem;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+          display: inline-block;
+        `;
+        welcomeMsg.innerHTML = `👋 Hello, ${userData.name || user.displayName || 'User'}! Welcome back.`;
+        actionButtons.parentNode.insertBefore(welcomeMsg, actionButtons.nextSibling);
+      }
       loadUserProfile();
     }
     
