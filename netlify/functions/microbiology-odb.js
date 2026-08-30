@@ -241,6 +241,7 @@ async function handler(event, context) {
       statusCode: 200,
       headers: { "Content-Type": "text/html" },
       body: html,
+      ttl: 60
     };
 
   } catch (error) {
