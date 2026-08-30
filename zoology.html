@@ -1376,7 +1376,7 @@
     if (isLocal) {
       return {
         postComment: '/api/comments',
-        getComments: '/api/comments/youtube'
+        getComments: '/api/comments/zoology'
       };
     } else {
       return {
@@ -1549,7 +1549,7 @@
         body: JSON.stringify({
           comment: commentInput.value,
           rating: selectedRating,
-          page: 'youtube'
+          page: 'zoology'
         })
       });
       
@@ -1613,7 +1613,7 @@
         },
         body: JSON.stringify({
           comment: replyText,
-          page: 'youtube',
+          page: 'zoology',
           parentId: parentId
         })
       });
@@ -1700,7 +1700,7 @@
     try {
       const endpoints = getApiEndpoints();
       // Fetch all so we can safely paginate from memory without worrying about backend bugs
-      const response = await fetch(`${endpoints.getComments}?page=youtube&limit=500&offset=0`);
+      const response = await fetch(`${endpoints.getComments}?page=zoology&limit=500&offset=0`);
       const data = await response.json();
 
       if (data.success) {
@@ -1744,7 +1744,7 @@
       } else {
         // Fallback to API if we legitimately need more
         const endpoints = getApiEndpoints();
-        const response = await fetch(`${endpoints.getComments}?page=youtube&limit=${commentsPerPage}&offset=${currentOffset}`);
+        const response = await fetch(`${endpoints.getComments}?page=zoology&limit=${commentsPerPage}&offset=${currentOffset}`);
         const data = await response.json();
         
         if (data.success && data.comments.length > 0) {
