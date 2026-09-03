@@ -1,4 +1,10 @@
 const admin = require('firebase-admin');
+// Legacy Google Drive fileId -> current noteId map, built from the repo's git
+// history of notes-data.json (every version before the Backblaze B2 migration
+// on 2026-08-15). Needed to recognize purchases made before the cart feature
+// (pre 2026-08-09), whose transaction docs never got a `noteId` field — only
+// the old Drive `noteUrl`.
+const legacyFileIdToNoteId = require('./data/legacy-fileid-map.json');
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {
@@ -32,6 +38,17 @@ async function verifyFirebaseToken(authHeader) {
   }
 }
 
+// Best-effort recovery for pre-cart-feature transactions that only have a
+// noteUrl (Drive link or short.gy link) and no noteId field at all.
+function deriveLegacyNoteId(noteUrl) {
+  if (!noteUrl) return null;
+  const driveMatch = noteUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+  if (driveMatch && legacyFileIdToNoteId[driveMatch[1]]) {
+    return legacyFileIdToNoteId[driveMatch[1]];
+  }
+  return null;
+}
+
 exports.handler = async (event, context) => {
   // CORS headers
   const headers = {
@@ -56,20 +73,38 @@ exports.handler = async (event, context) => {
 
     // Collect the clean note IDs (e.g., 'unit-1-dsc-5')
     const ownedIds = [];
+    const unresolvedLegacyDocs = [];
     transactionsSnapshot.forEach(doc => {
       const data = doc.data();
-      // If the transaction has a noteId, they own it! No Google Drive regex needed.
       if (data.noteId) {
-         ownedIds.push(data.noteId);
+        // Modern transaction (cart feature onward) - already has the clean ID.
+        ownedIds.push(data.noteId);
+        return;
+      }
+      // Legacy transaction from before the cart feature - fall back to
+      // deriving the note ID from the old Drive noteUrl so these purchases
+      // don't silently disappear.
+      const legacyId = deriveLegacyNoteId(data.noteUrl);
+      if (legacyId) {
+        ownedIds.push(legacyId);
+      } else {
+        unresolvedLegacyDocs.push(doc.id);
       }
     });
+
+    if (unresolvedLegacyDocs.length > 0) {
+      // Doesn't fail the request - just makes it easy to spot in logs which
+      // transaction docs still need a manual look (e.g. run the backfill
+      // script, or the noteUrl format is one we don't recognize yet).
+      console.warn('check-purchases: could not resolve noteId for legacy transactions', unresolvedLegacyDocs);
+    }
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
-        purchasedNotes: ownedIds 
+        purchasedNotes: ownedIds
       })
     };
   } catch (error) {
