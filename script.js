@@ -110,10 +110,11 @@ function openInAppViewer(pdfUrl, title) {
       </div>
 
       <!-- PDF Rendering Container -->
-      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:block; text-align:center; -webkit-overflow-scrolling: touch;">
+      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:block; text-align:center; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
          <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem; display: inline-block;">
            <i class="fas fa-spinner fa-spin"></i> Loading High-Quality Notes...
          </div>
+         <div id="pdf-pages-wrapper"></div>
       </div>
 
     </div>
@@ -141,10 +142,11 @@ function openInAppViewer(pdfUrl, title) {
 
   // 2. Zoom state.
   // currentZoom is a multiplier applied on top of each page's own "fit to
-  // container" base scale. Changing it now triggers a real re-render of every
-  // page at the new target resolution — the old version just CSS-stretched
-  // the already-rasterized canvas, which is what made notes look progressively
-  // worse the more someone zoomed in to read fine handwriting.
+  // container" base scale. Changing it (via the buttons OR the pinch
+  // handler below) triggers a real re-render of every page at the new
+  // target resolution, instead of CSS-stretching an already-rasterized
+  // bitmap — that CSS-stretch is what made notes look progressively worse
+  // the more someone zoomed in.
   let currentZoom = 1;
   let isRendering = false;
   let queuedZoom = null;
@@ -188,6 +190,74 @@ function openInAppViewer(pdfUrl, title) {
     zoomOutBtn.style.opacity = '1';
   }
 
+  // --- Custom pinch-to-zoom ---
+  // A two-finger pinch normally triggers the BROWSER's own native zoom,
+  // which just visually stretches whatever's already rendered — the exact
+  // same blur problem the +/- buttons used to have. `touch-action: pan-y`
+  // on the scroll container (set in the template above) tells the browser
+  // "only handle vertical scrolling here", which turns off its native
+  // pinch-zoom / double-tap-zoom for this element so we can handle pinch
+  // ourselves and feed it into the same crisp re-render pipeline the
+  // buttons use, instead of letting the OS just stretch the bitmap.
+  const pinchContainer = document.getElementById('pdf-render-container');
+  let pinchStartDistance = null;
+  let pinchStartZoom = 1;
+  let livePinchZoom = 1;
+
+  function touchDistance(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function resetPinchPreview() {
+    const wrapper = document.getElementById('pdf-pages-wrapper');
+    if (wrapper) wrapper.style.transform = '';
+  }
+
+  pinchContainer.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+      pinchStartDistance = touchDistance(e.touches);
+      pinchStartZoom = currentZoom;
+    }
+  }, { passive: true });
+
+  pinchContainer.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2 && pinchStartDistance) {
+      e.preventDefault();
+      const newDistance = touchDistance(e.touches);
+      const rawZoom = pinchStartZoom * (newDistance / pinchStartDistance);
+      livePinchZoom = Math.min(3.0, Math.max(0.75, rawZoom));
+
+      // Cheap CSS preview while fingers are actively moving — this can look
+      // slightly soft mid-gesture (there's no way around that without
+      // re-rendering every frame), but it's replaced by a full-resolution
+      // re-render the instant fingers lift, in touchend below.
+      const wrapper = document.getElementById('pdf-pages-wrapper');
+      if (wrapper) {
+        wrapper.style.transform = `scale(${livePinchZoom / currentZoom})`;
+        wrapper.style.transformOrigin = 'top center';
+      }
+    }
+  }, { passive: false });
+
+  pinchContainer.addEventListener('touchend', (e) => {
+    if (pinchStartDistance !== null && e.touches.length < 2) {
+      pinchStartDistance = null;
+      resetPinchPreview();
+
+      // Snap to the same quarter-step granularity as the +/- buttons, then
+      // do a real re-render at that zoom level so the result is fully sharp.
+      const snapped = Math.round(livePinchZoom / 0.25) * 0.25;
+      requestZoom(Math.min(3.0, Math.max(0.75, snapped)));
+    }
+  });
+
+  pinchContainer.addEventListener('touchcancel', () => {
+    pinchStartDistance = null;
+    resetPinchPreview();
+  });
+
   // 3. Dynamically load the PDF.js library
   if (typeof pdfjsLib === 'undefined') {
     const script = document.createElement('script');
@@ -218,6 +288,7 @@ function openInAppViewer(pdfUrl, title) {
       if (isClosed) return;
       pdfDoc = pdf;
       const container = document.getElementById('pdf-render-container');
+      const pagesWrapper = document.getElementById('pdf-pages-wrapper');
       const loader = document.getElementById('pdf-loading');
       if (loader) loader.remove();
 
@@ -234,7 +305,7 @@ function openInAppViewer(pdfUrl, title) {
 
       // Pre-fetch every page once and work out its "fit to container" base
       // scale up front, then do the first paint through the same code path
-      // zoom will reuse later.
+      // zoom (buttons or pinch) will reuse later.
       for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
         if (isClosed) return;
         const page = await pdf.getPage(pageNum);
@@ -259,7 +330,7 @@ function openInAppViewer(pdfUrl, title) {
         canvas.oncontextmenu = () => false;
         canvas.ondragstart = () => false; // Stops users from dragging the image to desktop
 
-        container.appendChild(canvas);
+        pagesWrapper.appendChild(canvas);
         canvasByPage.set(pageNum, canvas);
         pageObserver.observe(canvas);
       }
@@ -276,7 +347,7 @@ function openInAppViewer(pdfUrl, title) {
 
   // Renders (or re-renders) every page's canvas at baseScale * zoomValue,
   // always at full devicePixelRatio resolution. This is what actually keeps
-  // zoomed-in notes sharp, instead of CSS-stretching a lower-res bitmap.
+  // zoomed-in notes sharp, instead of stretching a lower-res bitmap.
   async function renderAllPages(zoomValue) {
     if (!pdfDoc || isClosed) return;
     const container = document.getElementById('pdf-render-container');
