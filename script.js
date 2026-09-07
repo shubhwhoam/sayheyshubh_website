@@ -110,7 +110,7 @@ function openInAppViewer(pdfUrl, title) {
       </div>
 
       <!-- PDF Rendering Container -->
-      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:block; text-align:center; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
+      <div id="pdf-render-container" style="flex:1; overflow:auto; padding: 15px; display:block; text-align:center; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y;">
          <div id="pdf-loading" style="margin-top: 50px; font-weight: bold; color: #475569; font-size: 1.1rem; display: inline-block;">
            <i class="fas fa-spinner fa-spin"></i> Loading High-Quality Notes...
          </div>
