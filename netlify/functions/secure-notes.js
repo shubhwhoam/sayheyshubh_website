@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
-const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
-const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const crypto = require('crypto');
 
 const zoologyNotes = require('./data/notes-data.json');
 const microbiologyNotes = require('./data/microbiology-notes-data.json');
@@ -23,42 +22,40 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-// Robustly handle the endpoint format
-const endpoint = process.env.B2_ENDPOINT.startsWith('https://')
-  ? process.env.B2_ENDPOINT
-  : `https://${process.env.B2_ENDPOINT}`;
+// Base URL of the Cloudflare Worker that proxies B2, e.g.
+// https://sayheyshubh-notes-proxy.<your-subdomain>.workers.dev
+const WORKER_URL = process.env.WORKER_URL;
 
-// Automatically extract the region (e.g., 'eu-central-003') from the endpoint string
-const region = process.env.B2_ENDPOINT.split('.')[1];
+// Shared secret with the Worker — used to HMAC-sign the URL so the Worker
+// can trust it was issued by this function (i.e. after auth + purchase
+// checks already passed), without the Worker needing to talk to Firestore
+// itself.
+const WORKER_SECRET = process.env.WORKER_SECRET;
 
-// Initialize Backblaze B2 Client using the S3 protocol
-const s3 = new S3Client({
-  region: region,
-  endpoint: endpoint,
-  credentials: {
-    accessKeyId: process.env.B2_KEY_ID,
-    secretAccessKey: process.env.B2_APPLICATION_KEY,
-  }
-});
-
-const B2_BUCKET = 'sayheyshubh-notes';
-
-// The signed URL only needs to live long enough for pdf.js to start fetching
-// the file right when the viewer opens — it's requested fresh on every open.
-// Keeping this short (instead of the old 1 hour) means that if someone grabs
-// the raw URL out of the browser's Network tab, it's only useful for a couple
-// of minutes rather than staying valid and downloadable for the rest of the hour.
+// The link only needs to live long enough for pdf.js to start fetching the
+// file right when the viewer opens — it's requested fresh on every open.
+// Keeping this short means that if someone grabs the URL out of the
+// browser's Network tab, it's only useful for a couple of minutes.
 const SIGNED_URL_EXPIRY_SECONDS = 180;
 
 // A real B2 object key never looks like a URL. This catches notes that
 // haven't been migrated/uploaded to B2 yet (including leftover placeholder
 // text like "YOUR_DRIVE_LINK_HERE") and fails cleanly instead of generating
-// a signed URL that will just 404 against the bucket.
+// a link that will just 404 against the bucket.
 function isValidB2Key(value) {
   if (!value || typeof value !== 'string') return false;
   if (value.startsWith('http://') || value.startsWith('https://')) return false;
   if (value.includes('YOUR_DRIVE_LINK_HERE')) return false;
   return true;
+}
+
+function buildWorkerUrl(storagePath) {
+  const exp = Math.floor(Date.now() / 1000) + SIGNED_URL_EXPIRY_SECONDS;
+  const sig = crypto.createHmac('sha256', WORKER_SECRET)
+    .update(`${storagePath}|${exp}`)
+    .digest('hex');
+  const encodedKey = encodeURIComponent(storagePath);
+  return `${WORKER_URL}/${encodedKey}?exp=${exp}&sig=${sig}`;
 }
 
 exports.handler = async (event, context) => {
@@ -92,19 +89,13 @@ exports.handler = async (event, context) => {
       return { statusCode: 403, body: JSON.stringify({ success: false, error: 'Note not purchased' }) };
     }
 
-    const command = new GetObjectCommand({
-      Bucket: B2_BUCKET,
-      Key: storagePath,
-      ResponseContentDisposition: 'inline' // Forces browser to VIEW instead of download
-    });
-
-    const signedUrl = await getSignedUrl(s3, command, { expiresIn: SIGNED_URL_EXPIRY_SECONDS });
+    const previewUrl = buildWorkerUrl(storagePath);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
         success: true,
-        previewUrl: signedUrl
+        previewUrl
       })
     };
   } catch (error) {
