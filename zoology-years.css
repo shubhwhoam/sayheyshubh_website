@@ -1,0 +1,562 @@
+/* Extracted from zoology-years.html inline <style> blocks for CWV/performance fix */
+
+/* --- MODERN ED-TECH STYLING --- */
+    body {
+      background-color: #fcfcfd;
+      font-family: 'Inter', sans-serif;
+      background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    main { flex: 1; width: 100%; }
+    footer { width: 100%; margin-top: auto; }
+
+    .notes-container { 
+      width: 100%;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 0 1rem 4rem 1rem; 
+      position: relative; 
+    }
+
+    /* Breadcrumbs */
+    .visual-breadcrumb {
+      padding: 3.5rem 0 0 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #64748b;
+    }
+    .visual-breadcrumb a {
+      color: #6366f1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .visual-breadcrumb a:hover { color: #4f46e5; text-decoration: underline; }
+    .visual-breadcrumb span { margin: 0 0.4rem; color: #cbd5e1; }
+
+    /* Directory Header */
+    .directory-header {
+      text-align: center;
+      margin: 1.5rem 0 3rem 0;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .header-tag {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #bbf7d0;
+    }
+
+    .directory-header h1 {
+      font-size: 2.8rem;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .directory-header p {
+      font-size: 1.15rem;
+      color: #475569;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Year Selection Cards (Grid) */
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .year-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .year-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.1);
+      border-color: #a7f3d0;
+    }
+
+    .year-icon {
+      width: 80px;
+      height: 80px;
+      background: #ecfdf5;
+      color: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15);
+    }
+
+    .year-card h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 0.8rem;
+    }
+
+    .sem-tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sem-tag {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .year-desc {
+      color: #64748b;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .year-btn-faux {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 1.05rem;
+    }
+
+    .year-card:hover .year-btn-faux {
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* SEO Content Section */
+    .seo-roadmap-section {
+      background: white;
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 4rem;
+    }
+
+    .seo-roadmap-section h2 {
+      font-size: 2.2rem;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .seo-roadmap-section .lead-text {
+      text-align: center;
+      color: #64748b;
+      font-size: 1.15rem;
+      max-width: 800px;
+      margin: 0 auto 3rem auto;
+      line-height: 1.7;
+    }
+
+    .syllabus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .syllabus-box {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 16px;
+      border-left: 4px solid #10b981;
+    }
+
+    .syllabus-box h3 {
+      font-size: 1.4rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .syllabus-box p {
+      color: #475569;
+      line-height: 1.7;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 0 auto 4rem auto;
+    }
+
+    .faq-section h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1e293b;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover { border-color: #cbd5e1; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.5rem;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover { color: #10b981; }
+    .faq-icon { font-size: 1.5rem; color: #10b981; font-weight: 300; transition: transform 0.3s ease; }
+    .faq-question.active .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: #f8fafc;
+      border-top: 1px solid transparent;
+    }
+
+    .faq-answer.active {
+      max-height: 9999px;
+      padding: 1.5rem;
+      border-top-color: #e2e8f0;
+    }
+
+    .faq-answer p { margin: 0 0 1rem 0; color: #475569; line-height: 1.7; font-size: 1rem; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+
+    /* Navigation Controls */
+    .navigation-controls { 
+      display: flex; 
+      justify-content: center; 
+      margin-top: 3rem; 
+    }
+    
+    .back-to-zoology-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: white;
+      color: #475569;
+      border: 2px solid #e2e8f0;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-zoology-btn:hover {
+      background: #f8fafc;
+      color: #0f172a;
+      border-color: #cbd5e1;
+      transform: translateY(-2px);
+    }
+
+    /* User Profile Styles */
+    .user-profile {
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      background: white;
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      display: none;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+    .user-profile.show { display: flex; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.9rem; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 700; color: #1e293b; }
+    .user-contact { font-size: 0.75rem; color: #64748b; }
+    .logout-btn { background: #fef2f2; color: #dc2626; border: none; padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
+    .logout-btn:hover { background: #fee2e2; }
+
+    @media (max-width: 768px) { 
+      .directory-header { padding: 3rem 1.5rem; }
+      .directory-header h1 { font-size: 2.2rem; }
+      .user-profile { 
+        position: relative; 
+        top: 0; 
+        right: 0; 
+        width: 100%; 
+        max-width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem; 
+        justify-content: space-between;
+      }
+      .seo-roadmap-section { padding: 2.5rem 1.5rem; }
+    }
+  
+    /* ==========================================================
+       PROFESSIONAL EDTECH FOOTER STYLES
+       ========================================================== */
+    .pro-footer {
+      background-color: #0b0f19;
+      color: #94a3b8;
+      padding: 5rem 0 0 0;
+      border-top: 1px solid #1e293b;
+      font-family: 'Inter', sans-serif;
+      margin-top: auto;
+    }
+    .pro-footer-container {
+      max-width: 1350px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    .pro-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.2fr 1.3fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+    }
+    /* Brand Column */
+    .pro-footer-brand .footer-logo-img {
+      max-width: 250px;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .pro-footer-brand p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin: 0 0 1.8rem 0;
+      max-width: 360px;
+    }
+    .pro-footer-socials {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .footer-social-pill {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    @media (hover: hover) {
+      .footer-social-pill:hover { background: #6366f1; color: white; transform: translateY(-3px); }
+    }
+    
+    /* Navigation & Contact Columns */
+    .pro-footer-col h3 {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: 0.5px;
+    }
+    .pro-footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .pro-footer-col ul li {
+      margin-bottom: 0.9rem;
+    }
+    
+    /* Kills any global white box hover completely + Adds Swipe */
+    .pro-footer-col ul li a {
+      display: inline-block;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    /* Minimalist Inline Contact UI - Force Transparent Backgrounds */
+    .footer-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      background: transparent !important;
+      border: none !important;
+    }
+    .footer-contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #1e293b;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .footer-contact-link {
+      display: inline-block;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    
+    @media (hover: hover) {
+      .pro-footer-col ul li a:hover { color: #6366f1; transform: translateX(4px); background: transparent !important; border: none !important; }
+      .footer-contact-row:hover .footer-contact-icon { background: #6366f1; color: white; }
+      .footer-contact-row:hover .footer-contact-link { color: #6366f1; transform: translateX(4px); }
+    }
+    
+    /* Footer Bottom Copyright Bar */
+    .pro-footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding: 1.8rem 0;
+    }
+    .pro-footer-bottom-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      max-width: 1350px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+      box-sizing: border-box;
+    }
+    .pro-footer-bottom p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .pro-footer-legal-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .pro-footer-legal-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      background: transparent !important;
+      border: none !important;
+    }
+    @media (hover: hover) {
+      .pro-footer-legal-links a:hover { color: #6366f1; background: transparent !important; border: none !important; }
+    }
+    
+    /* Mobile Responsiveness for Footer */
+    @media (max-width: 1024px) {
+      .pro-footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .pro-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .pro-footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .pro-footer-brand .footer-logo-img {
+        margin: 0 auto 1.5rem auto;
+      }
+      .pro-footer-brand p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pro-footer-socials {
+        justify-content: center;
+      }
+      .footer-contact-row {
+        justify-content: center;
+      }
+      .pro-footer-bottom-flex {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .pro-footer-legal-links {
+        justify-content: center;
+      }
+    }
