@@ -53,7 +53,10 @@
   <link rel="preload" href="attached_assets/boom.png_1753383095125.png" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://img.youtube.com">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   
@@ -182,7 +185,7 @@
     </div>
   </header>
 
-  <div class="zoology-container">
+  <main class="zoology-container">
     
     <!-- Visual Breadcrumb -->
     <nav class="visual-breadcrumb" aria-label="Breadcrumb">
@@ -211,6 +214,9 @@
     <div class="content-section" style="margin-bottom: 6rem;">
       <h2 class="section-title">Select Your Semester</h2>
       <p class="section-subtitle">Find exact syllabus-matched notes for your current academic year.</p>
+      <p class="section-subtitle" style="font-size: 0.95rem; margin-top: -1.5rem;">
+        Access unit-wise handwritten notes covering high-weightage DU subjects including <strong>Cell Biology, Non-Chordates, Comparative Anatomy, Genetics, Ecology, and Biochemistry</strong> — all mapped to the latest NEP syllabus.
+      </p>
       
       <div class="stats-grid">
         <div class="stat-item" onclick="window.location.href='zoology-first-semester'">
@@ -279,33 +285,42 @@
         <div class="video-item">
           <iframe 
             src="https://www.youtube-nocookie.com/embed/0QyVX0lVcMM" 
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/0QyVX0lVcMM?autoplay=1'><img src='https://img.youtube.com/vi/0QyVX0lVcMM/hqdefault.jpg' alt='Introduction to Ecology'><span>&#9658;</span></a>"
             title="Introduction to Ecology" 
-            loading="lazy" allowfullscreen>
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
           </iframe>
           <div class="video-info">
-            <div class="video-title">Introduction to Ecology | Semester 1 | Study Notes</div>
+            <h3 class="video-title">Introduction to Ecology | Semester 1 | Study Notes</h3>
           </div>
         </div>
 
         <div class="video-item">
           <iframe 
             src="https://www.youtube-nocookie.com/embed/wewhZlQ0IlI" 
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/wewhZlQ0IlI?autoplay=1'><img src='https://img.youtube.com/vi/wewhZlQ0IlI/hqdefault.jpg' alt='BSc Zoology First Year Survival Guide'><span>&#9658;</span></a>"
             title="BSc Zoology First Year Survival Guide" 
-            loading="lazy" allowfullscreen>
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
           </iframe>
           <div class="video-info">
-            <div class="video-title">BSc Zoology First Year Survival Guide 🎓</div>
+            <h3 class="video-title">BSc Zoology First Year Survival Guide 🎓</h3>
           </div>
         </div>
 
         <div class="video-item">
           <iframe 
             src="https://www.youtube-nocookie.com/embed/FMTwnbzEWAg" 
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/FMTwnbzEWAg?autoplay=1'><img src='https://img.youtube.com/vi/FMTwnbzEWAg/hqdefault.jpg' alt='Introduction to Non-Chordates'><span>&#9658;</span></a>"
             title="Introduction to Non-Chordates" 
-            loading="lazy" allowfullscreen>
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
           </iframe>
           <div class="video-info">
-            <div class="video-title">Introduction to Non-Chordates | Semester 1</div>
+            <h3 class="video-title">Introduction to Non-Chordates | Semester 1</h3>
           </div>
         </div>
       </div>
@@ -381,20 +396,20 @@
 
       <!-- FEATURED REVIEWS GRID -->
       <div class="modern-quote-grid">
-        <div class="quote-item">
+        <div class="quote-item" itemprop="review" itemscope itemtype="https://schema.org/Review">
           <span class="quote-mark">"</span>
-          <p>It won't be wrong to say that this site has been everything that I needed. Being a fresher tensed about the DU syllabus, this platform brought an end to all the worries.</p>
-          <h4>— Roshni Kumari</h4>
+          <p itemprop="reviewBody">It won't be wrong to say that this site has been everything that I needed. Being a fresher tensed about the DU syllabus, this platform brought an end to all the worries.</p>
+          <h3 itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">— Roshni Kumari</span></h3>
         </div>
-        <div class="quote-item">
+        <div class="quote-item" itemprop="review" itemscope itemtype="https://schema.org/Review">
           <span class="quote-mark">"</span>
-          <p>Thank you so much for being a lifesaver in my 1st year of college! Your handwritten notes and study materials were super helpful.</p>
-          <h4>— Kajal Kheria</h4>
+          <p itemprop="reviewBody">Thank you so much for being a lifesaver in my 1st year of college! Your handwritten notes and study materials were super helpful.</p>
+          <h3 itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">— Kajal Kheria</span></h3>
         </div>
-        <div class="quote-item">
+        <div class="quote-item" itemprop="review" itemscope itemtype="https://schema.org/Review">
           <span class="quote-mark">"</span>
-          <p>Honestly, these notes are a masterpiece! The way everything is organized and explained makes studying for semester exams so much easier.</p>
-          <h4>— Saniya Kain</h4>
+          <p itemprop="reviewBody">Honestly, these notes are a masterpiece! The way everything is organized and explained makes studying for semester exams so much easier.</p>
+          <h3 itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">— Saniya Kain</span></h3>
         </div>
       </div>
       
@@ -414,7 +429,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </main>
 
   <!-- Authentication Modal -->
   <div id="authModal" class="auth-modal">
@@ -1211,27 +1226,29 @@
       }
     }
 
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        currentUser = user;
-        try {
-          const deviceId = getDeviceId();
-          const userRef = db.collection('users').doc(user.uid);
-          const doc = await userRef.get();
-          
-          if (doc.exists) {
-            const data = doc.data();
-            const devices = data.devices || {};
-            if (devices[deviceId]) {
-              trackSubjectLogin(user, 'zoology');
-              updateUIForLoggedInUser(user, data);
-              return;
+    document.addEventListener('DOMContentLoaded', function() {
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          currentUser = user;
+          try {
+            const deviceId = getDeviceId();
+            const userRef = db.collection('users').doc(user.uid);
+            const doc = await userRef.get();
+            
+            if (doc.exists) {
+              const data = doc.data();
+              const devices = data.devices || {};
+              if (devices[deviceId]) {
+                trackSubjectLogin(user, 'zoology');
+                updateUIForLoggedInUser(user, data);
+                return;
+              }
             }
+          } catch (error) {
+            console.error('Authentication check failed:', error);
           }
-        } catch (error) {
-          console.error('Authentication check failed:', error);
         }
-      }
+      });
     });
 
     function updateUIForLoggedInUser(user, userData) {

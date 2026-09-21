@@ -284,6 +284,7 @@
       font-weight: 700;
       color: #1e293b;
       line-height: 1.5;
+      margin: 0;
     }
 
     /* FAQ Section Styles (De-boxed & Modern) */
@@ -430,7 +431,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .quote-item h4 {
+    .quote-item h3 {
       color: #10b981;
       font-weight: 700;
       font-size: 1rem;
