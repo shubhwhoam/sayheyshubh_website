@@ -27,10 +27,7 @@
     gtag('config', 'G-01VF0W2CD1');
   </script>
   
-  <!-- Firebase SDKs -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <!-- Firebase SDKs are now lazy-loaded — see the bootstrap script near the end of <body> -->
   
   <title>BSc Zoology Hons Notes PDF Download (DU) | Semester-wise Study Materials | SayHeyShubh</title>
   
@@ -53,12 +50,32 @@
   <link rel="preload" href="attached_assets/boom.png_1753383095125.png" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://img.youtube.com">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <!-- FontAwesome's own stylesheet doesn't set font-display, which forces a
+       brief invisible-text wait (FOIT) if the font hasn't loaded yet. These
+       @font-face overrides target the exact same font files and only add
+       font-display: swap, so icons show as blank/fallback then pop in
+       instead of blocking text render. -->
+  <style>
+    @font-face {
+      font-family: "Font Awesome 6 Free";
+      font-style: normal;
+      font-weight: 900;
+      font-display: swap;
+      src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Font Awesome 6 Brands";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2") format("woff2");
+    }
+  </style>
   
   <!-- JSON-LD Schema Markup for FAQ -->
   <script type="application/ld+json">
@@ -285,7 +302,7 @@
         <div class="video-item">
           <iframe 
             src="https://www.youtube-nocookie.com/embed/0QyVX0lVcMM" 
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/0QyVX0lVcMM?autoplay=1'><img src='https://img.youtube.com/vi/0QyVX0lVcMM/hqdefault.jpg' alt='Introduction to Ecology'><span>&#9658;</span></a>"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/0QyVX0lVcMM?autoplay=1'><img src='https://img.youtube.com/vi/0QyVX0lVcMM/mqdefault.jpg' alt='Introduction to Ecology'><span>&#9658;</span></a>"
             title="Introduction to Ecology" 
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -299,7 +316,7 @@
         <div class="video-item">
           <iframe 
             src="https://www.youtube-nocookie.com/embed/wewhZlQ0IlI" 
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/wewhZlQ0IlI?autoplay=1'><img src='https://img.youtube.com/vi/wewhZlQ0IlI/hqdefault.jpg' alt='BSc Zoology First Year Survival Guide'><span>&#9658;</span></a>"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/wewhZlQ0IlI?autoplay=1'><img src='https://img.youtube.com/vi/wewhZlQ0IlI/mqdefault.jpg' alt='BSc Zoology First Year Survival Guide'><span>&#9658;</span></a>"
             title="BSc Zoology First Year Survival Guide" 
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -313,7 +330,7 @@
         <div class="video-item">
           <iframe 
             src="https://www.youtube-nocookie.com/embed/FMTwnbzEWAg" 
-            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/FMTwnbzEWAg?autoplay=1'><img src='https://img.youtube.com/vi/FMTwnbzEWAg/hqdefault.jpg' alt='Introduction to Non-Chordates'><span>&#9658;</span></a>"
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}img{height:100%;object-fit:cover}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='https://www.youtube-nocookie.com/embed/FMTwnbzEWAg?autoplay=1'><img src='https://img.youtube.com/vi/FMTwnbzEWAg/mqdefault.jpg' alt='Introduction to Non-Chordates'><span>&#9658;</span></a>"
             title="Introduction to Non-Chordates" 
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -533,7 +550,49 @@
 
   <!-- Scripts -->
   <script defer src="script.js"></script>
-  <script defer src="firebase-config.js"></script>
+
+  <!-- Firebase is loaded lazily: only when the visitor is already logged in
+       (per the isLoggedIn flag) or the moment they open the login popup.
+       Anonymous visitors — the vast majority — never pay this cost. -->
+  <script>
+    (function() {
+      var firebasePromise = null;
+      window.loadFirebase = function() {
+        if (firebasePromise) return firebasePromise;
+        // Only warm up the connection to Firebase's auth iframe host once we
+        // actually know we need it — avoids an unused preconnect for the
+        // majority of visitors who never trigger this function.
+        var pc = document.createElement('link');
+        pc.rel = 'preconnect';
+        pc.href = 'https://sayheyshubh-7051c.firebaseapp.com';
+        document.head.appendChild(pc);
+        var sources = [
+          'https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js',
+          'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js',
+          'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js',
+          'firebase-config.js'
+        ];
+        firebasePromise = sources.reduce(function(chain, src) {
+          return chain.then(function() {
+            return new Promise(function(resolve, reject) {
+              var s = document.createElement('script');
+              s.src = src;
+              s.onload = resolve;
+              s.onerror = reject;
+              document.body.appendChild(s);
+            });
+          });
+        }, Promise.resolve());
+        return firebasePromise;
+      };
+      // Returning visitors who were logged in on a previous visit: start
+      // loading Firebase right away so their comment-form/unlock state is
+      // ready without waiting on a click.
+      if (localStorage.getItem('isLoggedIn') === 'true') {
+        window.loadFirebase();
+      }
+    })();
+  </script>
 
   <a href="https://t.me/sayheyshubh" class="doubts-btn" id="doubts-btn">💬</a>
   <div class="doubts-bubble" id="doubts-bubble">Got a question?</div>
@@ -616,19 +675,26 @@
       viewMoreBtn.addEventListener('click', loadMoreComments);
     }
 
-    // Check auth state and setup comment form
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        currentUserAuth = user;
-        await renderCommentForm(true);
-      } else {
-        currentUserAuth = null;
-        await renderCommentForm(false);
-      }
-      
-      // Load comments after auth check
-      loadComments();
-    });
+    // Check auth state and setup comment form.
+    // Skip Firebase entirely for visitors who were never logged in (the vast
+    // majority) — we already know the answer from localStorage, for free.
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      loadFirebase().then(() => {
+        auth.onAuthStateChanged(async (user) => {
+          if (user) {
+            currentUserAuth = user;
+            await renderCommentForm(true);
+          } else {
+            currentUserAuth = null;
+            await renderCommentForm(false);
+          }
+          loadComments();
+        });
+      });
+    } else {
+      currentUserAuth = null;
+      renderCommentForm(false).then(loadComments);
+    }
   });
 
   // Render comment form based on auth state
@@ -1175,6 +1241,9 @@
 
     function showAuthPopup() {
       document.getElementById('authModal').classList.add('show');
+      // Start loading Firebase the moment the user shows intent to log in,
+      // so it's ready (or nearly ready) by the time they tap "Sign in with Google".
+      loadFirebase();
     }
 
     function hideAuthPopup() {
@@ -1190,6 +1259,7 @@
     async function signInWithGoogle() {
       showLoading();
       try {
+        await loadFirebase();
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await auth.signInWithPopup(provider);
         const user = result.user;
@@ -1226,54 +1296,31 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          currentUser = user;
-          try {
-            const deviceId = getDeviceId();
-            const userRef = db.collection('users').doc(user.uid);
-            const doc = await userRef.get();
-            
-            if (doc.exists) {
-              const data = doc.data();
-              const devices = data.devices || {};
-              if (devices[deviceId]) {
-                trackSubjectLogin(user, 'zoology');
-                updateUIForLoggedInUser(user, data);
-                return;
-              }
-            }
-          } catch (error) {
-            console.error('Authentication check failed:', error);
-          }
-        }
-      });
-    });
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      loadFirebase().then(() => {
+        auth.onAuthStateChanged(async (user) => {
+          if (user) {
+            currentUser = user;
+            try {
+              const deviceId = getDeviceId();
+              const userRef = db.collection('users').doc(user.uid);
+              const doc = await userRef.get();
 
-    function updateUIForLoggedInUser(user, userData) {
-      const actionButtons = document.querySelector('.action-buttons');
-      if (actionButtons && userData && !document.querySelector('.welcome-message')) {
-        const welcomeMsg = document.createElement('div');
-        welcomeMsg.className = 'welcome-message';
-        welcomeMsg.style.cssText = `
-          background: white;
-          color: #10b981;
-          padding: 0.8rem 1.5rem;
-          border-radius: 50px;
-          margin-top: 1.5rem;
-          border: 1px solid #a7f3d0;
-          font-weight: 700;
-          font-size: 0.95rem;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-          display: inline-block;
-        `;
-        welcomeMsg.innerHTML = `👋 Hello, ${userData.name || user.displayName || 'User'}! Welcome back.`;
-        actionButtons.parentNode.insertBefore(welcomeMsg, actionButtons.nextSibling);
-      }
-      loadUserProfile();
+              if (doc.exists) {
+                const data = doc.data();
+                const devices = data.devices || {};
+                if (devices[deviceId]) {
+                  trackSubjectLogin(user, 'zoology');
+                }
+              }
+            } catch (error) {
+              console.error('Authentication check failed:', error);
+            }
+          }
+        });
+      });
     }
-    
+
     function loadUserProfile() {
       const userName = localStorage.getItem('userName');
       const userEmail = localStorage.getItem('userEmail');
@@ -1300,6 +1347,7 @@
 
     async function logout() {
       try {
+        await loadFirebase();
         await auth.signOut();
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userId');
