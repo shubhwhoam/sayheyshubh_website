@@ -1,5 +1,16 @@
 /* Extracted from zoology.html inline <style> blocks for CWV/performance fix */
 
+/* Inline SVG icons (replacing FontAwesome's webfont) size themselves to the
+   font-size of whatever they sit inside, exactly like an icon-font glyph did. */
+.icon-svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+
 /* --- MODERN ED-TECH FACELIFT --- */
     body {
       background-color: #fcfcfd;
