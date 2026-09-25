@@ -76,21 +76,28 @@ exports.handler = async (event) => {
     });
 
     // Get all replies for these comments
-    // Firestore 'in' operator has a limit of 10 values, so batch the queries
+    // Firestore 'in' operator has a limit of 10 values, so batch the queries.
+    // Run the batches in parallel instead of one-at-a-time — with up to 500
+    // top-level comments this was up to 50 sequential round trips, which is
+    // almost certainly what was causing the timeouts.
     const commentIds = topComments.map(comment => comment.id);
     let replies = [];
 
     if (commentIds.length > 0) {
-      // Split comment IDs into chunks of 10 (Firestore limit)
       const chunkSize = 10;
+      const chunks = [];
       for (let i = 0; i < commentIds.length; i += chunkSize) {
-        const chunk = commentIds.slice(i, i + chunkSize);
+        chunks.push(commentIds.slice(i, i + chunkSize));
+      }
 
-        const repliesRef = db.collection('comments')
+      const chunkResults = await Promise.all(chunks.map(chunk =>
+        db.collection('comments')
           .where('parentId', 'in', chunk)
-          .orderBy('createdAt', 'asc');
+          .orderBy('createdAt', 'asc')
+          .get()
+      ));
 
-        const repliesSnapshot = await repliesRef.get();
+      chunkResults.forEach(repliesSnapshot => {
         repliesSnapshot.forEach(doc => {
           replies.push({
             id: doc.id,
@@ -102,7 +109,7 @@ exports.handler = async (event) => {
             parent_id: doc.data().parentId
           });
         });
-      }
+      });
     }
 
     // Organize replies under their parent comments
@@ -111,18 +118,24 @@ exports.handler = async (event) => {
       replies: replies.filter(reply => reply.parent_id === comment.id)
     }));
 
-    // Get total count of top-level comments
-    const countSnapshot = await db.collection('comments')
-      .where('page', '==', page)
-      .where('parentId', '==', null)
-      .count()
-      .get();
+    // Get total count of top-level comments, and the rating aggregate, in
+    // parallel rather than one after another. The rating query only pulls
+    // the 'rating' field (not full comment bodies/names/emails), since
+    // that's all this aggregate needs.
+    const [countSnapshot, allForPage] = await Promise.all([
+      db.collection('comments')
+        .where('page', '==', page)
+        .where('parentId', '==', null)
+        .count()
+        .get(),
+      db.collection('comments')
+        .where('page', '==', page)
+        .where('parentId', '==', null)
+        .select('rating')
+        .get()
+    ]);
 
     // Compute a real aggregate rating from actual rated comments (no fabricated numbers)
-    const allForPage = await db.collection('comments')
-      .where('page', '==', page)
-      .where('parentId', '==', null)
-      .get();
     let ratingSum = 0;
     let ratingCount = 0;
     allForPage.forEach(doc => {
