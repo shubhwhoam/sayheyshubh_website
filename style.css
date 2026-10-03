@@ -2241,53 +2241,5 @@ li a:hover {
   top: 1px;
 }
 
-/* ============================================================
-   SHARED ACROSS EVERY PAGE (moved out of per-page CSS files,
-   where this exact same content had been duplicated)
-   ============================================================ */
-
-/* Inline SVG icons (replacing FontAwesome's webfont). Pages still on
-   FontAwesome are unaffected; migrated pages use this directly. */
-.icon-svg {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  display: inline-block;
-  vertical-align: -0.125em;
-  flex-shrink: 0;
-}
-/* A few classes (originally meant to size the circular *container* an icon
-   font sat inside) also declare width/height. Since they're now applied
-   directly to the SVG graphic itself, those would override the sizing
-   above and make the icon fill the whole badge. This restores correct
-   proportional sizing without touching those classes' other properties
-   (background, color, centering, etc). Extend this list as new pages are
-   migrated and introduce new combined classes. */
-.icon-svg.footer-contact-icon,
-.icon-svg.footer-social-pill,
-.icon-svg.stat-icon,
-.icon-svg.proof-icon,
-.icon-svg.feature-icon-wrapper {
-  width: 1em;
-  height: 1em;
-}
-
-/* Cookie consent banner */
-.cookie-banner {
-  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #ffffff; color: #333;
-  padding: 14px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex;
-  justify-content: space-between; align-items: center; gap: 15px; font-size: 14px; max-width: 600px; width: 90%;
-  z-index: 1000; transition: opacity 0.3s ease-in-out;
-}
-.cookie-banner a { color: #6366f1; text-decoration: none; font-weight: 500; }
-.cookie-buttons { display: flex; align-items: center; gap: 10px; }
-.accept-btn { background: #6366f1; color: white; padding: 6px 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; transition: background 0.3s ease; }
-.close-btn { font-size: 20px; cursor: pointer; color: #777; transition: color 0.3s ease; }
-.cookie-banner.hidden { opacity: 0; pointer-events: none; }
-@media (hover: hover) {
-  .accept-btn:hover { background: #4f46e5; }
-  .close-btn:hover { color: #333; }
-}
-
 
   
