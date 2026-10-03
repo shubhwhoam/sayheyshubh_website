@@ -24,9 +24,489 @@
 <!-- Google Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<!-- FontAwesome removed: every icon on this page is now an inline SVG
+     (sourced from FontAwesome's own free icon set, so they're pixel-identical) —
+     this drops the cdnjs.cloudflare.com font-file dependency entirely. -->
 <link rel="stylesheet" href="style.css" />
+<style>
+:root {
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --dark-text: #1e293b;
+  --body-light: #fcfcfd;
+  --card-border: #e2e8f0;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--body-light);
+  color: var(--dark-text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hero {
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #ffffff, transparent);
+}
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 3rem 2rem 4rem 2rem; 
+  max-width: 1350px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.hero-text {
+  max-width: 650px;
+}
+
+.trust-badge-container {
+  display: inline-flex;
+  align-items: center;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+}
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #10b981;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.trust-badge-text {
+  color: #065f46;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+.hero-text h1 {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+.hero-text h1 span {
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding-right: 0.1em;
+}
+.hero-text p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #475569;
+  margin: 0 0 2.5rem 0;
+}
+
+.quick-jump-nav {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.quick-jump-nav::-webkit-scrollbar { display: none; }
+.qj-pill {
+  white-space: nowrap;
+  padding: 0.6rem 1.2rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+@media (hover: hover) {
+  .qj-pill:hover {
+    background: #f8fafc;
+    color: #0f172a;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+  }
+}
+
+
+.hero-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  position: relative;
+}
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(99,102,241,0) 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+.hero-image-wrapper img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  border: 8px solid white;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.founder-badge {
+  background: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  color: #334155;
+  font-size: 0.95rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (hover: hover) {
+  .hero-image-wrapper:hover { transform: translateY(-5px); }
+  .hero-image-wrapper:hover img { box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+  .hero-image-wrapper:hover .founder-badge { box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+}
+
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+.btn-action.primary { background: var(--primary-gradient); color: white; }
+.btn-action.secondary { background: white; color: #4f46e5; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+
+@media (hover: hover) {
+  .btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+  }
+}
+
+
+.proof-section {
+  max-width: 1200px;
+  margin: 5rem auto 7rem auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+.proof-text {
+  flex: 1;
+}
+.proof-text h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+.proof-text p {
+  color: #475569;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.proof-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.proof-feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.proof-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+.proof-feature-list h3 { margin: 0 0 0.3rem 0; color: #1e293b; font-size: 1.1rem; }
+.proof-feature-list p { margin: 0; font-size: 0.95rem; color: #64748b; }
+
+
+.proof-visuals {
+  flex: 1;
+  position: relative;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+.pdf-mock-card {
+  position: absolute;
+  width: 290px;
+  height: 380px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  border: 1px solid #cbd5e1;
+  padding: 2.5rem 1.8rem;
+  
+  background-image: repeating-linear-gradient(transparent, transparent 27px, #e2e8f0 28px);
+  background-attachment: local;
+  background-size: 100% 28px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mock-1 { transform: rotate(-6deg) translateX(-50px) translateZ(-40px); z-index: 1; }
+
+.mock-2 { transform: rotate(5deg) translateX(40px) translateY(20px) translateZ(0); z-index: 2; }
+
+@media (hover: hover) {
+  
+  .proof-visuals:hover .mock-1 { transform: rotate(-10deg) translateX(-80px) translateZ(-40px); }
+  .proof-visuals:hover .mock-2 { transform: rotate(8deg) translateX(60px) translateY(10px) translateZ(30px); }
+  
+  
+  .feature-icon-wrapper { transition: all 0.3s ease; }
+  .feature-box:hover .feature-icon-wrapper { transform: scale(1.1) rotate(-5deg); }
+}
+
+
+.mock-hw-title {
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  border-bottom: 2px solid #ef4444;
+  display: inline-block;
+}
+.mock-line {
+  height: 12px;
+  background: #cbd5e1;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.mock-line.short { width: 65%; }
+.mock-line.medium { width: 85%; }
+.mock-line.highlight {
+  background: #fef08a; 
+  opacity: 1;
+  width: 90%;
+  border-radius: 4px;
+}
+.mock-diagram-box {
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  height: 110px;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  position: relative;
+}
+.mock-diagram-box i {
+  font-size: 2.5rem;
+  color: #64748b;
+}
+.mock-pyq-stamp {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #ef4444;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transform: rotate(10deg);
+  border: 1.5px solid #ef4444;
+  padding: 2px 8px;
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+
+.funnel-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+@media (hover: hover) {
+  .funnel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  }
+}
+.funnel-card.border-blue { border-left: 5px solid #6366f1; }
+.funnel-card.border-green { border-left: 5px solid #10b981; }
+.funnel-card.border-orange { border-left: 5px solid #f59e0b; }
+
+.funnel-icon-pill {
+  width: 100%;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+.funnel-icon-pill.bg-blue { background: #e0e7ff; color: #4f46e5; }
+.funnel-icon-pill.bg-green { background: #dcfce7; color: #16a34a; }
+.funnel-icon-pill.bg-orange { background: #ffedd5; color: #ea580c; }
+
+.funnel-card h3 {
+  font-size: 1.25rem;
+  color: #0f172a;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+.funnel-card p {
+  color: #475569;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+
+.channel-preview {
+  padding: 0 0 0 1.5rem; 
+  border-left: 4px solid #ef4444; 
+  margin-bottom: 3rem;
+}
+.channel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.yt-video-card {
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+.yt-thumbnail-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.yt-thumbnail-wrapper img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.yt-play-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.yt-play-overlay i {
+  color: white; font-size: 3rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+@media (hover: hover) {
+  .yt-video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+    border-color: #cbd5e1;
+  }
+  .yt-video-card:hover .yt-play-overlay { opacity: 1; }
+  .yt-video-card:hover .yt-thumbnail-wrapper img { transform: scale(1.05); }
+}
+
+
+@media (max-width: 1024px) {
+  .proof-section { flex-direction: column; text-align: center; }
+  .proof-feature-list li { text-align: left; }
+  .proof-visuals { margin-top: 2rem; width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+    padding: 3rem 1.2rem;
+    text-align: center;
+  }
+  .hero-text { max-width: 100%; }
+  .trust-badge-container { margin: 0 auto 1.5rem auto; }
+  .hero-text h1 { font-size: 2.5rem; }
+  .hero-text p { font-size: 1rem; }
+  .hero-ctas { justify-content: center; }
+  .hero-image-wrapper img { width: 250px; height: 250px; }
+  .hero-image-wrapper::before { width: 280px; height: 280px; }
+  .btn-action { width: 100%; justify-content: center; box-sizing: border-box; }
+  .quick-jump-nav { justify-content: flex-start; padding-bottom: 1rem; }
+  .columns, .content-grid { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
+  .proof-text h2 { font-size: 2rem; }
+  
+  
+  .proof-visuals {
+    min-height: 450px; 
+    height: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .mock-1 { transform: rotate(-4deg) translateX(-30px); }
+  .mock-2 { transform: rotate(4deg) translateX(30px) translateY(10px); }
+}
+</style>
 <link rel="icon" type="image/png" href="attached_assets/boom.png_1753383095125.png" sizes="192x192">
 <!-- Google Tag Manager (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-01VF0W2CD1"></script>
@@ -126,694 +606,6 @@ gtag('config', 'G-01VF0W2CD1');
   ]
 }
 </script>
-<style>
-/* Premium Modern Clean Global Styles & Mobile Overrides */
-:root {
-  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  --dark-text: #1e293b;
-  --body-light: #fcfcfd;
-  --card-border: #e2e8f0;
-}
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--body-light);
-  color: var(--dark-text);
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-/* Hero Section Fixes for Full Desktop Width & Edge Alignment */
-.hero {
-  width: 100%;
-  max-width: 100% !important;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #ffffff, transparent);
-}
-.hero-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  padding: 3rem 2rem 4rem 2rem; 
-  max-width: 1350px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0 auto;
-}
-.hero-text {
-  max-width: 650px;
-}
-/* Trust Badge */
-.trust-badge-container {
-  display: inline-flex;
-  align-items: center;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  margin-bottom: 1.5rem;
-}
-.pulse-dot {
-  width: 10px;
-  height: 10px;
-  background-color: #10b981;
-  border-radius: 50%;
-  margin-right: 10px;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  animation: pulse-green 2s infinite;
-}
-@keyframes pulse-green {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-.trust-badge-text {
-  color: #065f46;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-}
-.hero-text h1 {
-  font-size: 3.6rem;
-  font-weight: 800;
-  line-height: 1.15;
-  color: #0f172a;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-}
-.hero-text h1 span {
-  background: linear-gradient(45deg, #6366f1, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  padding-right: 0.1em;
-}
-.hero-text p {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: #475569;
-  margin: 0 0 2.5rem 0;
-}
-/* Quick Jump Mobile Menu */
-.quick-jump-nav {
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 2.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.quick-jump-nav::-webkit-scrollbar { display: none; }
-.qj-pill {
-  white-space: nowrap;
-  padding: 0.6rem 1.2rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #475569;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-}
-@media (hover: hover) {
-  .qj-pill:hover {
-    background: #f8fafc;
-    color: #0f172a;
-    border-color: #cbd5e1;
-    transform: translateY(-2px);
-  }
-}
-
-/* Interactive Hover Group for Image & Badge */
-.hero-image-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
-  position: relative;
-}
-.hero-image-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 40%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 350px; height: 350px;
-  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(99,102,241,0) 70%);
-  border-radius: 50%;
-  z-index: -1;
-}
-.hero-image-wrapper img {
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-  border: 8px solid white;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.founder-badge {
-  background: white;
-  padding: 0.6rem 1.4rem;
-  border-radius: 50px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-  border: 1px solid #e2e8f0;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 600;
-  color: #334155;
-  font-size: 0.95rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-@media (hover: hover) {
-  .hero-image-wrapper:hover { transform: translateY(-5px); }
-  .hero-image-wrapper:hover img { box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
-  .hero-image-wrapper:hover .founder-badge { box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-}
-
-/* Utility Component Optimization for Buttons */
-.btn-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2.2rem;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.05rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
-}
-.btn-action.primary { background: var(--primary-gradient); color: white; }
-.btn-action.secondary { background: white; color: #4f46e5; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-
-@media (hover: hover) {
-  .btn-action:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-  }
-}
-
-/* =========================================
-   PROOF OF QUALITY SECTION (UI MOCKUP)
-   ========================================= */
-.proof-section {
-  max-width: 1200px;
-  margin: 5rem auto 7rem auto;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  gap: 4rem;
-}
-.proof-text {
-  flex: 1;
-}
-.proof-text h2 {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 1.5rem;
-}
-.proof-text p {
-  color: #475569;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-.proof-feature-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.proof-feature-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.proof-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: #eef2ff;
-  color: #4f46e5;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  font-size: 1.1rem;
-}
-.proof-feature-list h4 { margin: 0 0 0.3rem 0; color: #1e293b; font-size: 1.1rem; }
-.proof-feature-list p { margin: 0; font-size: 0.95rem; color: #64748b; }
-
-/* The 3D CSS overlapping note cards */
-.proof-visuals {
-  flex: 1;
-  position: relative;
-  height: 420px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
-}
-.pdf-mock-card {
-  position: absolute;
-  width: 290px;
-  height: 380px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-  border: 1px solid #cbd5e1;
-  padding: 2.5rem 1.8rem;
-  /* Genuine lined paper effect */
-  background-image: repeating-linear-gradient(transparent, transparent 27px, #e2e8f0 28px);
-  background-attachment: local;
-  background-size: 100% 28px;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-/* Card 1: Placed behind */
-.mock-1 { transform: rotate(-6deg) translateX(-50px) translateZ(-40px); z-index: 1; }
-/* Card 2: Placed in front */
-.mock-2 { transform: rotate(5deg) translateX(40px) translateY(20px) translateZ(0); z-index: 2; }
-
-@media (hover: hover) {
-  /* Hover effect to spread them out */
-  .proof-visuals:hover .mock-1 { transform: rotate(-10deg) translateX(-80px) translateZ(-40px); }
-  .proof-visuals:hover .mock-2 { transform: rotate(8deg) translateX(60px) translateY(10px) translateZ(30px); }
-  
-  /* Enhancing Feature Boxes (Micro-interactions) */
-  .feature-icon-wrapper { transition: all 0.3s ease; }
-  .feature-box:hover .feature-icon-wrapper { transform: scale(1.1) rotate(-5deg); }
-}
-
-/* Simulated Note Content */
-.mock-hw-title {
-  font-family: 'Caveat', cursive, sans-serif;
-  font-size: 1.8rem;
-  color: #1e293b;
-  margin: 0 0 1rem 0;
-  line-height: 1.2;
-  border-bottom: 2px solid #ef4444;
-  display: inline-block;
-}
-.mock-line {
-  height: 12px;
-  background: #cbd5e1;
-  border-radius: 6px;
-  margin-bottom: 16px;
-  opacity: 0.6;
-}
-.mock-line.short { width: 65%; }
-.mock-line.medium { width: 85%; }
-.mock-line.highlight {
-  background: #fef08a; /* Yellow highlighter */
-  opacity: 1;
-  width: 90%;
-  border-radius: 4px;
-}
-.mock-diagram-box {
-  border: 2px solid #94a3b8;
-  border-radius: 8px;
-  height: 110px;
-  margin: 1.5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8fafc;
-  position: relative;
-}
-.mock-diagram-box i {
-  font-size: 2.5rem;
-  color: #64748b;
-}
-.mock-pyq-stamp {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: #ef4444;
-  font-family: 'Caveat', cursive, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  transform: rotate(10deg);
-  border: 1.5px solid #ef4444;
-  padding: 2px 8px;
-  border-radius: 4px;
-  opacity: 0.85;
-}
-
-/* =========================================
-   NEW SMART STUDY FUNNEL UI 
-   ========================================= */
-.funnel-card {
-  background: white;
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-@media (hover: hover) {
-  .funnel-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-  }
-}
-.funnel-card.border-blue { border-left: 5px solid #6366f1; }
-.funnel-card.border-green { border-left: 5px solid #10b981; }
-.funnel-card.border-orange { border-left: 5px solid #f59e0b; }
-
-.funnel-icon-pill {
-  width: 100%;
-  height: 60px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  padding: 0 1.5rem;
-  margin-bottom: 1.5rem;
-  font-size: 1.4rem;
-}
-.funnel-icon-pill.bg-blue { background: #e0e7ff; color: #4f46e5; }
-.funnel-icon-pill.bg-green { background: #dcfce7; color: #16a34a; }
-.funnel-icon-pill.bg-orange { background: #ffedd5; color: #ea580c; }
-
-.funnel-card h3 {
-  font-size: 1.25rem;
-  color: #0f172a;
-  margin: 0 0 1rem 0;
-  font-weight: 700;
-}
-.funnel-card p {
-  color: #475569;
-  font-size: 0.95rem;
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* =========================================
-   YOUTUBE SECTION UI ENHANCEMENT
-   ========================================= */
-.channel-preview {
-  padding: 0 0 0 1.5rem; 
-  border-left: 4px solid #ef4444; 
-  margin-bottom: 3rem;
-}
-.channel-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.yt-video-card {
-  text-decoration: none;
-  color: inherit;
-  background: white;
-  padding: 1rem;
-  border-radius: 16px;
-  border: 1px solid var(--card-border);
-  display: block;
-  text-align: left;
-  transition: all 0.3s ease;
-}
-.yt-thumbnail-wrapper {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-.yt-thumbnail-wrapper img {
-  width: 100%;
-  display: block;
-  transition: transform 0.3s ease;
-}
-.yt-play-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.2);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.3s ease;
-}
-.yt-play-overlay i {
-  color: white; font-size: 3rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-}
-
-@media (hover: hover) {
-  .yt-video-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.05);
-    border-color: #cbd5e1;
-  }
-  .yt-video-card:hover .yt-play-overlay { opacity: 1; }
-  .yt-video-card:hover .yt-thumbnail-wrapper img { transform: scale(1.05); }
-}
-
-/* Core Mobile-First Flex & Grid Refinement */
-@media (max-width: 1024px) {
-  .proof-section { flex-direction: column; text-align: center; }
-  .proof-feature-list li { text-align: left; }
-  .proof-visuals { margin-top: 2rem; width: 100%; }
-}
-
-@media (max-width: 768px) {
-  .hero-inner {
-    flex-direction: column-reverse;
-    padding: 3rem 1.2rem;
-    text-align: center;
-  }
-  .hero-text { max-width: 100%; }
-  .trust-badge-container { margin: 0 auto 1.5rem auto; }
-  .hero-text h1 { font-size: 2.5rem; }
-  .hero-text p { font-size: 1rem; }
-  .hero-ctas { justify-content: center; }
-  .hero-image-wrapper img { width: 250px; height: 250px; }
-  .hero-image-wrapper::before { width: 280px; height: 280px; }
-  .btn-action { width: 100%; justify-content: center; box-sizing: border-box; }
-  .quick-jump-nav { justify-content: flex-start; padding-bottom: 1rem; }
-  .columns, .content-grid { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
-  .proof-text h2 { font-size: 2rem; }
-  
-  /* Fixing Proof Section Overlap on Mobile explicitly */
-  .proof-visuals {
-    min-height: 450px; /* Guarantees the cards won't spill out */
-    height: auto;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  .mock-1 { transform: rotate(-4deg) translateX(-30px); }
-  .mock-2 { transform: rotate(4deg) translateX(30px) translateY(10px); }
-}
-
-/* ==========================================================
-   PROFESSIONAL EDTECH FOOTER STYLES
-   ========================================================== */
-.pro-footer {
-  background-color: #0b0f19;
-  color: #94a3b8;
-  padding: 5rem 0 0 0;
-  border-top: 1px solid #1e293b;
-  font-family: 'Inter', sans-serif;
-  margin-top: auto;
-}
-.pro-footer-container {
-  max-width: 1350px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-}
-.pro-footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1.2fr 1.3fr;
-  gap: 3rem;
-  padding-bottom: 4rem;
-}
-/* Brand Column */
-.pro-footer-brand .footer-logo-img {
-  max-width: 250px;
-  display: block;
-  margin-bottom: 1.5rem;
-}
-.pro-footer-brand p {
-  color: #94a3b8;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin: 0 0 1.8rem 0;
-  max-width: 360px;
-}
-.pro-footer-socials {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-}
-.footer-social-pill {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #1e293b;
-  color: #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-@media (hover: hover) {
-  .footer-social-pill:hover { background: #6366f1; color: white; transform: translateY(-3px); }
-}
-
-/* Navigation & Contact Columns */
-.pro-footer-col h3 {
-  color: #ffffff;
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin: 0 0 1.5rem 0;
-  letter-spacing: 0.5px;
-}
-.pro-footer-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.pro-footer-col ul li {
-  margin-bottom: 0.9rem;
-}
-
-/* Kills any global white box hover completely + Adds Swipe */
-.pro-footer-col ul li a {
-  display: inline-block;
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  background: transparent !important;
-  border: none !important;
-}
-
-/* Minimalist Inline Contact UI - Force Transparent Backgrounds */
-.footer-contact-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
-  background: transparent !important;
-  border: none !important;
-}
-.footer-contact-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #1e293b;
-  color: #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-.footer-contact-link {
-  display: inline-block;
-  color: #94a3b8;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  background: transparent !important;
-  border: none !important;
-}
-
-@media (hover: hover) {
-  .pro-footer-col ul li a:hover { color: #6366f1; transform: translateX(4px); background: transparent !important; border: none !important; }
-  .footer-contact-row:hover .footer-contact-icon { background: #6366f1; color: white; }
-  .footer-contact-row:hover .footer-contact-link { color: #6366f1; transform: translateX(4px); }
-}
-
-/* Footer Bottom Copyright Bar */
-.pro-footer-bottom {
-  border-top: 1px solid #1e293b;
-  padding: 1.8rem 0;
-}
-.pro-footer-bottom-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  max-width: 1350px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 2rem;
-  box-sizing: border-box;
-}
-.pro-footer-bottom p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #64748b;
-}
-.pro-footer-legal-links {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-.pro-footer-legal-links a {
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  background: transparent !important;
-  border: none !important;
-}
-@media (hover: hover) {
-  .pro-footer-legal-links a:hover { color: #6366f1; background: transparent !important; border: none !important; }
-}
-
-/* Mobile Responsiveness for Footer */
-@media (max-width: 1024px) {
-  .pro-footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-  }
-}
-@media (max-width: 768px) {
-  .pro-footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    text-align: center;
-  }
-  .pro-footer-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .pro-footer-brand .footer-logo-img {
-    margin: 0 auto 1.5rem auto;
-  }
-  .pro-footer-brand p {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .pro-footer-socials {
-    justify-content: center;
-  }
-  .footer-contact-row {
-    justify-content: center;
-  }
-  .pro-footer-bottom-flex {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-  .pro-footer-legal-links {
-    justify-content: center;
-  }
-}
-</style>
 </head>
 <body>
 <!-- Consistent Header Nav Architecture -->
@@ -822,7 +614,7 @@ body {
 <div class="logo-section">
 <a href="index" class="logo-link">
 <div class="logo">
-<img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh - Delhi University Dynamic Learning Hub">
+<img src="attached_assets/mainlogo_1753383095126.png" alt="SayHeyShubh - Delhi University Dynamic Learning Hub" width="282" height="80">
 </div>
 </a>
 </div>
@@ -843,6 +635,7 @@ body {
 </div>
 </header>
 
+<main>
 <!-- Premium Core Hero Section -->
 <section class="hero">
 <div class="hero-inner">
@@ -858,8 +651,8 @@ body {
 </h1>
 <p>What started as a single student's handwritten Zoology notes is transforming into an all-in-one academic ecosystem for Delhi University undergrads. Access comprehensive semester-wise notes, cross-verified practical manuals, and targeted previous year question configurations.</p>
 <div class="hero-ctas" style="display:flex; gap:1rem; flex-wrap:wrap;">
-<a href="notes" class="btn-action primary"><i class="fa-solid fa-book-open"></i> Explore Notes</a>
-<a href="community" class="btn-action secondary"><i class="fa-solid fa-users"></i> Meet the Community</a>
+<a href="notes" class="btn-action primary"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M256 141.3l0 309.3 .5-.2C311.1 427.7 369.7 416 428.8 416l19.2 0 0-320-19.2 0c-42.2 0-84.1 8.4-123.1 24.6-16.8 7-33.4 13.9-49.7 20.7zM230.9 61.5L256 72 281.1 61.5C327.9 42 378.1 32 428.8 32L464 32c26.5 0 48 21.5 48 48l0 352c0 26.5-21.5 48-48 48l-35.2 0c-50.7 0-100.9 10-147.7 29.5l-12.8 5.3c-7.9 3.3-16.7 3.3-24.6 0l-12.8-5.3C184.1 490 133.9 480 83.2 480L48 480c-26.5 0-48-21.5-48-48L0 80C0 53.5 21.5 32 48 32l35.2 0c50.7 0 100.9 10 147.7 29.5z"/></svg> Explore Notes</a>
+<a href="community" class="btn-action secondary"><svg class="icon-svg" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144zM0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4-32.9 36.8-52.9 85.4-52.9 138.6l0 16c0 11.4 2.4 22.2 6.7 32L32 480c-17.7 0-32-14.3-32-32l0-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32l0-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128l0 32c0 17.7-14.3 32-32 32l-86.7 0zM472 160a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zM160 432c0-88.4 71.6-160 160-160s160 71.6 160 160l0 16c0 17.7-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32l0-16z"/></svg> Meet the Community</a>
 </div>
 
 <!-- NEW: Mobile Quick Jump Menu -->
@@ -873,9 +666,9 @@ body {
 </div>
 <!-- Wrapped Photo & Badge for unified hover interaction -->
 <div class="hero-image-wrapper">
-<img src="attached_assets/shubham_1753383095126.jpg" alt="Shubham Kumar - Founder of SayHeyShubh">
+<img src="attached_assets/shubham_1753383095126.jpg" alt="Shubham Kumar - Founder of SayHeyShubh" width="320" height="320">
 <div class="founder-badge">
-<i class="fa-solid fa-check-circle" style="color: #10b981;"></i> Shubham Kumar • Founder
+<svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false" style="color: #10b981;"><path fill="currentColor" d="M256 512a256 256 0 1 1 0-512 256 256 0 1 1 0 512zM374 145.7c-10.7-7.8-25.7-5.4-33.5 5.3L221.1 315.2 169 263.1c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c5 5 11.8 7.5 18.8 7s13.4-4.1 17.5-9.8L379.3 179.2c7.8-10.7 5.4-25.7-5.3-33.5z"/></svg> Shubham Kumar • Founder
 </div>
 </div>
 </div>
@@ -888,23 +681,23 @@ body {
     <p>Our notes aren't just blocks of text. They are engineered specifically for Delhi University exam formats to help you write structured answers that score 9+ CGPA.</p>
     <ul class="proof-feature-list">
       <li>
-        <div class="proof-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="proof-icon"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M368.5 18.3l-50.1 50.1 125.3 125.3 50.1-50.1c21.9-21.9 21.9-57.3 0-79.2L447.7 18.3c-21.9-21.9-57.3-21.9-79.2 0zM279.3 97.2l-.5 .1-144.1 43.2c-19.9 6-35.7 21.2-42.3 41L3.8 445.8c-2.9 8.7-1.9 18.2 2.5 26L161.7 316.4c-1.1-4-1.6-8.1-1.6-12.4 0-26.5 21.5-48 48-48s48 21.5 48 48-21.5 48-48 48c-4.3 0-8.5-.6-12.4-1.6L40.3 505.7c7.8 4.4 17.2 5.4 26 2.5l264.3-88.6c19.7-6.6 35-22.4 41-42.3l43.2-144.1 .1-.5-135.5-135.5z"/></svg></div>
         <div>
-          <h4>Clean, Clear Handwriting</h4>
+          <h3>Clean, Clear Handwriting</h3>
           <p>Scanned in high-resolution directly from the notebooks of DU toppers. No illegible scribbles.</p>
         </div>
       </li>
       <li>
-        <div class="proof-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <div class="proof-icon"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 80C0 53.5 21.5 32 48 32l96 0c26.5 0 48 21.5 48 48l0 16 128 0 0-16c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-16-128 0 0 16c0 7.3-1.7 14.3-4.6 20.5l68.6 91.5 80 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96c0-7.3 1.7-14.3 4.6-20.5L128 224 48 224c-26.5 0-48-21.5-48-48L0 80z"/></svg></div>
         <div>
-          <h4>Flowcharts & Labeled Diagrams</h4>
+          <h3>Flowcharts & Labeled Diagrams</h3>
           <p>Complex biological processes broken down into visual flowcharts that examiners love to see.</p>
         </div>
       </li>
       <li>
-        <div class="proof-icon"><i class="fa-solid fa-bullseye" style="color: #ea580c;"></i></div>
+        <div class="proof-icon"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false" style="color: #ea580c;"><path fill="currentColor" d="M448 256a192 192 0 1 0 -384 0 192 192 0 1 0 384 0zM0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256 80a80 80 0 1 0 0-160 80 80 0 1 0 0 160zm0-224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zM224 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg></div>
         <div>
-          <h4>PYQ Highlights</h4>
+          <h3>PYQ Highlights</h3>
           <p>Topics that appeared in past DU exams are explicitly tagged so you know exactly what to prioritize.</p>
         </div>
       </li>
@@ -920,7 +713,7 @@ body {
       <div class="mock-line short"></div>
       
       <div class="mock-diagram-box">
-        <i class="fa-solid fa-dna"></i>
+        <svg class="icon-svg" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M352 0c17.7 0 32 14.3 32 32 0 57.8-24.4 104.8-57.4 144.5-24.1 28.9-53.8 55.1-83.6 79.5 29.8 24.5 59.5 50.6 83.6 79.5 33 39.6 57.4 86.7 57.4 144.5 0 17.7-14.3 32-32 32s-32-14.3-32-32L64 480c0 17.7-14.3 32-32 32S0 497.7 0 480C0 422.2 24.4 375.2 57.4 335.5 81.5 306.6 111.2 280.5 141 256 111.2 231.5 81.5 205.4 57.4 176.5 24.4 136.8 0 89.8 0 32 0 14.3 14.3 0 32 0S64 14.3 64 32l256 0c0-17.7 14.3-32 32-32zM283.5 384l-182.9 0c-8.2 10.5-15.1 21.1-20.6 32l224.2 0c-5.6-10.9-12.5-21.5-20.6-32zM238 336c-14.3-13-29.8-25.8-46-39-16.2 13.1-31.7 26-46 39l92 0zM100.5 128l182.9 0c8.2-10.5 15.1-21.1 20.6-32L79.9 96c5.6 10.9 12.5 21.5 20.6 32zM146 176c14.3 13 29.8 25.8 46 39 16.2-13.1 31.7-26 46-39l-92 0z"/></svg>
       </div>
       
       <div class="mock-line highlight"></div>
@@ -929,7 +722,7 @@ body {
     
     <!-- Card 2: Foreground Note with PYQ stamp -->
     <div class="pdf-mock-card mock-2">
-      <div class="mock-pyq-stamp">PYQ <i class="fa-solid fa-arrow-turn-down" style="font-size: 0.9rem; margin-left: 2px;"></i></div>
+      <div class="mock-pyq-stamp">PYQ <svg class="icon-svg" viewBox="0 0 384 512" aria-hidden="true" focusable="false" style="font-size: 0.9rem; margin-left: 2px;"><path fill="currentColor" d="M32 64C14.3 64 0 49.7 0 32S14.3 0 32 0l96 0c53 0 96 43 96 96l0 306.7 73.4-73.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-128 128c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 402.7 160 96c0-17.7-14.3-32-32-32L32 64z"/></svg></div>
       <h3 class="mock-hw-title" style="border-bottom-color: #3b82f6;">Biochemistry</h3>
       <div class="mock-line highlight"></div>
       <div class="mock-line medium"></div>
@@ -937,7 +730,7 @@ body {
       <div class="mock-line short"></div>
       
       <div class="mock-diagram-box">
-        <i class="fa-solid fa-sitemap"></i>
+        <svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M192 64c0-17.7 14.3-32 32-32l64 0c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32l-8 0 0 64 120 0c39.8 0 72 32.2 72 72l0 56 8 0c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l8 0 0-56c0-13.3-10.7-24-24-24l-120 0 0 80 8 0c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l8 0 0-80-120 0c-13.3 0-24 10.7-24 24l0 56 8 0c17.7 0 32 14.3 32 32l0 64c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l8 0 0-56c0-39.8 32.2-72 72-72l120 0 0-64-8 0c-17.7 0-32-14.3-32-32l0-64z"/></svg>
       </div>
     </div>
   </div>
@@ -976,15 +769,15 @@ body {
 <h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:2.5rem;">Engineered for Delhi University Science Students</h2>
 <div class="columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
 <div class="feature-box">
-<h4 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#4f46e5;"><i class="fa-solid fa-graduation-cap"></i> Syllabus Accuracy Guarantee</h4>
+<h3 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#4f46e5;"><svg class="icon-svg" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"/></svg> Syllabus Accuracy Guarantee</h3>
 <p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">Every singular note file matches the precise parameters of the DU FYUP/NEP roadmap. Zero fluff, absolute compliance.</p>
 </div>
 <div class="feature-box">
-<h4 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#10b981;"><i class="fa-solid fa-square-check"></i> Peer-Reviewed Ecosystems</h4>
+<h3 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#10b981;"><svg class="icon-svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M384 32c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96C0 60.7 28.7 32 64 32l320 0zM342 145.7c-10.7-7.8-25.7-5.4-33.5 5.3L189.1 315.2 137 263.1c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c5 5 11.9 7.5 18.8 7s13.4-4.1 17.5-9.8L347.3 179.2c7.8-10.7 5.4-25.7-5.3-33.5z"/></svg> Peer-Reviewed Ecosystems</h3>
 <p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">Our materials are structured and verified by fellow DU students who have faced the exact exam halls.</p>
 </div>
 <div class="feature-box">
-<h4 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#f59e0b;"><i class="fa-solid fa-network-wired"></i> Hyper-Relatable Growth</h4>
+<h3 style="font-size:1.2rem; margin:0 0 0.5rem 0; color:#f59e0b;"><svg class="icon-svg" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M248 88l80 0 0 48-80 0 0-48zm-8-56c-26.5 0-48 21.5-48 48l0 64c0 26.5 21.5 48 48 48l16 0 0 32-224 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0 0 32-16 0c-26.5 0-48 21.5-48 48l0 64c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48l-16 0 0-32 192 0 0 32-16 0c-26.5 0-48 21.5-48 48l0 64c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48l-16 0 0-32 96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-224 0 0-32 16 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48l-96 0zM448 376l8 0 0 48-80 0 0-48 72 0zm-256 0l8 0 0 48-80 0 0-48 72 0z"/></svg> Hyper-Relatable Growth</h3>
 <p style="color:#475569; font-size:0.95rem; line-height:1.6; margin:0;">We merge premium education with mental health awareness, digital workflows, and deep community support systems.</p>
 </div>
 </div>
@@ -997,28 +790,28 @@ body {
 <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
 <div class="content-card feature-box" onclick="window.location.href='zoology'" style="cursor:pointer; text-align:center;">
 <div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #fee2e2; color: #ef4444; width: 70px; height: 70px; font-size: 2.5rem;">
-  <i class="fa-solid fa-dna"></i>
+  <svg class="icon-svg" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M352 0c17.7 0 32 14.3 32 32 0 57.8-24.4 104.8-57.4 144.5-24.1 28.9-53.8 55.1-83.6 79.5 29.8 24.5 59.5 50.6 83.6 79.5 33 39.6 57.4 86.7 57.4 144.5 0 17.7-14.3 32-32 32s-32-14.3-32-32L64 480c0 17.7-14.3 32-32 32S0 497.7 0 480C0 422.2 24.4 375.2 57.4 335.5 81.5 306.6 111.2 280.5 141 256 111.2 231.5 81.5 205.4 57.4 176.5 24.4 136.8 0 89.8 0 32 0 14.3 14.3 0 32 0S64 14.3 64 32l256 0c0-17.7 14.3-32 32-32zM283.5 384l-182.9 0c-8.2 10.5-15.1 21.1-20.6 32l224.2 0c-5.6-10.9-12.5-21.5-20.6-32zM238 336c-14.3-13-29.8-25.8-46-39-16.2 13.1-31.7 26-46 39l92 0zM100.5 128l182.9 0c8.2-10.5 15.1-21.1 20.6-32L79.9 96c5.6 10.9 12.5 21.5 20.6 32zM146 176c14.3 13 29.8 25.8 46 39 16.2-13.1 31.7-26 46-39l-92 0z"/></svg>
 </div>
 <h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Zoology (Hons)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Full handwritten chapter solutions, detailed structural morphology charts, and solved DU term question logs.</p>
 </div>
 <div class="content-card feature-box" onclick="window.location.href='botany'" style="cursor:pointer; text-align:center;">
 <div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #d1fae5; color: #10b981; width: 70px; height: 70px; font-size: 2.5rem;">
-  <i class="fa-solid fa-seedling"></i>
+  <svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M512 32C512 140.1 435.4 230.3 333.6 251.4 325.7 193.3 299.6 141 261.1 100.5 301.2 40 369.9 0 448 0l32 0c17.7 0 32 14.3 32 32zM0 96C0 78.3 14.3 64 32 64l32 0c123.7 0 224 100.3 224 224l0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-160C100.3 320 0 219.7 0 96z"/></svg>
 </div>
 <h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Botany (Hons)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Comprehensive physiology diagrams, taxonomic structural breakdowns, and upcoming semester modules.</p>
 </div>
 <div class="content-card feature-box" onclick="window.location.href='microbiology'" style="cursor:pointer; text-align:center;">
 <div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #ede9fe; color: #8b5cf6; width: 70px; height: 70px; font-size: 2.5rem;">
-  <i class="fa-solid fa-virus"></i>
+  <svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M296 40c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 44.1-53.3 66.1-84.5 35-15.6-15.6-40.9-15.6-56.6 0s-15.6 40.9 0 56.6c31.2 31.2 9.1 84.5-35 84.5-22.1 0-40 17.9-40 40s17.9 40 40 40c44.1 0 66.1 53.3 35 84.5-15.6 15.6-15.6 40.9 0 56.6s40.9 15.6 56.6 0c31.2-31.2 84.5-9.1 84.5 35 0 22.1 17.9 40 40 40s40-17.9 40-40c0-44.1 53.3-66.1 84.5-35 15.6 15.6 40.9 15.6 56.6 0s15.6-40.9 0-56.6c-31.2-31.2-9.1-84.5 35-84.5 22.1 0 40-17.9 40-40s-17.9-40-40-40c-44.1 0-66.1-53.3-35-84.5 15.6-15.6 15.6-40.9 0-56.6s-40.9-15.6-56.6 0C349.3 106.1 296 84.1 296 40zM160 224a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm160 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
 </div>
 <h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Microbiology (Hons)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Premium biochemistry flowcharts, structural logic vectors, and verified lab files managed by Aditi.</p>
 </div>
 <div class="content-card feature-box" onclick="window.location.href='lifescience'" style="cursor:pointer; text-align:center;">
 <div class="feature-icon-wrapper" style="margin: 0 auto 1rem auto; background: #e0f2fe; color: #0284c7; width: 70px; height: 70px; font-size: 2.5rem;">
-  <i class="fa-solid fa-flask"></i>
+  <svg class="icon-svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M288 0L128 0C110.3 0 96 14.3 96 32s14.3 32 32 32L128 215.5 7.5 426.3C2.6 435 0 444.7 0 454.7 0 486.4 25.6 512 57.3 512l333.4 0c31.6 0 57.3-25.6 57.3-57.3 0-10-2.6-19.8-7.5-28.4L320 215.5 320 64c17.7 0 32-14.3 32-32S337.7 0 320 0L288 0zM192 215.5l0-151.5 64 0 0 151.5c0 11.1 2.9 22.1 8.4 31.8l41.6 72.7-164 0 41.6-72.7c5.5-9.7 8.4-20.6 8.4-31.8z"/></svg>
 </div>
 <h3 style="font-size:1.4rem; margin:0 0 0.5rem 0; color:#0f172a;">BSc Life Science (Prog.)</h3>
 <p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Integrated interdisciplinary notes covering Chemistry, Zoology, and Botany disciplines. Simplified PYQs.</p>
@@ -1031,7 +824,7 @@ body {
 <div style="max-width:1100px; margin:0 auto;">
 <div class="channel-preview">
 <div class="channel-info">
-<img src="attached_assets/shubhiphilia.jpg" alt="ShubhiPhilia YouTube Digital Science Channel Avatar" style="width:75px; height:75px; border-radius:50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+<img src="attached_assets/shubhiphilia.jpg" alt="ShubhiPhilia YouTube Digital Science Channel Avatar" width="75" height="75" loading="lazy" style="border-radius:50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
 <div class="channel-details">
 <h3 style="margin:0 0 0.5rem 0; font-size:1.8rem; color:#0f172a; font-weight:800;">Visual Mastery with ShubhiPhilia</h3>
 <p style="margin:0; color:#475569; font-size:1.05rem; line-height:1.6;">Complement your technical note review files with detailed video lectures, rapid college revision sprints, and raw student life maps on YouTube.</p>
@@ -1042,51 +835,48 @@ body {
 <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
 <a href="watch-ecology" class="yt-video-card">
   <div class="yt-thumbnail-wrapper">
-    <img src="https://i.ytimg.com/vi/0QyVX0lVcMM/hqdefault.jpg" alt="Introduction to Ecology Video Lesson Thumbnail">
-    <div class="yt-play-overlay"><i class="fa-solid fa-circle-play"></i></div>
+    <img src="https://i.ytimg.com/vi/0QyVX0lVcMM/mqdefault.jpg" alt="Introduction to Ecology Video Lesson Thumbnail" width="320" height="180" loading="lazy">
+    <div class="yt-play-overlay"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/></svg></div>
   </div>
   <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:#0f172a;">Introduction to Ecology</h4>
   <p style="margin:0; color:#64748b; font-size:0.85rem;">BSc Zoology Honours Semester 1 Modules</p>
 </a>
 <a href="watch-survival-guide" class="yt-video-card">
   <div class="yt-thumbnail-wrapper">
-    <img src="https://i.ytimg.com/vi/wewhZlQ0IlI/hqdefault.jpg" alt="BSc Zoology First Year Survival Blueprint Thumbnail">
-    <div class="yt-play-overlay"><i class="fa-solid fa-circle-play"></i></div>
+    <img src="https://i.ytimg.com/vi/wewhZlQ0IlI/mqdefault.jpg" alt="BSc Zoology First Year Survival Blueprint Thumbnail" width="320" height="180" loading="lazy">
+    <div class="yt-play-overlay"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/></svg></div>
   </div>
   <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:#0f172a;">First Year Survival Blueprint</h4>
   <p style="margin:0; color:#64748b; font-size:0.85rem;">Exam strategies & survival architectures for DU freshers</p>
 </a>
 <a href="watch-non-chordates" class="yt-video-card">
   <div class="yt-thumbnail-wrapper">
-    <img src="https://i.ytimg.com/vi/FMTwnbzEWAg/hqdefault.jpg" alt="Classification of Non-Chordates Video Class Thumbnail">
-    <div class="yt-play-overlay"><i class="fa-solid fa-circle-play"></i></div>
+    <img src="https://i.ytimg.com/vi/FMTwnbzEWAg/mqdefault.jpg" alt="Classification of Non-Chordates Video Class Thumbnail" width="320" height="180" loading="lazy">
+    <div class="yt-play-overlay"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9l0 176c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z"/></svg></div>
   </div>
   <h4 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:#0f172a;">Introduction to Non-Chordates</h4>
   <p style="margin:0; color:#64748b; font-size:0.85rem;">Phylum-wise taxonomic classification masterclasses</p>
 </a>
 </div>
 <div style="text-align:center; margin-top:3.5rem;">
-<a href="https://www.youtube.com/@ShubhiPhilia" class="btn-action primary" target="_blank" style="background:#ef4444;"><i class="fa-brands fa-youtube fa-fw"></i> Subscribe on YouTube</a>
+<a href="https://www.youtube.com/@ShubhiPhilia" class="btn-action primary" target="_blank" style="background:#ef4444;"><svg class="icon-svg" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M549.7 124.1C543.5 100.4 524.9 81.8 501.4 75.5 458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5C51.2 81.8 32.7 100.4 26.4 124.1 15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8 42.6 11.5 213.4 11.5 213.4 11.5s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6l0-162.4 142.7 81.2-142.7 81.2z"/></svg> Subscribe on YouTube</a>
 </div>
 </div>
 </section>
 
 <!-- Live Verified Student Testimonial Grid -->
 <section class="testimonials" style="max-width:1100px; margin:5rem auto; padding:0 1.5rem;">
-<h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:3rem;"><i class="fa-solid fa-heart" style="color:#ef4444;"></i> Trusted by Thousands of DU Freshers</h2>
+<h2 style="text-align:center; font-size:2rem; font-weight:800; margin-bottom:3rem;"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false" style="color:#ef4444;"><path fill="currentColor" d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/></svg> Trusted by Thousands of DU Freshers</h2>
 <div class="columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
 <div class="feature-box" style="text-align:left;">
 <p style="color:#4a5568; line-height:1.7; font-style:italic; margin:0 0 1.5rem 0;">"It won't be wrong to say that this site has been everything that I needed. Being a fresher who was tensed regarding the course and syllabus, this platform brought an end to all my worries."</p>
-<p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><i class="fa-solid fa-circle-user" style="color:#6366f1;"></i> Roshni Kumari</p>
-</div>
+<p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false" style="color:#6366f1;"><path fill="currentColor" d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2 35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg> Roshni Kumari</p></div>
 <div class="feature-box" style="text-align:left;">
 <p style="color:#4a5568; line-height:1.7; font-style:italic; margin:0 0 1.5rem 0;">"Thank you so much for being a lifesaver in my 1st year of college! Your notes and study materials were super helpful, and I really appreciate the immense effort."</p>
-<p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><i class="fa-solid fa-circle-user" style="color:#10b981;"></i> Kajal Kheria</p>
-</div>
+<p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false" style="color:#10b981;"><path fill="currentColor" d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2 35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg> Kajal Kheria</p></div>
 <div class="feature-box" style="text-align:left;">
 <p style="color:#4a5568; line-height:1.7; font-style:italic; margin:0 0 1.5rem 0;">"Honestly, these notes are a masterpiece! The way everything is organized and explained makes studying so much easier. Truly some of the best notes I've ever found."</p>
-<p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><i class="fa-solid fa-circle-user" style="color:#8b5cf6;"></i> Saniya Kain</p>
-</div>
+<p style="margin:0; font-weight:700; color:#0f172a; font-size:0.95rem;"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false" style="color:#8b5cf6;"><path fill="currentColor" d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2 35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg> Saniya Kain</p></div>
 </div>
 </section>
 
@@ -1123,6 +913,8 @@ body {
 <a href="community" class="btn-action secondary" style="color:#4f46e5; font-weight:700;">Join the Student Network</a>
 </section>
 
+</main>
+
 <!-- PROFESSIONAL EDTECH FOOTER COMPONENT -->
 <footer class="pro-footer">
 <div class="pro-footer-container">
@@ -1130,14 +922,14 @@ body {
 <!-- Col 1: Brand & Intro -->
 <div class="pro-footer-brand">
 <a href="index">
-<img src="attached_assets/sayheyshubh_footer_logo.png" alt="SayHeyShubh Logo" class="footer-logo-img">
+<img src="attached_assets/sayheyshubh_footer_logo.png" alt="SayHeyShubh Logo" class="footer-logo-img" width="250" height="116" loading="lazy">
 </a>
 <p>Built in the classrooms of Delhi University, SayHeyShubh is a student-driven academic ecosystem. We consolidate semester-wise notes, practical files, cheat sheets of most important questions and previous year question databases into one accessible learning hub.</p>
 <div class="pro-footer-socials">
-<a href="https://youtube.com/@ShubhiPhilia" target="_blank" aria-label="YouTube" class="footer-social-pill"><i class="fa-brands fa-youtube fa-fw"></i></a>
-<a href="https://t.me/sayheyshubh" target="_blank" aria-label="Telegram" class="footer-social-pill"><i class="fa-brands fa-telegram fa-fw"></i></a>
-<a href="https://linkedin.com/in/sayheyshubh" target="_blank" aria-label="LinkedIn" class="footer-social-pill"><i class="fa-brands fa-linkedin-in fa-fw"></i></a>
-<a href="https://instagram.com/sayheyshubh" target="_blank" aria-label="Instagram" class="footer-social-pill"><i class="fa-brands fa-instagram fa-fw"></i></a>
+<a href="https://youtube.com/@ShubhiPhilia" target="_blank" aria-label="YouTube" class="footer-social-pill"><svg class="icon-svg" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M549.7 124.1C543.5 100.4 524.9 81.8 501.4 75.5 458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5C51.2 81.8 32.7 100.4 26.4 124.1 15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8 42.6 11.5 213.4 11.5 213.4 11.5s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6l0-162.4 142.7 81.2-142.7 81.2z"/></svg></a>
+<a href="https://t.me/sayheyshubh" target="_blank" aria-label="Telegram" class="footer-social-pill"><svg class="icon-svg" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496zM371 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2 .5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3 .6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7 .5 3.2 .6 6.5 .4 9.8z"/></svg></a>
+<a href="https://linkedin.com/in/sayheyshubh" target="_blank" aria-label="LinkedIn" class="footer-social-pill"><svg class="icon-svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg></a>
+<a href="https://instagram.com/sayheyshubh" target="_blank" aria-label="Instagram" class="footer-social-pill"><svg class="icon-svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
 </div>
 </div>
 
@@ -1168,15 +960,15 @@ body {
 <div class="pro-footer-col">
 <h3>Help & Contact</h3>
 <div class="footer-contact-row">
-<i class="fa-solid fa-envelope footer-contact-icon fa-fw"></i>
+<svg class="icon-svg footer-contact-icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z"/></svg>
 <a href="mailto:shubhamkmr.work@gmail.com" class="footer-contact-link">shubhamkmr.work@gmail.com</a>
 </div>
 <div class="footer-contact-row">
-<i class="fa-brands fa-telegram footer-contact-icon fa-fw"></i>
+<svg class="icon-svg footer-contact-icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496zM371 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2 .5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3 .6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7 .5 3.2 .6 6.5 .4 9.8z"/></svg>
 <a href="https://t.me/sayheyshubh" target="_blank" class="footer-contact-link">Join Telegram Group</a>
 </div>
 <div class="footer-contact-row">
-<i class="fa-brands fa-instagram footer-contact-icon fa-fw"></i>
+<svg class="icon-svg footer-contact-icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
 <a href="https://instagram.com/sayheyshubh" target="_blank" class="footer-contact-link">Follow @sayheyshubh</a>
 </div>
 </div>
@@ -1198,41 +990,12 @@ body {
 
 <!-- Cookie Consent Banner Banner Component -->
 <div id="cookie-banner" class="cookie-banner">
-<p>This website utilizes analytical cookies to monitor workflow health and optimize speed. <a href="/privacy-policy" target="_blank">Learn more</a></p>
+<p>This website utilizes analytical cookies to monitor workflow health and optimize speed. <a href="/privacy-policy" target="_blank">Read our Privacy Policy</a></p>
 <div class="cookie-buttons">
 <button id="accept-cookies" class="accept-btn">Accept</button>
 <span id="close-cookies" class="close-btn">&times;</span>
 </div>
 </div>
-<style>
-.cookie-banner {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ffffff;
-  color: #333;
-  padding: 14px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  font-size: 14px;
-  max-width: 600px;
-  width: 90%;
-  z-index: 1000;
-  transition: opacity 0.3s ease-in-out;
-}
-.cookie-banner a { color: #6366f1; text-decoration: none; font-weight: 500; }
-.cookie-buttons { display: flex; align-items: center; gap: 10px; }
-.accept-btn { background: #6366f1; color: white; padding: 6px 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; transition: background 0.3s ease; }
-@media (hover: hover) { .accept-btn:hover { background: #4f46e5; } }
-.close-btn { font-size: 20px; cursor: pointer; color: #777; transition: color 0.3s ease; }
-@media (hover: hover) { .close-btn:hover { color: #333; } }
-.cookie-banner.hidden { opacity: 0; pointer-events: none; }
-</style>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("cookie-banner");
