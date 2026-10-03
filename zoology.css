@@ -10,18 +10,6 @@
   vertical-align: -0.125em;
   flex-shrink: 0;
 }
-/* A few classes (originally meant to size the circular *container* an icon
-   font sat inside) also declare width/height. Since they're now applied
-   directly to the SVG graphic itself, those would override the sizing
-   above and make the icon fill the whole badge. This restores correct
-   proportional sizing without touching those classes' other properties
-   (background, color, centering, etc). */
-.icon-svg.footer-contact-icon,
-.icon-svg.footer-social-pill,
-.icon-svg.stat-icon {
-  width: 1em;
-  height: 1em;
-}
 
 /* --- MODERN ED-TECH FACELIFT --- */
     body {
