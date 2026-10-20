@@ -3,7 +3,9 @@ const crypto = require('crypto');
 
 const zoologyNotes = require('./data/notes-data.json');
 const microbiologyNotes = require('./data/microbiology-notes-data.json');
-const notesData = { ...zoologyNotes, ...microbiologyNotes };
+const lifescienceNotes = require('./data/lifescience-notes-data.json');
+// lifescience is spread FIRST so existing zoology/microbiology entries always win and can never be overwritten.
+const notesData = { ...lifescienceNotes, ...zoologyNotes, ...microbiologyNotes };
 
 if (!admin.apps.length) {
   if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && process.env.FIREBASE_PRIVATE_KEY) {

@@ -2243,3 +2243,30 @@ li a:hover {
 
 
   
+/* ============================================================
+   Inline SVG icons (replacing the FontAwesome webfont).
+   Shared by every page that has been migrated off FontAwesome.
+   These classes didn't exist before, so pages still on
+   FontAwesome are completely unaffected.
+   ============================================================ */
+.icon-svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+/* Some classes were written to size the circular *container* an icon font sat
+   in (width/height). Applied straight onto an SVG they would blow the icon up
+   to the full badge size, so for those combinations the 1em size always wins. */
+.icon-svg.footer-contact-icon,
+.icon-svg.footer-social-pill,
+.icon-svg.stat-icon,
+.icon-svg.proof-icon,
+.icon-svg.feature-icon-wrapper {
+  width: 1em;
+  height: 1em;
+}
+.icon-spin { animation: icon-spin 1s linear infinite; }
+@keyframes icon-spin { to { transform: rotate(360deg); } }

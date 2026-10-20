@@ -1,8 +1,10 @@
 const zoologyNotes = require('./data/notes-data.json');
 const microbiologyNotes = require('./data/microbiology-notes-data.json');
+const lifescienceNotes = require('./data/lifescience-notes-data.json');
 
 // Combine both datasets into one master list
-const notesData = { ...zoologyNotes, ...microbiologyNotes };
+// lifescience is spread FIRST so existing zoology/microbiology entries always win and can never be overwritten.
+const notesData = { ...lifescienceNotes, ...zoologyNotes, ...microbiologyNotes };
 
 const admin = require('firebase-admin');
 const Razorpay = require('razorpay');
